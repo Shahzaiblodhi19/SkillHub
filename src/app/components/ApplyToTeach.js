@@ -47,7 +47,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
     };
 
     return (
-        <div className="text-center mt-5">
+        <div>
             {isOpenApplytoTeach && (
                 <div
                     className="modal d-flex align-items-center justify-content-center"

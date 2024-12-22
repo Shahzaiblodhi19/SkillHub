@@ -6,9 +6,11 @@ import React, { useState, useEffect } from 'react';
 import "./styles/globals.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from './components/Login';
 import SignUp from './components/Signup';
 import ApplyToTeach from './components/ApplyToTeach';
+import Dashboard from './pages/Dashboard';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,53 +34,54 @@ export default function Home() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <html lang="en">
-      <body>
-        <div className="container-fluid px-0">
-          {/* Use d-flex to ensure columns remain aligned */}
-          <div className="d-flex flex-row w-100">
-            {/* Sidebar */}
-            <div
-              className={`custom-sidebar ${isSidebarOpen ? "sidebar-open" : "sidebar-closed"}`}
-            >
-              <Sidebar
-                isSidebarOpen={isSidebarOpen}
-                setIsSidebarOpen={setIsSidebarOpen}
-              />
-            </div>
-            {/* Main content */}
-            <div className="flex-grow-1">
-              <Header
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-                isModalOpen2={isModalOpen2}
-                isOpenApplytoTeach={isOpenApplytoTeach}
-                setIsOpenApplytoTeach={setIsOpenApplytoTeach}
-                setIsModalOpen2={setIsModalOpen2}
-                setIsSidebarOpen={setIsSidebarOpen}
-              />
-              <div className="content">
-                <Login
+        <Router>
+          <div className="container-fluid px-0">
+            {/* Use d-flex to ensure columns remain aligned */}
+            <div className="d-flex flex-row w-100">
+              {/* Sidebar */}
+              <div
+                className={`custom-sidebar ${isSidebarOpen ? "sidebar-open" : "sidebar-closed"}`}
+              >
+                <Sidebar
+                  isSidebarOpen={isSidebarOpen}
+                  setIsSidebarOpen={setIsSidebarOpen}
+                />
+              </div>
+              {/* Main content */}
+              <div className="flex-grow-1">
+                <Header
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
                   isModalOpen2={isModalOpen2}
-                  setIsModalOpen2={setIsModalOpen2}
-                />
-                <SignUp
-                  isModalOpen={isModalOpen}
-                  setIsModalOpen={setIsModalOpen}
-                  isModalOpen2={isModalOpen2}
-                  setIsModalOpen2={setIsModalOpen2}
-                />
-                <ApplyToTeach
                   isOpenApplytoTeach={isOpenApplytoTeach}
                   setIsOpenApplytoTeach={setIsOpenApplytoTeach}
+                  setIsModalOpen2={setIsModalOpen2}
+                  setIsSidebarOpen={setIsSidebarOpen}
                 />
+                <div className="content">
+                  <Login
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    isModalOpen2={isModalOpen2}
+                    setIsModalOpen2={setIsModalOpen2}
+                  />
+                  <SignUp
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    isModalOpen2={isModalOpen2}
+                    setIsModalOpen2={setIsModalOpen2}
+                  />
+                  <ApplyToTeach
+                    isOpenApplytoTeach={isOpenApplytoTeach}
+                    setIsOpenApplytoTeach={setIsOpenApplytoTeach}
+                  />
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                  </Routes>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </body>
-    </html>
+        </Router>
   );
 }
