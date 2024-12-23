@@ -304,9 +304,9 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                             </li>
 
                             {/* Accordion Content */}
-                            {isSidebarOpen === false ? '' : isSchoolOpen && (
+                            {isSidebarOpen === false ? '' : isCollectionOpen && (
                                 <ul className="ml-7 mt-2">
-                                    {["School A", "School B", "School C"].map((item) => (
+                                    {["Collection A", "Collection B", "Collection C"].map((item) => (
                                         <li
                                             key={item}
                                             className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeSchool === item ? "dropdown-link-active" : "dropdown-link"
