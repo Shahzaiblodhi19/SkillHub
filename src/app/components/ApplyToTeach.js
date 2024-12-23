@@ -11,36 +11,36 @@ import { SettingsInputSvideoTwoTone } from '@mui/icons-material';
 
 export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach }) {
     const [currentStep, setCurrentStep] = useState(1);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('');
     const [audience, setAudience] = useState(null);
     const [language, setLanguage] = useState(null);
     const [Teaching, setTeaching] = useState(null);
-    const [videoSampleLink, setVideoSampleLink] = useState(null);
+    const [videoSampleLink, setVideoSampleLink] = useState('');
     const [holdInCourse, setHoldInCourse] = useState(null);
-    const [courseDescription, setCourseDescription] = useState(null);
-    const [socialMediaAccount, setSocialMediaAccount] = useState(null);
+    const [courseDescription, setCourseDescription] = useState('');
+    const [socialMediaAccount, setSocialMediaAccount] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [fullName, setFullName] = useState('');
     const [isStepMode, setIsStepMode] = useState(false);
-    const [teachingCategory, setTeachingCategory] = useState(null);
+    const [teachingCategory, setTeachingCategory] = useState('');
 
     const toggleModal = () => {
         setIsOpenApplytoTeach(!isOpenApplytoTeach);
         setCurrentStep(1);
-        setSelectedOption(null);
+        setSelectedOption('');
         setLanguage(null);
         setPhone('');
         setTeaching(null);
         setEmail('');
         setHoldInCourse(null);
-        setSocialMediaAccount(null);
-        setCourseDescription(null);
-        setVideoSampleLink(null);
+        setSocialMediaAccount('');
+        setCourseDescription('');
+        setVideoSampleLink('');
         setAudience(null);
         setFullName('');
         setIsStepMode(false);
-        setTeachingCategory(null)
+        setTeachingCategory('')
     };
 
     const handleNext = () => {
@@ -122,7 +122,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                         </div>
 
                                         {/* Right Column */}
-                                        <div className="col-md-6" style={{ marginTop: '-50px' }}>
+                                        <div className="col-md-6 text-center"  style={{ marginTop: '-50px' }}>
                                             <Image className="logo-full mb-3" style={{ marginLeft: '-3px' }} src={Logo} alt="logo" width={175} height={35} />
                                             <h5 className="mb-3 fw-bold text-left" style={{ fontSize: '21px' }}>Apply to Teach on SkillHub</h5>
                                             <p className='mb-2 text-left' style={{ fontSize: '14px' }}>
@@ -291,7 +291,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                                         "I have finished my course and i'm ready to launch",
                                                     ].map((holdincourse, index) => (
                                                         <div key={index} style={{ background: '#ECECEC' }} className={`py-2 px-3 option-card d-flex justify-content-between align-items-center w-100 ${holdInCourse === holdincourse ? 'selected' : ''}`} onClick={() => setHoldInCourse(holdincourse)}>
-                                                            <p sty className="mb-0" style={{ fontSize: '12px' }}>{holdincourse}</p>
+                                                            <p className="mb-0" style={{ fontSize: '12px' }}>{holdincourse}</p>
                                                             {holdInCourse === holdincourse && <div className="tick">✔</div>}
                                                         </div>
                                                     ))}
@@ -308,7 +308,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                                         'I have a sizeable following',
                                                     ].map((audi, index) => (
                                                         <div key={index} style={{ background: '#ECECEC' }} className={`py-2 px-3 option-card d-flex justify-content-between align-items-center w-100 ${audience === audi ? 'selected' : ''}`} onClick={() => setAudience(audi)}>
-                                                            <p sty className="mb-0" style={{ fontSize: '12px' }}>{audi}</p>
+                                                            <p className="mb-0" style={{ fontSize: '12px' }}>{audi}</p>
                                                             {audience === audi && <div className="tick">✔</div>}
                                                         </div>
                                                     ))}
@@ -327,7 +327,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                                         "I'm just starting teaching",
                                                     ].map((option, index) => (
                                                         <div key={index} style={{ background: '#ECECEC' }} className={`py-2 px-3 option-card d-flex justify-content-between align-items-center w-100 ${selectedOption === option ? 'selected' : ''}`} onClick={() => setSelectedOption(option)}>
-                                                            <p sty className="mb-0" style={{ fontSize: '12px' }}>{option}</p>
+                                                            <p className="mb-0" style={{ fontSize: '12px' }}>{option}</p>
                                                             {selectedOption === option && <div className="tick">✔</div>}
                                                         </div>
                                                     ))}
