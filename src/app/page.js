@@ -1,3 +1,4 @@
+"use client"; 
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import React, { useState, useEffect } from 'react';
 import Sidebar from "../components/Sidebar";
@@ -85,7 +86,6 @@ export default function Home() {
               setSelectedEmoji={setSelectedEmoji}
               selectedEmoji={selectedEmoji}
             />
-            {/* Dashboard is now directly accessed through routing in Next.js */}
           </div>
         </div>
       </div>
