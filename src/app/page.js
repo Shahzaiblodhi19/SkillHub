@@ -1,14 +1,14 @@
 "use client"; 
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import React, { useState, useEffect } from 'react';
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 import { useRouter } from 'next/router';
-import SignUp from '../components/Signup';
-import ApplyToTeach from '../components/ApplyToTeach';
-import Dashboard from '../pages/Dashboard';
-import AddSchoolPopup from '../components/AddSchool';
-import Login from '../components/Login';
+import SignUp from './components/Signup';
+import ApplyToTeach from './components/ApplyToTeach';
+import Dashboard from './pages/Dashboard';
+import AddSchoolPopup from './components/AddSchool';
+import Login from './components/Login';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
