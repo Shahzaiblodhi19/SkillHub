@@ -9,6 +9,7 @@ import ApplyToTeach from './components/ApplyToTeach';
 import Dashboard from './pages/Dashboard';
 import AddSchoolPopup from './components/AddSchool';
 import Login from './components/Login';
+import "./styles/globals.css";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
