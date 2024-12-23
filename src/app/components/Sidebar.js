@@ -5,10 +5,12 @@ import Logo from '../assets/logo.svg';
 
 export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setIsSidebarOpen, setIsSchoolModal, isSchoolModal }) {
     const [isSchoolOpen, setSchoolOpen] = useState(true);
+    const [isCollectionOpen, setCollectionOpen] = useState(true);
     const [isOpen, setIsOpen] = useState(true);
     const [SidebarLinkActive, setSidebarLinkActive] = useState('Dashboard');
     const [activeItem, setActiveItem] = useState("Courses"); // Set initial active item
-    const [activeSchool, setActiveSchool] = useState("School A"); // Set initial active item
+    const [activeSchool, setActiveSchool] = useState(""); // Set initial active item
+    const [activeCollection, setActiveCollection] = useState("Collection A"); // Set initial active item
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
@@ -19,9 +21,14 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
         setSidebarLinkActive('none')
     };
 
+    const handleToggle3 = () => {
+        setCollectionOpen(!isCollectionOpen);
+        setSidebarLinkActive('none')
+    };
     const handleSetActive = (item) => {
         setActiveItem(item);
         setActiveSchool(item)
+        setActiveCollection(item)
     };
     // Map each item to its respective SVG
     const itemIcons = {
@@ -276,7 +283,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                             </li>
                             <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
                                 <button
-                                    onClick={handleToggle2}
+                                    onClick={handleToggle3}
                                     className="flex items-center justify-between w-full p-2"
                                 >
                                     <div className="flex items-center">
@@ -290,7 +297,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                             <path d="M22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11Z" fill="#E8E9ED" />
                                             <path d="M11 16C10.5314 16 10.1515 15.6201 10.1515 15.1515V6.84848C10.1515 6.37988 10.5314 6 11 6C11.4686 6 11.8485 6.37988 11.8485 6.84848V15.1515C11.8485 15.6201 11.4686 16 11 16ZM6.84849 11.8485C6.37988 11.8485 6 11.4686 6 11C6 10.5314 6.37988 10.1515 6.84848 10.1515H15.1515C15.6201 10.1515 16 10.5314 16 11C16 11.4686 15.6201 11.8485 15.1515 11.8485H6.84849Z" fill="black" />
                                         </svg>
-                                        {isSchoolOpen ?
+                                        {isCollectionOpen ?
                                             <svg className="withoutstroke" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none">
                                                 <path d="M0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11Z" fill="#E8E9ED" />
                                                 <path d="M11.5 9.54513L15.778 14L17 12.7274L11.5 7L6 12.7274L7.22203 14L11.5 9.54513Z" fill="black" />
@@ -309,7 +316,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     {["Collection A", "Collection B", "Collection C"].map((item) => (
                                         <li
                                             key={item}
-                                            className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeSchool === item ? "dropdown-link-active" : "dropdown-link"
+                                            className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeCollection === item ? "dropdown-link-active" : "dropdown-link"
                                                 }`}
                                             onClick={() => handleSetActive(item)}
                                         >
