@@ -7,16 +7,20 @@ import "./styles/globals.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from './components/Login';
 import SignUp from './components/Signup';
 import ApplyToTeach from './components/ApplyToTeach';
 import Dashboard from './pages/Dashboard';
+import AddSchoolPopup from './components/AddSchool';
+import Login from './components/Login';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar visibility
   const [isOpenApplytoTeach, setIsOpenApplytoTeach] = useState(false);
+  const [isSchoolModal, setIsSchoolModal] = useState(false);
+  const [schoolName, setSchoolName] = useState("");
+  const [selectedEmoji, setSelectedEmoji] = useState(null);
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -45,6 +49,10 @@ export default function Home() {
                 <Sidebar
                   isSidebarOpen={isSidebarOpen}
                   setIsSidebarOpen={setIsSidebarOpen}
+                  setIsSchoolModal={setIsSchoolModal}
+                  isSchoolModal={isSchoolModal}
+                  schoolName={schoolName}
+                  selectedEmoji={selectedEmoji}
                 />
               </div>
               {/* Main content */}
@@ -74,6 +82,14 @@ export default function Home() {
                   <ApplyToTeach
                     isOpenApplytoTeach={isOpenApplytoTeach}
                     setIsOpenApplytoTeach={setIsOpenApplytoTeach}
+                  />
+                  <AddSchoolPopup 
+                  setIsSchoolModal={setIsSchoolModal}
+                  isSchoolModal={isSchoolModal}
+                  setSchoolName={setSchoolName}
+                  schoolName={schoolName}
+                  setSelectedEmoji={setSelectedEmoji}
+                  selectedEmoji={selectedEmoji}
                   />
                   <Routes>
                     <Route path="/" element={<Dashboard />} />

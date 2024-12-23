@@ -6,6 +6,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
+:root {
+      --primary-color: #02C5AF;
+      --secondary-color: #142E53;
+      --accent-color: #13C4CC;
+      --dark-blue: #3B6E91;
+      --light-blue: #009ECB;
+      --text-color: #4F4F4F;
+      --background-color: #F2F2F2;
+      --dark-text: #262B3D;
+      --border-color: #E5E5E5;
+      --placeholder-color: #A0AEC0;
+    }
 
 /* Autofill styles */
 input:-webkit-autofill,
@@ -107,7 +119,6 @@ button:focus {
   border: 1px solid #E3E7EA !important;
   background-color: #F1F5F4 !important;
   color: #224762 !important;
-  stroke: #224762 !important;
 }
 
 .nav-item.dropdownActive {
@@ -148,7 +159,14 @@ button:focus {
   opacity: 0;
   /* Initially invisible */
 }
-
+::-webkit-scrollbar {
+  width: 4px;
+  /* Custom width for the scrollbar */
+  transition: opacity 0.3s ease;
+  /* Smooth transition for opacity */
+  opacity: 0;
+  /* Initially invisible */
+}
 .sidebar:hover {
   overflow-y: auto;
   /* Show scrollbar on hover */
@@ -164,9 +182,17 @@ button:focus {
   border-radius: 12px;
   /* Smooth, rounded thumb */
 }
+::-webkit-scrollbar-thumb {
+  background: #5682a2;
+  border-radius: 12px;
+  /* Smooth, rounded thumb */
+}
 
 .sidebar::-webkit-scrollbar-thumb:hover {
   background: #082b45;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #225b88;
 }
 
 .sidebar::-webkit-scrollbar-track {
@@ -176,8 +202,14 @@ button:focus {
   /* Rounded corners for track */
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
   /* Subtle shadow for depth */
+}::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  /* Track background color */
+  border-radius: 12px;
+  /* Rounded corners for track */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
 }
-
 .btn:hover,
 .btn:focus,
 .btn:active {
@@ -196,7 +228,10 @@ button:focus {
   background: #e0e0e0;
   /* Matches track color for corner area */
 }
-
+::-webkit-scrollbar-corner {
+  background: #e0e0e0;
+  /* Matches track color for corner area */
+}
 .form-control::placeholder {
   color: #6f6f6f;
 }
@@ -275,7 +310,7 @@ button:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,6 +318,7 @@ button:focus {
 }
 
 .modal-container {
+  overflow-y: auto;
   background: #fff;
   padding: 13px 30px;
   border-radius: 8px;
@@ -522,7 +558,94 @@ button:focus {
   font-size: 12px;
   padding: 10px;
 }
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.form-group textarea {
+  resize: none;
+  height: 60px;
+}
+.image-upload .upload-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.image-upload .upload-btn input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.image-upload .dimensions {
+  font-size: 12px;
+  color: #888 !important;
+  margin-top: 5px;
+}
 
+
+
+
+.delete-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF4D4D;
+}
+
+.add-link-button {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.add-link-button:hover {
+  background: rgba(2, 197, 175, 0.1);
+}
+.submit-btn {
+  width: auto;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+  font-weight: 600;
+}
 
 
 
@@ -548,4 +671,281 @@ button:focus {
 }
 @media (max-width: 320px) {
   /* Styles for very small devices */
+}
+
+.banner-preview {
+  width: 100%;
+  height: 200px;
+  background: #F7FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.banner-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+
+.emoji-label {
+  position: absolute;
+  right: 8px;
+  top: -20px;
+  font-size: 12px;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.emoji-wrapper {
+  display: flex;
+  align-items: stretch;
+  margin-top: -1px;
+  position: relative;
+}
+
+.school-inputs {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-color);
+  background: white;
+}
+
+.school-inputs::placeholder {
+  color: var(--placeholder-color);
+  opacity: 0.7;
+}
+
+.school-inputs:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.emoji-button {
+  background: #F8F9FA;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  position: relative;
+  margin: 0;
+}
+
+.emoji-button:hover {
+  background: #EDF2F7;
+}
+
+.emoji-selected {
+  font-size: 20px;
+  position: relative;
+}
+
+.emoji-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.emoji-picker {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.emoji-search {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-color);
+  background: #F8F9FA;
+}
+
+.emoji-search::placeholder {
+  color: var(--placeholder-color);
+}
+
+.emoji-categories {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.emoji-category {
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.emoji-category:hover {
+  background: var(--background-color);
+}
+
+.emoji-section {
+  margin-bottom: 20px;
+}
+
+.emoji-section-title {
+  font-size: 13px;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.emoji-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.emoji-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.emoji-item {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.emoji-item:hover {
+  background: var(--background-color);
+}
+
+.upload-section {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.upload-preview {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+}
+
+.upload-thumbnail {
+  width: 120px;
+  height: 80px;
+  background: #F7FAFC;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-info {
+  flex: 1;
+}
+
+.upload-dimensions {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.upload-dimensions strong {
+  font-weight: 600;
+}
+
+.upload-button {
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--text-color);
+  background: transparent;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-button:hover {
+  background: var(--background-color);
+}
+
+.banner-preview {
+  width: 100%;
+  height: 200px;
+  background: #F7FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.banner-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }

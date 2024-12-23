@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, setIsOpenApplytoTeach, isOpenApplytoTeach }) => {
 
-  const [Login, setLogin] = useState(false);
+  const [Login, setLogin] = useState(true);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const toggleModal2 = () => setIsModalOpen2(!isModalOpen2);
   // State to track the input value

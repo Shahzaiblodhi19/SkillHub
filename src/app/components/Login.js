@@ -4,15 +4,15 @@ import Logo from '../assets/logo.svg';
 import Image from "next/image";
 
 
-export default function Login({ isModalOpen, setIsModalOpen ,isModalOpen2, setIsModalOpen2}) {
+export default function Login({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2 }) {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const toggleModal = () => setIsModalOpen(!isModalOpen);
-    const signuplinker = () => {
-        setIsModalOpen(!isModalOpen);
+    const loginLinker = () => {
         setIsModalOpen2(!isModalOpen2);
-
+        setIsModalOpen(!isModalOpen);
     }
+
     return (
         <>
             {/* Modal */}
@@ -28,12 +28,12 @@ export default function Login({ isModalOpen, setIsModalOpen ,isModalOpen2, setIs
                         <div className="modal-header">
                             <h2>Sign in to your account</h2>
                             <p>
-                                New to SkillHub? <span onClick={signuplinker} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Sign up here!</span>
+                                New to SkillHub? <span onClick={loginLinker} style={{ textDecoration: 'underline', cursor: 'pointer' }} >Sign Up here!</span>
                             </p>
                         </div>
                         <form>
                             {/* Email Field */}
-                            <div className="input-group mt-4">
+                            <div className="input-group mt-3">
                                 <input type="email" placeholder="Email" required />
                             </div>
 
@@ -66,22 +66,24 @@ export default function Login({ isModalOpen, setIsModalOpen ,isModalOpen2, setIs
                                 </div>
                             </div>
 
-                            {/* Remember Me */}
-                            <div className=" d-flex align-items-center mt-3">
-                                <input type="checkbox" id="rememberMe" />
-                                <label className="ml-2" style={{ fontSize: '13px', fontWeight: '500' }} htmlFor="rememberMe">Remember me</label>
+                            <div>
+                                <label className="flex items-center gap-2 mt-2" style={{fontSize: '13px'}}>
+                                    <input
+                                        type="checkbox"
+                                    />
+                                    Remember Me
+                                </label>
                             </div>
-
                             {/* Sign In Button */}
                             <button type="submit" className="btn signup-btn w-100 mt-3" style={{ padding: '10px 0px' }}>
-                                Sign In
+                                Log In
                             </button>
                         </form>
 
                         {/* Additional Links */}
-                        <p className="forgot-links">
-                            <a href="#">Forgot your password?</a>
-                            <a href="#">Didn't receive confirmation instructions?</a>
+                        <p className="forgot-links2 cursor-pointer">
+                            <a style={{ textDecoration: 'underline' }} >Forgot your password</a>
+                            <a style={{ textDecoration: 'underline' }} >Don't receive confirmation instructions?</a>
                         </p>
 
                         {/* Social Login Buttons */}
