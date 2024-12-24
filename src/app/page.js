@@ -11,6 +11,7 @@ import AddSchoolPopup from './components/AddSchool';
 import Login from './components/Login';
 import "./styles/globals.css";
 import CreateCollectionModal from './components/AddCollection';
+import NotificationsPanel from './components/NotificationPanel';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +22,7 @@ export default function Home() {
   const [schoolName, setSchoolName] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [collectionModal, SetCollectionModal] = useState(false);
+  const [isPanelActive, setIsPanelActive] = useState(false);
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -65,6 +67,8 @@ export default function Home() {
             setIsOpenApplytoTeach={setIsOpenApplytoTeach}
             setIsModalOpen2={setIsModalOpen2}
             setIsSidebarOpen={setIsSidebarOpen}
+            isPanelActive={isPanelActive}
+            setIsPanelActive={setIsPanelActive}
           />
           <div className="content">
             <Login
@@ -95,6 +99,11 @@ export default function Home() {
             collectionModal={collectionModal}
             SetCollectionModal={SetCollectionModal}
             />
+            <NotificationsPanel 
+            isPanelActive={isPanelActive}
+            setIsPanelActive={setIsPanelActive}
+            />
+
           </div>
         </div>
       </div>
