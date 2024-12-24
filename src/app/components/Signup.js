@@ -34,11 +34,11 @@ export default function SignUp({ isModalOpen, setIsModalOpen,isModalOpen2, setIs
                         <form>
                             {/* Email Field */}
                             <div className="input-group mt-4">
-                                <input type="name" placeholder="Full Name" required />
+                                <input type="name" className="school-inputs" placeholder="Full Name" required />
                             </div>
                             {/* Email Field */}
                             <div className="input-group mt-3">
-                                <input type="email" placeholder="Email" required />
+                                <input type="email" className="school-inputs" placeholder="Email" required />
                             </div>
 
                             {/* Password Field */}
@@ -48,6 +48,7 @@ export default function SignUp({ isModalOpen, setIsModalOpen,isModalOpen2, setIs
                                         type={passwordVisible ? "text" : "password"}
                                         placeholder="Password"
                                         required
+                                        className="school-inputs"
                                     />
                                     <button
                                         type="button"

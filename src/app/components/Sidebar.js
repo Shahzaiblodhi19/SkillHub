@@ -41,7 +41,6 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
         if (PlayListModal === true) {
             setSidebarLinkActive('')
         } else {
-            setSidebarLinkActive('Playlist')
         }
     }
     // Map each item to its respective SVG
@@ -365,7 +364,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Notifications</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'Team' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => setSidebarLinkActive('Team')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Team' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => handleSidebarLinks('Team')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -376,7 +375,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Team</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'Settings' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => setSidebarLinkActive('Settings')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Settings' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => handleSidebarLinks('Settings')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "

@@ -13,6 +13,7 @@ import "./styles/globals.css";
 import CreateCollectionModal from './components/AddCollection';
 import NotificationsPanel from './components/NotificationPanel';
 import Playlist from './components/PlayList';
+import SupportModal from './components/SupportModal';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +26,7 @@ export default function Home() {
   const [collectionModal, SetCollectionModal] = useState(false);
   const [isPanelActive, setIsPanelActive] = useState(false);
   const [PlayListModal, setPlayListModal] = useState(false);
+  const [supportModal, setsupportModal] = useState(false);
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -74,6 +76,8 @@ export default function Home() {
             setIsSidebarOpen={setIsSidebarOpen}
             isPanelActive={isPanelActive}
             setIsPanelActive={setIsPanelActive}
+            supportModal={supportModal}
+            setsupportModal={setsupportModal}
           />
           <div className="content">
             <Login
@@ -108,8 +112,8 @@ export default function Home() {
               isPanelActive={isPanelActive}
               setIsPanelActive={setIsPanelActive}
             />
-
             <Playlist PlayListModal={PlayListModal} />
+            <SupportModal supportModal={supportModal} setsupportModal={setsupportModal} />
           </div>
         </div>
       </div>

@@ -4,7 +4,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, setIsOpenApplytoTeach, isOpenApplytoTeach, setIsPanelActive, isPanelActive }) => {
+const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsupportModal,
+  setIsModalOpen2, setIsOpenApplytoTeach, isOpenApplytoTeach, setIsPanelActive, isPanelActive }) => {
 
   const [Login, setLogin] = useState(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -145,6 +146,12 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, se
     setAnchorEl3(null);
   };
 
+  const handleLink = (LinkName) => {
+    if (LinkName === 'Support') {
+      setsupportModal(!supportModal);
+    }
+  }
+
   const profileItems = [
     {
       label: "Preferences", icon:
@@ -178,6 +185,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, se
       label: "Support", icon: <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="1.5" stroke="currentColor" fill="none">
         <path d="M9.984 9A2.248 2.248 0 0 1 12 7.75a2.25 2.25 0 0 1 1.579 3.853c-.5.493-1.108 1.025-1.402 1.65M12 16.25v.01m0 2.99a7.25 7.25 0 1 1 0-14.5 7.25 7.25 0 0 1 0 14.5Z" stroke-linejoin="round" stroke-linecap="round" />
       </svg>
+      ,
     },
     {
       label: "Team", icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
@@ -470,7 +478,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, se
                     key={index}
                     style={{
                       borderRadius: "5px",
-                      border: '0.2px solid #F5F5F5',
+                      border: "0.2px solid #F5F5F5",
                       padding: "11px 15px",
                       display: "flex",
                       alignItems: "center",
@@ -480,13 +488,12 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, se
                       color: "#333",
                       transition: "background-color 0.3s ease",
                     }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.backgroundColor = "#f0f0f0")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.target.style.backgroundColor = "transparent")
-                    }
-                    onClick={handleClose3}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = "#f0f0f0")}
+                    onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+                    onClick={() => {
+                      handleClose3(); // Close the menu
+                      handleLink(item.label); // Trigger the link action
+                    }}
                   >
                     <span
                       style={{
@@ -498,6 +505,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, se
                     {item.label}
                   </MenuItem>
                 ))}
+
                 <MenuItem
                   style={{
                     borderRadius: "5px",

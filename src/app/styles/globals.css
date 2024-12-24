@@ -20,7 +20,9 @@ body {
   --gray-300: #D1D5DB;
   --gray-400: #9CA3AF;
   --gray-500: #6B7280;
-  --gray-600: #4B5563;
+  --gray-600: #4B5563;;
+  --border-color: #E5E5E5;
+  --placeholder-color: #A0AEC0;
   --panel-width: 480px;
   --hover-bg: #F3F4F6;
 }
@@ -562,13 +564,7 @@ button:focus {
   transition: all 0.3s ease-in-out;
 }
 
-/* For medium screens and below */
-@media (max-width: 768px) {
-  .sidebar-open {
-    width: 5%;
-    /* Auto-close sidebar for smaller screens */
-  }
-}
+
 
 .option-card.selected {
   background-color: #55B0AF !important;
@@ -772,7 +768,7 @@ button:focus {
 
 .school-inputs:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: #02C5AF;
 }
 
 .emoji-button {
