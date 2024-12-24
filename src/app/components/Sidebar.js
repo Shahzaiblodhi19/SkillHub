@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from 'next/image'; // Import Next.js Image component
 import Logo from '../assets/logo.svg';
+import Link from "next/link";
 
 export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setIsSidebarOpen,
     setIsSchoolModal, isSchoolModal, collectionModal, SetCollectionModal, setPlayListModal, PlayListModal }) {
@@ -99,15 +100,15 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                         <ul className="space-y-2 mx-3 mt-2">
                             {/* Dashboard */}
                             <li className={`nav-item ${SidebarLinkActive === 'Dashboard' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Dashboard')}>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/"
                                     className="flex items-center p-2 "
                                 >
                                     <svg style={{ marginRight: '10px' }} width="18" height="18" fill="none" viewBox="0 0 24 24">
                                         <path fill="#4B4B4B" d="M11.4697 2.46967C11.7626 2.17678 12.2375 2.17678 12.5304 2.46967L21.5304 11.4697C21.7449 11.6842 21.809 12.0068 21.6929 12.287C21.5768 12.5673 21.3034 12.75 21 12.75H19.75V19C19.75 19.7293 19.4603 20.4288 18.9446 20.9445C18.4288 21.4603 17.7294 21.75 17 21.75H7.00002C6.27068 21.75 5.5712 21.4603 5.05548 20.9445C4.53975 20.4288 4.25002 19.7293 4.25002 19V12.75H3.00002C2.69668 12.75 2.4232 12.5673 2.30711 12.287C2.19103 12.0068 2.25519 11.6842 2.46969 11.4697L11.4697 2.46967ZM9.75002 20.25H14.25V15C14.25 14.6685 14.1183 14.3505 13.8839 14.1161C13.6495 13.8817 13.3315 13.75 13 13.75H11C10.6685 13.75 10.3506 13.8817 10.1161 14.1161C9.88172 14.3505 9.75002 14.6685 9.75002 15V20.25ZM15.75 20.25V15C15.75 14.2707 15.4603 13.5712 14.9446 13.0555C14.4288 12.5397 13.7294 12.25 13 12.25H11C10.2707 12.25 9.5712 12.5397 9.05548 13.0555C8.53975 13.5712 8.25002 14.2707 8.25002 15V20.25H7.00002C6.6685 20.25 6.35056 20.1183 6.11614 19.8839C5.88172 19.6495 5.75002 19.3315 5.75002 19V12C5.75002 11.5858 5.41424 11.25 5.00002 11.25H4.81068L12 4.06066L19.1894 11.25H19C18.5858 11.25 18.25 11.5858 18.25 12V19C18.25 19.3315 18.1183 19.6495 17.8839 19.8839C17.6495 20.1183 17.3315 20.25 17 20.25H15.75Z" clipRule="evenodd" fillRule="evenodd"></path>
                                     </svg>
                                     <span>Dashboard</span>
-                                </a>
+                                </Link>
                             </li>
 
                             {/* My Products */}
@@ -151,15 +152,15 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                 </ul>
                             )}
                             <li className={`nav-item ${SidebarLinkActive === 'Marketing' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Marketing')}>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/marketing"
                                     className="flex items-center p-2 "
                                 >
                                     <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 24 24">
                                         <path fill="#4F4F4F" d="M3.25 4C3.25 3.58579 3.58579 3.25 4 3.25H20C20.4142 3.25 20.75 3.58579 20.75 4V6.172C20.7498 6.90125 20.46 7.60073 19.9443 8.11633C19.9443 8.11636 19.9444 8.1163 19.9443 8.11633L15.75 12.3107V19C15.75 19.3228 15.5434 19.6094 15.2372 19.7115L9.23717 21.7115C9.00846 21.7878 8.75704 21.7494 8.56147 21.6084C8.36589 21.4675 8.25 21.2411 8.25 21V12.79L3.96504 8.0765C3.50504 7.5704 3.25007 6.911 3.25 6.22708V4ZM4.75 4.75V6.22692C4.75 6.22689 4.75 6.22695 4.75 6.22692C4.75005 6.53774 4.86591 6.83748 5.07495 7.0675C5.07494 7.06748 5.07497 7.06751 5.07495 7.0675L9.55496 11.9955C9.68046 12.1335 9.75 12.3134 9.75 12.5V19.9594L14.25 18.4594V12C14.25 11.8011 14.329 11.6103 14.4697 11.4697L18.8837 7.05567C19.1181 6.82134 19.2499 6.50344 19.25 6.172C19.25 6.17195 19.25 6.17205 19.25 6.172V4.75H4.75Z" clipRule="evenodd" fillRule="evenodd"></path>
                                     </svg>
                                     <span>Marketing</span>
-                                </a>
+                                </Link>
                             </li>
                             <li style={{ display: 'none' }} className={`nav-item`} onClick={() => setIsSidebarOpen(true)}>
                                 <a

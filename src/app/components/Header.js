@@ -10,26 +10,30 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
   const [Login, setLogin] = useState(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const toggleModal2 = () => setIsModalOpen2(!isModalOpen2);
-  // State to track the input value
-  const [searchText, setSearchText] = useState('');
-
-  // Handle input change
-  const handleInputChange = (e) => {
-    setSearchText(e.target.value);
-    setOpen2(false); // Open menu when typing in input
-  };
-
-  // Clear input when delete icon is clicked
-  const handleClearInput = () => {
-    setSearchText('');
-  };
-
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedItem, setSelectedItem] = useState('courses'); // Default: 'courses'
+  const [selectedItem, setSelectedItem] = useState('select'); // Default: 'courses'
   const open = Boolean(anchorEl);
+
+
 
   // Menu items with labels, keys, and their SVG icons
   const menuItems = [
+        {
+      label: 'Select',
+      key: 'select',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="18" width="18">
+          <path fill="#4E4E4E" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clipRule="evenodd" fillRule="evenodd"></path>
+        </svg>),
+    },
+    {
+      label: 'All',
+      key: 'all',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="18" width="18">
+          <path fill="#4E4E4E" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clipRule="evenodd" fillRule="evenodd"></path>
+        </svg>),
+    },
     {
       label: 'Courses',
       key: 'courses',
@@ -69,7 +73,6 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
       ),
     },
   ];
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -82,59 +85,11 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
     setSelectedItem(item.key); // Update selected item
     setAnchorEl(null);
   };
-
   const checkIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
       <path d="M14.312 0.45286C14.6755 0.769131 14.6755 1.33378 14.312 1.65005L6.02701 8.85793C5.27435 9.51275 4.15422 9.51275 3.40156 8.85793L0.688264 6.49737C0.324615 6.181 0.324615 5.61617 0.688264 5.29979V5.29979C0.986676 5.04018 1.4307 5.03991 1.72943 5.29916L3.4024 6.75109C4.15489 7.40416 5.27332 7.40374 6.02532 6.75011L13.2707 0.452616C13.5693 0.193075 14.0135 0.193179 14.312 0.45286V0.45286Z" fill="#526279" />
     </svg>
   );
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const [open2, setOpen2] = useState(false);
-
-  // Trending items data
-  const trendingItems = [
-    { label: 'Alberto' },
-    { label: 'Ruka' },
-    { label: 'Benchmark' },
-    { label: 'Artificial Intelligence' },
-    { label: 'Latest version of supercomputer' },
-  ];
-
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-    setOpen2(true); // Open menu on click
-  };
-
-  // Handle menu close
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
-  // Handle trend selection
-  const handleSelectTrend = (trend) => {
-    setSearchText(trend.label); // Set the selected trend in the input field
-    setOpen2(false); // Close the menu after selection
-  };
-
-  // Filter the trending items based on the searchText
-  const filteredItems = trendingItems.filter((item) =>
-    item.label.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  // Close the menu if clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (anchorEl2 && !anchorEl2.contains(event.target)) {
-        setOpen2(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [anchorEl2]);
-
   const [anchorEl3, setAnchorEl3] = useState(null);
   const open3 = Boolean(anchorEl3);
 
@@ -151,7 +106,6 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
       setsupportModal(!supportModal);
     }
   }
-
   const profileItems = [
     {
       label: "Preferences", icon:
@@ -205,6 +159,213 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
     setFilterVisible(!isFilterVisible);
   };
 
+  const [searchValue, setSearchValue] = useState(""); // Input value
+  const [showTrending, setShowTrending] = useState(true); // Toggle between trending and results
+  const [showSuggestions, setShowSuggestions] = useState(false); // Show suggestions dropdown
+
+  // Sample data
+  const trendingSearches = [
+    "Alberto",
+    "Ruka",
+    "Benchmark",
+    "Artificial Intelligence",
+    "Latest version of supercomputer",
+  ];
+
+  const searchResults = {
+    courses: [
+      {
+        title: "Advanced Machine Learning Techniques",
+        author: "Jonah Berger",
+        duration: "23m",
+        enrolled: "156",
+        image: "https://i.ibb.co/jJ4GHXP/img1.jpg",
+      },
+      {
+        title: "Data Science Fundamentals",
+        author: "Sarah Johnson",
+        duration: "2.5hr",
+        enrolled: "342",
+        image: "https://i.ibb.co/z27wtc6/img2.jpg",
+      },
+    ],
+    sessions: [
+      {
+        title: "Leadership Workshop",
+        author: "Michael Chen",
+        enrolled: "89",
+        image: "https://i.ibb.co/LJwrLdW/coaching-image.webp",
+      },
+      {
+        title: "Team Building Strategies",
+        author: "Emily Wilson",
+        enrolled: "124",
+        image: "https://i.ibb.co/k67BZds/community-image1.png",
+      },
+    ],
+    communities: [
+      {
+        title: "Tech Innovators Network",
+        author: "David Lee",
+        enrolled: "567",
+        image: "https://i.ibb.co/Csdq4rd/newsletter-image.png",
+      },
+      {
+        title: "Digital Marketing Pros",
+        author: "Lisa Anderson",
+        enrolled: "892",
+        image: "https://i.ibb.co/jJ4GHXP/img1.jpg",
+      },
+    ],
+  };
+
+  const topics = ["US relations", "Digital Marketing", "Data Science", "Leadership"];
+
+  const handleInputChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchValue(value);
+    setShowSuggestions(true);
+  };
+
+  const handleClearInput = () => {
+    setSearchValue("");
+    setShowSuggestions(false);
+  };
+
+
+  const filterResults = (category) => {
+    return category.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchValue) ||
+        (item.author && item.author.toLowerCase().includes(searchValue))
+    );
+  };
+
+  const renderTrending = () => (
+    <div className="trending-section">
+      <h3 className="section-title">Trending now</h3>
+      <div className="trending-items">
+        {trendingSearches.map((search, index) => (
+          <div
+            key={index}
+            className="trending-item"
+            onClick={() => {
+              setSearchValue(search.toLowerCase());
+              setShowTrending(false);
+            }}
+          >
+            <span>{search}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  // Render filtered results
+  const renderResults = () => {
+    // Filter data for all categories
+    const filteredCourses = filterResults(searchResults.courses);
+    const filteredSessions = filterResults(searchResults.sessions);
+    const filteredCommunities = filterResults(searchResults.communities);
+  
+    // Check if there are matches
+    const showCourses =
+      (selectedItem === "courses" || selectedItem === "all") &&
+      filteredCourses.length > 0;
+    const showSessions =
+      (selectedItem === "sessions" || selectedItem === "all") &&
+      filteredSessions.length > 0;
+    const showCommunities =
+      (selectedItem === "communities" || selectedItem === "all") &&
+      filteredCommunities.length > 0;
+  
+    return (
+      <div className="results-section">
+        {/* Render Courses */}
+        {showCourses && (
+          <div className="results-category">
+            <h3 className="category-title">Courses</h3>
+            <div className="results-list">
+              {filteredCourses.map((course, index) => (
+                <div key={index} className="result-item">
+                  <img className="result-image" src={course.image} alt={course.title} />
+                  <div className="result-content">
+                    <h4 className="result-title">{course.title}</h4>
+                    <p>{course.author}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+  
+        {/* Render Sessions */}
+        {showSessions && (
+          <div className="results-category">
+            <h3 className="category-title">Sessions</h3>
+            <div className="results-list">
+              {filteredSessions.map((session, index) => (
+                <div key={index} className="result-item">
+                  <img className="result-image" src={session.image} alt={session.title} />
+                  <div className="result-content">
+                    <h4 className="result-title">{session.title}</h4>
+                    <p>{session.author}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+  
+        {/* Render Communities */}
+        {showCommunities && (
+          <div className="results-category">
+            <h3 className="category-title">Communities</h3>
+            <div className="results-list">
+              {filteredCommunities.map((community, index) => (
+                <div key={index} className="result-item">
+                  <img className="result-image" src={community.image} alt={community.title} />
+                  <div className="result-content">
+                    <h4 className="result-title">{community.title}</h4>
+                    <p>{community.author}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+  
+        {/* Fallback for no matches */}
+        {!showCourses && !showSessions && !showCommunities && (
+          <p>No results found</p>
+        )}
+      </div>
+    );
+  };
+  
+  
+
+  const renderTopics = () => (
+    <div className="topics-section">
+      <h3 className="section-title">Topics</h3>
+      <div className="topics-grid">
+        {topics.map((topic, index) => (
+          <div
+            key={index}
+            className="topic-item"
+            onClick={() => {
+              setSearchValue(topic.toLowerCase());
+              setShowTrending(false);
+            }}
+          >
+            <span>{topic}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+
   return (
     <header className="navbar navbar-expand-lg m-0 px-3 py-2" style={{ background: '#fff' }}>
       <div className="container-fluid">
@@ -212,146 +373,97 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
         {/* Right-side buttons */}
         <div className="d-flex align-items-center gap-3 w-100 justify-content-end">
           {/* Search bar */}
-          <div className="input-group search-bar" style={{ background: '#F1F6F7', border: '1.5px solid #293330', borderRadius: '8px', width: '485px' }}>
-            <button className="btn " type="button">
-              <svg width='24' height='24' viewBox="1 1 60 60">
-                <path d="M27.765 42.244c-8.614 0-15.622-7.008-15.622-15.622S19.151 11 27.765 11s15.622 7.008 15.622 15.622-7.007 15.622-15.622 15.622zm0-28.398c-7.045 0-12.775 5.73-12.775 12.775s5.73 12.775 12.775 12.775 12.775-5.73 12.775-12.775-5.73-12.775-12.775-12.775z"></path><path d="M34.869 39.146l4.014-3.738 9.286 9.114a3.164 3.164 0 01-.07 4.562l-.071.066a3.163 3.163 0 01-4.561-.257l-8.598-9.747zM27.77 34.173c-2.882 0-5.412-.876-7.656-2.526a1.002 1.002 0 01-.35-.81c.008-.461.445-.969 1.02-.959.284.005.493.153.713.308 1.837 1.302 3.832 1.971 6.275 1.971 1.875 0 4.492-.476 6.314-2.118a.98.98 0 01.638-.261.92.92 0 01.686.241c.222.209.33.527.336.735a1.02 1.02 0 01-.318.775c-1.333 1.237-4.262 2.644-7.658 2.644z"></path>
-              </svg>
-            </button>
-            <input
-              style={{
-                background: '#F1F6F7 ',
-                border: '0',
-                paddingLeft: '0',
-                paddingRight: '3px',
-                fontSize: '12px',
-              }}
-              type="text"
-              className="form-control"
-              placeholder="Search for anything..."
-              aria-label="Search"
-              id="basic-button2"
-              aria-controls={open2 ? 'basic-menu2' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open2 ? 'true' : undefined}
-              onClick={handleClick2}
-              value={searchText}
-              onChange={handleInputChange} // Update state on input change
-            />
 
-            <Menu
-              id="basic-menu2"
-              anchorEl={anchorEl2}
-              open={open2}
-              onClose={handleClose2}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button2',
-              }}
-              PaperProps={{
-                style: {
-                  borderRadius: '5px',
-                  border: '1px solid #E6E6E6',
-                  boxShadow: 'none',
-                  paddingBottom: '10px',
-                  width: '480px',
-                  transform: 'translate(-44px, 13px)', // Adjust position as needed
-                  zIndex: 999, // Make sure the menu is below the input field
-                },
-              }}
-            >
-              <div
+          <div className="input-group position-relative search-bar" style={{ background: '#F1F6F7', border: '1.5px solid #293330', borderRadius: '8px', maxWidth: '485px', width: '100%' }}>
+            <div className="search-wrapper w-100">
+              <button className="btn " type="button">
+                <svg width='24' height='24' viewBox="1 1 60 60">
+                  <path d="M27.765 42.244c-8.614 0-15.622-7.008-15.622-15.622S19.151 11 27.765 11s15.622 7.008 15.622 15.622-7.007 15.622-15.622 15.622zm0-28.398c-7.045 0-12.775 5.73-12.775 12.775s5.73 12.775 12.775 12.775 12.775-5.73 12.775-12.775-5.73-12.775-12.775-12.775z"></path><path d="M34.869 39.146l4.014-3.738 9.286 9.114a3.164 3.164 0 01-.07 4.562l-.071.066a3.163 3.163 0 01-4.561-.257l-8.598-9.747zM27.77 34.173c-2.882 0-5.412-.876-7.656-2.526a1.002 1.002 0 01-.35-.81c.008-.461.445-.969 1.02-.959.284.005.493.153.713.308 1.837 1.302 3.832 1.971 6.275 1.971 1.875 0 4.492-.476 6.314-2.118a.98.98 0 01.638-.261.92.92 0 01.686.241c.222.209.33.527.336.735a1.02 1.02 0 01-.318.775c-1.333 1.237-4.262 2.644-7.658 2.644z"></path>
+                </svg>
+              </button>
+              <input
                 style={{
-                  padding: '12px',
-                  fontWeight: 'bold',
-                  fontSize: '14px',
-                  color: '#333',
+                  background: '#F1F6F7 ',
+                  border: '0',
+                  paddingLeft: '0',
+                  paddingRight: '3px',
+                  fontSize: '12px',
+                }}
+                type="text"
+                className="form-control w-100"
+                placeholder="Search for anything..."
+                aria-label="Search"
+                value={searchValue}
+                onFocus={() => setShowSuggestions(true)}
+                onChange={handleInputChange}
+              />
+              {searchValue && (
+                <div className="delete-icon d-flex align-items-center mr-3" style={{ marginLeft: '5px', display: 'block' }} onClick={handleClearInput}>
+                  <svg viewBox="0 0 24 24" className="w-4 h-4">
+                    <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0a.9959.9959 0 0 1 0-1.41L10.59 12 7.7 9.11a.9959.9959 0 0 1 0-1.41c.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41"></path>
+                  </svg>              </div>
+              )}
+
+              <button id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick} className="d-flex align-items-center gap-2 px-2" style={{ background: '#fff', fontSize: '12px', borderRadius: '8px', zIndex: '99', marginRight: '-5px' }}>
+                {/* Default menu item */}
+                {menuItems.find((item) => item.key === selectedItem)?.icon} {/* Dynamic SVG */}
+                <span>{menuItems.find((item) => item.key === selectedItem)?.label}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15z" fill="#636363"></path></svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+                PaperProps={{
+                  style: {
+                    borderRadius: '5px',
+                    border: '1px solid #E6E6E6',
+                    boxShadow: 'none',
+                    width: '200px',
+                    left: '220px !important'
+                  },
                 }}
               >
-                Trending Now
-              </div>
-              {filteredItems.length > 0 ? (
-                filteredItems.map((item, index) => (
+                {menuItems.map((item) => (
                   <MenuItem
-                    key={index}
-                    style={{
-                      border: 'none',
-                      padding: '7px 12px',
-                      fontSize: '13px',
-                      display: 'flex',
-                      gap: '12px',
-                      alignItems: 'center',
-                    }}
-                    onClick={() => handleSelectTrend(item)} // Update input when trend is selected
+                    key={item.key}
+                    onClick={() => handleSelect(item)}
+                    selected={item.key === selectedItem}
+                    style={{ border: '0.2px solid #F5F5F5' }}
+                    className="d-flex align-items-center justify-content-between py- m-0"
                   >
-                    {/* Trending icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 64 38" fill="none">
-                      <path d="M3 35.1111L22.3333 15.7778L35.2222 28.6667L61 2.88892" stroke="black" strokeWidth="4.16667" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M48.1111 2.88892H61V15.7778" stroke="black" strokeWidth="4.16667" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span style={{ fontWeight: '600', color: '#000' }}>{item.label}</span>
+                    <div className="d-flex align-items-center gap-2 py-1 " style={{ fontSize: '13px' }}>
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </div>
+                    {selectedItem === item.key && checkIcon} {/* Show check icon for selected item */}
                   </MenuItem>
-                ))
-              ) : (
-                <MenuItem style={{ padding: '7px 12px', fontSize: '13px' }}>No results</MenuItem>
-              )}
-            </Menu>
-            {searchText && (
-              <div className="delete-icon d-flex align-items-center mr-3" style={{ marginLeft: '5px' }} onClick={handleClearInput}>
-                <svg data-testid="EastRoundedIcon" viewBox="0 0 24 24"><path fill="#95969A" d="M14.29 5.71c-.39.39-.39 1.02 0 1.41L18.17 11H3c-.55 0-1 .45-1 1s.45 1 1 1h15.18l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l5.59-5.59c.39-.39.39-1.02 0-1.41l-5.6-5.58c-.38-.39-1.02-.39-1.41 0"></path></svg>
+                ))}
+              </Menu>
+              <button className="search-btn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 34 28" fill="none">
+                <path d="M2.00002 14H31.1667" stroke="#BEEEFF" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M20.3333 25.6666L32 13.9999L20.3333 2.33325" stroke="#BEEEFF" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round" />
+              </svg></button>
+            </div>
+
+            {showSuggestions && (
+              <div className={`search-suggestions ${showSuggestions ? "active" : ""}`}>
+                {showTrending ? renderTrending() : renderResults()}
+                {renderTopics()}
               </div>
             )}
-            <button id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick} className="d-flex align-items-center gap-2 px-2" style={{ background: '#fff', fontSize: '12px', borderRadius: '8px', zIndex: '99', marginRight: '-5px' }}>
-              {/* Default menu item */}
-              {menuItems.find((item) => item.key === selectedItem)?.icon} {/* Dynamic SVG */}
-              <span>{menuItems.find((item) => item.key === selectedItem)?.label}</span>
-              <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15z" fill="#636363"></path></svg>
-            </button>
-
-            {/* Dropdown Menu */}
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-              PaperProps={{
-                style: {
-                  borderRadius: '5px',
-                  border: '1px solid #E6E6E6',
-                  boxShadow: 'none',
-                  width: '200px',
-                  left: '220px !important'
-                },
-              }}
-            >
-              {menuItems.map((item) => (
-                <MenuItem
-                  key={item.key}
-                  onClick={() => handleSelect(item)}
-                  selected={item.key === selectedItem}
-                  style={{ border: '0.2px solid #F5F5F5' }}
-                  className="d-flex align-items-center justify-content-between py- m-0"
-                >
-                  <div className="d-flex align-items-center gap-2 py-1 " style={{ fontSize: '13px' }}>
-                    {item.icon}
-                    <span>{item.label}</span>
-                  </div>
-                  {selectedItem === item.key && checkIcon} {/* Show check icon for selected item */}
-                </MenuItem>
-              ))}
-            </Menu>
-            <button className="search-btn"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 34 28" fill="none">
-              <path d="M2.00002 14H31.1667" stroke="#BEEEFF" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M20.3333 25.6666L32 13.9999L20.3333 2.33325" stroke="#BEEEFF" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round" />
-            </svg></button>
-
           </div>
+
           <button type="button" onClick={toggleFilter} className="btn p-0" >
             <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 60 60" fill="none">
               <circle cx="30" cy="30" r="29.25" stroke="#E5E5E5" strokeWidth="1.5" />

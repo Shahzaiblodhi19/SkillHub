@@ -1,11 +1,23 @@
-// pages/_app.js
-import "../styles/globals.css";
-import { GlobalProvider } from "./context/GlobalContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/globals.css';
+import { Geist, Geist_Mono } from "next/font/google";
 
-export default function App({ Component, pageProps }) {
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export default function MyApp({ Component, pageProps }) {
   return (
-    <GlobalProvider>
-      <Component {...pageProps} />
-    </GlobalProvider>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Component {...pageProps} />
+      </body>
+    </html>
   );
 }
