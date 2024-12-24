@@ -425,7 +425,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, setIsModalOpen2, se
               <button className="btn signup-btn" onClick={toggleModal2}>Join</button>
             </>
           }
-          <button className="btn p-0" type="button">
+          <button onClick={() => setLogin(!Login)} className="btn p-0" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 60 60" fill="none">
               <circle cx="30" cy="30" r="29.25" stroke="#E5E5E5" strokeWidth="1.5" />
               <mask id="mask0_50_170" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="14" y="15" width="31" height="31">

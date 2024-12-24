@@ -1,85 +1,15 @@
 // pages/index.js
 import { useState } from "react";
 import Image from "next/image";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data"; // Emoji data
 
-const emojiCategories = {
-  frequent: ["🕐", "😊", "🐱", "🍔", "🚗", "⚽", "👕", "🎵", "🌟", "📱", "🛒", "🏡", "🖊️", "🔥", "💡", "📅", "✨", "🔒", "🎥", "📞", "💻", "📦", "📚", "📸", "💳", "📋", "📈", "🖋️", "📍", "📂", "🎶", "🛏️", "🔑", "🛁", "🖼️", "💵", "🗂️", "🔗", "🛠️", "🧾", "📜", "🕯️", "📡", "💬", "📊", "🧹", "🧼", "🪣", "🔔", "📖", "🔎", "⚙️", "🔦", "🧮", "💣", "🗡️", "⚔️", "🔫", "🛡️", "🏹", "🧨", "🪓", "🔨", "🧲", "🔩", "⚖️", "🔧", "🪚", "🧰", "🔬", "🔭", "🩺", "💉", "💊", "🩸", "🧬", "🦠", "🩻", "🩼", "🧯", "📀", "💿", "🖱️", "🖲️", "💽", "🖨️", "🖴", "📟", "📠"],
-  smileys: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "😷", "🤒", "🤕", "🤢", "🤮", "🤧", "🥴", "😵", "🤯", "😳", "🥶", "😱", "😨", "😰", "😥", "😓", "😪", "😴", "😬", "🤥", "🤭", "🤔", "🤫", "🤗", "🫣", "🫠", "😶‍🌫️", "😑", "😐", "🙄", "😮‍💨", "😵‍💫", "🫥", "🤐", "🫢"],
-  nature: ["🐱", "🐶", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐽", "🐸", "🐵", "🙈", "🙉", "🙊", "🐒", "🐔", "🐧", "🐦", "🐤", "🐣", "🐥", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "🐜", "🦗", "🕷", "🕸", "🐢", "🐍", "🦎", "🦂", "🦕", "🦖", "🐙", "🦑", "🦐", "🦞", "🦀", "🐡", "🐟", "🐠", "🐬", "🐳", "🐋", "🦈", "🐊", "🐅", "🐆", "🦧", "🦮", "🐕‍🦺", "🐩", "🐕", "🐈", "🐓", "🦃", "🦢", "🦚", "🦜", "🐇", "🦝", "🦨", "🦡", "🦦", "🦥", "🐁", "🐀", "🐿️", "🦔", "🐾"],
-  food: ["🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅", "🍆", "🥑", "🥦", "🥬", "🥒", "🌶", "🫑", "🌽", "🥕", "🧄", "🧅", "🥔", "🍠", "🥐", "🍞", "🥖", "🥨", "🧀", "🥚", "🍳", "🧈", "🥞", "🧇", "🫓", "🥗", "🥙", "🥪", "🌮", "🌯", "🫔", "🥘", "🍲", "🍿", "🧂", "🥤", "🧃", "🧋", "🍹", "🍸", "🍷", "🍶", "🍵", "🫖", "🥂", "🍻", "🍺", "🍼", "🥄", "🍴", "🥢", "🥡"],
-  activities: ["⚽", "🏀", "🏈", "⚾", "🥎", "🎾", "🏐", "🏉", "🎱", "🏓", "🏸", "🏒", "🏑", "🥍", "🏏", "🪀", "🪁", "🎿", "⛷", "🏂", "🪂", "🏋️", "🤼", "🤸", "⛹️", "🤺", "🤾", "🏌️", "🏇", "🧘", "🏄", "🏊", "🤽", "🚣", "🧗", "🚵", "🚴", "🎤", "🎧", "🎼", "🎹", "🥁", "🎷", "🎺", "🎸", "🪕", "🎻", "🎮", "🕹️", "🎲", "🧩", "🎯", "🎳", "🎬"],
-  travel: ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚓", "🚑", "🚒", "🚐"],
-  objects: ["👕", "👚", "👖", "👔", "👗", "👙", "👘", "👠", "👡", "👢"],
-  symbols: ["❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "💔", "💕", "💞"],
-};
-
-const EmojiPicker = ({ selectedEmoji, setSelectedEmoji, toggleEmojiPicker }) => {
-  const handleSelect = (emoji) => {
-    setSelectedEmoji(emoji);
-    toggleEmojiPicker();
-  };
-
-  const handleRemove = () => {
-    setSelectedEmoji(null);
-  };
-
-  return (
-    <div
-      className="absolute top-full right-0 mt-2 bg-white p-4 border rounded-lg w-72 max-h-96 overflow-auto"
-      style={{ zIndex: 100 }}
-    >
-
-      {selectedEmoji && (
-        <div className="flex items-center justify-between p-2 bg-gray-50 rounded mb-4">
-          <span className="text-lg">{selectedEmoji}</span>
-          <button
-            onClick={handleRemove}
-            className="text-red-500 hover:text-red-700 border border-black absolute"
-            title="Remove Emoji"
-            style={{ zIndex: 1001, top: '-100px' }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-
-        </div>
-      )}
-      {Object.entries(emojiCategories).map(([category, emojis]) => (
-        <div key={category} className="mb-4">
-          <div className="text-gray-500 text-sm mb-2">{category}</div>
-          <div className="flex flex-wrap gap-2">
-            {emojis.map((emoji) => (
-              <button
-                key={emoji}
-                onClick={() => handleSelect(emoji)}
-                className="text-lg p-1 hover:bg-gray-100 rounded"
-              >
-                {emoji}
-              </button>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSelectedEmoji, selectedEmoji, schoolName, setSchoolName }) {
+export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, schoolName, setSchoolName }) {
   const [emojiPickerVisible, setEmojiPickerVisible] = useState(false);
   const [bannerPreview, setBannerPreview] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState("😀"); // Default emoji
   const [links, setLinks] = useState([{ text: "", url: "" }]);
   const [description, setDescription] = useState("");
 
@@ -96,8 +26,6 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSel
     }
   };
 
-  const toggleEmojiPicker = () => setEmojiPickerVisible(!emojiPickerVisible);
-
   const handleLinkChange = (index, field, value) => {
     const updatedLinks = [...links];
     updatedLinks[index][field] = value;
@@ -110,7 +38,7 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSel
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     const formData = {
       name: schoolName.trim(), // Use state value for name
       description: description.trim(), // Use state value for description
@@ -119,7 +47,7 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSel
       thumbnail: thumbnailPreview, // Thumbnail image (base64)
       links: links.filter((link) => link.text.trim() && link.url.trim()), // Valid links only
     };
-  
+
     // Validate required fields
     if (!formData.name) {
       alert("Please enter the school name.");
@@ -137,10 +65,10 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSel
       alert("Please upload a thumbnail image.");
       return;
     }
-  
+
     // Display form data in an alert
     alert("Form submitted: " + JSON.stringify(formData, null, 2));
-  
+
     // Reset all fields after submission
     setSchoolName(""); // Reset school name
     setDescription(""); // Reset description
@@ -148,13 +76,17 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSel
     setBannerPreview(null); // Reset banner preview
     setThumbnailPreview(null); // Reset thumbnail preview
     setLinks([{ text: "", url: "" }]); // Reset links to default empty state
-  
+
     // Close modal
     setIsSchoolModal(false);
   };
-  
 
 
+
+  const handleEmojiSelect = (emoji) => {
+    setSelectedEmoji(emoji.native); // Capture selected emoji
+    setIsEmojiPickerOpen(false); // Close picker after selecting emoji
+};
 
   return (
     isSchoolModal && (
@@ -188,31 +120,14 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, setSel
                     type="button"
                     id="emojiButton"
                     className="emoji-button flex items-center justify-center w-10 h-10 "
-                    onClick={toggleEmojiPicker}
+                    onClick={()=>setIsEmojiPickerOpen(!isEmojiPickerOpen)}
                   >
-                    {selectedEmoji || (
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="#4F4F4F"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M12 7V17M7 12H17"
-                          stroke="#4F4F4F"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    )}
+                    {selectedEmoji}
                   </button>
-                  {emojiPickerVisible && (
-                    <EmojiPicker
-                      setSelectedEmoji={setSelectedEmoji}
-                      toggleEmojiPicker={toggleEmojiPicker}
-                    />
+                  {isEmojiPickerOpen && (
+                    <div className="absolute z-50 mt-2 top-16 right-0 bg-white shadow-lg rounded-lg p-2">
+                      <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+                    </div>
                   )}
                 </div>
               </div>
