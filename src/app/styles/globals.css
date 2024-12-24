@@ -562,11 +562,6 @@ button:focus {
   transition: all 0.3s ease-in-out;
 }
 
-.content {
-  padding: 20px;
-  /* Add spacing for content */
-}
-
 /* For medium screens and below */
 @media (max-width: 768px) {
   .sidebar-open {
@@ -662,7 +657,7 @@ button:focus {
   display: flex !important;
   align-items: center;
   gap: 8px;
-  color: var(--primary-color);
+  color: #02C5AF;
   background: none;
   border: none;
   cursor: pointer;
@@ -679,7 +674,7 @@ button:focus {
 .submit-btn {
   width: auto;
   padding: 10px 20px;
-  background: var(--primary-color);
+  background: #02C5AF;
   color: white;
   border: none;
   cursor: pointer;

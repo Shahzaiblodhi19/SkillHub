@@ -3,7 +3,8 @@ import { useState } from "react";
 import Image from 'next/image'; // Import Next.js Image component
 import Logo from '../assets/logo.svg';
 
-export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setIsSidebarOpen, setIsSchoolModal, isSchoolModal, collectionModal, SetCollectionModal }) {
+export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setIsSidebarOpen,
+    setIsSchoolModal, isSchoolModal, collectionModal, SetCollectionModal, setPlayListModal, PlayListModal }) {
     const [isSchoolOpen, setSchoolOpen] = useState(true);
     const [isCollectionOpen, setCollectionOpen] = useState(true);
     const [isOpen, setIsOpen] = useState(true);
@@ -30,6 +31,19 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
         setActiveSchool(item)
         setActiveCollection(item)
     };
+    const handleSidebarLinks = (links) => {
+        setSidebarLinkActive(links);
+        if (links === 'Playlist') {
+            setPlayListModal(!PlayListModal)
+        } else{
+            setPlayListModal(false)
+        }
+        if (PlayListModal === true) {
+            setSidebarLinkActive('')
+        } else {
+            setSidebarLinkActive('Playlist')
+        }
+    }
     // Map each item to its respective SVG
     const itemIcons = {
         'School A': (
@@ -85,7 +99,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                     <nav className="flex-grow">
                         <ul className="space-y-2 mx-3 mt-2">
                             {/* Dashboard */}
-                            <li className={`nav-item ${SidebarLinkActive === 'Dashboard' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Dashboard')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Dashboard' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Dashboard')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -137,7 +151,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     ))}
                                 </ul>
                             )}
-                            <li className={`nav-item ${SidebarLinkActive === 'Marketing' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Marketing')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Marketing' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Marketing')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -165,7 +179,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                         <ul className="space-y-2 mx-3 mt-4 border-b pb-3">
                             <span className="px-3 learn" style={{ fontSize: '10px', fontWeight: '600', color: '#767571' }}>LEARN</span>
                             {/* Dashboard */}
-                            <li className={`nav-item ${SidebarLinkActive === 'Dash' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Dash')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Dash' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Dash')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -176,7 +190,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'Explore' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Explore')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Explore' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Explore')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -189,7 +203,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Explore</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('My Learning')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('My Learning')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -198,7 +212,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>My Learning</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Learner Report')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Learner Report')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -261,7 +275,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                 </ul>
                             )}
 
-                            <li className={`nav-item ${SidebarLinkActive === 'Calendar' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Calendar')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Calendar' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Calendar')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -272,7 +286,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Calendar</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={() => setSidebarLinkActive('Bookmarks')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={()=>handleSidebarLinks('Bookmarks')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -330,7 +344,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
 
                     <nav className="flex-grow border-r">
                         <ul className="space-y-2 mx-3 mt-3 border-b pb-2">
-                            <li className={`nav-item ${SidebarLinkActive === 'Playlist' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => setSidebarLinkActive('Playlist')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Playlist' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={()=>handleSidebarLinks('Playlist')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
@@ -340,7 +354,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Playlist</span>
                                 </a>
                             </li>
-                            <li className={`nav-item ${SidebarLinkActive === 'Notifications' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => setSidebarLinkActive('Notifications')}>
+                            <li className={`nav-item ${SidebarLinkActive === 'Notifications' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={()=>handleSidebarLinks('Notifications')}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "

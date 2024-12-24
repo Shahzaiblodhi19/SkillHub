@@ -12,6 +12,7 @@ import Login from './components/Login';
 import "./styles/globals.css";
 import CreateCollectionModal from './components/AddCollection';
 import NotificationsPanel from './components/NotificationPanel';
+import Playlist from './components/PlayList';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Home() {
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [collectionModal, SetCollectionModal] = useState(false);
   const [isPanelActive, setIsPanelActive] = useState(false);
+  const [PlayListModal, setPlayListModal] = useState(false);
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -55,8 +57,11 @@ export default function Home() {
             selectedEmoji={selectedEmoji}
             collectionModal={collectionModal}
             SetCollectionModal={SetCollectionModal}
+            PlayListModal={PlayListModal}
+            setPlayListModal={setPlayListModal}
           />
         </div>
+
         {/* Main content */}
         <div className="flex-grow-1">
           <Header
@@ -95,15 +100,16 @@ export default function Home() {
               setSelectedEmoji={setSelectedEmoji}
               selectedEmoji={selectedEmoji}
             />
-            <CreateCollectionModal  
-            collectionModal={collectionModal}
-            SetCollectionModal={SetCollectionModal}
+            <CreateCollectionModal
+              collectionModal={collectionModal}
+              SetCollectionModal={SetCollectionModal}
             />
-            <NotificationsPanel 
-            isPanelActive={isPanelActive}
-            setIsPanelActive={setIsPanelActive}
+            <NotificationsPanel
+              isPanelActive={isPanelActive}
+              setIsPanelActive={setIsPanelActive}
             />
 
+            <Playlist PlayListModal={PlayListModal} />
           </div>
         </div>
       </div>
