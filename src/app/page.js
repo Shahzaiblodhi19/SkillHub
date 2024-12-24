@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import React, { useState, useEffect } from 'react';
 import Sidebar from "./components/Sidebar";
@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import AddSchoolPopup from './components/AddSchool';
 import Login from './components/Login';
 import "./styles/globals.css";
+import CreateCollectionModal from './components/AddCollection';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function Home() {
   const [isSchoolModal, setIsSchoolModal] = useState(false);
   const [schoolName, setSchoolName] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState(null);
+  const [collectionModal, SetCollectionModal] = useState(false);
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -49,6 +51,8 @@ export default function Home() {
             isSchoolModal={isSchoolModal}
             schoolName={schoolName}
             selectedEmoji={selectedEmoji}
+            collectionModal={collectionModal}
+            SetCollectionModal={SetCollectionModal}
           />
         </div>
         {/* Main content */}
@@ -79,13 +83,17 @@ export default function Home() {
               isOpenApplytoTeach={isOpenApplytoTeach}
               setIsOpenApplytoTeach={setIsOpenApplytoTeach}
             />
-            <AddSchoolPopup 
+            <AddSchoolPopup
               setIsSchoolModal={setIsSchoolModal}
               isSchoolModal={isSchoolModal}
               setSchoolName={setSchoolName}
               schoolName={schoolName}
               setSelectedEmoji={setSelectedEmoji}
               selectedEmoji={selectedEmoji}
+            />
+            <CreateCollectionModal  
+            collectionModal={collectionModal}
+            SetCollectionModal={SetCollectionModal}
             />
           </div>
         </div>
