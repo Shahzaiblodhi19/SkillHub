@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
               supportModal={supportModal}
               setsupportModal={setsupportModal}
             />
-            <div className="content h-100" style={{overflowY: 'scroll'}}>
+            <div className="content" style={{ height: 'calc(100vh - 62px)' }}>
               <Login
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
@@ -118,7 +118,7 @@ export default function RootLayout({ children }) {
               <Playlist PlayListModal={PlayListModal} />
               <SupportModal supportModal={supportModal} setsupportModal={setsupportModal} />
 
-              <div className='PagesContent h-full' style={{padding: '20px',background: '#F2F2F2'}}>
+              <div className='PagesContent h-full'style={{padding: '20px',background: '#F2F2F2',overflowY: 'auto'}}>
                 {children}
               </div>
               {/* Home Page should be here */}
