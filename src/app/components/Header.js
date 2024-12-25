@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,21 +11,13 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const toggleModal2 = () => setIsModalOpen2(!isModalOpen2);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedItem, setSelectedItem] = useState('select'); // Default: 'courses'
+  const [selectedItem, setSelectedItem] = useState('all'); // Default: 'courses'
   const open = Boolean(anchorEl);
 
 
 
   // Menu items with labels, keys, and their SVG icons
   const menuItems = [
-        {
-      label: 'Select',
-      key: 'select',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="18" width="18">
-          <path fill="#4E4E4E" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clipRule="evenodd" fillRule="evenodd"></path>
-        </svg>),
-    },
     {
       label: 'All',
       key: 'all',
@@ -75,16 +67,20 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
   ];
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setShowSuggestions(true);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleSelect = (item) => {
     setSelectedItem(item.key); // Update selected item
     setAnchorEl(null);
+    setShowSuggestions(true); // Show suggestions
+    setShowTrending(false); // Hide trending
   };
+
+
   const checkIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
       <path d="M14.312 0.45286C14.6755 0.769131 14.6755 1.33378 14.312 1.65005L6.02701 8.85793C5.27435 9.51275 4.15422 9.51275 3.40156 8.85793L0.688264 6.49737C0.324615 6.181 0.324615 5.61617 0.688264 5.29979V5.29979C0.986676 5.04018 1.4307 5.03991 1.72943 5.29916L3.4024 6.75109C4.15489 7.40416 5.27332 7.40374 6.02532 6.75011L13.2707 0.452616C13.5693 0.193075 14.0135 0.193179 14.312 0.45286V0.45286Z" fill="#526279" />
@@ -219,17 +215,30 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
     ],
   };
 
-  const topics = ["US relations", "Digital Marketing", "Data Science", "Leadership"];
+  const topics = ["Digital Marketing", "Data Science", "Leadership"];
 
   const handleInputChange = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchValue(value);
+
+    if (value.trim() !== "") {
+      setShowTrending(false); // Hide trending
+    } else {
+      setShowTrending(true); // Show trending again when input is cleared
+    }
+
+    setShowSuggestions(true); // Keep suggestions visible
+  };
+
+  const handleFocus = () => {
     setShowSuggestions(true);
+    setShowTrending(true); // Show trending when input is focused
   };
 
   const handleClearInput = () => {
     setSearchValue("");
-    setShowSuggestions(false);
+    setShowTrending(true); // Show trending again when input is cleared
+    setShowSuggestions(false); // Hide suggestions
   };
 
 
@@ -253,7 +262,9 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
               setSearchValue(search.toLowerCase());
               setShowTrending(false);
             }}
-          >
+          ><svg xmlns="http://www.w3.org/2000/svg" width="940" height="556" viewBox="0 0 940 556" fill="none">
+              <path d="M13.8425 542.789C4.24505 533.182 -0.361751 521.78 0.022148 508.586C0.406047 495.391 5.01285 484.374 13.8425 475.535L266.976 218.528C285.371 200.113 308.165 190.906 335.358 190.906C362.551 190.906 385.345 200.113 403.74 218.528L527.308 343.429L776.843 96.0295H700.063C686.466 96.0295 675.077 91.4178 665.896 82.1943C656.714 72.9709 652.107 61.5858 652.075 48.0389C652.043 34.4919 656.65 23.0907 665.896 13.8353C675.141 4.57984 686.53 -0.0318601 700.063 0.000165651H892.012C905.609 0.000165651 917.014 4.61186 926.227 13.8353C935.441 23.0587 940.032 34.4599 940 48.0389V240.194C940 253.805 935.393 265.222 926.179 274.445C916.966 283.669 905.577 288.264 892.012 288.232C878.448 288.2 867.059 283.605 857.845 274.445C848.632 265.286 844.025 253.869 844.025 240.194V163.332L595.69 411.884C577.295 430.299 554.501 439.506 527.308 439.506C500.115 439.506 477.321 430.299 458.926 411.884L335.358 288.184L81.0249 542.789C72.2272 551.596 61.0302 556 47.4337 556C33.8373 556 22.6402 551.596 13.8425 542.789Z" fill="black" />
+            </svg>
             <span>{search}</span>
           </div>
         ))}
@@ -267,7 +278,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
     const filteredCourses = filterResults(searchResults.courses);
     const filteredSessions = filterResults(searchResults.sessions);
     const filteredCommunities = filterResults(searchResults.communities);
-  
+
     // Check if there are matches
     const showCourses =
       (selectedItem === "courses" || selectedItem === "all") &&
@@ -278,7 +289,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
     const showCommunities =
       (selectedItem === "communities" || selectedItem === "all") &&
       filteredCommunities.length > 0;
-  
+
     return (
       <div className="results-section">
         {/* Render Courses */}
@@ -298,7 +309,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
             </div>
           </div>
         )}
-  
+
         {/* Render Sessions */}
         {showSessions && (
           <div className="results-category">
@@ -316,7 +327,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
             </div>
           </div>
         )}
-  
+
         {/* Render Communities */}
         {showCommunities && (
           <div className="results-category">
@@ -334,7 +345,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
             </div>
           </div>
         )}
-  
+
         {/* Fallback for no matches */}
         {!showCourses && !showSessions && !showCommunities && (
           <p>No results found</p>
@@ -342,8 +353,8 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
       </div>
     );
   };
-  
-  
+
+
 
   const renderTopics = () => (
     <div className="topics-section">
@@ -358,6 +369,9 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
               setShowTrending(false);
             }}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 1310 1310" fill="none">
+              <path d="M1310 748.571H748.571V1310H561.429V748.571H0V561.429H561.429V0H748.571V561.429H1310V748.571Z" fill="black" />
+            </svg>
             <span>{topic}</span>
           </div>
         ))}
@@ -365,7 +379,19 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
     </div>
   );
 
+  const containerRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+      setShowSuggestions(false);
+    }
+  };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <header className="navbar navbar-expand-lg m-0 px-3 py-2" style={{ background: '#fff' }}>
       <div className="container-fluid">
@@ -394,7 +420,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
                 placeholder="Search for anything..."
                 aria-label="Search"
                 value={searchValue}
-                onFocus={() => setShowSuggestions(true)}
+                onFocus={handleFocus} // Show suggestions and trending
                 onChange={handleInputChange}
               />
               {searchValue && (
@@ -457,11 +483,14 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
             </div>
 
             {showSuggestions && (
-              <div className={`search-suggestions ${showSuggestions ? "active" : ""}`}>
-                {showTrending ? renderTrending() : renderResults()}
-                {renderTopics()}
+              <div ref={containerRef} className={`search-suggestions ${showSuggestions ? "active" : ""}`}>
+                {showTrending && renderTrending()} {/* Show Trending when focused */}
+                {showTrending && renderTopics()}
+                {!showTrending && renderResults()} {/* Show Results when typing */}
+                {!showTrending && renderTopics()}
               </div>
             )}
+
           </div>
 
           <button type="button" onClick={toggleFilter} className="btn p-0" >

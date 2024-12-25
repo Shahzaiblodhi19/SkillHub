@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
     <html><body>
       <div className="container-fluid px-0">
         {/* Use d-flex to ensure columns remain aligned */}
-        <div className="d-flex flex-row w-100">
+        <div className="d-flex flex-row w-100 ">
           {/* Sidebar */}
           <div className={`custom-sidebar ${isSidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
             <Sidebar
@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
               supportModal={supportModal}
               setsupportModal={setsupportModal}
             />
-            <div className="content">
+            <div className="content h-100" style={{overflowY: 'scroll'}}>
               <Login
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
@@ -118,7 +118,7 @@ export default function RootLayout({ children }) {
               <Playlist PlayListModal={PlayListModal} />
               <SupportModal supportModal={supportModal} setsupportModal={setsupportModal} />
 
-              <div className='PagesContent' style={{padding: '20px'}}>
+              <div className='PagesContent h-full' style={{padding: '20px',background: '#F2F2F2'}}>
                 {children}
               </div>
               {/* Home Page should be here */}
