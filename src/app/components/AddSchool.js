@@ -90,8 +90,8 @@ export default function AddSchoolPopup({ isSchoolModal, setIsSchoolModal, school
 
   return (
     isSchoolModal && (
-      <div className="modal-overlay  h-screen" style={{ overflowY: 'auto' }}>
-        <div className="modal-container h-screen" style={{ width: '550px', textAlign: 'left' }}>
+      <div className="modal-overlay  h-screen" style={{ overflowY: 'auto'  }}>
+        <div className="modal-container h-screen" style={{ width: '550px', textAlign: 'left',height: `calc(100vh - 80px)`, }}>
           <div className="d-flex align-items-center justify-content-between mb-4" >
             <h2 className="text-lg font-bold text-gray-800">Create School</h2>
             <button className="close-btn" onClick={toggleModal2}>

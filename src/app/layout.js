@@ -19,6 +19,12 @@ import BottomNavigation from './components/ResponsiveFooter';
 //   title: "Skill Hub",
 //   description: "A Platform for Teaching and Buy Courses",
 // };
+import { createContext } from "react";
+import AddCourse from './components/AddCourse';
+import CreateBundle from './components/CreateBundle';
+
+// Create context
+export const MyContext = createContext();
 
 export default function RootLayout({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,6 +40,8 @@ export default function RootLayout({ children }) {
   const [supportModal, setsupportModal] = useState(false);
   const [isSidebarActive, setisSidebarActive] = useState(false)
   const [isSidebarSmallActive, setisSidebarSmallActive] = useState(false)
+  const [AddCourseModal, setAddCourseModal] = useState(false)
+  const [AddBundleModal, setAddBundleModal] = useState(false)
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -88,106 +96,118 @@ export default function RootLayout({ children }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const values = {
+    isSchoolModal,
+    setIsSchoolModal,
+    setAddCourseModal,
+    AddCourseModal,
+    AddBundleModal,
+    setAddBundleModal
+  }
   return (
-    <html><body>
-      <div className="container-fluid px-0">
-        {/* Use d-flex to ensure columns remain aligned */}
-        <div className="d-flex flex-row w-100 ">
-          {/* Sidebar */}
-          <div className={`custom-sidebar ${isSidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
-            <Sidebar
-              isSidebarOpen={isSidebarOpen}
-              setIsSidebarOpen={setIsSidebarOpen}
-              setIsSchoolModal={setIsSchoolModal}
-              isSchoolModal={isSchoolModal}
-              schoolName={schoolName}
-              selectedEmoji={selectedEmoji}
-              collectionModal={collectionModal}
-              SetCollectionModal={SetCollectionModal}
-              PlayListModal={PlayListModal}
-              setPlayListModal={setPlayListModal}
-              isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive}
-            />
-          </div>
+    <MyContext.Provider value={values}>
+      <html><body>
+        <div className="container-fluid px-0">
+          {/* Use d-flex to ensure columns remain aligned */}
+          <div className="d-flex flex-row w-100 ">
+            {/* Sidebar */}
+            <div className={`custom-sidebar ${isSidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
+              <Sidebar
+                isSidebarOpen={isSidebarOpen}
+                setIsSidebarOpen={setIsSidebarOpen}
+                setIsSchoolModal={setIsSchoolModal}
+                isSchoolModal={isSchoolModal}
+                schoolName={schoolName}
+                selectedEmoji={selectedEmoji}
+                collectionModal={collectionModal}
+                SetCollectionModal={SetCollectionModal}
+                PlayListModal={PlayListModal}
+                setPlayListModal={setPlayListModal}
+                isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive}
+              />
+            </div>
 
-          {/* Main content */}
-          <div className="flex-grow-1 w-100">
-            <Header
-              isModalOpen={isModalOpen}
-              setIsModalOpen={setIsModalOpen}
-              isModalOpen2={isModalOpen2}
-              isOpenApplytoTeach={isOpenApplytoTeach}
-              setIsOpenApplytoTeach={setIsOpenApplytoTeach}
-              setIsModalOpen2={setIsModalOpen2}
-              setIsSidebarOpen={setIsSidebarOpen}
-              isPanelActive={isPanelActive}
-              setIsPanelActive={setIsPanelActive}
-              supportModal={supportModal}
-              setsupportModal={setsupportModal}
-              isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive}
-            />
-            <div className="content" style={{ height: `${isSmallMobileView ? 'calc(100vh - 120px)' : 'calc(100vh - 62px)' }`, background: 'none' }}>
-              <Login
+            {/* Main content */}
+            <div className="flex-grow-1 w-100">
+              <Header
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 isModalOpen2={isModalOpen2}
-                setIsModalOpen2={setIsModalOpen2}
-              />
-              <SignUp
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-                isModalOpen2={isModalOpen2}
-                setIsModalOpen2={setIsModalOpen2}
-              />
-              <ApplyToTeach
                 isOpenApplytoTeach={isOpenApplytoTeach}
                 setIsOpenApplytoTeach={setIsOpenApplytoTeach}
-              />
-              <AddSchoolPopup
-                setIsSchoolModal={setIsSchoolModal}
-                isSchoolModal={isSchoolModal}
-                setSchoolName={setSchoolName}
-                schoolName={schoolName}
-                setSelectedEmoji={setSelectedEmoji}
-                selectedEmoji={selectedEmoji}
-              />
-              <CreateCollectionModal
-                collectionModal={collectionModal}
-                SetCollectionModal={SetCollectionModal}
-              />
-              <NotificationsPanel
+                setIsModalOpen2={setIsModalOpen2}
+                setIsSidebarOpen={setIsSidebarOpen}
                 isPanelActive={isPanelActive}
                 setIsPanelActive={setIsPanelActive}
+                supportModal={supportModal}
+                setsupportModal={setsupportModal}
+                isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive}
               />
-              <Playlist PlayListModal={PlayListModal} />
-              <SupportModal supportModal={supportModal} setsupportModal={setsupportModal} />
-              {isMobileView && <ResponsiveSidebar
-                setIsSchoolModal={setIsSchoolModal}
-                isSchoolModal={isSchoolModal}
-                schoolName={schoolName}
-                selectedEmoji={selectedEmoji}
-                collectionModal={collectionModal}
-                SetCollectionModal={SetCollectionModal}
-                PlayListModal={PlayListModal}
-                setPlayListModal={setPlayListModal} isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive} />}
-              {isSmallMobileView && <ResponsiveSidebar
-                setIsSchoolModal={setIsSchoolModal}
-                isSchoolModal={isSchoolModal}
-                schoolName={schoolName}
-                selectedEmoji={selectedEmoji}
-                collectionModal={collectionModal}
-                SetCollectionModal={SetCollectionModal}
-                PlayListModal={PlayListModal}
-                setPlayListModal={setPlayListModal} isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive} />}
-              <div className='PagesContent h-full' style={{ padding: '20px', background: '#F2F2F2', overflowY: 'auto' }}>
-                {children}
+              <div className="content" style={{ height: `${isSmallMobileView ? 'calc(100vh - 120px)' : 'calc(100vh - 62px)'}`, background: 'none' }}>
+                <Login
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                  isModalOpen2={isModalOpen2}
+                  setIsModalOpen2={setIsModalOpen2}
+                />
+                <SignUp
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                  isModalOpen2={isModalOpen2}
+                  setIsModalOpen2={setIsModalOpen2}
+                />
+                <ApplyToTeach
+                  isOpenApplytoTeach={isOpenApplytoTeach}
+                  setIsOpenApplytoTeach={setIsOpenApplytoTeach}
+                />
+                <AddSchoolPopup
+                  setIsSchoolModal={setIsSchoolModal}
+                  isSchoolModal={isSchoolModal}
+                  setSchoolName={setSchoolName}
+                  schoolName={schoolName}
+                  setSelectedEmoji={setSelectedEmoji}
+                  selectedEmoji={selectedEmoji}
+                />
+                <CreateCollectionModal
+                  collectionModal={collectionModal}
+                  SetCollectionModal={SetCollectionModal}
+                />
+                <NotificationsPanel
+                  isPanelActive={isPanelActive}
+                  setIsPanelActive={setIsPanelActive}
+                />
+                <Playlist PlayListModal={PlayListModal} />
+                <SupportModal supportModal={supportModal} setsupportModal={setsupportModal} />
+                {isMobileView && <ResponsiveSidebar
+                  setIsSchoolModal={setIsSchoolModal}
+                  isSchoolModal={isSchoolModal}
+                  schoolName={schoolName}
+                  selectedEmoji={selectedEmoji}
+                  collectionModal={collectionModal}
+                  SetCollectionModal={SetCollectionModal}
+                  PlayListModal={PlayListModal}
+                  setPlayListModal={setPlayListModal} isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive} />}
+                {isSmallMobileView && <ResponsiveSidebar
+                  setIsSchoolModal={setIsSchoolModal}
+                  isSchoolModal={isSchoolModal}
+                  schoolName={schoolName}
+                  selectedEmoji={selectedEmoji}
+                  collectionModal={collectionModal}
+                  SetCollectionModal={SetCollectionModal}
+                  PlayListModal={PlayListModal}
+                  setPlayListModal={setPlayListModal} isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive} />}
+                <AddCourse />
+                <CreateBundle />
+                <div className='PagesContent h-full' style={{ padding: '20px', background: '#F2F2F2', overflowY: 'auto' }}>
+                  {children}
+                </div>
+                {/* Home Page should be here */}
               </div>
-              {/* Home Page should be here */}
+              {isSmallMobileView && <BottomNavigation />}
             </div>
-            {isSmallMobileView && <BottomNavigation />}
           </div>
         </div>
-      </div>
-    </body></html>
+      </body></html>
+    </MyContext.Provider>
   );
 }
