@@ -12,6 +12,8 @@ import CreateCollectionModal from './components/AddCollection';
 import NotificationsPanel from './components/NotificationPanel';
 import Playlist from './components/PlayList';
 import SupportModal from './components/SupportModal';
+import ResponsiveSidebar from './components/ResponsiveSidebar';
+import BottomNavigation from './components/ResponsiveFooter';
 
 // export const metadata = {
 //   title: "Skill Hub",
@@ -30,6 +32,8 @@ export default function RootLayout({ children }) {
   const [isPanelActive, setIsPanelActive] = useState(false);
   const [PlayListModal, setPlayListModal] = useState(false);
   const [supportModal, setsupportModal] = useState(false);
+  const [isSidebarActive, setisSidebarActive] = useState(false)
+  const [isSidebarSmallActive, setisSidebarSmallActive] = useState(false)
 
   // Handle responsive behavior for sidebar
   useEffect(() => {
@@ -45,6 +49,44 @@ export default function RootLayout({ children }) {
     handleResize(); // Run on initial render
 
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    // Function to check window width
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 1220 && window.innerWidth >= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const [isSmallMobileView, setIsSmallMobileView] = useState(true);
+
+  useEffect(() => {
+    // Function to check window width
+    const handleResize = () => {
+      setIsSmallMobileView(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   return (
     <html><body>
@@ -64,11 +106,12 @@ export default function RootLayout({ children }) {
               SetCollectionModal={SetCollectionModal}
               PlayListModal={PlayListModal}
               setPlayListModal={setPlayListModal}
+              isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive}
             />
           </div>
 
           {/* Main content */}
-          <div className="flex-grow-1">
+          <div className="flex-grow-1 w-100">
             <Header
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
@@ -81,8 +124,9 @@ export default function RootLayout({ children }) {
               setIsPanelActive={setIsPanelActive}
               supportModal={supportModal}
               setsupportModal={setsupportModal}
+              isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive}
             />
-            <div className="content" style={{ height: 'calc(100vh - 62px)' }}>
+            <div className="content" style={{ height: `${isSmallMobileView ? 'calc(100vh - 120px)' : 'calc(100vh - 62px)' }`, background: 'none' }}>
               <Login
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
@@ -117,12 +161,30 @@ export default function RootLayout({ children }) {
               />
               <Playlist PlayListModal={PlayListModal} />
               <SupportModal supportModal={supportModal} setsupportModal={setsupportModal} />
-
-              <div className='PagesContent h-full'style={{padding: '20px',background: '#F2F2F2',overflowY: 'auto'}}>
+              {isMobileView && <ResponsiveSidebar
+                setIsSchoolModal={setIsSchoolModal}
+                isSchoolModal={isSchoolModal}
+                schoolName={schoolName}
+                selectedEmoji={selectedEmoji}
+                collectionModal={collectionModal}
+                SetCollectionModal={SetCollectionModal}
+                PlayListModal={PlayListModal}
+                setPlayListModal={setPlayListModal} isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive} />}
+              {isSmallMobileView && <ResponsiveSidebar
+                setIsSchoolModal={setIsSchoolModal}
+                isSchoolModal={isSchoolModal}
+                schoolName={schoolName}
+                selectedEmoji={selectedEmoji}
+                collectionModal={collectionModal}
+                SetCollectionModal={SetCollectionModal}
+                PlayListModal={PlayListModal}
+                setPlayListModal={setPlayListModal} isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive} />}
+              <div className='PagesContent h-full' style={{ padding: '20px', background: '#F2F2F2', overflowY: 'auto' }}>
                 {children}
               </div>
               {/* Home Page should be here */}
             </div>
+            {isSmallMobileView && <BottomNavigation />}
           </div>
         </div>
       </div>

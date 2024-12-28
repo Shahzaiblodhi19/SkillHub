@@ -49,7 +49,7 @@ export default function Playlist({ PlayListModal }) {
     PlayListModal &&
     <div className={`transition-transform transform ${PlayListModal ? 'translate-x-0' : '-translate-x-full'
       }`} style={{ height: '91.2vh' }}>
-      <div className="bg-white rounded-md p-3 border-1 w-96 h-full" style={{ overflowY: 'auto' }}>
+      <div className=" rounded-md p-3 border-1 w-96 h-full" style={{ overflowY: 'auto' }}>
         {/* Current Playing Section */}
         {playlist.length > 0 ? (
           <div className="mb-3 px-3 pt-3 pb-5" style={{ background: '#F2F3F7' }}>

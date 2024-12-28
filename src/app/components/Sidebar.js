@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Image from 'next/image'; // Import Next.js Image component
 import Logo from '../assets/logo.svg';
 import Link from "next/link";
 
-export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setIsSidebarOpen,
+export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActive, selectedEmoji, isSidebarOpen, setIsSidebarOpen,
     setIsSchoolModal, isSchoolModal, collectionModal, SetCollectionModal, setPlayListModal, PlayListModal }) {
     const [isSchoolOpen, setSchoolOpen] = useState(true);
     const [isCollectionOpen, setCollectionOpen] = useState(true);
@@ -44,6 +44,25 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
         } else {
         }
     }
+    const [isMobileView, setIsMobileView] = useState(false);
+
+    useEffect(() => {
+        // Function to check window width
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth <= 1220);
+        };
+
+        // Initial check
+        handleResize();
+
+        // Event listener for resize
+        window.addEventListener("resize", handleResize);
+
+        // Cleanup on unmount
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
     // Map each item to its respective SVG
     const itemIcons = {
         'School A': (
@@ -94,7 +113,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                     </li>
                 </div>
 
-                <div className="sidebar ">
+                <div className="sidebar">
                     {/* Menu Items */}
                     <nav className="flex-grow">
                         <ul className="space-y-2 mx-3 mt-2">
@@ -168,7 +187,7 @@ export default function Sidebar({ schoolName, selectedEmoji, isSidebarOpen, setI
                                     <span>Marketing</span>
                                 </Link>
                             </li>
-                            <li style={{ display: 'none' }} className={`nav-item`} onClick={() => setIsSidebarOpen(true)}>
+                            <li style={{ display: 'none' }} className={`nav-item`} onClick={() => isMobileView ? setisSidebarActive(true) : setIsSidebarOpen(true)}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 "
