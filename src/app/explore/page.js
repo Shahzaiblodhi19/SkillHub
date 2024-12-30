@@ -203,80 +203,8 @@ export default function Explore() {
     const [viewMoreActive, setViewMoreActive] = useState(false); // To toggle between View More and Less
     const [viewMoreActive2, setViewMoreActive2] = useState(false); // To toggle between View More and Less
     const [viewMoreActive3, setViewMoreActive3] = useState(false);
-
-    // Handle Tab Switching
-    const handleTabChange = (tab) => {
-        setActiveTab(tab); // Update the active tab
-        setCurrentPage(1);
-        setViewMoreActive(false); // Reset View More on tab change
-        setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
-        setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
-        setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
-        if (tab === "All") {
-            setAllCourses(allCourses.slice(0, 10));
-        } else if (tab === "Courses") {
-            setAllCourses(allCourses.slice(0, 8));
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
-        } else if (tab === "Sessions") {
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
-            setAllCourses(allCourses.slice(3, 8));
-        } else if (tab === "Communities") {
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
-            setAllCourses(allCourses.slice(2, 9));
-        } else if (tab === "Instructors") {
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
-            setAllCourses(allCourses.slice(4, 12));
-        } else if (tab === "Subscriptions") {
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
-            setAllCourses(allCourses.slice(2, 10));
-        }
-    };
-
-    // Toggle View More / Less Functionality
-    const handleToggleViewMore = () => {
-        if (viewMoreActive) {
-            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
-        } else {
-            setDisplayedCourses(allCourses.slice(0, 10)); // Show all 8 courses
-        }
-        setViewMoreActive(!viewMoreActive); // Toggle the button state
-    };
-    // Toggle View More / Less Functionality
-    const handleToggleViewMore2 = () => {
-        if (viewMoreActive2) {
-            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
-        } else {
-            setDisplayedCourses2(allCourses.slice(0, 10)); // Show all 8 courses
-        }
-        setViewMoreActive2(!viewMoreActive2); // Toggle the button state
-    };
-    const handleToggleViewMore3 = () => {
-        if (viewMoreActive3) {
-            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
-        } else {
-            setDisplayedCourses3(allCourses.slice(0, 10)); // Show all 8 courses
-        }
-        setViewMoreActive3(!viewMoreActive3); // Toggle the button state
-    };
-    // Handle Pagination
-    const totalPages = Math.ceil(allCourses.length / coursesPerPage);
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-        const startIndex = (page - 1) * coursesPerPage;
-        const endIndex = startIndex + coursesPerPage;
-        setDisplayedCourses(allCourses.slice(startIndex, endIndex));
-    };
     const [showAll, setShowAll] = useState(false);
+    const [TopicsShow, setTopicsShow] = useState(true);
 
     const topics = [
         { name: "Finance", icon: "💰" },
@@ -316,6 +244,85 @@ export default function Explore() {
 
     const toggleShowAll = () => {
         setShowAll(!showAll);
+    };
+
+    // Handle Tab Switching
+    const handleTabChange = (tab) => {
+        setActiveTab(tab); // Update the active tab
+        setCurrentPage(1);
+        setViewMoreActive(false); // Reset View More on tab change
+        setTopicsShow(true);
+        setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        if (tab === "All") {
+            setAllCourses(allCourses.slice(0, 10));
+        } else if (tab === "Courses") {
+            setAllCourses(allCourses.slice(0, 8));
+            setTopicsShow(false);
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+        } else if (tab === "Sessions") {
+            setTopicsShow(false);
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(3, 8));
+        } else if (tab === "Communities") {
+            setTopicsShow(false);
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(2, 9));
+        } else if (tab === "Instructors") {
+            setDisplayedCourses3([]);
+            setTopicsShow(false);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(4, 12));
+        } else if (tab === "Subscriptions") {
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setTopicsShow(false);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(2, 10));
+        }
+    };
+
+    // Toggle View More / Less Functionality
+    const handleToggleViewMore = () => {
+        if (viewMoreActive) {
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        } else {
+            setDisplayedCourses(allCourses.slice(0, 10)); // Show all 8 courses
+        }
+        setViewMoreActive(!viewMoreActive); // Toggle the button state
+    };
+    // Toggle View More / Less Functionality
+    const handleToggleViewMore2 = () => {
+        if (viewMoreActive2) {
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        } else {
+            setDisplayedCourses2(allCourses.slice(0, 10)); // Show all 8 courses
+        }
+        setViewMoreActive2(!viewMoreActive2); // Toggle the button state
+    };
+    const handleToggleViewMore3 = () => {
+        if (viewMoreActive3) {
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        } else {
+            setDisplayedCourses3(allCourses.slice(0, 10)); // Show all 8 courses
+        }
+        setViewMoreActive3(!viewMoreActive3); // Toggle the button state
+    };
+    // Handle Pagination
+    const totalPages = Math.ceil(allCourses.length / coursesPerPage);
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        const startIndex = (page - 1) * coursesPerPage;
+        const endIndex = startIndex + coursesPerPage;
+        setDisplayedCourses(allCourses.slice(startIndex, endIndex));
     };
 
     return (
@@ -614,7 +621,7 @@ export default function Explore() {
             ) : (
                 ''
             )}
-            <div
+            {TopicsShow === true ? (<div
                 className="w-100 mb-4"
                 style={{
                     background: '#fff',
@@ -701,7 +708,11 @@ export default function Explore() {
                         }
                     </button>
                 </div>
-            </div>
+            </div>)
+                :
+                ('')
+            }
+
 
             {displayedCourses.length !== 0 ? (
                 <div
