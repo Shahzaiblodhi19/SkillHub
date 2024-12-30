@@ -194,6 +194,9 @@ export default function Explore() {
     const [displayedCourses2, setDisplayedCourses2] = useState(
         allCourses.slice(0, coursesPerPage)
     );
+    const [displayedCourses3, setDisplayedCourses3] = useState(
+        allCourses.slice(0, coursesPerPage)
+    );
     const [AllCourses, setAllCourses] = useState(
         allCourses.slice(0, 10)
     );
@@ -206,15 +209,36 @@ export default function Explore() {
         setActiveTab(tab); // Update the active tab
         setCurrentPage(1);
         setViewMoreActive(false); // Reset View More on tab change
+        setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
         if (tab === "All") {
             setAllCourses(allCourses.slice(0, 10));
-        } else if (tab === "Trending") {
+        } else if (tab === "Courses") {
             setAllCourses(allCourses.slice(0, 8));
-            setDisplayedCourses([])
-        } else if (tab === "Latest") {
-            setAllCourses(allCourses.slice(1, 6));
-        } else if (tab === "Favorites") {
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+        } else if (tab === "Sessions") {
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(3, 8));
+        } else if (tab === "Communities") {
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
             setAllCourses(allCourses.slice(2, 9));
+        } else if (tab === "Instructors") {
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(4, 12));
+        } else if (tab === "Subscriptions") {
+            setDisplayedCourses3([]);
+            setDisplayedCourses2([]);
+            setDisplayedCourses([]);
+            setAllCourses(allCourses.slice(2, 10));
         }
     };
 
@@ -238,9 +262,9 @@ export default function Explore() {
     };
     const handleToggleViewMore3 = () => {
         if (viewMoreActive3) {
-            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
         } else {
-            setDisplayedCourses2(allCourses.slice(0, 10)); // Show all 8 courses
+            setDisplayedCourses3(allCourses.slice(0, 10)); // Show all 8 courses
         }
         setViewMoreActive3(!viewMoreActive3); // Toggle the button state
     };
@@ -256,207 +280,124 @@ export default function Explore() {
     return (
         <div style={{ padding: "10px", fontFamily: "Arial, sans-serif" }}>
             {/* Tabs */}
-            <div className="w-100 py-2 shadow-md" style={{ marginBottom: "20px", display: "flex", gap: "2px", background: '#fff', borderRadius: '15px' }}>
-                {["All", "Trending", "Latest", "Favorites"].map((tab) => (
-                    <button
-                        key={tab}
-                        onClick={() => handleTabChange(tab)}
-                        style={{
-                            padding: "10px 20px",
-                            background: 'transparent',
-                            color: activeTab === tab ? "#587678" : "#4B4B4B",
-                            border: "none",
-                            borderRadius: "5px",
-                            cursor: "pointer",
-                            fontWeight: activeTab === tab ? '600' : '500',
-                        }}
-                    >
-                        {tab}
-                    </button>
-                ))}
-            </div>
+            <div className="flex shadow-md  items-center py-3 px-4 justify-between" style={{ marginBottom: "20px", display: "flex", gap: "22px", background: '#fff', borderRadius: '15px' }}>
+                <div className="w-100" style={{ display: "flex", gap: "22px",}}>
+                    {[
+                        { name: "All", svg: null }, // No SVG for "All" tab
+                        {
+                            name: "Courses", svg: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                            </svg>
+                        },
+                        {
+                            name: "Sessions", svg: <svg className="w-10 h-10" style={{ marginRight: '-5px' }} fill="none" viewBox="0 0 38 38">
+                                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.2" stroke="currentColor" d="M22.887 17.1133L27.3337 14.42V23.5866L22.887 20.8866M10.667 14.42H20.8537C21.3929 14.42 21.9101 14.6342 22.2915 15.0155C22.6728 15.3969 22.887 15.914 22.887 16.4533V23.5866H12.7003C12.4328 23.5867 12.1678 23.5338 11.9207 23.4312C11.6735 23.3286 11.4491 23.1783 11.2602 22.9887C11.0713 22.7992 10.9217 22.5743 10.8199 22.3268C10.7181 22.0794 10.6661 21.8142 10.667 21.5466V14.42Z"></path>
+                                <path fill="currentColor" d="M15.8738 19.4266H17.9605C18.4573 19.4266 18.9338 19.624 19.2851 19.9753C19.6365 20.3266 19.8338 20.8031 19.8338 21.3V22.3333H14.0005V21.3C14.0005 20.8031 14.1979 20.3266 14.5492 19.9753C14.9005 19.624 15.377 19.4266 15.8738 19.4266Z"></path>
+                                <path fill="currentColor" d="M16.8872 19.0133C17.7855 19.0133 18.5138 18.2761 18.5138 17.3666C18.5138 16.4572 17.7855 15.72 16.8872 15.72C15.9888 15.72 15.2605 16.4572 15.2605 17.3666C15.2605 18.2761 15.9888 19.0133 16.8872 19.0133Z"></path>
+                            </svg>
+                        },
+                        {
+                            name: "Communities", svg: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path fill="currentColor" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441C9.09203 3.29004 9.08325 3.31123 9.08325 3.33333V8.33333C9.08325 8.35543 9.09203 8.37663 9.10766 8.39226C9.12329 8.40789 9.14448 8.41667 9.16659 8.41667H14.9999C15.1988 8.41667 15.3896 8.49569 15.5302 8.63634L16.7499 9.85601V3.33333C16.7499 3.31123 16.7411 3.29003 16.7255 3.27441C16.7099 3.25878 16.6887 3.25 16.6666 3.25H9.16659ZM8.047 2.21375C8.34393 1.91682 8.74666 1.75 9.16659 1.75H16.6666C17.0865 1.75 17.4892 1.91681 17.7862 2.21375C18.0831 2.51068 18.2499 2.91341 18.2499 3.33333V11.6667C18.2499 11.97 18.0672 12.2435 17.7869 12.3596C17.5067 12.4757 17.1841 12.4115 16.9696 12.197L14.6893 9.91667H9.16659C8.74666 9.91667 8.34393 9.74985 8.047 9.45292C7.75007 9.15599 7.58325 8.75326 7.58325 8.33333V3.33333C7.58325 2.91341 7.75007 2.51068 8.047 2.21375Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                <path fill="currentColor" d="M3.33333 9.08333C3.31123 9.08333 3.29004 9.09211 3.27441 9.10774C3.25878 9.12336 3.25 9.14456 3.25 9.16666V15.6893L4.46967 14.4697C4.61032 14.329 4.80109 14.25 5 14.25H10.8333C10.8554 14.25 10.8766 14.2412 10.8923 14.2256C10.9079 14.21 10.9167 14.1888 10.9167 14.1667V12.5C10.9167 12.0858 11.2525 11.75 11.6667 11.75C12.0809 11.75 12.4167 12.0858 12.4167 12.5V14.1667C12.4167 14.5866 12.2499 14.9893 11.9529 15.2862C11.656 15.5832 11.2533 15.75 10.8333 15.75H5.31066L3.03033 18.0303C2.81583 18.2448 2.49324 18.309 2.21299 18.1929C1.93273 18.0768 1.75 17.8033 1.75 17.5V9.16666C1.75 8.74674 1.91682 8.34401 2.21375 8.04708C2.51068 7.75014 2.91341 7.58333 3.33333 7.58333H5C5.41421 7.58333 5.75 7.91911 5.75 8.33333C5.75 8.74754 5.41421 9.08333 5 9.08333H3.33333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                            </svg>
+                        },
+                        {
+                            name: "Instructors", svg: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" height="18" width="18">
+                                <path fill="currentColor" d="M9.46497 2.65469L3.88834 5.94284C3.88112 5.9471 3.87383 5.95125 3.86648 5.95529C3.53431 6.13787 3.33341 6.48044 3.33341 6.8475V12.9174C3.33391 13.1 3.38341 13.2792 3.47675 13.4362C3.57021 13.5935 3.7042 13.7227 3.86471 13.8104C3.88028 13.8189 3.89558 13.8279 3.91059 13.8374L9.51062 17.3799C9.66161 17.4588 9.82953 17.5 10.0001 17.5C10.1706 17.5 10.3385 17.4588 10.4895 17.3799L16.0065 13.89C16.0242 13.8713 16.0454 13.8485 16.0692 13.8223C16.1476 13.7361 16.2503 13.6169 16.351 13.4827C16.4536 13.3459 16.542 13.2096 16.6016 13.0884C16.6598 12.9702 16.666 12.9159 16.6667 12.916C16.6667 12.916 16.6667 12.9168 16.6667 12.9183V6.84316C16.669 6.47367 16.4717 6.13196 16.1507 5.94942L16.1378 5.94193L10.5403 2.62526C10.421 2.55461 10.2347 2.51688 9.98782 2.53681C9.77125 2.55429 9.57557 2.61124 9.46497 2.65469ZM16.5351 14.5417L17.1194 15.1358C17.0772 15.1773 17.0307 15.2142 16.9806 15.2459L11.3556 18.8042C11.341 18.8134 11.3262 18.8222 11.3111 18.8305C10.9094 19.0511 10.4584 19.1667 10.0001 19.1667C9.54173 19.1667 9.0908 19.0511 8.68902 18.8305C8.67394 18.8222 8.65912 18.8134 8.64458 18.8042L3.04 15.2588C2.62874 15.0283 2.2852 14.6935 2.0441 14.2879C1.79804 13.874 1.66772 13.4015 1.66675 12.92L1.66675 12.9183V6.8475C1.66675 5.8708 2.19919 4.97552 3.05167 4.50135L8.66682 1.19049C8.6944 1.17423 8.72289 1.15957 8.75216 1.14659C9.01002 1.03219 9.40947 0.911399 9.85374 0.875543C10.2945 0.839973 10.8669 0.881526 11.3899 1.1914L16.8757 4.44191C16.981 4.48034 17.0764 4.53941 17.157 4.61423C17.8934 5.11464 18.3381 5.95164 18.3334 6.85072V12.9183C18.3334 13.2699 18.2128 13.5891 18.097 13.8244C17.9757 14.0708 17.8228 14.2982 17.6842 14.4829C17.5436 14.6702 17.4051 14.8305 17.3025 14.9434C17.2508 15.0003 17.2071 15.0463 17.1754 15.079C17.1701 15.0846 17.1651 15.0897 17.1604 15.0945C17.1512 15.1039 17.1435 15.1118 17.1372 15.1181L17.1256 15.1297L17.1218 15.1334L17.1204 15.1348L17.1194 15.1358C17.1193 15.1359 17.1194 15.1358 16.5351 14.5417Z" clipRule="evenodd" fillRule="evenodd"></path>
+                                <path fill="currentColor" d="M7.64306 5.97631C8.26818 5.35119 9.11603 5 10.0001 5C10.8841 5 11.732 5.35119 12.3571 5.97631C12.9822 6.60143 13.3334 7.44928 13.3334 8.33333C13.3334 9.21739 12.9822 10.0652 12.3571 10.6904C11.732 11.3155 10.8841 11.6667 10.0001 11.6667C9.11603 11.6667 8.26818 11.3155 7.64306 10.6904C7.01794 10.0652 6.66675 9.21739 6.66675 8.33333C6.66675 7.44928 7.01794 6.60143 7.64306 5.97631ZM10.0001 6.66667C9.55805 6.66667 9.13413 6.84226 8.82157 7.15482C8.50901 7.46738 8.33341 7.89131 8.33341 8.33333C8.33341 8.77536 8.50901 9.19929 8.82157 9.51185C9.13413 9.82441 9.55805 10 10.0001 10C10.4421 10 10.866 9.82441 11.1786 9.51185C11.4912 9.19929 11.6667 8.77536 11.6667 8.33333C11.6667 7.89131 11.4912 7.46738 11.1786 7.15482C10.866 6.84226 10.4421 6.66667 10.0001 6.66667Z" clipRule="evenodd" fillRule="evenodd"></path>
+                                <path fill="currentColor" d="M6.9273 14.5988L5.60407 15.9908C5.28698 16.3244 4.75951 16.3377 4.42594 16.0207C4.09237 15.7036 4.079 15.1761 4.39609 14.8425L5.77651 13.3904C5.81197 13.353 5.85082 13.3191 5.89255 13.289C6.60295 12.7758 7.45703 12.4998 8.33335 12.5M6.9273 14.5988C7.3415 14.3174 7.83122 14.1665 8.33308 14.1667L11.6667 14.1667C12.1682 14.1665 12.6578 14.3172 13.0718 14.5982L14.3962 15.9909C14.7133 16.3244 15.2408 16.3377 15.5743 16.0206C15.9078 15.7034 15.9211 15.1759 15.604 14.8424L14.2224 13.3895C14.1868 13.3521 14.1479 13.3182 14.1061 13.288C13.396 12.7755 12.5424 12.4998 11.6667 12.5C11.6666 12.5 11.6668 12.5 11.6667 12.5H8.33335" clipRule="evenodd" fillRule="evenodd"></path>
+                            </svg>
+                        },
+                        {
+                            name: "Subscriptions", svg: <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path fill="currentColor" d="M17 12.7992V13.5992C17.4418 13.5992 17.8 13.241 17.8 12.7992H17ZM17 8.39922H17.8C17.8 7.95739 17.4418 7.59922 17 7.59922V8.39922ZM4.96739 4.12628C4.59574 4.3652 4.48814 4.86017 4.72706 5.23183C4.96598 5.60348 5.46095 5.71108 5.83261 5.47216L4.96739 4.12628ZM11 1.19922L11.6315 0.708066C11.3773 0.381231 10.9157 0.302372 10.5674 0.526276L11 1.19922ZM13.1685 5.29037C13.4398 5.63913 13.9424 5.70196 14.2912 5.4307C14.6399 5.15945 14.7027 4.65682 14.4315 4.30807L13.1685 5.29037ZM17 11.9992H14.4V13.5992H17V11.9992ZM14.4 9.19922H17V7.59922H14.4V9.19922ZM16.2 8.39922V12.7992H17.8V8.39922H16.2ZM13 10.5992C13 9.82602 13.6268 9.19922 14.4 9.19922V7.59922C12.7431 7.59922 11.4 8.94237 11.4 10.5992H13ZM14.4 11.9992C13.6268 11.9992 13 11.3724 13 10.5992H11.4C11.4 12.2561 12.7431 13.5992 14.4 13.5992V11.9992ZM5.83261 5.47216L11.4326 1.87216L10.5674 0.526276L4.96739 4.12628L5.83261 5.47216ZM10.3685 1.69037L13.1685 5.29037L14.4315 4.30807L11.6315 0.708066L10.3685 1.69037ZM1.8 5.59922H15.4V3.99922H1.8V5.59922ZM15.4 15.9992H1.8V17.5992H15.4V15.9992ZM1.8 15.9992V5.59922H0.2V15.9992H1.8ZM1.8 15.9992H1.8H0.2C0.2 16.8829 0.916343 17.5992 1.8 17.5992V15.9992ZM15.4 15.9992H15.4V17.5992C16.2837 17.5992 17 16.8829 17 15.9992H15.4ZM15.4 5.59922H15.4H17C17 4.71556 16.2837 3.99922 15.4 3.99922V5.59922ZM1.8 3.99922C0.916344 3.99922 0.2 4.71556 0.2 5.59922H1.8H1.8V3.99922ZM15.4 13.3992V15.9992H17V13.3992H15.4ZM15.4 5.59922V7.69922H17V5.59922H15.4Z"></path>
+                            </svg>
+                        },
+                    ].map((tab) => (
+                        <button
+                            key={tab.name}
+                            onClick={() => handleTabChange(tab.name)}
+                            style={{
+                                background: 'transparent',
+                                color: activeTab === tab.name ? "#02C5AF" : "#4B4B4B",
+                                border: "none",
+                                cursor: "pointer",
+                                fontWeight: '500',
+                                display: 'flex',
+                                alignItems: 'center', // Align text and SVG horizontally
+                                gap: '5px', // Add spacing between SVG and text
+                                borderBottom: activeTab === tab.name ? "3px solid #02C5AF" : "none",
+                                paddingBottom: "1px",
+                                transition: "box-shadow 0.3s ease",
+                            }}
+                        >
+                            {tab.svg && tab.svg} {/* Render SVG if available */}
+                            {tab.name}
+                        </button>
 
-            {/* Courses */}
-            <div className="w-100 mb-4" style={{
-                background: '#fff',
-                padding: '30px 20px',
-                borderRadius: '20px'
-            }}>
-                <div className="flex items-center justify-between mb-4">
-                    <h1 style={{ fontSize: '22px', fontWeight: 'bold' }}>Trending Courses</h1>
-                    {/* Pagination */}
-                    <div
-                        style={{
-                            marginTop: "20px",
-                            display: "flex",
-                            justifyContent: "center",
-                            gap: "5px",
-                        }}
-                    >
-                        {[...Array(totalPages).keys()].map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => handlePageChange(idx + 1)}
-                                style={{
-                                    padding: "5px 10px",
-                                    background: currentPage === idx + 1 ? "#007bff" : "#f0f0f0",
-                                    color: currentPage === idx + 1 ? "#fff" : "#000",
-                                    border: "none",
-                                    borderRadius: "5px",
-                                    cursor: "pointer",
-                                }}
-                            >
-                                {idx + 1}
-                            </button>
-                        ))}
-                    </div>
+                    ))}
                 </div>
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
+                    <path fill="#4F4F4F" d="M10.7885 3.74485C10.588 2.91838 9.41205 2.91838 9.21155 3.74485L9.21147 3.74518C8.8815 5.1021 7.33071 5.74534 6.13614 5.01904L6.13582 5.01885C5.40863 4.57613 4.57711 5.40852 5.01959 6.13484C5.18849 6.41193 5.2896 6.72499 5.31469 7.04853C5.33978 7.37216 5.2881 7.69713 5.16386 7.99701C5.03962 8.29689 4.84633 8.56319 4.59972 8.77425C4.35315 8.98527 4.06025 9.1351 3.74485 9.21155C2.91838 9.41205 2.91838 10.588 3.74485 10.7885L3.74519 10.7885C4.06037 10.8652 4.35302 11.0151 4.59936 11.2262C4.84569 11.4372 5.03875 11.7034 5.16285 12.0031C5.28694 12.3028 5.33857 12.6275 5.31354 12.9509C5.28851 13.2743 5.18752 13.5873 5.01878 13.8643C4.57621 14.5915 5.40855 15.4229 6.13484 14.9804C6.41193 14.8115 6.72498 14.7104 7.04853 14.6853C7.37216 14.6602 7.69713 14.7119 7.99701 14.8361C8.29689 14.9604 8.56319 15.1537 8.77425 15.4003C8.98527 15.6468 9.1351 15.9398 9.21155 16.2552C9.41205 17.0816 10.588 17.0816 10.7885 16.2552L10.7885 16.2548C10.8652 15.9396 11.0151 15.647 11.2262 15.4006C11.4372 15.1543 11.7034 14.9612 12.0031 14.8372C12.3028 14.7131 12.6275 14.6614 12.9509 14.6865C13.2743 14.7115 13.5873 14.8125 13.8643 14.9812C14.5915 15.4238 15.4229 14.5914 14.9804 13.8652C14.8115 13.5881 14.7104 13.275 14.6853 12.9515C14.6602 12.6278 14.7119 12.3029 14.8361 12.003C14.9604 11.7031 15.1537 11.4368 15.4003 11.2257C15.6468 11.0147 15.9398 10.8649 16.2552 10.7885C17.0816 10.588 17.0816 9.41205 16.2552 9.21155L16.2548 9.21147C15.9396 9.13482 15.647 8.98488 15.4006 8.77384C15.1543 8.56281 14.9612 8.29662 14.8372 7.99692C14.7131 7.69723 14.6614 7.37248 14.6865 7.04908C14.7115 6.72567 14.8125 6.41274 14.9812 6.13571C15.4238 5.40854 14.5914 4.57713 13.8652 5.01959C13.5881 5.18849 13.275 5.2896 12.9515 5.31469C12.6278 5.33978 12.3029 5.2881 12.003 5.16386C11.7031 5.03962 11.4368 4.84633 11.2257 4.59972C11.0147 4.35315 10.8649 4.06025 10.7885 3.74485ZM7.99686 3.44982C8.5066 1.34995 11.4937 1.35006 12.0032 3.45015L12.0033 3.45032C12.0333 3.57452 12.0923 3.68986 12.1754 3.78695C12.2585 3.88404 12.3634 3.96014 12.4814 4.00905C12.5995 4.05796 12.7274 4.07831 12.8548 4.06843C12.9823 4.05855 13.1055 4.01873 13.2146 3.9522L13.2148 3.95208C15.0602 2.82789 17.1728 4.9397 16.0488 6.78584L16.0488 6.78596C15.9823 6.89502 15.9426 7.01822 15.9327 7.14555C15.9229 7.27287 15.9432 7.40072 15.9921 7.51871C16.0409
+                             7.6367 16.1169 7.74149 16.2139 7.82458C16.3108 7.90759 16.4259 7.96658 16.5498 7.99678C18.65 8.50629 18.65 11.4937 16.5498 12.0032L16.5497 12.0033C16.4255 12.0333 16.3101 12.0923 16.2131 12.1754C16.116 12.2585 16.0399 12.3634 15.991 12.4814C15.942 12.5995 15.9217 12.7274 15.9316 12.8548C15.9414 12.9822 15.9813 13.1055 16.0478 13.2146L16.0479 13.2148C17.1721 15.0602 15.0603 17.1728 13.2142 16.0488L13.214 16.0488C13.105 15.9823 12.9818 15.9426 12.8545 15.9327C12.7271 15.9229 12.5993 15.9432 12.4813 15.9921C12.3633 16.0409 12.2585 16.1169 12.1754 16.2139C12.0924 16.3108 12.0334 16.4259 12.0032 16.5498C11.4937 18.65 8.50629 18.65 7.99678 16.5498L7.99674 16.5497C7.96665 16.4255 7.90766 16.3101 7.82456 16.2131C7.74147 16.116 7.63663 16.0399 7.51857 15.991C7.40051 15.942 7.27257 15.9217 7.14516 15.9316C7.01775 15.9414 6.89447 15.9813 6.78536 16.0478L6.78516 16.0479C4.93982 17.1721 2.82721 15.0603 3.95115 13.2142L3.95122 13.214C4.01765 13.105 4.05741 12.9818 4.06727 12.8545C4.07712 12.7271 4.0568 12.5993 4.00794 12.4813C3.95908 12.3633 3.88308 12.2585 3.7861 12.1754C3.68921 12.0924 3.57411 12.0334 3.45015 12.0032C1.34995 11.4937 1.34995 8.50629 3.45015 7.99678L3.45032 7.99674C3.57452 7.96665 3.68986 7.90766 3.78695 7.82456C3.88404 7.74147 3.96014 7.63663 4.00905 7.51857C4.05796 7.40051 4.07831 7.27257 4.06843 7.14516C4.05855 7.01775 4.01873 6.89447 3.9522 6.78536L3.95208 6.78516C2.82795 4.93992 4.93946 2.82745 6.78553 3.95096C7.25752 4.23793 7.86658 3.98467 7.99678 3.45015M7.79029 7.79029C8.37634 7.20424 9.1712 6.875 10 6.875C10.8288 6.875 11.6237 7.20424 12.2097 7.79029C12.7958 8.37634 13.125 9.1712 13.125 10C13.125 10.8288 12.7958 11.6237 12.2097 12.2097C11.6237 12.7958 10.8288 13.125 10 13.125C9.1712 13.125 8.37634 12.7958 7.79029 12.2097C7.20424 11.6237 6.875 10.8288 6.875 10C6.875 9.1712 7.20424 8.37634 7.79029 7.79029ZM10 8.125C9.50272 8.125 9.0258 8.32254 8.67417 8.67417C8.32254 9.0258 8.125 9.50272 8.125 10C8.125 10.4973 8.32254 10.9742 8.67417 11.3258C9.0258 11.6775 9.50272 11.875 10 11.875C10.4973 11.875 10.9742 11.6775 11.3258 11.3258C11.6775 10.9742 11.875 10.4973 11.875 10C11.875 9.50272 11.6775 9.0258 11.3258 8.67417C10.9742 8.32254 10.4973 8.125 10 8.125Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg>
+            </div>
+            {AllCourses.length !== 0 ? (
                 <div
+                    className="w-100 mb-4"
                     style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(5, 1fr)",
-                        rowGap: "25px",
-                        columnGap: "13px",
+                        background: '#fff',
+                        padding: '30px 20px',
+                        borderRadius: '20px',
                     }}
                 >
-                    {AllCourses.map((course, index) => (
-                        <div className="flex flex-col" key={index}>
-                            {/* Header Section */}
-                            <div
-                                className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
-                                style={{ background: '#F0F3FA', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}
-                            >
-                                <p style={{ fontSize: "12px", color: "#5D625E" }} className="flex items-center gap-2">
-                                    <svg className="w-4 h-4" style={{ marginBottom: '1.5px' }} fill="none" viewBox="0 0 20 20">
-                                        <path
-                                            fill="#4F4F4F"
-                                            d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z"
-                                            clipRule="evenodd"
-                                            fillRule="evenodd"
-                                        ></path>
-                                    </svg>{" "}
-                                    {course.students}
-                                </p>
-                                <span>
-                                    <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                        <path
-                                            fill="#5D625E"
-                                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                        />
-                                    </svg>
-                                </span>
-                            </div>
-
-                            {/* Content Section */}
-                            <div
-                                className="shadow-md"
-                                style={{
-                                    overflow: "hidden",
-                                    padding: "7px",
-                                    background: "#fff",
-                                }}
-                            >
-                                <img
-                                    src={course.img}
-                                    alt={course.title}
-                                    className="rounded"
-                                    style={{ width: "100%", height: "150px", objectFit: "cover" }}
-                                />
-                                <div style={{ padding: '28px 38px 10px 12px' }}>
-                                    <h4 className="h-9" style={{ fontSize: "15px", marginBottom: "4px" }}>
-                                        {course.title}
-                                    </h4>
-                                    <p className="mb-4" style={{ fontSize: "13px", marginBottom: "5px", color: 'grey' }}>
-                                        By {course.author}
-                                    </p>
-                                    <p style={{ fontSize: "14px", color: "#000", fontWeight: 'bold' }}>
-                                        {course.price}{" "}
-                                        <span style={{ textDecoration: "line-through", color: "#aaa", marginLeft: '6px', fontWeight: '500' }}>
-                                            {course.originalPrice}
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="w-100 p-3 flex items-center justify-between" style={{ background: '#F9F9F9', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                    {/* Type */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        {course.details.icons}
-                                        <span style={{ fontSize: "14px", color: "#000" }}>{course.details.type}</span>
-                                    </div>
-
-                                    {/* Duration */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="13"
-                                            height="13"
-                                            fill="currentColor"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
-                                        </svg>
-                                        <span style={{ fontSize: "14px", color: "#000" }}>{course.details.duration}</span>
-                                    </div>
-
-                                    {/* Rating */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            viewBox="0 0 16 16"
-                                            style={{ marginBottom: '2px' }}
-                                        >
-                                            <path fill="#2FB3BF" d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <span style={{ fontSize: "13px", color: "#000", fontWeight: "600" }}>
-                                            {course.details.rating}
-                                        </span>
-                                        <span style={{ fontSize: "12px", color: "#797D80" }}>{course.details.reviews}</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    ))}
-
-                </div>
-            </div>
-            {displayedCourses ?
-                <div className="w-100 mb-4" style={{
-                    background: '#fff',
-                    padding: '30px 20px',
-                    borderRadius: '20px'
-                }}>
-                    <h1 className="mb-4" style={{ fontSize: '22px', fontWeight: 'bold' }}>Latest Courses</h1>
-                    <div
+                    <h1
+                        className="mb-4"
                         style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(5, 1fr)",
-                            rowGap: "25px",
-                            columnGap: "13px",
+                            fontSize: '22px',
+                            fontWeight: 'bold',
                         }}
                     >
-                        {displayedCourses.map((course, index) => (
-                            <div className="flex flex-col" key={index}>
+                        {activeTab === 'All' ? 'Trending Courses' : 'All ' + activeTab}
+                    </h1>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap', // Allows wrapping to the next row
+                            gap: '25px 13px', // Space between rows and columns
+                            justifyContent: 'flex-start', // Aligns items to the start
+                        }}
+                    >
+                        {/* Render all courses */}
+                        {AllCourses.map((course, index) => (
+                            <div
+                                className="flex flex-col"
+                                key={index}
+                                style={{
+                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
+                                    background: '#fff',
+                                    borderRadius: '10px',
+                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
+                                }}
+                            >
                                 {/* Header Section */}
                                 <div
                                     className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
-                                    style={{ background: '#F0F3FA', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}
+                                    style={{
+                                        background: '#F0F3FA',
+                                        borderTopLeftRadius: '10px',
+                                        borderTopRightRadius: '10px',
+                                    }}
                                 >
-                                    <p style={{ fontSize: "12px", color: "#5D625E" }} className="flex items-center gap-2">
-                                        <svg className="w-4 h-4" style={{ marginBottom: '1.5px' }} fill="none" viewBox="0 0 20 20">
-                                            <path
-                                                fill="#4F4F4F"
-                                                d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z"
-                                                clipRule="evenodd"
-                                                fillRule="evenodd"
-                                            ></path>
-                                        </svg>{" "}
+                                    <p
+                                        style={{
+                                            fontSize: '12px',
+                                            color: '#5D625E',
+                                        }}
+                                    >
                                         {course.students}
                                     </p>
                                     <span>
@@ -473,43 +414,87 @@ export default function Explore() {
                                 <div
                                     className="shadow-md"
                                     style={{
-                                        overflow: "hidden",
-                                        padding: "7px",
-                                        background: "#fff",
+                                        overflow: 'hidden',
+                                        padding: '7px',
+                                        background: '#fff',
                                     }}
                                 >
                                     <img
                                         src={course.img}
                                         alt={course.title}
                                         className="rounded"
-                                        style={{ width: "100%", height: "150px", objectFit: "cover" }}
+                                        style={{
+                                            width: '100%',
+                                            height: '150px',
+                                            objectFit: 'cover',
+                                        }}
                                     />
                                     <div style={{ padding: '28px 38px 10px 12px' }}>
-                                        <h4 className="h-9" style={{ fontSize: "15px", marginBottom: "4px" }}>
+                                        <h4
+                                            className="h-9"
+                                            style={{
+                                                fontSize: '15px',
+                                                marginBottom: '4px',
+                                            }}
+                                        >
                                             {course.title}
                                         </h4>
-                                        <p className="mb-4" style={{ fontSize: "13px", marginBottom: "5px", color: 'grey' }}>
+                                        <p
+                                            className="mb-4"
+                                            style={{
+                                                fontSize: '13px',
+                                                marginBottom: '5px',
+                                                color: 'grey',
+                                            }}
+                                        >
                                             By {course.author}
                                         </p>
-                                        <p style={{ fontSize: "14px", color: "#000", fontWeight: 'bold' }}>
-                                            {course.price}{" "}
-                                            <span style={{ textDecoration: "line-through", color: "#aaa", marginLeft: '6px', fontWeight: '500' }}>
+                                        <p
+                                            style={{
+                                                fontSize: '14px',
+                                                color: '#000',
+                                                fontWeight: 'bold',
+                                            }}
+                                        >
+                                            {course.price}{' '}
+                                            <span
+                                                style={{
+                                                    textDecoration: 'line-through',
+                                                    color: '#aaa',
+                                                    marginLeft: '6px',
+                                                    fontWeight: '500',
+                                                }}
+                                            >
                                                 {course.originalPrice}
                                             </span>
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="w-100 p-3 flex items-center justify-between" style={{ background: '#F9F9F9', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}>
-                                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                <div
+                                    className="w-100 py-3 px-2 flex items-center justify-between"
+                                    style={{
+                                        background: '#F9F9F9',
+                                        borderBottomLeftRadius: '10px',
+                                        borderBottomRightRadius: '10px',
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         {/* Type */}
-                                        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                             {course.details.icons}
-                                            <span style={{ fontSize: "14px", color: "#000" }}>{course.details.type}</span>
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.type}
+                                            </span>
                                         </div>
 
                                         {/* Duration */}
-                                        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="13"
@@ -520,39 +505,294 @@ export default function Explore() {
                                                 <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
                                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
                                             </svg>
-                                            <span style={{ fontSize: "14px", color: "#000" }}>{course.details.duration}</span>
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.duration}
+                                            </span>
                                         </div>
 
                                         {/* Rating */}
-                                        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
                                                 height="16"
                                                 fill="currentColor"
                                                 viewBox="0 0 16 16"
-                                                style={{ marginBottom: '2px' }}
+                                                style={{
+                                                    marginBottom: '2px',
+                                                }}
                                             >
-                                                <path fill="#2FB3BF" d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z" />
+                                                <path
+                                                    fill="#2FB3BF"
+                                                    d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z"
+                                                />
                                             </svg>
-                                            <span style={{ fontSize: "13px", color: "#000", fontWeight: "600" }}>
+                                            <span
+                                                style={{
+                                                    fontSize: '13px',
+                                                    color: '#000',
+                                                    fontWeight: '600',
+                                                }}
+                                            >
                                                 {course.details.rating}
                                             </span>
-                                            <span style={{ fontSize: "12px", color: "#797D80" }}>{course.details.reviews}</span>
+                                            <span
+                                                style={{
+                                                    fontSize: '12px',
+                                                    color: '#797D80',
+                                                }}
+                                            >
+                                                {course.details.reviews}
+                                            </span>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         ))}
 
+                        {/* Placeholder Divs to Fill Row */}
+                        {Array.from(
+                            { length: (5 - (AllCourses.length % 5)) % 5 }, // Calculate placeholders needed
+                            (_, i) => (
+                                <div
+                                    key={`placeholder-${i}`}
+                                    style={{
+                                        flex: '1 1 calc(20% - 13px)',
+                                        visibility: 'hidden',
+                                    }}
+                                />
+                            )
+                        )}
                     </div>
+                </div>
+            ) : (
+                ''
+            )}
+
+            {displayedCourses2.length !== 0 ? (
+                <div
+                    className="w-100 mb-4"
+                    style={{
+                        background: '#fff',
+                        padding: '30px 20px',
+                        borderRadius: '20px',
+                    }}
+                >
+                    <h1
+                        className="mb-4"
+                        style={{
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Latest Courses
+                    </h1>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap', // Allows wrapping to the next row
+                            gap: '25px 13px', // Space between rows and columns
+                            justifyContent: 'space-between', // Ensures even distribution
+                        }}
+                    >
+                        {/* Render all courses */}
+                        {displayedCourses.map((course, index) => (
+                            <div
+                                className="flex flex-col"
+                                key={index}
+                                style={{
+                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
+                                    background: '#fff',
+                                    borderRadius: '10px',
+                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
+                                }}
+                            >
+                                {/* Header Section */}
+                                <div
+                                    className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
+                                    style={{
+                                        background: '#F0F3FA',
+                                        borderTopLeftRadius: '10px',
+                                        borderTopRightRadius: '10px',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            fontSize: '12px',
+                                            color: '#5D625E',
+                                        }}
+                                    >
+                                        {course.students}
+                                    </p>
+                                    <span>
+                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
+                                            <path
+                                                fill="#5D625E"
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                {/* Content Section */}
+                                <div
+                                    className="shadow-md"
+                                    style={{
+                                        overflow: 'hidden',
+                                        padding: '7px',
+                                        background: '#fff',
+                                    }}
+                                >
+                                    <img
+                                        src={course.img}
+                                        alt={course.title}
+                                        className="rounded"
+                                        style={{
+                                            width: '100%',
+                                            height: '150px',
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                    <div style={{ padding: '28px 38px 10px 12px' }}>
+                                        <h4
+                                            className="h-9"
+                                            style={{
+                                                fontSize: '15px',
+                                                marginBottom: '4px',
+                                            }}
+                                        >
+                                            {course.title}
+                                        </h4>
+                                        <p
+                                            className="mb-4"
+                                            style={{
+                                                fontSize: '13px',
+                                                marginBottom: '5px',
+                                                color: 'grey',
+                                            }}
+                                        >
+                                            By {course.author}
+                                        </p>
+                                        <p
+                                            style={{
+                                                fontSize: '14px',
+                                                color: '#000',
+                                                fontWeight: 'bold',
+                                            }}
+                                        >
+                                            {course.price}{' '}
+                                            <span
+                                                style={{
+                                                    textDecoration: 'line-through',
+                                                    color: '#aaa',
+                                                    marginLeft: '6px',
+                                                    fontWeight: '500',
+                                                }}
+                                            >
+                                                {course.originalPrice}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    className="w-100 py-3 px-2 flex items-center justify-between"
+                                    style={{
+                                        background: '#F9F9F9',
+                                        borderBottomLeftRadius: '10px',
+                                        borderBottomRightRadius: '10px',
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        {/* Type */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            {course.details.icons}
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.type}
+                                            </span>
+                                        </div>
+
+                                        {/* Duration */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="13"
+                                                height="13"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
+                                            </svg>
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.duration}
+                                            </span>
+                                        </div>
+
+                                        {/* Rating */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                                style={{
+                                                    marginBottom: '2px',
+                                                }}
+                                            >
+                                                <path
+                                                    fill="#2FB3BF"
+                                                    d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z"
+                                                />
+                                            </svg>
+                                            <span
+                                                style={{
+                                                    fontSize: '13px',
+                                                    color: '#000',
+                                                    fontWeight: '600',
+                                                }}
+                                            >
+                                                {course.details.rating}
+                                            </span>
+                                            <span
+                                                style={{
+                                                    fontSize: '12px',
+                                                    color: '#797D80',
+                                                }}
+                                            >
+                                                {course.details.reviews}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                     {/* View More / Less */}
                     <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
                         <button
 
                         >
-                            {!viewMoreActive ? <svg
+                            {!viewMoreActive2 ? <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
@@ -581,146 +821,228 @@ export default function Explore() {
                         </button>
                     </div>
                 </div>
-                : ''
-            }
-            <div className="w-100 mb-4" style={{
-                background: '#fff',
-                padding: '30px 20px',
-                borderRadius: '20px'
-            }}>
-                <h1 className="mb-4" style={{ fontSize: '22px', fontWeight: 'bold' }}>Most Watched</h1>
+            ) : (
+                ''
+            )}
+            {displayedCourses2.length !== 0 ? (
                 <div
+                    className="w-100 mb-4"
                     style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(5, 1fr)",
-                        rowGap: "25px",
-                        columnGap: "13px",
+                        background: '#fff',
+                        padding: '30px 20px',
+                        borderRadius: '20px',
                     }}
                 >
-                    {displayedCourses2.map((course, index) => (
-                        <div className="flex flex-col" key={index}>
-                            {/* Header Section */}
-                            <div
-                                className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
-                                style={{ background: '#F0F3FA', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}
-                            >
-                                <p style={{ fontSize: "12px", color: "#5D625E" }} className="flex items-center gap-2">
-                                    <svg className="w-4 h-4" style={{ marginBottom: '1.5px' }} fill="none" viewBox="0 0 20 20">
-                                        <path
-                                            fill="#4F4F4F"
-                                            d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z"
-                                            clipRule="evenodd"
-                                            fillRule="evenodd"
-                                        ></path>
-                                    </svg>{" "}
-                                    {course.students}
-                                </p>
-                                <span>
-                                    <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                        <path
-                                            fill="#5D625E"
-                                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                        />
-                                    </svg>
-                                </span>
-                            </div>
+                    <h1
+                        className="mb-4"
+                        style={{
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Most Watched
+                    </h1>
 
-                            {/* Content Section */}
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap', // Allows wrapping to the next row
+                            gap: '25px 13px', // Space between rows and columns
+                            justifyContent: 'space-between', // Ensures even distribution
+                        }}
+                    >
+                        {/* Render all courses */}
+                        {displayedCourses2.map((course, index) => (
                             <div
-                                className="shadow-md"
+                                className="flex flex-col"
+                                key={index}
                                 style={{
-                                    overflow: "hidden",
-                                    padding: "7px",
-                                    background: "#fff",
+                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
+                                    background: '#fff',
+                                    borderRadius: '10px',
+                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
                                 }}
                             >
-                                <img
-                                    src={course.img}
-                                    alt={course.title}
-                                    className="rounded"
-                                    style={{ width: "100%", height: "150px", objectFit: "cover" }}
-                                />
-                                <div style={{ padding: '28px 38px 10px 12px' }}>
-                                    <h4 className="h-9" style={{ fontSize: "15px", marginBottom: "4px" }}>
-                                        {course.title}
-                                    </h4>
-                                    <p className="mb-4" style={{ fontSize: "13px", marginBottom: "5px", color: 'grey' }}>
-                                        By {course.author}
+                                {/* Header Section */}
+                                <div
+                                    className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
+                                    style={{
+                                        background: '#F0F3FA',
+                                        borderTopLeftRadius: '10px',
+                                        borderTopRightRadius: '10px',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            fontSize: '12px',
+                                            color: '#5D625E',
+                                        }}
+                                    >
+                                        {course.students}
                                     </p>
-                                    <p style={{ fontSize: "14px", color: "#000", fontWeight: 'bold' }}>
-                                        {course.price}{" "}
-                                        <span style={{ textDecoration: "line-through", color: "#aaa", marginLeft: '6px', fontWeight: '500' }}>
-                                            {course.originalPrice}
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="w-100 p-3 flex items-center justify-between" style={{ background: '#F9F9F9', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                    {/* Type */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        {course.details.icons}
-                                        <span style={{ fontSize: "14px", color: "#000" }}>{course.details.type}</span>
-                                    </div>
-
-                                    {/* Duration */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="13"
-                                            height="13"
-                                            fill="currentColor"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
+                                    <span>
+                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
+                                            <path
+                                                fill="#5D625E"
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                            />
                                         </svg>
-                                        <span style={{ fontSize: "14px", color: "#000" }}>{course.details.duration}</span>
-                                    </div>
-
-                                    {/* Rating */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            viewBox="0 0 16 16"
-                                            style={{ marginBottom: '2px' }}
-                                        >
-                                            <path fill="#2FB3BF" d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <span style={{ fontSize: "13px", color: "#000", fontWeight: "600" }}>
-                                            {course.details.rating}
-                                        </span>
-                                        <span style={{ fontSize: "12px", color: "#797D80" }}>{course.details.reviews}</span>
-                                    </div>
+                                    </span>
                                 </div>
 
+                                {/* Content Section */}
+                                <div
+                                    className="shadow-md"
+                                    style={{
+                                        overflow: 'hidden',
+                                        padding: '7px',
+                                        background: '#fff',
+                                    }}
+                                >
+                                    <img
+                                        src={course.img}
+                                        alt={course.title}
+                                        className="rounded"
+                                        style={{
+                                            width: '100%',
+                                            height: '150px',
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                    <div style={{ padding: '28px 38px 10px 12px' }}>
+                                        <h4
+                                            className="h-9"
+                                            style={{
+                                                fontSize: '15px',
+                                                marginBottom: '4px',
+                                            }}
+                                        >
+                                            {course.title}
+                                        </h4>
+                                        <p
+                                            className="mb-4"
+                                            style={{
+                                                fontSize: '13px',
+                                                marginBottom: '5px',
+                                                color: 'grey',
+                                            }}
+                                        >
+                                            By {course.author}
+                                        </p>
+                                        <p
+                                            style={{
+                                                fontSize: '14px',
+                                                color: '#000',
+                                                fontWeight: 'bold',
+                                            }}
+                                        >
+                                            {course.price}{' '}
+                                            <span
+                                                style={{
+                                                    textDecoration: 'line-through',
+                                                    color: '#aaa',
+                                                    marginLeft: '6px',
+                                                    fontWeight: '500',
+                                                }}
+                                            >
+                                                {course.originalPrice}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    className="w-100 py-3 px-2 flex items-center justify-between"
+                                    style={{
+                                        background: '#F9F9F9',
+                                        borderBottomLeftRadius: '10px',
+                                        borderBottomRightRadius: '10px',
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        {/* Type */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            {course.details.icons}
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.type}
+                                            </span>
+                                        </div>
+
+                                        {/* Duration */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="13"
+                                                height="13"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
+                                            </svg>
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.duration}
+                                            </span>
+                                        </div>
+
+                                        {/* Rating */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                                style={{
+                                                    marginBottom: '2px',
+                                                }}
+                                            >
+                                                <path
+                                                    fill="#2FB3BF"
+                                                    d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z"
+                                                />
+                                            </svg>
+                                            <span
+                                                style={{
+                                                    fontSize: '13px',
+                                                    color: '#000',
+                                                    fontWeight: '600',
+                                                }}
+                                            >
+                                                {course.details.rating}
+                                            </span>
+                                            <span
+                                                style={{
+                                                    fontSize: '12px',
+                                                    color: '#797D80',
+                                                }}
+                                            >
+                                                {course.details.reviews}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
 
-                </div>
-                {/* View More / Less */}
-                <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore2} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
-                    <button
+                    {/* View More / Less */}
+                    <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore2} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
+                        <button
 
-                    >
-                        {!viewMoreActive2 ? <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
                         >
-                            <path
-                                fillRule="evenodd"
-                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-                                stroke="2px"
-                            />
-                        </svg>
-                            : <svg
+                            {!viewMoreActive2 ? <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
@@ -729,151 +1051,248 @@ export default function Explore() {
                             >
                                 <path
                                     fillRule="evenodd"
-                                    d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                    stroke="2px"
                                 />
                             </svg>
-                        }
-                    </button>
+                                : <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                    />
+                                </svg>
+                            }
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-            <div className="w-100 mb-4" style={{
-                background: '#fff',
-                padding: '30px 20px',
-                borderRadius: '20px'
-            }}>
-                <h1 className="mb-4" style={{ fontSize: '22px', fontWeight: 'bold' }}>Customer Favorites</h1>
+            ) : (
+                ''
+            )}
+            {displayedCourses3.length !== 0 ? (
                 <div
+                    className="w-100"
                     style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(5, 1fr)",
-                        rowGap: "25px",
-                        columnGap: "13px",
+                        background: '#fff',
+                        padding: '30px 20px',
+                        borderRadius: '20px',
                     }}
                 >
-                    {displayedCourses2.map((course, index) => (
-                        <div className="flex flex-col" key={index}>
-                            {/* Header Section */}
-                            <div
-                                className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
-                                style={{ background: '#F0F3FA', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}
-                            >
-                                <p style={{ fontSize: "12px", color: "#5D625E" }} className="flex items-center gap-2">
-                                    <svg className="w-4 h-4" style={{ marginBottom: '1.5px' }} fill="none" viewBox="0 0 20 20">
-                                        <path
-                                            fill="#4F4F4F"
-                                            d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z"
-                                            clipRule="evenodd"
-                                            fillRule="evenodd"
-                                        ></path>
-                                    </svg>{" "}
-                                    {course.students}
-                                </p>
-                                <span>
-                                    <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                        <path
-                                            fill="#5D625E"
-                                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                        />
-                                    </svg>
-                                </span>
-                            </div>
+                    <h1
+                        className="mb-4"
+                        style={{
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Customer Favorites
+                    </h1>
 
-                            {/* Content Section */}
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap', // Allows wrapping to the next row
+                            gap: '25px 13px', // Space between rows and columns
+                            justifyContent: 'space-between', // Ensures even distribution
+                        }}
+                    >
+                        {/* Render all courses */}
+                        {displayedCourses3.map((course, index) => (
                             <div
-                                className="shadow-md"
+                                className="flex flex-col"
+                                key={index}
                                 style={{
-                                    overflow: "hidden",
-                                    padding: "7px",
-                                    background: "#fff",
+                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
+                                    background: '#fff',
+                                    borderRadius: '10px',
+                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
                                 }}
                             >
-                                <img
-                                    src={course.img}
-                                    alt={course.title}
-                                    className="rounded"
-                                    style={{ width: "100%", height: "150px", objectFit: "cover" }}
-                                />
-                                <div style={{ padding: '28px 38px 10px 12px' }}>
-                                    <h4 className="h-9" style={{ fontSize: "15px", marginBottom: "4px" }}>
-                                        {course.title}
-                                    </h4>
-                                    <p className="mb-4" style={{ fontSize: "13px", marginBottom: "5px", color: 'grey' }}>
-                                        By {course.author}
+                                {/* Header Section */}
+                                <div
+                                    className="w-100 py-2 px-3 fw-bold flex items-center justify-between"
+                                    style={{
+                                        background: '#F0F3FA',
+                                        borderTopLeftRadius: '10px',
+                                        borderTopRightRadius: '10px',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            fontSize: '12px',
+                                            color: '#5D625E',
+                                        }}
+                                    >
+                                        {course.students}
                                     </p>
-                                    <p style={{ fontSize: "14px", color: "#000", fontWeight: 'bold' }}>
-                                        {course.price}{" "}
-                                        <span style={{ textDecoration: "line-through", color: "#aaa", marginLeft: '6px', fontWeight: '500' }}>
-                                            {course.originalPrice}
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="w-100 p-3 flex items-center justify-between" style={{ background: '#F9F9F9', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                    {/* Type */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        {course.details.icons}
-                                        <span style={{ fontSize: "14px", color: "#000" }}>{course.details.type}</span>
-                                    </div>
-
-                                    {/* Duration */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="13"
-                                            height="13"
-                                            fill="currentColor"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
+                                    <span>
+                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
+                                            <path
+                                                fill="#5D625E"
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                            />
                                         </svg>
-                                        <span style={{ fontSize: "14px", color: "#000" }}>{course.details.duration}</span>
-                                    </div>
-
-                                    {/* Rating */}
-                                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            viewBox="0 0 16 16"
-                                            style={{ marginBottom: '2px' }}
-                                        >
-                                            <path fill="#2FB3BF" d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <span style={{ fontSize: "13px", color: "#000", fontWeight: "600" }}>
-                                            {course.details.rating}
-                                        </span>
-                                        <span style={{ fontSize: "12px", color: "#797D80" }}>{course.details.reviews}</span>
-                                    </div>
+                                    </span>
                                 </div>
 
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                {/* View More / Less */}
-                <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore3} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
-                    <button
+                                {/* Content Section */}
+                                <div
+                                    className="shadow-md"
+                                    style={{
+                                        overflow: 'hidden',
+                                        padding: '7px',
+                                        background: '#fff',
+                                    }}
+                                >
+                                    <img
+                                        src={course.img}
+                                        alt={course.title}
+                                        className="rounded"
+                                        style={{
+                                            width: '100%',
+                                            height: '150px',
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                    <div style={{ padding: '28px 38px 10px 12px' }}>
+                                        <h4
+                                            className="h-9"
+                                            style={{
+                                                fontSize: '15px',
+                                                marginBottom: '4px',
+                                            }}
+                                        >
+                                            {course.title}
+                                        </h4>
+                                        <p
+                                            className="mb-4"
+                                            style={{
+                                                fontSize: '13px',
+                                                marginBottom: '5px',
+                                                color: 'grey',
+                                            }}
+                                        >
+                                            By {course.author}
+                                        </p>
+                                        <p
+                                            style={{
+                                                fontSize: '14px',
+                                                color: '#000',
+                                                fontWeight: 'bold',
+                                            }}
+                                        >
+                                            {course.price}{' '}
+                                            <span
+                                                style={{
+                                                    textDecoration: 'line-through',
+                                                    color: '#aaa',
+                                                    marginLeft: '6px',
+                                                    fontWeight: '500',
+                                                }}
+                                            >
+                                                {course.originalPrice}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
 
-                    >
-                        {!viewMoreActive3 ? <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
+                                <div
+                                    className="w-100 py-3 px-2 flex items-center justify-between"
+                                    style={{
+                                        background: '#F9F9F9',
+                                        borderBottomLeftRadius: '10px',
+                                        borderBottomRightRadius: '10px',
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        {/* Type */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            {course.details.icons}
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.type}
+                                            </span>
+                                        </div>
+
+                                        {/* Duration */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="13"
+                                                height="13"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M8 3.5a.5.5 0 0 1 .5.5v4l3.5 2.086a.5.5 0 1 1-.5.866L8 8.866V4a.5.5 0 0 1 .5-.5z" />
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
+                                            </svg>
+                                            <span
+                                                style={{
+                                                    fontSize: '14px',
+                                                    color: '#000',
+                                                }}
+                                            >
+                                                {course.details.duration}
+                                            </span>
+                                        </div>
+
+                                        {/* Rating */}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                                style={{
+                                                    marginBottom: '2px',
+                                                }}
+                                            >
+                                                <path
+                                                    fill="#2FB3BF"
+                                                    d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z"
+                                                />
+                                            </svg>
+                                            <span
+                                                style={{
+                                                    fontSize: '13px',
+                                                    color: '#000',
+                                                    fontWeight: '600',
+                                                }}
+                                            >
+                                                {course.details.rating}
+                                            </span>
+                                            <span
+                                                style={{
+                                                    fontSize: '12px',
+                                                    color: '#797D80',
+                                                }}
+                                            >
+                                                {course.details.reviews}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* View More / Less */}
+                    <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore3} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
+                        <button
+
                         >
-                            <path
-                                fillRule="evenodd"
-                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-                                stroke="2px"
-                            />
-                        </svg>
-                            : <svg
+                            {!viewMoreActive3 ? <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
@@ -882,15 +1301,29 @@ export default function Explore() {
                             >
                                 <path
                                     fillRule="evenodd"
-                                    d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                    stroke="2px"
                                 />
                             </svg>
-                        }
-                    </button>
+                                : <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                    />
+                                </svg>
+                            }
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-
+            ) : (
+                ''
+            )}
 
         </div>
     );
