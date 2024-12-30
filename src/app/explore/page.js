@@ -276,12 +276,53 @@ export default function Explore() {
         const endIndex = startIndex + coursesPerPage;
         setDisplayedCourses(allCourses.slice(startIndex, endIndex));
     };
+    const [showAll, setShowAll] = useState(false);
+
+    const topics = [
+        { name: "Finance", icon: "💰" },
+        { name: "Lifestyle", icon: "🏠" },
+        { name: "Entertainment", icon: "🎥" },
+        { name: "Science", icon: "🔬" },
+        { name: "Health", icon: "⚕️" },
+        { name: "Brazil", icon: "🇧🇷" },
+        { name: "Australia", icon: "🇦🇺" },
+        { name: "Switzerland", icon: "🇨🇭" },
+        { name: "Egypt", icon: "🇪🇬" },
+        { name: "France", icon: "🇫🇷" },
+        { name: "Georgia", icon: "🇬🇪" },
+        { name: "Russia", icon: "🇷🇺" },
+        { name: "Italy", icon: "🇮🇹" },
+        { name: "Technology", icon: "💻" },
+        { name: "Education", icon: "📚" },
+        { name: "Environment", icon: "🌿" },
+        { name: "Sports", icon: "⚽" },
+        { name: "Travel", icon: "✈️" },
+        { name: "Music", icon: "🎵" },
+        { name: "Gaming", icon: "🎮" },
+        { name: "Politics", icon: "🏛️" },
+        { name: "Art", icon: "🎨" },
+        { name: "Food", icon: "🍔" },
+        { name: "History", icon: "📜" },
+        { name: "Space", icon: "🚀" },
+        { name: "Fashion", icon: "👗" },
+        { name: "Business", icon: "📈" },
+        { name: "Programming", icon: "🖥️" },
+        { name: "Books", icon: "📖" },
+        { name: "Photography", icon: "📷" },
+        { name: "Movies", icon: "🎬" }
+    ];
+
+    const visibleTopics = showAll ? topics : topics.slice(0, 15);
+
+    const toggleShowAll = () => {
+        setShowAll(!showAll);
+    };
 
     return (
         <div style={{ padding: "10px", fontFamily: "Arial, sans-serif" }}>
             {/* Tabs */}
             <div className="flex shadow-md  items-center py-3 px-4 justify-between" style={{ marginBottom: "20px", display: "flex", gap: "22px", background: '#fff', borderRadius: '15px' }}>
-                <div className="w-100" style={{ display: "flex", gap: "22px",}}>
+                <div className="w-100" style={{ display: "flex", gap: "22px", }}>
                     {[
                         { name: "All", svg: null }, // No SVG for "All" tab
                         {
@@ -573,8 +614,96 @@ export default function Explore() {
             ) : (
                 ''
             )}
+            <div
+                className="w-100 mb-4"
+                style={{
+                    background: '#fff',
+                    padding: '30px 20px',
+                    borderRadius: '20px',
+                }}
+            >
+                <h1
+                    className="mb-4"
+                    style={{
+                        fontSize: '22px',
+                        fontWeight: 'bold',
+                    }}
+                >
+                    Topics
+                </h1>
+                <div
+                    style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "10px",
+                    }}
+                >
+                    {visibleTopics.map((topic, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                padding: "10px 15px",
+                                border: "1px solid #ddd",
+                                borderRadius: "20px",
+                                backgroundColor: "#f9f9f9",
+                                fontSize: "14px",
+                                fontWeight: "500",
+                                color: "#333",
+                                cursor: "pointer",
+                                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
+                                transition: "transform 0.2s, box-shadow 0.2s",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "scale(1.05)";
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "scale(1)";
+                            }}
+                        >
+                            <span style={{ marginRight: "5px" }}>{topic.icon}</span>
+                            {topic.name}
+                        </div>
+                    ))}
+                </div>
+                {/* View More / Less */}
+                <div className="cursor-pointer py-2 fw-bold" onClick={toggleShowAll} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
+                    <button
 
-            {displayedCourses2.length !== 0 ? (
+                    >
+                        {!showAll ? <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                stroke="2px"
+                            />
+                        </svg>
+                            : <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                />
+                            </svg>
+                        }
+                    </button>
+                </div>
+            </div>
+
+            {displayedCourses.length !== 0 ? (
                 <div
                     className="w-100 mb-4"
                     style={{
@@ -792,7 +921,7 @@ export default function Explore() {
                         <button
 
                         >
-                            {!viewMoreActive2 ? <svg
+                            {!viewMoreActive ? <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
