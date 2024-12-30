@@ -74,17 +74,17 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
         <div>
             {isOpenApplytoTeach && (
                 <div
-                    className="modal d-flex align-items-center justify-content-center"
+                    className="modal d-flex align-items-center justify-content-center h-screen"
                     style={{
                         display: 'block',
                         background: 'rgba(0, 0, 0, 0.6)',
                     }}
                 >
                     <div
-                        className="modal-dialog"
-                        style={{ maxWidth: '830px', width: '90%', height: '480px' }}
+                        className="modal-dialog applytoteachres"
+                        style={{ maxWidth: '830px', width: '90%' }}
                     >
-                        <div className="modal-content bg-light shadow-lg rounded" style={{ height: '100%' }}>
+                        <div className="modal-content bg-light shadow-lg rounded h-full" style={{overflowY: 'auto'}}>
                             <div className="d-flex align-items-center justify-content-between px-4 pt-3 pb-1" style={{ zIndex: '1000' }}>
                                 <Image className="logo-full pl-2 pt-1" src={Logo} alt="logo" width={185} height={35} />
                                 <button className="close-btn" onClick={toggleModal}>
@@ -92,7 +92,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                 </button>
                             </div>
 
-                            <div className="modal-body px-4 d-flex flex-column justify-content-between" style={{ height: '100%' }}>
+                            <div className="modal-body px-4 d-flex flex-column justify-content-between">
                                 {!isStepMode ? (
                                     <div className="row">
                                         {/* Left Column */}
@@ -122,7 +122,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                         </div>
 
                                         {/* Right Column */}
-                                        <div className="col-md-6 text-center"  style={{ marginTop: '-50px' }}>
+                                        <div className="col-md-6 text-center sec-col-apply"  style={{ marginTop: '-50px' }}>
                                             <Image className="logo-full mb-3" style={{ marginLeft: '-3px' }} src={Logo} alt="logo" width={175} height={35} />
                                             <h5 className="mb-3 fw-bold text-left" style={{ fontSize: '21px' }}>Apply to Teach on SkillHub</h5>
                                             <p className='mb-2 text-left' style={{ fontSize: '14px' }}>
@@ -158,7 +158,7 @@ export default function ApplyToTeach({ isOpenApplytoTeach, setIsOpenApplytoTeach
                                         </div>
                                     </div>
                                 ) : (
-                                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '-35px', padding: '0100px', height: '100%' }}>
+                                    <div className='applytoteachresp' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '-35px', padding: '0100px', height: '100%' }}>
                                         {currentStep === 12 && (
                                             <div>
                                                 <h5 className="mb-4 fw-bold text-left" style={{ fontSize: '15px' }}>

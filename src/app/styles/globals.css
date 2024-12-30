@@ -2820,6 +2820,13 @@ input:checked+.toggle-slider:before {
     /* Smaller attendee count font */
     padding: 3px 8px;
   }
+  .sec-col-apply{margin-top: 30px !important;}
+  .applytoteachres{
+    height: calc(100vh - 180px);
+  }
+  .applytoteachresp{
+    padding: 20px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2879,6 +2886,7 @@ input:checked+.toggle-slider:before {
     font-size: 12px;
     /* Smaller header font */
   }
+  
 }
 
 

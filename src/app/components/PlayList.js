@@ -47,9 +47,12 @@ export default function Playlist({ PlayListModal }) {
 
   return (
     PlayListModal &&
-    <div className={`transition-transform transform ${PlayListModal ? 'translate-x-0' : '-translate-x-full'
-      }`} style={{ height: '91.2vh' }}>
-      <div className=" rounded-md p-3 border-1 w-96 h-full" style={{ overflowY: 'auto' }}>
+    <div className={`transition-transform transform absolute w-100 h-screen ${PlayListModal ? 'translate-x-0' : '-translate-x-full'
+      }`} style={{zIndex: '1000',height: 'calc(100vh - 62px)',
+        backdropFilter: 'blur(10px)', // For background blur
+        WebkitBackdropFilter: 'blur(15px)', // Safari support
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',}}>
+      <div className=" rounded-md p-3 border-1 w-96 bg-white" style={{ overflowY: 'auto',height: 'calc(100vh - 62px)' ,zIndex: '1000' }}>
         {/* Current Playing Section */}
         {playlist.length > 0 ? (
           <div className="mb-3 px-3 pt-3 pb-5" style={{ background: '#F2F3F7' }}>

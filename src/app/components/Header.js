@@ -392,17 +392,15 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const [isSmallMobileView, setIsSmallMobileView] = useState(true);
+  const [isSmallMobileView, setIsSmallMobileView] = useState(window.innerWidth <= 856);
+
   useEffect(() => {
     // Function to check window width
     const handleResize = () => {
       setIsSmallMobileView(window.innerWidth <= 856);
     };
 
-    // Initial check
-    handleResize();
-
-    // Event listener for resize
+    // Add event listener for resize
     window.addEventListener("resize", handleResize);
 
     // Cleanup on unmount
@@ -410,6 +408,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <header className="navbar  m-0 px-3 py-2" style={{ background: '#fff' }}>
       <div className="container-fluid">
@@ -443,6 +442,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
                   placeholder="Search for anything..."
                   aria-label="Search"
                   value={searchValue}
+                  onClick={handleFocus}
                   onFocus={handleFocus} // Show suggestions and trending
                   onChange={handleInputChange}
                 />
