@@ -1,5 +1,5 @@
 "use client";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from 'next/image'; // Import Next.js Image component
 import Logo from '../assets/logo.svg';
 import Link from "next/link";
@@ -47,21 +47,23 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
     const [isMobileView, setIsMobileView] = useState(false);
 
     useEffect(() => {
-        // Function to check window width
-        const handleResize = () => {
-            setIsMobileView(window.innerWidth <= 1220);
-        };
+        // Check if window is defined (important for SSR)
+        if (typeof window !== "undefined") {
+            const handleResize = () => {
+                setIsMobileView(window.innerWidth <= 1220);
+            };
 
-        // Initial check
-        handleResize();
+            // Initial check
+            handleResize();
 
-        // Event listener for resize
-        window.addEventListener("resize", handleResize);
+            // Event listener for resize
+            window.addEventListener("resize", handleResize);
 
-        // Cleanup on unmount
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
+            // Cleanup on unmount
+            return () => {
+                window.removeEventListener("resize", handleResize);
+            };
+        }
     }, []);
     // Map each item to its respective SVG
     const itemIcons = {

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -380,11 +380,11 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
   );
 
   const containerRef = useRef(null);
-  const handleClickOutside = (event) => {
+  const handleClickOutside = useCallback((event) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
       setShowSuggestions(false);
     }
-  };
+  });
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -392,18 +392,16 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const [isSmallMobileView, setIsSmallMobileView] = useState(window.innerWidth <= 856);
+  const [isSmallMobileView, setIsSmallMobileView] = useState(false);
 
   useEffect(() => {
-    // Function to check window width
     const handleResize = () => {
       setIsSmallMobileView(window.innerWidth <= 856);
     };
 
-    // Add event listener for resize
+    handleResize(); // Set initial value after mounting
     window.addEventListener("resize", handleResize);
 
-    // Cleanup on unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -578,7 +576,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
                 </svg>
               </button>
 
-              <a onClick={() => setIsOpenApplytoTeach(!isOpenApplytoTeach)} className={`btn ${isSmallMobileView ? 'btn-sm py-2 px-1' : ''} btn-dark px-4`} style={isSmallMobileView ? {fontSize: '11.2px',borderRadius: '50px'} : { borderRadius: '50px' }}>+  Apply to Teach</a>
+              <a onClick={() => setIsOpenApplytoTeach(!isOpenApplytoTeach)} className={`btn ${isSmallMobileView ? 'btn-sm py-2 px-1' : ''} btn-dark px-4`} style={isSmallMobileView ? { fontSize: '11.2px', borderRadius: '50px' } : { borderRadius: '50px' }}>+  Apply to Teach</a>
 
             </>
             : <>

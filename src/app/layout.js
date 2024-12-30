@@ -43,59 +43,37 @@ export default function RootLayout({ children }) {
   const [AddCourseModal, setAddCourseModal] = useState(false)
   const [AddBundleModal, setAddBundleModal] = useState(false)
 
-  // Handle responsive behavior for sidebar
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 1220) {
-        setIsSidebarOpen(false); // Close sidebar for smaller screens (md and below)
-      } else {
-        setIsSidebarOpen(true); // Reopen sidebar for larger screens
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Run on initial render
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
   const [isMobileView, setIsMobileView] = useState(false);
+  const [isSmallMobileView, setIsSmallMobileView] = useState(false);
 
   useEffect(() => {
-    // Function to check window width
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 1220 && window.innerWidth >= 768);
-    };
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        const width = window.innerWidth;
 
-    // Initial check
-    handleResize();
+        // Sidebar behavior
+        setIsSidebarOpen(width >= 1220);
 
-    // Event listener for resize
-    window.addEventListener("resize", handleResize);
+        // Mobile view (768px to 1220px)
+        setIsMobileView(width <= 1220 && width >= 768);
 
-    // Cleanup on unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+        // Small mobile view (<768px)
+        setIsSmallMobileView(width < 768);
+      };
+
+      // Initial check
+      handleResize();
+
+      // Add resize listener
+      window.addEventListener("resize", handleResize);
+
+      // Cleanup on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
-  const [isSmallMobileView, setIsSmallMobileView] = useState(true);
 
-  useEffect(() => {
-    // Function to check window width
-    const handleResize = () => {
-      setIsSmallMobileView(window.innerWidth <= 768);
-    };
-
-    // Initial check
-    handleResize();
-
-    // Event listener for resize
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup on unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   const values = {
     isSchoolModal,
     setIsSchoolModal,
