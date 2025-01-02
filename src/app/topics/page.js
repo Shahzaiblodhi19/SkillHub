@@ -1126,13 +1126,12 @@ export default function Topics() {
                         <div
                             key={course.id}
                             className="relative group trending-session-card"
-                            // style={{
-                            //     flex: '1 1 calc(25% - 20px)',
-                            //     background: '#fff',
-                            //     borderRadius: '10px',
-                            //     boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                            //     overflow: 'hidden',
-                            // }}
+                            style={{
+                                background: '#fff',
+                                borderRadius: '10px',
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                overflow: 'hidden',
+                            }}
                         >
 
                             {/* Image */}
@@ -1245,13 +1244,12 @@ export default function Topics() {
                         <div
                             key={course.id}
                             className="relative group trending-session-card"
-                            // style={{
-                            //     flex: '1 1 calc(25% - 20px)',
-                            //     background: '#fff',
-                            //     borderRadius: '10px',
-                            //     boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                            //     overflow: 'hidden',
-                            // }}
+                            style={{
+                                background: '#fff',
+                                borderRadius: '10px',
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                overflow: 'hidden',
+                            }}
                         >
 
                             {/* Image */}
@@ -1356,13 +1354,12 @@ export default function Topics() {
                         <div
                             key={course.id}
                             className="relative group trending-session-card"
-                            // style={{
-                            //     flex: '1 1 calc(25% - 20px)',
-                            //     background: '#fff',
-                            //     borderRadius: '10px',
-                            //     boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                            //     overflow: 'hidden',
-                            // }}
+                            style={{
+                                background: '#fff',
+                                borderRadius: '10px',
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                overflow: 'hidden',
+                            }}
                         >
                             {/* Header Section */}
                             <div
