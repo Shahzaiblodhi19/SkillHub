@@ -2820,11 +2820,16 @@ input:checked+.toggle-slider:before {
     /* Smaller attendee count font */
     padding: 3px 8px;
   }
-  .sec-col-apply{margin-top: 30px !important;}
-  .applytoteachres{
+
+  .sec-col-apply {
+    margin-top: 30px !important;
+  }
+
+  .applytoteachres {
     height: calc(100vh - 180px);
   }
-  .applytoteachresp{
+
+  .applytoteachresp {
     padding: 20px !important;
   }
 }
@@ -2886,7 +2891,7 @@ input:checked+.toggle-slider:before {
     font-size: 12px;
     /* Smaller header font */
   }
-  
+
 }
 
 
@@ -3539,6 +3544,15 @@ input:checked+.toggle-slider:before {
   margin-left: 24px;
 }
 
+.tooltip-item {
+  display: flex;
+  align-items: center;
+  z-index: 10000;
+  gap: 6px;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
 .container-products .stat-item {
   display: flex;
   align-items: center;
@@ -3578,6 +3592,42 @@ input:checked+.toggle-slider:before {
   transition: all 0.2s;
   margin-bottom: 8px;
   z-index: 100;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+  z-index: 1000;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.tooltip-item:hover .tooltip {
+  opacity: 1;
+  z-index: 100000;
+  visibility: visible;
 }
 
 .container-products .stat-tooltip::after {
@@ -3882,12 +3932,14 @@ input:checked+.toggle-slider:before {
   font-size: 14px;
   color: #333;
 }
+
 .container-products .footer-item {
   display: flex;
   align-items: center;
   gap: 8px;
   height: 22px;
 }
+
 /* Replace/modify these styles */
 .container-products .footer-icon-wrapper {
   position: relative;
@@ -3934,6 +3986,7 @@ input:checked+.toggle-slider:before {
   margin-top: auto;
   border-radius: 0 0 8px 8px;
 }
+
 .container-products .footer-content {
   display: flex;
   align-items: center;
@@ -4037,6 +4090,7 @@ input:checked+.toggle-slider:before {
   align-items: center;
   gap: 4px;
 }
+
 .popup-container {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -4270,4 +4324,154 @@ input:checked+.toggle-slider:before {
 .popup-container option {
   padding: 12px;
   font-size: 14px;
+}
+
+/* General container */
+.responsive-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allow items to wrap to the next row */
+  justify-content: flex-start;
+  /* Align items to the left */
+  gap: 25px 16px !important;
+}
+
+/* General item with fixed width */
+.responsive-item {
+  flex: 0 0 calc(20% - 13px);
+  /* Fixed width for items */
+  max-width: calc(20% - 13px);
+  /* Ensures items don't exceed this width */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  /* No extra margin */
+}
+
+/* Medium-large screens (4 items per row) */
+@media (max-width: 1420px) and (min-width: 1292px) {
+  .responsive-container {
+    gap: 20px !important;
+  }
+
+  .responsive-item {
+    flex: 0 0 calc(25% - 15px);
+    /* 4 items per row */
+    max-width: calc(25% - 15px);
+  }
+}
+
+/* Medium screens (tablet, 3 items per row) */
+@media (max-width: 1291px) and (min-width: 768px) {
+  .responsive-container {
+    gap: 30px !important;
+  }
+
+  .responsive-item {
+    flex: 0 0 calc(33.33% - 20px);
+    /* 3 items per row */
+    max-width: calc(33.33% - 20px);
+  }
+}
+
+/* Small screens (mobile, 2 items per row) */
+@media (max-width: 767px) and (min-width: 481px) {
+
+  .responsive-item {
+    flex: 0 0 calc(50% - 10px);
+    /* 2 items per row */
+    max-width: calc(50% - 10px);
+  }
+}
+
+/* Extra small screens (mobile portrait, 1 item per row) */
+@media (max-width: 480px) {
+  .responsive-item {
+    flex: 0 0 100%;
+    /* 1 item per row */
+    max-width: 100%;
+  }
+}
+
+/* Responsive styles */
+.responsive-tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* Center on smaller screens */
+}
+
+.responsive-tab-list {
+  gap: 10px;
+  /* Reduce gap on small screens */
+}
+.trending-sessions-container {
+  padding: 30px 20px;
+  /* Reduce padding for smaller screens */
+}
+/* Default: Desktop (4 cards per row) */
+.trending-sessions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* Consistent gap between cards */
+  justify-content: space-between;
+  /* Ensures balanced spacing */
+}
+
+.trending-session-card {
+  flex: 1 1 calc(25% - 20px);
+  /* Four cards per row */
+  max-width: calc(25% - 20px);
+  /* Ensure cards stay within width */
+}
+
+/* Tablet (3 cards per row) */
+@media only screen and (max-width: 1200px) {
+  .trending-session-card {
+    flex: 1 1 calc(33.33% - 20px);
+    /* Three cards per row */
+    max-width: calc(33.33% - 20px);
+  }
+}
+
+/* Small Tablet (2 cards per row) */
+@media only screen and (max-width: 768px) {
+  .trending-sessions-container {
+    padding: 15px;
+    /* Reduce padding for smaller screens */
+  }
+
+  .trending-sessions-grid {
+    justify-content: flex-start;
+    /* Align to the start */
+  }
+
+  .trending-session-card {
+    flex: 1 1 calc(50% - 20px);
+    /* Two cards per row */
+    max-width: calc(50% - 20px);
+    margin-bottom: 15px;
+    /* Add spacing between cards */
+  }
+
+  
+}
+
+/* Mobile (1 card per row) */
+@media only screen and (max-width: 576px) {
+  .trending-sessions-container {
+    padding: 10px;
+    /* Minimized padding for small devices */
+  }
+
+  .trending-session-card {
+    flex: 1 1 100%;
+    /* Full width for one card */
+    max-width: 100%;
+    margin-bottom: 20px;
+    /* Ensure spacing below the card */
+  }
+
 }

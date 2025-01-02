@@ -1,9 +1,11 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Explore() {
     const allCourses = [
         {
+            id: 1,
             title: "The 7 Habits of Highly Effective People",
             author: "Stephen Covey",
             price: "$14.99",
@@ -22,6 +24,7 @@ export default function Explore() {
             },
         },
         {
+            id: 2,
             title: "How to Win Friends and Influence People",
             author: "Dale Carnegie",
             price: "$19.99",
@@ -40,6 +43,7 @@ export default function Explore() {
             },
         },
         {
+            id: 3,
             title: "Think and Grow Rich",
             author: "Napoleon Hill",
             price: "$24.99",
@@ -58,6 +62,7 @@ export default function Explore() {
             },
         },
         {
+            id: 4,
             title: "The Power of Habit",
             author: "Charles Duhigg",
             price: "$16.99",
@@ -76,6 +81,7 @@ export default function Explore() {
             },
         },
         {
+            id: 5,
             title: "Atomic Habits",
             author: "James Clear",
             price: "$21.99",
@@ -94,6 +100,7 @@ export default function Explore() {
             },
         },
         {
+            id: 6,
             title: "Deep Work",
             author: "Cal Newport",
             price: "$17.99",
@@ -112,6 +119,7 @@ export default function Explore() {
             },
         },
         {
+            id: 7,
             title: "Grit",
             author: "Angela Duckworth",
             price: "$19.49",
@@ -130,6 +138,7 @@ export default function Explore() {
             },
         },
         {
+            id: 8,
             title: "The Lean Startup",
             author: "Eric Ries",
             price: "$15.99",
@@ -148,6 +157,7 @@ export default function Explore() {
             },
         },
         {
+            id: 9,
             title: "The Power of Habit",
             author: "Charles Duhigg",
             price: "$16.99",
@@ -166,6 +176,7 @@ export default function Explore() {
             },
         },
         {
+            id: 10,
             title: "Atomic Habits",
             author: "James Clear",
             price: "$21.99",
@@ -324,12 +335,40 @@ export default function Explore() {
         const endIndex = startIndex + coursesPerPage;
         setDisplayedCourses(allCourses.slice(startIndex, endIndex));
     };
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const handleDropdownToggle = (id) => {
+        setDropdownVisible({
+            [id]: !dropdownVisible[id], // Toggle the selected dropdown
+        });
+    };
 
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [selectedCollection, setSelectedCollection] = useState(null);
+
+    const collections = [
+        { id: 1, name: "Collection XYZ", titles: 1, icon: "😀" },
+        { id: 2, name: "Collection ABC", titles: 63, icon: "🎨" },
+    ];
+
+    const handleCollectionClick = (collection) => {
+        setSelectedCollection(collection.id);
+        // Add your save logic here (e.g., API call, database update)
+        alert(
+            `saved to collection: ${collection.name} (Collection ID: ${collection.id})`
+        );
+        setIsPopupVisible(false);
+    };
     return (
         <div style={{ padding: "10px", fontFamily: "Arial, sans-serif" }}>
             {/* Tabs */}
-            <div className="flex shadow-md  items-center py-3 px-4 justify-between" style={{ marginBottom: "20px", display: "flex", gap: "22px", background: '#fff', borderRadius: '15px' }}>
-                <div className="w-100" style={{ display: "flex", gap: "22px", }}>
+            <div className="flex shadow-md items-center py-3 px-4 w-100 items-center responsive-tab-container gap-4" style={{ marginBottom: "20px", display: "flex", background: '#fff', borderRadius: '15px' }}>
+                <div className="responsive-tab-list"
+                    style={{
+                        display: "flex",
+                        gap: "22px",
+                        width: '80%',
+                        flexWrap: "wrap", // Wrap tabs when space is limited
+                    }}>
                     {[
                         { name: "All", svg: null }, // No SVG for "All" tab
                         {
@@ -371,7 +410,7 @@ export default function Explore() {
                                 color: activeTab === tab.name ? "#02C5AF" : "#4B4B4B",
                                 border: "none",
                                 cursor: "pointer",
-                                fontWeight: '500',
+                                fontWeight: '600',
                                 display: 'flex',
                                 alignItems: 'center', // Align text and SVG horizontally
                                 gap: '5px', // Add spacing between SVG and text
@@ -386,7 +425,7 @@ export default function Explore() {
 
                     ))}
                 </div>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
                     <path fill="#4F4F4F" d="M10.7885 3.74485C10.588 2.91838 9.41205 2.91838 9.21155 3.74485L9.21147 3.74518C8.8815 5.1021 7.33071 5.74534 6.13614 5.01904L6.13582 5.01885C5.40863 4.57613 4.57711 5.40852 5.01959 6.13484C5.18849 6.41193 5.2896 6.72499 5.31469 7.04853C5.33978 7.37216 5.2881 7.69713 5.16386 7.99701C5.03962 8.29689 4.84633 8.56319 4.59972 8.77425C4.35315 8.98527 4.06025 9.1351 3.74485 9.21155C2.91838 9.41205 2.91838 10.588 3.74485 10.7885L3.74519 10.7885C4.06037 10.8652 4.35302 11.0151 4.59936 11.2262C4.84569 11.4372 5.03875 11.7034 5.16285 12.0031C5.28694 12.3028 5.33857 12.6275 5.31354 12.9509C5.28851 13.2743 5.18752 13.5873 5.01878 13.8643C4.57621 14.5915 5.40855 15.4229 6.13484 14.9804C6.41193 14.8115 6.72498 14.7104 7.04853 14.6853C7.37216 14.6602 7.69713 14.7119 7.99701 14.8361C8.29689 14.9604 8.56319 15.1537 8.77425 15.4003C8.98527 15.6468 9.1351 15.9398 9.21155 16.2552C9.41205 17.0816 10.588 17.0816 10.7885 16.2552L10.7885 16.2548C10.8652 15.9396 11.0151 15.647 11.2262 15.4006C11.4372 15.1543 11.7034 14.9612 12.0031 14.8372C12.3028 14.7131 12.6275 14.6614 12.9509 14.6865C13.2743 14.7115 13.5873 14.8125 13.8643 14.9812C14.5915 15.4238 15.4229 14.5914 14.9804 13.8652C14.8115 13.5881 14.7104 13.275 14.6853 12.9515C14.6602 12.6278 14.7119 12.3029 14.8361 12.003C14.9604 11.7031 15.1537 11.4368 15.4003 11.2257C15.6468 11.0147 15.9398 10.8649 16.2552 10.7885C17.0816 10.588 17.0816 9.41205 16.2552 9.21155L16.2548 9.21147C15.9396 9.13482 15.647 8.98488 15.4006 8.77384C15.1543 8.56281 14.9612 8.29662 14.8372 7.99692C14.7131 7.69723 14.6614 7.37248 14.6865 7.04908C14.7115 6.72567 14.8125 6.41274 14.9812 6.13571C15.4238 5.40854 14.5914 4.57713 13.8652 5.01959C13.5881 5.18849 13.275 5.2896 12.9515 5.31469C12.6278 5.33978 12.3029 5.2881 12.003 5.16386C11.7031 5.03962 11.4368 4.84633 11.2257 4.59972C11.0147 4.35315 10.8649 4.06025 10.7885 3.74485ZM7.99686 3.44982C8.5066 1.34995 11.4937 1.35006 12.0032 3.45015L12.0033 3.45032C12.0333 3.57452 12.0923 3.68986 12.1754 3.78695C12.2585 3.88404 12.3634 3.96014 12.4814 4.00905C12.5995 4.05796 12.7274 4.07831 12.8548 4.06843C12.9823 4.05855 13.1055 4.01873 13.2146 3.9522L13.2148 3.95208C15.0602 2.82789 17.1728 4.9397 16.0488 6.78584L16.0488 6.78596C15.9823 6.89502 15.9426 7.01822 15.9327 7.14555C15.9229 7.27287 15.9432 7.40072 15.9921 7.51871C16.0409
                              7.6367 16.1169 7.74149 16.2139 7.82458C16.3108 7.90759 16.4259 7.96658 16.5498 7.99678C18.65 8.50629 18.65 11.4937 16.5498 12.0032L16.5497 12.0033C16.4255 12.0333 16.3101 12.0923 16.2131 12.1754C16.116 12.2585 16.0399 12.3634 15.991 12.4814C15.942 12.5995 15.9217 12.7274 15.9316 12.8548C15.9414 12.9822 15.9813 13.1055 16.0478 13.2146L16.0479 13.2148C17.1721 15.0602 15.0603 17.1728 13.2142 16.0488L13.214 16.0488C13.105 15.9823 12.9818 15.9426 12.8545 15.9327C12.7271 15.9229 12.5993 15.9432 12.4813 15.9921C12.3633 16.0409 12.2585 16.1169 12.1754 16.2139C12.0924 16.3108 12.0334 16.4259 12.0032 16.5498C11.4937 18.65 8.50629 18.65 7.99678 16.5498L7.99674 16.5497C7.96665 16.4255 7.90766 16.3101 7.82456 16.2131C7.74147 16.116 7.63663 16.0399 7.51857 15.991C7.40051 15.942 7.27257 15.9217 7.14516 15.9316C7.01775 15.9414 6.89447 15.9813 6.78536 16.0478L6.78516 16.0479C4.93982 17.1721 2.82721 15.0603 3.95115 13.2142L3.95122 13.214C4.01765 13.105 4.05741 12.9818 4.06727 12.8545C4.07712 12.7271 4.0568 12.5993 4.00794 12.4813C3.95908 12.3633 3.88308 12.2585 3.7861 12.1754C3.68921 12.0924 3.57411 12.0334 3.45015 12.0032C1.34995 11.4937 1.34995 8.50629 3.45015 7.99678L3.45032 7.99674C3.57452 7.96665 3.68986 7.90766 3.78695 7.82456C3.88404 7.74147 3.96014 7.63663 4.00905 7.51857C4.05796 7.40051 4.07831 7.27257 4.06843 7.14516C4.05855 7.01775 4.01873 6.89447 3.9522 6.78536L3.95208 6.78516C2.82795 4.93992 4.93946 2.82745 6.78553 3.95096C7.25752 4.23793 7.86658 3.98467 7.99678 3.45015M7.79029 7.79029C8.37634 7.20424 9.1712 6.875 10 6.875C10.8288 6.875 11.6237 7.20424 12.2097 7.79029C12.7958 8.37634 13.125 9.1712 13.125 10C13.125 10.8288 12.7958 11.6237 12.2097 12.2097C11.6237 12.7958 10.8288 13.125 10 13.125C9.1712 13.125 8.37634 12.7958 7.79029 12.2097C7.20424 11.6237 6.875 10.8288 6.875 10C6.875 9.1712 7.20424 8.37634 7.79029 7.79029ZM10 8.125C9.50272 8.125 9.0258 8.32254 8.67417 8.67417C8.32254 9.0258 8.125 9.50272 8.125 10C8.125 10.4973 8.32254 10.9742 8.67417 11.3258C9.0258 11.6775 9.50272 11.875 10 11.875C10.4973 11.875 10.9742 11.6775 11.3258 11.3258C11.6775 10.9742 11.875 10.4973 11.875 10C11.875 9.50272 11.6775 9.0258 11.3258 8.67417C10.9742 8.32254 10.4973 8.125 10 8.125Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                 </svg>
@@ -411,25 +450,15 @@ export default function Explore() {
                     </h1>
 
                     <div
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap', // Allows wrapping to the next row
-                            gap: '25px 13px', // Space between rows and columns
-                            justifyContent: 'flex-start', // Aligns items to the start
-                        }}
+                        className='responsive-container'
+
                     >
                         {/* Render all courses */}
                         {AllCourses.map((course, index) => (
                             <div
-                                className="flex flex-col"
+                                className="flex flex-col responsive-item"
                                 key={index}
-                                style={{
-                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
-                                    background: '#fff',
-                                    borderRadius: '10px',
-                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
-                                }}
+
                             >
                                 {/* Header Section */}
                                 <div
@@ -440,22 +469,206 @@ export default function Explore() {
                                         borderTopRightRadius: '10px',
                                     }}
                                 >
-                                    <p
-                                        style={{
-                                            fontSize: '12px',
-                                            color: '#5D625E',
-                                        }}
-                                    >
-                                        {course.students}
-                                    </p>
-                                    <span>
-                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                            <path
-                                                fill="#5D625E"
-                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                            />
+                                    <div className="flex items-center gap-1.5">
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 20 20">
+                                            <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
-                                    </span>
+                                        <p
+                                            style={{
+                                                fontSize: '12px',
+                                                color: '#5D625E',
+                                            }}
+                                        >
+                                            {course.students}
+                                        </p>
+                                    </div>
+                                    <div style={{ position: "relative", display: "inline-block" }}>
+                                        <span
+                                            onClick={() => handleDropdownToggle(course.id)}
+                                            style={{ cursor: "pointer" }}
+                                        >
+                                            <svg
+                                                className="w-5 h-5"
+                                                style={{ rotate: "90deg" }}
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    fill="#5D625E"
+                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {dropdownVisible[course.id] && (
+                                            <div
+                                                style={{
+                                                    position: "absolute",
+                                                    top: "34px",
+                                                    right: "0",
+                                                    background: "#fff",
+                                                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                                                    borderRadius: "5px",
+                                                    padding: "2px",
+                                                    width: "180px",
+                                                    zIndex: 100,
+                                                }}
+                                            >
+                                                <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: '12px' }}>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                            borderBottom: "1px solid #eee",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Saved to Bookmarks")}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 shrink-0" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" stroke-width="32" stroke-linejoin="round" fill="none"></path></svg> Save to Bookmarks
+                                                    </li>
+                                                    <div>
+                                                        {/* Trigger Button */}
+                                                        <li
+                                                            className="flex items-center gap-2"
+                                                            style={{
+                                                                padding: "8px 12px",
+                                                                cursor: "pointer",
+                                                                borderBottom: "1px solid #eee",
+                                                            }}
+                                                            onMouseOver={(e) => (
+                                                                (e.target.style.backgroundColor = "#f0f8ff"),
+                                                                (e.target.style.color = "#03314b")
+                                                            )}
+                                                            onMouseOut={(e) => (
+                                                                (e.target.style.backgroundColor = ""),
+                                                                (e.target.style.color = "")
+                                                            )}
+                                                            onClick={() => setIsPopupVisible(true)}
+                                                        >
+                                                            <svg
+                                                                className="w-4 h-4 shrink-0"
+                                                                viewBox="0 0 24 24"
+                                                                fill="currentColor"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    fill="#141414"
+                                                                    d="M16 9a7 7 0 1 1 0 14 7 7 0 1 1 0-14zm4-7a2 2 0 0 1 2 2v4h-1.5V3.5h-17v17H8V22H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16zm-3 10h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"
+                                                                ></path>
+                                                            </svg>{" "}
+                                                            Save to Collection
+                                                        </li>
+
+                                                        {/* Popup Modal */}
+                                                        {isPopupVisible && (
+                                                            <div
+                                                                style={{
+                                                                    position: "fixed",
+                                                                    top: "50%",
+                                                                    left: "50%",
+                                                                    transform: "translate(-50%, -50%)",
+                                                                    backgroundColor: "white",
+                                                                    borderRadius: "10px",
+                                                                    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                                                                    padding: "5px",
+                                                                    width: "250px",
+                                                                    zIndex: 1000,
+                                                                }}
+                                                            >
+                                                                <div
+                                                                    style={{
+                                                                        display: "flex",
+                                                                        justifyContent: "space-between",
+                                                                    }}
+                                                                    className='p-2'
+                                                                >
+                                                                    <h3 className="mb-0">Save to <span style={{ color: '#009ECB' }}>Collection</span></h3>
+                                                                    <button
+                                                                        style={{
+                                                                            border: "none",
+                                                                            background: "transparent",
+                                                                            fontSize: "14px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => setIsPopupVisible(false)}
+                                                                    >
+                                                                        ✕
+                                                                    </button>
+                                                                </div>
+                                                                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                                                                    {collections.map((collection) => (
+                                                                        <li
+                                                                            key={collection.id}
+                                                                            className="flex items-center gap-2 mb-2"
+                                                                            style={{
+                                                                                display: "flex",
+                                                                                alignItems: "center",
+                                                                                padding: "6px 12px 6px 6px",
+                                                                                borderBottom: "1px solid #eee",
+                                                                                cursor: "pointer",
+                                                                                backgroundColor:
+                                                                                    selectedCollection === collection.id ? "#f0f8ff" : "",
+                                                                                color: selectedCollection === collection.id ? "#03314b" : "#000",
+                                                                            }}
+                                                                            onClick={() => handleCollectionClick(collection)}
+                                                                        >
+                                                                            <span style={{ fontSize: "34px", background: '#E1E8E8', borderRadius: '10px', padding: '1px 3px' }}>{collection.icon}</span>
+                                                                            <div>
+                                                                                <div style={{ fontWeight: "bold" }}>{collection.name}</div>
+                                                                                <div style={{ fontSize: "12px", color: "#757575" }}>
+                                                                                    {collection.titles} title{collection.titles > 1 && "s"}
+                                                                                </div>
+                                                                            </div>
+                                                                            {selectedCollection === collection.id && (
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="currentColor"
+                                                                                    style={{ marginLeft: "auto", color: "#03314b" }}
+                                                                                    width="19"
+                                                                                    height="19"
+                                                                                >
+                                                                                    <path d="M20.292 6.293a1 1 0 0 1 1.416 1.414l-11 11a1 1 0 0 1-1.414 0l-5-5a1 1 0 1 1 1.414-1.414L10 16.586z"></path>
+                                                                                </svg>
+                                                                            )}
+                                                                        </li>
+                                                                    ))}
+                                                                    <li
+                                                                        style={{
+                                                                            display: "flex",
+                                                                            alignItems: "center",
+                                                                            padding: "4px 10px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => alert("Create a new collection")}
+                                                                    >
+                                                                        <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 276 276" fill="none">
+                                                                            <path d="M276 138C276 214.215 214.215 276 138 276C61.7847 276 0 214.215 0 138C0 61.7847 61.7847 0 138 0C214.215 0 276 61.7847 276 138Z" fill="#DBDBDB" />
+                                                                            <path d="M127.233 199V78H147.767V199H127.233ZM77 148.767V128.233H198V148.767H77Z" fill="#2E2E2E" />
+                                                                        </svg>
+                                                                        Create a new collection
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Added to Playlist")}
+                                                    >
+                                                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 21 17"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="feature-outline-icon" transform="translate(0.865723, 0.665728)" fill="#757575" fill-rule="nonzero"><path d="M6.13427734,12.6369485 L18.1342773,12.6369485 C18.6865621,12.6369485 19.1342773,13.0846638 19.1342773,13.6369485 C19.1342773,14.1892333 18.6865621,14.6369485 18.1342773,14.6369485 L6.13427734,14.6369485 C5.58199259,14.6369485 5.13427734,14.1892333 5.13427734,13.6369485 C5.13427734,13.0846638 5.58199259,12.6369485 6.13427734,12.6369485 Z M6.13427734,6.63694853 L18.1342773,6.63694853 C18.6865621,6.63694853 19.1342773,7.08466378 19.1342773,7.63694853 C19.1342773,8.18923328 18.6865621,8.63694853 18.1342773,8.63694853 L6.13427734,8.63694853 C5.58199259,8.63694853 5.13427734,8.18923328 5.13427734,7.63694853 C5.13427734,7.08466378 5.58199259,6.63694853 6.13427734,6.63694853 Z M6.13427734,0.636948529 L18.1342773,0.636948529 C18.6865621,0.636948529 19.1342773,1.08466378 19.1342773,1.63694853 C19.1342773,2.18923328 18.6865621,2.63694853 18.1342773,2.63694853 L6.13427734,2.63694853 C5.58199259,2.63694853 5.13427734,2.18923328 5.13427734,1.63694853 C5.13427734,1.08466378 5.58199259,0.636948529 6.13427734,0.636948529 Z M0.909179688,15.2121438 L2.69042969,14.163804 C2.80794271,14.0957701 2.88680013,13.998358 2.92700195,13.8715677 C2.96720378,13.7447773 2.96720378,13.6179869 2.92700195,13.4911966 C2.88680013,13.3644062 2.80794271,13.2669941 2.69042969,13.1989602 L0.909179688,12.1320657 C0.686523438,11.995998 0.479329427,11.9650735 0.287597656,12.0392923
+                                                         C0.0958658854,12.113511 0,12.2805032 0,12.5402688 L0,14.8039407 C0,15.0513366 0.0974121094,15.2136901 0.292236328,15.2910013 C0.487060547,15.3683125 0.692708333,15.3420267 0.909179688,15.2121438 Z M0.909179688,9.21214384 L2.69042969,8.163804 C2.80794271,8.09577014 2.88680013,7.99835803 2.92700195,7.87156767 C2.96720378,7.74477731 2.96720378,7.61798694 2.92700195,7.49119658 C2.88680013,7.36440621 2.80794271,7.2669941 2.69042969,7.19896025 L0.909179688,6.13206572 C0.686523438,5.99599801 0.479329427,5.96507353 0.287597656,6.03929228 C0.0958658854,6.11351103 0,6.28050322 0,6.54026884 L0,8.80394072 C0,9.05133655 0.0974121094,9.21369007 0.292236328,9.29100126 C0.487060547,9.36831246 0.692708333,9.34202665 0.909179688,9.21214384 Z M0.909179688,3.21214384 L2.69042969,2.163804 C2.80794271,2.09577014 2.88680013,1.99835803 2.92700195,1.87156767 C2.96720378,1.74477731 2.96720378,1.61798694 2.92700195,1.49119658 C2.88680013,1.36440621 2.80794271,1.2669941 2.69042969,1.19896025 L0.909179688,0.132065717 C0.686523438,-0.00400199142 0.479329427,-0.0349264706 0.287597656,0.0392922794 C0.0958658854,0.113511029 0,0.280503217 0,0.540268842 L0,2.80394072 C0,3.05133655 0.0974121094,3.21369007 0.292236328,3.29100126 C0.487060547,3.36831246 0.692708333,3.34202665 0.909179688,3.21214384 Z"></path></g></g></svg> Add to Playlist
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Content Section */}
@@ -608,6 +821,7 @@ export default function Explore() {
                             { length: (5 - (AllCourses.length % 5)) % 5 }, // Calculate placeholders needed
                             (_, i) => (
                                 <div
+                                    className="responsive-item"
                                     key={`placeholder-${i}`}
                                     style={{
                                         flex: '1 1 calc(20% - 13px)',
@@ -629,15 +843,17 @@ export default function Explore() {
                     borderRadius: '20px',
                 }}
             >
-                <h1
-                    className="mb-4"
-                    style={{
-                        fontSize: '22px',
-                        fontWeight: 'bold',
-                    }}
-                >
-                    Topics
-                </h1>
+                <Link href='/topics'>
+                    <h1
+                        className="mb-4"
+                        style={{
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Topics
+                    </h1>
+                </Link>
                 <div
                     style={{
                         display: "flex",
@@ -713,7 +929,6 @@ export default function Explore() {
                 ('')
             }
 
-
             {displayedCourses.length !== 0 ? (
                 <div
                     className="w-100 mb-4"
@@ -734,25 +949,13 @@ export default function Explore() {
                     </h1>
 
                     <div
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap', // Allows wrapping to the next row
-                            gap: '25px 13px', // Space between rows and columns
-                            justifyContent: 'space-between', // Ensures even distribution
-                        }}
+                        className='responsive-container'
                     >
                         {/* Render all courses */}
                         {displayedCourses.map((course, index) => (
                             <div
-                                className="flex flex-col"
+                                className="flex flex-col responsive-item"
                                 key={index}
-                                style={{
-                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
-                                    background: '#fff',
-                                    borderRadius: '10px',
-                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
-                                }}
                             >
                                 {/* Header Section */}
                                 <div
@@ -763,22 +966,206 @@ export default function Explore() {
                                         borderTopRightRadius: '10px',
                                     }}
                                 >
-                                    <p
-                                        style={{
-                                            fontSize: '12px',
-                                            color: '#5D625E',
-                                        }}
-                                    >
-                                        {course.students}
-                                    </p>
-                                    <span>
-                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                            <path
-                                                fill="#5D625E"
-                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                            />
+                                    <div className="flex items-center gap-1.5">
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 20 20">
+                                            <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
-                                    </span>
+                                        <p
+                                            style={{
+                                                fontSize: '12px',
+                                                color: '#5D625E',
+                                            }}
+                                        >
+                                            {course.students}
+                                        </p>
+                                    </div>
+                                    <div style={{ position: "relative", display: "inline-block" }}>
+                                        <span
+                                            onClick={() => handleDropdownToggle(course.id)}
+                                            style={{ cursor: "pointer" }}
+                                        >
+                                            <svg
+                                                className="w-5 h-5"
+                                                style={{ rotate: "90deg" }}
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    fill="#5D625E"
+                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {dropdownVisible[course.id] && (
+                                            <div
+                                                style={{
+                                                    position: "absolute",
+                                                    top: "34px",
+                                                    right: "0",
+                                                    background: "#fff",
+                                                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                                                    borderRadius: "5px",
+                                                    padding: "2px",
+                                                    width: "180px",
+                                                    zIndex: 100,
+                                                }}
+                                            >
+                                                <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: '12px' }}>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                            borderBottom: "1px solid #eee",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Saved to Bookmarks")}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 shrink-0" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" stroke-width="32" stroke-linejoin="round" fill="none"></path></svg> Save to Bookmarks
+                                                    </li>
+                                                    <div>
+                                                        {/* Trigger Button */}
+                                                        <li
+                                                            className="flex items-center gap-2"
+                                                            style={{
+                                                                padding: "8px 12px",
+                                                                cursor: "pointer",
+                                                                borderBottom: "1px solid #eee",
+                                                            }}
+                                                            onMouseOver={(e) => (
+                                                                (e.target.style.backgroundColor = "#f0f8ff"),
+                                                                (e.target.style.color = "#03314b")
+                                                            )}
+                                                            onMouseOut={(e) => (
+                                                                (e.target.style.backgroundColor = ""),
+                                                                (e.target.style.color = "")
+                                                            )}
+                                                            onClick={() => setIsPopupVisible(true)}
+                                                        >
+                                                            <svg
+                                                                className="w-4 h-4 shrink-0"
+                                                                viewBox="0 0 24 24"
+                                                                fill="currentColor"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    fill="#141414"
+                                                                    d="M16 9a7 7 0 1 1 0 14 7 7 0 1 1 0-14zm4-7a2 2 0 0 1 2 2v4h-1.5V3.5h-17v17H8V22H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16zm-3 10h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"
+                                                                ></path>
+                                                            </svg>{" "}
+                                                            Save to Collection
+                                                        </li>
+
+                                                        {/* Popup Modal */}
+                                                        {isPopupVisible && (
+                                                            <div
+                                                                style={{
+                                                                    position: "fixed",
+                                                                    top: "50%",
+                                                                    left: "50%",
+                                                                    transform: "translate(-50%, -50%)",
+                                                                    backgroundColor: "white",
+                                                                    borderRadius: "10px",
+                                                                    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                                                                    padding: "5px",
+                                                                    width: "250px",
+                                                                    zIndex: 1000,
+                                                                }}
+                                                            >
+                                                                <div
+                                                                    style={{
+                                                                        display: "flex",
+                                                                        justifyContent: "space-between",
+                                                                    }}
+                                                                    className='p-2'
+                                                                >
+                                                                    <h3 className="mb-0">Save to <span style={{ color: '#009ECB' }}>Collection</span></h3>
+                                                                    <button
+                                                                        style={{
+                                                                            border: "none",
+                                                                            background: "transparent",
+                                                                            fontSize: "14px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => setIsPopupVisible(false)}
+                                                                    >
+                                                                        ✕
+                                                                    </button>
+                                                                </div>
+                                                                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                                                                    {collections.map((collection) => (
+                                                                        <li
+                                                                            key={collection.id}
+                                                                            className="flex items-center gap-2 mb-2"
+                                                                            style={{
+                                                                                display: "flex",
+                                                                                alignItems: "center",
+                                                                                padding: "6px 12px 6px 6px",
+                                                                                borderBottom: "1px solid #eee",
+                                                                                cursor: "pointer",
+                                                                                backgroundColor:
+                                                                                    selectedCollection === collection.id ? "#f0f8ff" : "",
+                                                                                color: selectedCollection === collection.id ? "#03314b" : "#000",
+                                                                            }}
+                                                                            onClick={() => handleCollectionClick(collection)}
+                                                                        >
+                                                                            <span style={{ fontSize: "34px", background: '#E1E8E8', borderRadius: '10px', padding: '1px 3px' }}>{collection.icon}</span>
+                                                                            <div>
+                                                                                <div style={{ fontWeight: "bold" }}>{collection.name}</div>
+                                                                                <div style={{ fontSize: "12px", color: "#757575" }}>
+                                                                                    {collection.titles} title{collection.titles > 1 && "s"}
+                                                                                </div>
+                                                                            </div>
+                                                                            {selectedCollection === collection.id && (
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="currentColor"
+                                                                                    style={{ marginLeft: "auto", color: "#03314b" }}
+                                                                                    width="19"
+                                                                                    height="19"
+                                                                                >
+                                                                                    <path d="M20.292 6.293a1 1 0 0 1 1.416 1.414l-11 11a1 1 0 0 1-1.414 0l-5-5a1 1 0 1 1 1.414-1.414L10 16.586z"></path>
+                                                                                </svg>
+                                                                            )}
+                                                                        </li>
+                                                                    ))}
+                                                                    <li
+                                                                        style={{
+                                                                            display: "flex",
+                                                                            alignItems: "center",
+                                                                            padding: "4px 10px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => alert("Create a new collection")}
+                                                                    >
+                                                                        <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 276 276" fill="none">
+                                                                            <path d="M276 138C276 214.215 214.215 276 138 276C61.7847 276 0 214.215 0 138C0 61.7847 61.7847 0 138 0C214.215 0 276 61.7847 276 138Z" fill="#DBDBDB" />
+                                                                            <path d="M127.233 199V78H147.767V199H127.233ZM77 148.767V128.233H198V148.767H77Z" fill="#2E2E2E" />
+                                                                        </svg>
+                                                                        Create a new collection
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Added to Playlist")}
+                                                    >
+                                                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 21 17"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="feature-outline-icon" transform="translate(0.865723, 0.665728)" fill="#757575" fill-rule="nonzero"><path d="M6.13427734,12.6369485 L18.1342773,12.6369485 C18.6865621,12.6369485 19.1342773,13.0846638 19.1342773,13.6369485 C19.1342773,14.1892333 18.6865621,14.6369485 18.1342773,14.6369485 L6.13427734,14.6369485 C5.58199259,14.6369485 5.13427734,14.1892333 5.13427734,13.6369485 C5.13427734,13.0846638 5.58199259,12.6369485 6.13427734,12.6369485 Z M6.13427734,6.63694853 L18.1342773,6.63694853 C18.6865621,6.63694853 19.1342773,7.08466378 19.1342773,7.63694853 C19.1342773,8.18923328 18.6865621,8.63694853 18.1342773,8.63694853 L6.13427734,8.63694853 C5.58199259,8.63694853 5.13427734,8.18923328 5.13427734,7.63694853 C5.13427734,7.08466378 5.58199259,6.63694853 6.13427734,6.63694853 Z M6.13427734,0.636948529 L18.1342773,0.636948529 C18.6865621,0.636948529 19.1342773,1.08466378 19.1342773,1.63694853 C19.1342773,2.18923328 18.6865621,2.63694853 18.1342773,2.63694853 L6.13427734,2.63694853 C5.58199259,2.63694853 5.13427734,2.18923328 5.13427734,1.63694853 C5.13427734,1.08466378 5.58199259,0.636948529 6.13427734,0.636948529 Z M0.909179688,15.2121438 L2.69042969,14.163804 C2.80794271,14.0957701 2.88680013,13.998358 2.92700195,13.8715677 C2.96720378,13.7447773 2.96720378,13.6179869 2.92700195,13.4911966 C2.88680013,13.3644062 2.80794271,13.2669941 2.69042969,13.1989602 L0.909179688,12.1320657 C0.686523438,11.995998 0.479329427,11.9650735 0.287597656,12.0392923
+                                                         C0.0958658854,12.113511 0,12.2805032 0,12.5402688 L0,14.8039407 C0,15.0513366 0.0974121094,15.2136901 0.292236328,15.2910013 C0.487060547,15.3683125 0.692708333,15.3420267 0.909179688,15.2121438 Z M0.909179688,9.21214384 L2.69042969,8.163804 C2.80794271,8.09577014 2.88680013,7.99835803 2.92700195,7.87156767 C2.96720378,7.74477731 2.96720378,7.61798694 2.92700195,7.49119658 C2.88680013,7.36440621 2.80794271,7.2669941 2.69042969,7.19896025 L0.909179688,6.13206572 C0.686523438,5.99599801 0.479329427,5.96507353 0.287597656,6.03929228 C0.0958658854,6.11351103 0,6.28050322 0,6.54026884 L0,8.80394072 C0,9.05133655 0.0974121094,9.21369007 0.292236328,9.29100126 C0.487060547,9.36831246 0.692708333,9.34202665 0.909179688,9.21214384 Z M0.909179688,3.21214384 L2.69042969,2.163804 C2.80794271,2.09577014 2.88680013,1.99835803 2.92700195,1.87156767 C2.96720378,1.74477731 2.96720378,1.61798694 2.92700195,1.49119658 C2.88680013,1.36440621 2.80794271,1.2669941 2.69042969,1.19896025 L0.909179688,0.132065717 C0.686523438,-0.00400199142 0.479329427,-0.0349264706 0.287597656,0.0392922794 C0.0958658854,0.113511029 0,0.280503217 0,0.540268842 L0,2.80394072 C0,3.05133655 0.0974121094,3.21369007 0.292236328,3.29100126 C0.487060547,3.36831246 0.692708333,3.34202665 0.909179688,3.21214384 Z"></path></g></g></svg> Add to Playlist
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Content Section */}
@@ -984,25 +1371,13 @@ export default function Explore() {
                     </h1>
 
                     <div
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap', // Allows wrapping to the next row
-                            gap: '25px 13px', // Space between rows and columns
-                            justifyContent: 'space-between', // Ensures even distribution
-                        }}
+                        className='responsive-container'
                     >
                         {/* Render all courses */}
                         {displayedCourses2.map((course, index) => (
                             <div
-                                className="flex flex-col"
+                                className="flex flex-col responsive-item"
                                 key={index}
-                                style={{
-                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
-                                    background: '#fff',
-                                    borderRadius: '10px',
-                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
-                                }}
                             >
                                 {/* Header Section */}
                                 <div
@@ -1013,22 +1388,206 @@ export default function Explore() {
                                         borderTopRightRadius: '10px',
                                     }}
                                 >
-                                    <p
-                                        style={{
-                                            fontSize: '12px',
-                                            color: '#5D625E',
-                                        }}
-                                    >
-                                        {course.students}
-                                    </p>
-                                    <span>
-                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                            <path
-                                                fill="#5D625E"
-                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                            />
+                                    <div className="flex items-center gap-1.5">
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 20 20">
+                                            <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
-                                    </span>
+                                        <p
+                                            style={{
+                                                fontSize: '12px',
+                                                color: '#5D625E',
+                                            }}
+                                        >
+                                            {course.students}
+                                        </p>
+                                    </div>
+                                    <div style={{ position: "relative", display: "inline-block" }}>
+                                        <span
+                                            onClick={() => handleDropdownToggle(course.id)}
+                                            style={{ cursor: "pointer" }}
+                                        >
+                                            <svg
+                                                className="w-5 h-5"
+                                                style={{ rotate: "90deg" }}
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    fill="#5D625E"
+                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {dropdownVisible[course.id] && (
+                                            <div
+                                                style={{
+                                                    position: "absolute",
+                                                    top: "34px",
+                                                    right: "0",
+                                                    background: "#fff",
+                                                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                                                    borderRadius: "5px",
+                                                    padding: "2px",
+                                                    width: "180px",
+                                                    zIndex: 100,
+                                                }}
+                                            >
+                                                <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: '12px' }}>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                            borderBottom: "1px solid #eee",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Saved to Bookmarks")}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 shrink-0" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" stroke-width="32" stroke-linejoin="round" fill="none"></path></svg> Save to Bookmarks
+                                                    </li>
+                                                    <div>
+                                                        {/* Trigger Button */}
+                                                        <li
+                                                            className="flex items-center gap-2"
+                                                            style={{
+                                                                padding: "8px 12px",
+                                                                cursor: "pointer",
+                                                                borderBottom: "1px solid #eee",
+                                                            }}
+                                                            onMouseOver={(e) => (
+                                                                (e.target.style.backgroundColor = "#f0f8ff"),
+                                                                (e.target.style.color = "#03314b")
+                                                            )}
+                                                            onMouseOut={(e) => (
+                                                                (e.target.style.backgroundColor = ""),
+                                                                (e.target.style.color = "")
+                                                            )}
+                                                            onClick={() => setIsPopupVisible(true)}
+                                                        >
+                                                            <svg
+                                                                className="w-4 h-4 shrink-0"
+                                                                viewBox="0 0 24 24"
+                                                                fill="currentColor"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    fill="#141414"
+                                                                    d="M16 9a7 7 0 1 1 0 14 7 7 0 1 1 0-14zm4-7a2 2 0 0 1 2 2v4h-1.5V3.5h-17v17H8V22H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16zm-3 10h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"
+                                                                ></path>
+                                                            </svg>{" "}
+                                                            Save to Collection
+                                                        </li>
+
+                                                        {/* Popup Modal */}
+                                                        {isPopupVisible && (
+                                                            <div
+                                                                style={{
+                                                                    position: "fixed",
+                                                                    top: "50%",
+                                                                    left: "50%",
+                                                                    transform: "translate(-50%, -50%)",
+                                                                    backgroundColor: "white",
+                                                                    borderRadius: "10px",
+                                                                    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                                                                    padding: "5px",
+                                                                    width: "250px",
+                                                                    zIndex: 1000,
+                                                                }}
+                                                            >
+                                                                <div
+                                                                    style={{
+                                                                        display: "flex",
+                                                                        justifyContent: "space-between",
+                                                                    }}
+                                                                    className='p-2'
+                                                                >
+                                                                    <h3 className="mb-0">Save to <span style={{ color: '#009ECB' }}>Collection</span></h3>
+                                                                    <button
+                                                                        style={{
+                                                                            border: "none",
+                                                                            background: "transparent",
+                                                                            fontSize: "14px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => setIsPopupVisible(false)}
+                                                                    >
+                                                                        ✕
+                                                                    </button>
+                                                                </div>
+                                                                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                                                                    {collections.map((collection) => (
+                                                                        <li
+                                                                            key={collection.id}
+                                                                            className="flex items-center gap-2 mb-2"
+                                                                            style={{
+                                                                                display: "flex",
+                                                                                alignItems: "center",
+                                                                                padding: "6px 12px 6px 6px",
+                                                                                borderBottom: "1px solid #eee",
+                                                                                cursor: "pointer",
+                                                                                backgroundColor:
+                                                                                    selectedCollection === collection.id ? "#f0f8ff" : "",
+                                                                                color: selectedCollection === collection.id ? "#03314b" : "#000",
+                                                                            }}
+                                                                            onClick={() => handleCollectionClick(collection)}
+                                                                        >
+                                                                            <span style={{ fontSize: "34px", background: '#E1E8E8', borderRadius: '10px', padding: '1px 3px' }}>{collection.icon}</span>
+                                                                            <div>
+                                                                                <div style={{ fontWeight: "bold" }}>{collection.name}</div>
+                                                                                <div style={{ fontSize: "12px", color: "#757575" }}>
+                                                                                    {collection.titles} title{collection.titles > 1 && "s"}
+                                                                                </div>
+                                                                            </div>
+                                                                            {selectedCollection === collection.id && (
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="currentColor"
+                                                                                    style={{ marginLeft: "auto", color: "#03314b" }}
+                                                                                    width="19"
+                                                                                    height="19"
+                                                                                >
+                                                                                    <path d="M20.292 6.293a1 1 0 0 1 1.416 1.414l-11 11a1 1 0 0 1-1.414 0l-5-5a1 1 0 1 1 1.414-1.414L10 16.586z"></path>
+                                                                                </svg>
+                                                                            )}
+                                                                        </li>
+                                                                    ))}
+                                                                    <li
+                                                                        style={{
+                                                                            display: "flex",
+                                                                            alignItems: "center",
+                                                                            padding: "4px 10px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => alert("Create a new collection")}
+                                                                    >
+                                                                        <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 276 276" fill="none">
+                                                                            <path d="M276 138C276 214.215 214.215 276 138 276C61.7847 276 0 214.215 0 138C0 61.7847 61.7847 0 138 0C214.215 0 276 61.7847 276 138Z" fill="#DBDBDB" />
+                                                                            <path d="M127.233 199V78H147.767V199H127.233ZM77 148.767V128.233H198V148.767H77Z" fill="#2E2E2E" />
+                                                                        </svg>
+                                                                        Create a new collection
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Added to Playlist")}
+                                                    >
+                                                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 21 17"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="feature-outline-icon" transform="translate(0.865723, 0.665728)" fill="#757575" fill-rule="nonzero"><path d="M6.13427734,12.6369485 L18.1342773,12.6369485 C18.6865621,12.6369485 19.1342773,13.0846638 19.1342773,13.6369485 C19.1342773,14.1892333 18.6865621,14.6369485 18.1342773,14.6369485 L6.13427734,14.6369485 C5.58199259,14.6369485 5.13427734,14.1892333 5.13427734,13.6369485 C5.13427734,13.0846638 5.58199259,12.6369485 6.13427734,12.6369485 Z M6.13427734,6.63694853 L18.1342773,6.63694853 C18.6865621,6.63694853 19.1342773,7.08466378 19.1342773,7.63694853 C19.1342773,8.18923328 18.6865621,8.63694853 18.1342773,8.63694853 L6.13427734,8.63694853 C5.58199259,8.63694853 5.13427734,8.18923328 5.13427734,7.63694853 C5.13427734,7.08466378 5.58199259,6.63694853 6.13427734,6.63694853 Z M6.13427734,0.636948529 L18.1342773,0.636948529 C18.6865621,0.636948529 19.1342773,1.08466378 19.1342773,1.63694853 C19.1342773,2.18923328 18.6865621,2.63694853 18.1342773,2.63694853 L6.13427734,2.63694853 C5.58199259,2.63694853 5.13427734,2.18923328 5.13427734,1.63694853 C5.13427734,1.08466378 5.58199259,0.636948529 6.13427734,0.636948529 Z M0.909179688,15.2121438 L2.69042969,14.163804 C2.80794271,14.0957701 2.88680013,13.998358 2.92700195,13.8715677 C2.96720378,13.7447773 2.96720378,13.6179869 2.92700195,13.4911966 C2.88680013,13.3644062 2.80794271,13.2669941 2.69042969,13.1989602 L0.909179688,12.1320657 C0.686523438,11.995998 0.479329427,11.9650735 0.287597656,12.0392923
+                                                         C0.0958658854,12.113511 0,12.2805032 0,12.5402688 L0,14.8039407 C0,15.0513366 0.0974121094,15.2136901 0.292236328,15.2910013 C0.487060547,15.3683125 0.692708333,15.3420267 0.909179688,15.2121438 Z M0.909179688,9.21214384 L2.69042969,8.163804 C2.80794271,8.09577014 2.88680013,7.99835803 2.92700195,7.87156767 C2.96720378,7.74477731 2.96720378,7.61798694 2.92700195,7.49119658 C2.88680013,7.36440621 2.80794271,7.2669941 2.69042969,7.19896025 L0.909179688,6.13206572 C0.686523438,5.99599801 0.479329427,5.96507353 0.287597656,6.03929228 C0.0958658854,6.11351103 0,6.28050322 0,6.54026884 L0,8.80394072 C0,9.05133655 0.0974121094,9.21369007 0.292236328,9.29100126 C0.487060547,9.36831246 0.692708333,9.34202665 0.909179688,9.21214384 Z M0.909179688,3.21214384 L2.69042969,2.163804 C2.80794271,2.09577014 2.88680013,1.99835803 2.92700195,1.87156767 C2.96720378,1.74477731 2.96720378,1.61798694 2.92700195,1.49119658 C2.88680013,1.36440621 2.80794271,1.2669941 2.69042969,1.19896025 L0.909179688,0.132065717 C0.686523438,-0.00400199142 0.479329427,-0.0349264706 0.287597656,0.0392922794 C0.0958658854,0.113511029 0,0.280503217 0,0.540268842 L0,2.80394072 C0,3.05133655 0.0974121094,3.21369007 0.292236328,3.29100126 C0.487060547,3.36831246 0.692708333,3.34202665 0.909179688,3.21214384 Z"></path></g></g></svg> Add to Playlist
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Content Section */}
@@ -1234,25 +1793,13 @@ export default function Explore() {
                     </h1>
 
                     <div
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap', // Allows wrapping to the next row
-                            gap: '25px 13px', // Space between rows and columns
-                            justifyContent: 'space-between', // Ensures even distribution
-                        }}
+                        className='responsive-container'
                     >
                         {/* Render all courses */}
                         {displayedCourses3.map((course, index) => (
                             <div
-                                className="flex flex-col"
+                                className="flex flex-col responsive-item"
                                 key={index}
-                                style={{
-                                    flex: '1 1 calc(20% - 13px)', // Ensures 5 items per row
-                                    background: '#fff',
-                                    borderRadius: '10px',
-                                    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                                    maxWidth: 'calc(20% - 13px)', // Prevents items from stretching
-                                }}
                             >
                                 {/* Header Section */}
                                 <div
@@ -1263,22 +1810,206 @@ export default function Explore() {
                                         borderTopRightRadius: '10px',
                                     }}
                                 >
-                                    <p
-                                        style={{
-                                            fontSize: '12px',
-                                            color: '#5D625E',
-                                        }}
-                                    >
-                                        {course.students}
-                                    </p>
-                                    <span>
-                                        <svg className="w-5 h-5" style={{ rotate: '90deg' }} viewBox="0 0 24 24">
-                                            <path
-                                                fill="#5D625E"
-                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                            />
+                                    <div className="flex items-center gap-1.5">
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 20 20">
+                                            <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
-                                    </span>
+                                        <p
+                                            style={{
+                                                fontSize: '12px',
+                                                color: '#5D625E',
+                                            }}
+                                        >
+                                            {course.students}
+                                        </p>
+                                    </div>
+                                    <div style={{ position: "relative", display: "inline-block" }}>
+                                        <span
+                                            onClick={() => handleDropdownToggle(course.id)}
+                                            style={{ cursor: "pointer" }}
+                                        >
+                                            <svg
+                                                className="w-5 h-5"
+                                                style={{ rotate: "90deg" }}
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    fill="#5D625E"
+                                                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {dropdownVisible[course.id] && (
+                                            <div
+                                                style={{
+                                                    position: "absolute",
+                                                    top: "34px",
+                                                    right: "0",
+                                                    background: "#fff",
+                                                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                                                    borderRadius: "5px",
+                                                    padding: "2px",
+                                                    width: "180px",
+                                                    zIndex: 100,
+                                                }}
+                                            >
+                                                <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: '12px' }}>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                            borderBottom: "1px solid #eee",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Saved to Bookmarks")}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 shrink-0" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" stroke-width="32" stroke-linejoin="round" fill="none"></path></svg> Save to Bookmarks
+                                                    </li>
+                                                    <div>
+                                                        {/* Trigger Button */}
+                                                        <li
+                                                            className="flex items-center gap-2"
+                                                            style={{
+                                                                padding: "8px 12px",
+                                                                cursor: "pointer",
+                                                                borderBottom: "1px solid #eee",
+                                                            }}
+                                                            onMouseOver={(e) => (
+                                                                (e.target.style.backgroundColor = "#f0f8ff"),
+                                                                (e.target.style.color = "#03314b")
+                                                            )}
+                                                            onMouseOut={(e) => (
+                                                                (e.target.style.backgroundColor = ""),
+                                                                (e.target.style.color = "")
+                                                            )}
+                                                            onClick={() => setIsPopupVisible(true)}
+                                                        >
+                                                            <svg
+                                                                className="w-4 h-4 shrink-0"
+                                                                viewBox="0 0 24 24"
+                                                                fill="currentColor"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    fill="#141414"
+                                                                    d="M16 9a7 7 0 1 1 0 14 7 7 0 1 1 0-14zm4-7a2 2 0 0 1 2 2v4h-1.5V3.5h-17v17H8V22H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16zm-3 10h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3z"
+                                                                ></path>
+                                                            </svg>{" "}
+                                                            Save to Collection
+                                                        </li>
+
+                                                        {/* Popup Modal */}
+                                                        {isPopupVisible && (
+                                                            <div
+                                                                style={{
+                                                                    position: "fixed",
+                                                                    top: "50%",
+                                                                    left: "50%",
+                                                                    transform: "translate(-50%, -50%)",
+                                                                    backgroundColor: "white",
+                                                                    borderRadius: "10px",
+                                                                    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                                                                    padding: "5px",
+                                                                    width: "250px",
+                                                                    zIndex: 1000,
+                                                                }}
+                                                            >
+                                                                <div
+                                                                    style={{
+                                                                        display: "flex",
+                                                                        justifyContent: "space-between",
+                                                                    }}
+                                                                    className='p-2'
+                                                                >
+                                                                    <h3 className="mb-0">Save to <span style={{ color: '#009ECB' }}>Collection</span></h3>
+                                                                    <button
+                                                                        style={{
+                                                                            border: "none",
+                                                                            background: "transparent",
+                                                                            fontSize: "14px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => setIsPopupVisible(false)}
+                                                                    >
+                                                                        ✕
+                                                                    </button>
+                                                                </div>
+                                                                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                                                                    {collections.map((collection) => (
+                                                                        <li
+                                                                            key={collection.id}
+                                                                            className="flex items-center gap-2 mb-2"
+                                                                            style={{
+                                                                                display: "flex",
+                                                                                alignItems: "center",
+                                                                                padding: "6px 12px 6px 6px",
+                                                                                borderBottom: "1px solid #eee",
+                                                                                cursor: "pointer",
+                                                                                backgroundColor:
+                                                                                    selectedCollection === collection.id ? "#f0f8ff" : "",
+                                                                                color: selectedCollection === collection.id ? "#03314b" : "#000",
+                                                                            }}
+                                                                            onClick={() => handleCollectionClick(collection)}
+                                                                        >
+                                                                            <span style={{ fontSize: "34px", background: '#E1E8E8', borderRadius: '10px', padding: '1px 3px' }}>{collection.icon}</span>
+                                                                            <div>
+                                                                                <div style={{ fontWeight: "bold" }}>{collection.name}</div>
+                                                                                <div style={{ fontSize: "12px", color: "#757575" }}>
+                                                                                    {collection.titles} title{collection.titles > 1 && "s"}
+                                                                                </div>
+                                                                            </div>
+                                                                            {selectedCollection === collection.id && (
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="currentColor"
+                                                                                    style={{ marginLeft: "auto", color: "#03314b" }}
+                                                                                    width="19"
+                                                                                    height="19"
+                                                                                >
+                                                                                    <path d="M20.292 6.293a1 1 0 0 1 1.416 1.414l-11 11a1 1 0 0 1-1.414 0l-5-5a1 1 0 1 1 1.414-1.414L10 16.586z"></path>
+                                                                                </svg>
+                                                                            )}
+                                                                        </li>
+                                                                    ))}
+                                                                    <li
+                                                                        style={{
+                                                                            display: "flex",
+                                                                            alignItems: "center",
+                                                                            padding: "4px 10px",
+                                                                            cursor: "pointer",
+                                                                        }}
+                                                                        onClick={() => alert("Create a new collection")}
+                                                                    >
+                                                                        <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 276 276" fill="none">
+                                                                            <path d="M276 138C276 214.215 214.215 276 138 276C61.7847 276 0 214.215 0 138C0 61.7847 61.7847 0 138 0C214.215 0 276 61.7847 276 138Z" fill="#DBDBDB" />
+                                                                            <path d="M127.233 199V78H147.767V199H127.233ZM77 148.767V128.233H198V148.767H77Z" fill="#2E2E2E" />
+                                                                        </svg>
+                                                                        Create a new collection
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <li
+                                                        className="flex items-center gap-2"
+                                                        style={{
+                                                            padding: "8px 12px",
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onMouseOver={(e) => (e.target.style.backgroundColor = "#f0f8ff", e.target.style.color = "#03314b")}
+                                                        onMouseOut={(e) => (e.target.style.backgroundColor = "", e.target.style.color = "")}
+                                                        onClick={() => alert("Added to Playlist")}
+                                                    >
+                                                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 21 17"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="feature-outline-icon" transform="translate(0.865723, 0.665728)" fill="#757575" fill-rule="nonzero"><path d="M6.13427734,12.6369485 L18.1342773,12.6369485 C18.6865621,12.6369485 19.1342773,13.0846638 19.1342773,13.6369485 C19.1342773,14.1892333 18.6865621,14.6369485 18.1342773,14.6369485 L6.13427734,14.6369485 C5.58199259,14.6369485 5.13427734,14.1892333 5.13427734,13.6369485 C5.13427734,13.0846638 5.58199259,12.6369485 6.13427734,12.6369485 Z M6.13427734,6.63694853 L18.1342773,6.63694853 C18.6865621,6.63694853 19.1342773,7.08466378 19.1342773,7.63694853 C19.1342773,8.18923328 18.6865621,8.63694853 18.1342773,8.63694853 L6.13427734,8.63694853 C5.58199259,8.63694853 5.13427734,8.18923328 5.13427734,7.63694853 C5.13427734,7.08466378 5.58199259,6.63694853 6.13427734,6.63694853 Z M6.13427734,0.636948529 L18.1342773,0.636948529 C18.6865621,0.636948529 19.1342773,1.08466378 19.1342773,1.63694853 C19.1342773,2.18923328 18.6865621,2.63694853 18.1342773,2.63694853 L6.13427734,2.63694853 C5.58199259,2.63694853 5.13427734,2.18923328 5.13427734,1.63694853 C5.13427734,1.08466378 5.58199259,0.636948529 6.13427734,0.636948529 Z M0.909179688,15.2121438 L2.69042969,14.163804 C2.80794271,14.0957701 2.88680013,13.998358 2.92700195,13.8715677 C2.96720378,13.7447773 2.96720378,13.6179869 2.92700195,13.4911966 C2.88680013,13.3644062 2.80794271,13.2669941 2.69042969,13.1989602 L0.909179688,12.1320657 C0.686523438,11.995998 0.479329427,11.9650735 0.287597656,12.0392923
+                                                         C0.0958658854,12.113511 0,12.2805032 0,12.5402688 L0,14.8039407 C0,15.0513366 0.0974121094,15.2136901 0.292236328,15.2910013 C0.487060547,15.3683125 0.692708333,15.3420267 0.909179688,15.2121438 Z M0.909179688,9.21214384 L2.69042969,8.163804 C2.80794271,8.09577014 2.88680013,7.99835803 2.92700195,7.87156767 C2.96720378,7.74477731 2.96720378,7.61798694 2.92700195,7.49119658 C2.88680013,7.36440621 2.80794271,7.2669941 2.69042969,7.19896025 L0.909179688,6.13206572 C0.686523438,5.99599801 0.479329427,5.96507353 0.287597656,6.03929228 C0.0958658854,6.11351103 0,6.28050322 0,6.54026884 L0,8.80394072 C0,9.05133655 0.0974121094,9.21369007 0.292236328,9.29100126 C0.487060547,9.36831246 0.692708333,9.34202665 0.909179688,9.21214384 Z M0.909179688,3.21214384 L2.69042969,2.163804 C2.80794271,2.09577014 2.88680013,1.99835803 2.92700195,1.87156767 C2.96720378,1.74477731 2.96720378,1.61798694 2.92700195,1.49119658 C2.88680013,1.36440621 2.80794271,1.2669941 2.69042969,1.19896025 L0.909179688,0.132065717 C0.686523438,-0.00400199142 0.479329427,-0.0349264706 0.287597656,0.0392922794 C0.0958658854,0.113511029 0,0.280503217 0,0.540268842 L0,2.80394072 C0,3.05133655 0.0974121094,3.21369007 0.292236328,3.29100126 C0.487060547,3.36831246 0.692708333,3.34202665 0.909179688,3.21214384 Z"></path></g></g></svg> Add to Playlist
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Content Section */}
