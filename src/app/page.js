@@ -123,7 +123,9 @@ export default function Dashboard() {
         students: '5,678',
         revenue: "$5,879",
         rating: 4.8
-      }
+      },
+      progress: 50,
+      status: 'Draft',
     },
     {
       title: "UI/UX Design Masterclass",
@@ -132,7 +134,9 @@ export default function Dashboard() {
         students: '3,245',
         revenue: "$3,459",
         rating: 4.9
-      }
+      },
+      progress: 50,
+      status: 'Draft',
     }
   ];
 
@@ -144,7 +148,9 @@ export default function Dashboard() {
         attendees: '1,234',
         revenue: "$8,950",
         rating: 4.7
-      }
+      },
+      progress: 50,
+      status: 'Draft',
     },
     {
       title: "Digital Marketing Conference",
@@ -153,7 +159,9 @@ export default function Dashboard() {
         attendees: '2,567',
         revenue: "$12,450",
         rating: 4.6
-      }
+      },
+      progress: 50,
+      status: 'Draft',
     }
   ];
 
@@ -165,7 +173,9 @@ export default function Dashboard() {
         members: '8,934',
         revenue: "$15,750",
         rating: 4.9
-      }
+      },
+      progress: 50,
+      status: 'Draft',
     },
     {
       title: "Design Community Plus",
@@ -174,7 +184,9 @@ export default function Dashboard() {
         members: '6,234',
         revenue: "$9,850",
         rating: 4.8
-      }
+      },
+      progress: 50,
+      status: 'Draft',
     }
   ];
   const salesData = [
@@ -485,7 +497,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="dashboard-section" style={{marginBottom: '24px'}}>
+      <div className="dashboard-section" style={{ marginBottom: '24px' }}>
         <h2 className="section-header">Recent Activity</h2>
         <div className="columns-container">
           {/* Courses Column */}
@@ -504,6 +516,18 @@ export default function Dashboard() {
                   <img src={course.image} alt={course.title} className="product-image" />
                   <div className="product-content">
                     <h3 className="product-title">{course.title}</h3>
+                    <p className="mb-2.5 mt-2" style={{ fontSize: '13px' }}>
+                      {`Progress `}
+                      <span style={{ fontWeight: 'bold' }}>{course.progress}%</span>
+                      {` • Status: `}
+                      <span style={{ fontWeight: 'bold' }}>{course.status}</span>
+                    </p>
+                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2.5">
+                      <div
+                        className="h-1 rounded-full"
+                        style={{ width: `${course.progress}%`, background: '#02C5AF' }}
+                      ></div>
+                    </div>
                     <div className="product-stats">
                       <div className="stat" data-tooltip={`${course.stats.students} students`}>
                         <svg fill="none" viewBox="0 0 20 20">
@@ -522,6 +546,7 @@ export default function Dashboard() {
                         </svg> {course.stats.rating}
                       </div>
                     </div>
+                    <button className='mt-3 edit-course-btn'>Edit Course</button>
                   </div>
                 </div>
               ))}
@@ -544,6 +569,18 @@ export default function Dashboard() {
                   <img src={event.image} alt={event.title} className="product-image" />
                   <div className="product-content">
                     <h3 className="product-title">{event.title}</h3>
+                    <p className="mb-2.5 mt-2" style={{ fontSize: '13px' }}>
+                      {`Progress `}
+                      <span style={{ fontWeight: 'bold' }}>{event.progress}%</span>
+                      {` • Status: `}
+                      <span style={{ fontWeight: 'bold' }}>{event.status}</span>
+                    </p>
+                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2.5">
+                      <div
+                        className="h-1 rounded-full"
+                        style={{ width: `${event.progress}%`, background: '#02C5AF' }}
+                      ></div>
+                    </div>
                     <div className="product-stats">
                       <div className="stat" data-tooltip={`${event.stats.attendees} attendees`}>
                         <svg fill="none" viewBox="0 0 20 20">
@@ -562,6 +599,7 @@ export default function Dashboard() {
                         </svg> {event.stats.rating}
                       </div>
                     </div>
+                    <button className='mt-3 edit-course-btn'>Edit Event</button>
                   </div>
                 </div>
               ))}
@@ -585,6 +623,18 @@ export default function Dashboard() {
                   <img src={community.image} alt={community.title} className="product-image" />
                   <div className="product-content">
                     <h3 className="product-title">{community.title}</h3>
+                    <p className="mb-2.5 mt-2" style={{ fontSize: '13px' }}>
+                      {`Progress `}
+                      <span style={{ fontWeight: 'bold' }}>{community.progress}%</span>
+                      {` • Status: `}
+                      <span style={{ fontWeight: 'bold' }}>{community.status}</span>
+                    </p>
+                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2.5">
+                      <div
+                        className="h-1 rounded-full"
+                        style={{ width: `${community.progress}%`, background: '#02C5AF' }}
+                      ></div>
+                    </div>
                     <div className="product-stats">
                       <div className="stat" data-tooltip={`${community.stats.members} members`}>
                         <svg fill="none" viewBox="0 0 20 20">
@@ -603,6 +653,7 @@ export default function Dashboard() {
                         </svg> {community.stats.rating}
                       </div>
                     </div>
+                    <button className='mt-3 edit-course-btn'>Edit Community</button>
                   </div>
                 </div>
               ))}

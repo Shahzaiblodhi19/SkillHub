@@ -46,6 +46,8 @@ export default function RootLayout({ children }) {
   const [isMobileView, setIsMobileView] = useState(false);
   const [isSmallMobileView, setIsSmallMobileView] = useState(false);
 
+  const [activeFilter, setActiveFilter] = useState("");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
@@ -77,10 +79,13 @@ export default function RootLayout({ children }) {
   const values = {
     isSchoolModal,
     setIsSchoolModal,
+    activeFilter,
     setAddCourseModal,
     AddCourseModal,
     AddBundleModal,
-    setAddBundleModal
+    setAddBundleModal,
+    setActiveFilter,
+
   }
   return (
     <MyContext.Provider value={values}>

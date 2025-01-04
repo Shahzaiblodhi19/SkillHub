@@ -954,7 +954,7 @@ export default function Topics() {
                                     />
                                     <div style={{ padding: '28px 38px 10px 12px' }}>
                                         <h4
-                                            className="h-9"
+                                            className="h-13"
                                             style={{
                                                 fontSize: '15px',
                                                 marginBottom: '4px',

@@ -1,16 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from 'next/image'; // Import Next.js Image component
 import Logo from '../assets/logo.svg';
 import Link from "next/link";
+import { MyContext } from "../layout";
 
 export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActive, selectedEmoji, isSidebarOpen, setIsSidebarOpen,
     setIsSchoolModal, isSchoolModal, collectionModal, SetCollectionModal, setPlayListModal, PlayListModal }) {
     const [isSchoolOpen, setSchoolOpen] = useState(true);
+    const context = useContext(MyContext)
     const [isCollectionOpen, setCollectionOpen] = useState(true);
     const [isOpen, setIsOpen] = useState(true);
     const [SidebarLinkActive, setSidebarLinkActive] = useState('Dashboard');
-    const [activeItem, setActiveItem] = useState("Courses"); // Set initial active item
+    const [activeItem, setActiveItem] = useState(""); // Set initial active item
     const [activeSchool, setActiveSchool] = useState(""); // Set initial active item
     const [activeCollection, setActiveCollection] = useState("Collection A"); // Set initial active item
 
@@ -22,7 +24,10 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
         setSchoolOpen(!isSchoolOpen);
         setSidebarLinkActive('none')
     };
-
+    const handleActiveLink = (item) => {
+        context.setActiveFilter(item);
+        setSidebarLinkActive('')
+    }
     const handleToggle3 = () => {
         setCollectionOpen(!isCollectionOpen);
         setSidebarLinkActive('none')
@@ -34,6 +39,7 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
     };
     const handleSidebarLinks = (links) => {
         setSidebarLinkActive(links);
+        context.setActiveFilter('')
         if (links === 'Playlist') {
             setPlayListModal(!PlayListModal)
         } else {
@@ -157,27 +163,22 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
 
                             {isSidebarOpen === false ? '' : isOpen && (
                                 <ul className="ml-7 mt-2 ">
-                                    {["Courses", "Sessions", "Communities", "Memberships"].map((item) => (
+                                    {["All Products", "Schools", "Courses", "Sessions", "Communities", "Bundles", "Subscriptions"].map((item) => (
                                         <li
                                             key={item}
-                                            className={`p-2 cursor-pointer ${activeItem === item
+                                            className={`p-2 cursor-pointer ${context.activeFilter === item
                                                 ? "dropdown-link-active"
                                                 : "dropdown-link"
                                                 }`}
-                                            onClick={() => handleSetActive(item)}
+                                            onClick={() => handleActiveLink(item)}
                                         >
-                                            {item === "Courses" ? (
-                                                <Link href="/products">
-                                                    {item}
-                                                </Link>
-                                            ) : (
-                                                item
-                                            )}
+                                            {<Link href="/products">
+                                                {item}
+                                            </Link>}
                                         </li>
                                     ))}
                                 </ul>
                             )}
-
                             <li className={`nav-item ${SidebarLinkActive === 'Marketing' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Marketing')}>
                                 <Link
                                     href="/marketing"
