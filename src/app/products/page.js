@@ -839,7 +839,7 @@ export default function ProductsPage() {
     <div className="container-products">
       <div className="header">
         <div className='flex items-center gap-2'>
-          <h1 className="header-title">{context.activeFilter === '' ? 'All Products' : context.activeFilter !== 'All Products' ? 'All ' + context.activeFilter : 'All Products'}</h1>
+          <h1 className="header-title">{context.activeFilter === '' ? 'All Products' : context.activeFilter !== 'All Products' ?  context.activeFilter : 'All Products'}</h1>
           <div className="arrow-container mb-1 relative p-1 cursor-pointer" onClick={() => setAllProductsToolTip(!AllProductsToolTip)}>
             <svg style={AllProductsToolTip === true ? { rotate: '180deg' } : { rotate: '0deg' }} className='arrowconatinersvg' viewBox="0 0 24 24" stroke="currentColor">
               <path strokeWidth={3} d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
