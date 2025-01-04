@@ -580,7 +580,7 @@ export default function Topics() {
                                 color: activeTab === tab.name ? "#02C5AF" : "#4B4B4B",
                                 border: "none",
                                 cursor: "pointer",
-                                fontWeight: '600',
+                                fontWeight: '500',
                                 display: 'flex',
                                 alignItems: 'center', // Align text and SVG horizontally
                                 gap: '5px', // Add spacing between SVG and text
