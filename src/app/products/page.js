@@ -1053,6 +1053,13 @@ export default function ProductsPage() {
     if (item === 'Bundle') {
       context.setAddBundleModal(!context.AddBundleModal)
     }
+    if (item === 'Community') {
+      context.setAddCommunityModal(!context.AddCommunityModal)
+    }
+    if (item === 'Session') {
+      context.setAddSessionModal(!context.AddSessionModal)
+    }
+    
   };
 
 
