@@ -2,14 +2,14 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../layout";
 
-const AddSession = () => {
+const EditPagesettingPrice = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
     const [url, setUrl] = useState("");
     const [charCount, setCharCount] = useState(0);
     const context = useContext(MyContext);
-    const [activeTab, setActiveTab] = useState("Landing Page");
+    const [activeTab, setActiveTab] = useState("Checklist");
 
     const generateRandomString = (length) => {
         const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -159,8 +159,168 @@ const AddSession = () => {
         instructor.name.toLowerCase().includes(searchTermInstructor.toLowerCase())
     );
 
+
+    const courseChecklistData = [
+        {
+            sectionTitle: "Course Requirements",
+            status: "error",
+            issues: 14,
+            progress: 50,
+            checklistItems: [
+                {
+                    title: "Link to School",
+                    status: "pending",
+                    description: "Course must be linked to a school. Please select or create a school for this course.",
+                    action: "Add School Link",
+                },
+                {
+                    title: "Video Learning Activities (Min: 3, Max: 15)",
+                    status: "pending",
+                    description: "Course requires minimum 3 video learning activities. Current count: 1",
+                    affectedItems: ["Introduction Video"],
+                    action: "Add Videos",
+                    affectedItemsIcon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>,
+                    affectedItemsText: 'Current videos:'
+                },
+                {
+                    title: "Price Range ($9.99 - $199.99)",
+                    status: "completed",
+                    description: "Course price is within the allowed range. Current price:",
+                    currentPrice: '$49.99',
+                },
+                {
+                    title: "YouTube Content Check",
+                    status: "error",
+                    description: "Course contains YouTube learning activities which are not allowed. Please remove or replace with native video content.",
+                    affectedItems: ["Introduction Video", "Module 2 Tutorial", "Final Project Guide"],
+                    action: "Remove YouTube Content",
+                    affectedItemsText: 'Affected activities:'
+                },
+                {
+                    title: "Session/Meeting Activities (Max: 3)",
+                    status: "pending",
+                    description: "Course exceeds maximum allowed session/meeting activities (Max: 3). Current count: 5",
+                    affectedItems: ["Week 1 Meeting", "Week 2 Workshop", "Week 3 Q&A", "Week 4 Review", "Final Session"],
+                    action: "Review Sessions",
+                    affectedItemsText: 'Affected sessions:'
+                },
+                {
+                    title: "Course Duration (FREE: Min 15min)",
+                    status: "pending",
+                    description: "Course duration does not meet the minimum requirement for FREE courses (15 minutes minimum). Current duration: ",
+                    action: "Adjust Duration",
+                    duration: '8 minutes'
+                },
+                {
+                    title: "Category Selection",
+                    status: "pending",
+                    description: "Course category is required. Please select an appropriate category for your course.",
+                    action: "Select Category",
+                },
+                {
+                    title: "Featured Image (500x200 minimum)",
+                    status: "pending",
+                    description: "Current featured image (300x150) does not meet minimum size requirements. Please upload an image that is at least 500x200 pixels.",
+                    action: "Upload Image",
+                },
+                {
+                    title: "Promotional Video",
+                    status: "pending",
+                    description: "Course promotional video is missing. Adding a promotional video can increase course engagement and enrollment rates.",
+                    action: "Add Promo Video",
+                },
+                {
+                    title: "Course Bullet Points (4+ Required)",
+                    status: "pending",
+                    description: "Course requires at least 4 bullet points describing key learning outcomes. Current count: 2",
+                    affectedItems: ["Learn programming fundamentals", "Build real-world applications"],
+                    action: "Add Bullet Points",
+                    affectedItemsText: 'Current bullet points:'
+                },
+                {
+                    title: "Course Requirements (1+ Required)",
+                    status: "pending",
+                    description: "Please specify at least 1 prerequisite or requirement for taking this course. Current count: 0",
+                    action: "Add Requirements",
+                },
+                {
+                    title: "Intended Learners (1+ Required)",
+                    status: "pending",
+                    description: "Specify at least 1 target audience or intended learner type for your course. Current count: 0",
+                    action: "Add Target Audience",
+                },
+                {
+                    title: "CPE Information",
+                    status: "pending",
+                    description: "CPE information is required for this course. Please provide necessary continuing professional education details.",
+                    action: "Add CPE Details",
+                },
+                {
+                    title: "Section Count (Min: 2, Max: 12)",
+                    status: "completed",
+                    description: "Course sections are within the allowed range. Current: 8 sections (Min: 2, Max: 12)",
+                },
+                {
+                    title: "Title Format Check",
+                    status: "pending",
+                    description: "Course title contains invalid characters. The following part needs to be fixed:",
+                    TitleLineError: 'Learn Python [2024]!',
+                    restDescription: 'Title must only contain letters, numbers, spaces, and basic punctuation (.,-)',
+                    action: "Fix Title Format",
+                },
+                {
+                    title: "Blacklisted Keywords Check",
+                    status: "pending",
+                    description: "Course title or description contains blacklisted keywords:",
+                    affectedItems: ["Section 2: Python Masterclass", "Section 4: Best Course Guarantee"],
+                    action: "Review Content",
+                    TitleLineError: 'masterclass, best course, guaranteed',
+                    affectedItemsText: 'Affected units:'
+                },
+                {
+                    title: "Community Link",
+                    status: "pending",
+                    description: "Community link is required for this course type. Please add a link to your course community.",
+                    action: "Add Community Link",
+                },
+                {
+                    title: "Certificate Configuration",
+                    status: "pending",
+                    description: "Course certificate needs to be configured. Please set up completion certificate requirements and design.",
+                    action: "Setup Certificate",
+                },
+                {
+                    title: "Skill Assessments (1+ Required)",
+                    status: "pending",
+                    description: "Course requires at least 1 skill assessment. Current count: 0",
+                    action: "Add Assessment",
+                },
+            ],
+        },
+        // Additional sections go here (Profile Requirements, Session Requirements, etc.)
+    ];
+    const [showCompleted, setShowCompleted] = useState(false);
+
+    const handleToggle = () => {
+        setShowCompleted(!showCompleted);
+    };
+
+    const [coursesectionexpand, setcoursesectionexpand] = useState(false);
+
+    const [expandedState, setExpandedState] = useState({});
+
+    const toggleExpand = (index) => {
+        setExpandedState((prevState) => ({
+            ...prevState,
+            [index]: !prevState[index],
+        }));
+    };
+
     return (
-        context.AddSessionModal &&
+        context.AddEditProduct &&
         <div className="modal-overlay h-screen" style={{ overflowY: 'auto' }}>
             <div className="modal-container h-screen p-0" style={{ width: '80%', textAlign: 'left', height: `calc(100vh - 80px)`, background: '#f2f2f2' }}>
                 <div className='popup-container'>
@@ -186,7 +346,7 @@ const AddSession = () => {
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <button className="p-0" onClick={() => context.setAddSessionModal(!context.AddSessionModal)}>
+                                            <button className="p-0" onClick={() => context.setEditProduct(!context.AddEditProduct)}>
                                                 ✖
                                             </button>
                                         </div>
@@ -759,6 +919,142 @@ const AddSession = () => {
                                 </div>
                             </>
                         )}
+                        {activeTab === "Checklist" && (
+                            <>
+                                <div className="row checklist-modal justify-between w-100 pl-10 pr-4 ">
+                                    <div className="course-content col-12 border rounded">
+                                        <div className="content-header">
+                                            <div className="header-left">
+                                                <h1 className="header-title">Course Checklist</h1>
+                                                <div className="header-progress">
+                                                    <div className="progress-bar">
+                                                        <div className="progress-fill" style={{ width: '20px' }}></div>
+                                                    </div>
+                                                    <span className="issues-count">20 issues left</span>
+                                                </div>
+                                            </div>
+                                            <div className="expand-dropdown">
+                                                <div className="view-toggle">
+                                                    <span className="toggle-label">Show Completed</span>
+                                                    <label className="toggle-switch">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="viewToggle"
+                                                            checked={showCompleted}
+                                                            onChange={handleToggle}
+                                                        />
+                                                        <span className="toggle-slider"></span>
+                                                    </label>
+                                                </div>
+                                                <button className="expand-button">
+                                                    Expand
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path
+                                                            d="M4 6l4 4 4-4"
+                                                            stroke="currentColor"
+                                                            strokeWidth="1.5"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <div className="expand-menu">
+                                                    <button className="expand-all">Expand All</button>
+                                                    <button className="expand-issues">Expand Issues</button>
+                                                    <button className="expand-completed">Expand Completed</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {courseChecklistData.map((data, index) => {
+                                            return (
+                                                <div className={`section ${coursesectionexpand === true ? 'expanded' : ''}`}>
+                                                    <div className="section-header mb-0" onClick={() => setcoursesectionexpand(!coursesectionexpand)}>
+                                                        <div className="header-left">
+                                                            <div className="section-title mb-0">{data.sectionTitle}</div>
+                                                            <div className="status-badge status-error">
+                                                                <svg className="status-icon" viewBox="0 0 15 15">
+                                                                    <path
+                                                                        clipRule="evenodd"
+                                                                        fillRule="evenodd"
+                                                                        fill="currentColor"
+                                                                        d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                                                                    />
+                                                                </svg>
+                                                                {data.issues} issues
+                                                            </div>
+                                                        </div>
+                                                        <div className="header-right">
+                                                            <div className="progress-circle">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                                                    <circle className="bg" cx="12" cy="12" r="10" />
+                                                                    <circle className="progress" cx="12" cy="12" r="10" stroke-dasharray="62.8" stroke-dashoffset="31.4" />
+                                                                </svg>
+                                                                <div className="tooltip">{data.progress}Complete</div>
+                                                            </div>
+                                                            <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div className="section-content">
+                                                        {data.checklistItems.map((item, itemIndex) => (
+                                                            <div className="checklist-item" key={itemIndex}>
+                                                                <div className="item-header" >
+                                                                    <div className="item-icon">
+                                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div className="item-title">{item.title}</div>
+                                                                    {item.action ? <button className="fix-button">{item.action}</button> :
+                                                                        <div class="item-status status-completed">
+                                                                            <svg width="20" height="20" viewBox="0 0 20 20">
+                                                                                <path d="M10 0a10 10 0 110 20 10 10 0 010-20zm3.77 7.23l-4.95 4.95-2.59-2.59L4.77 11l3.18 3.18 5.59-5.59-1.77-1.36z" fill="currentColor" />
+                                                                            </svg>
+                                                                            {item.status}
+                                                                        </div>
+                                                                    }
+                                                                    <div className="item-expand" onClick={() => toggleExpand(`${index}-${itemIndex}`)}>
+                                                                        <svg style={{
+                                                                            transform: expandedState[`${index}-${itemIndex}`] ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                            transition: 'transform 0.2s ease',
+                                                                        }}
+                                                                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                                <div className={`item-details ${expandedState[`${index}-${itemIndex}`] ? 'expanded' : ''
+                                                                    }`}>
+                                                                    <div className="issue-description">
+                                                                        {item.description} {item.currentPrice ? <span className="highlight-success">{item.currentPrice}</span> : ''} {item.duration ? <span class="keyword-highlight">{item.duration}</span> : ''}<br />
+                                                                        {item.TitleLineError ? <div class="keyword-highlight">{item.TitleLineError}</div> : ''}
+                                                                        {item.restDescription ? item.restDescription : ''}
+                                                                        <div class="affected-items">
+                                                                            {item.affectedItemsText}
+                                                                            <span href="#" class="affected-link cursor-pointer">
+                                                                                {item.affectedItemsIcon}
+                                                                                {item.affectedItems && item.affectedItems.length > 0 ? (
+                                                                                    item.affectedItems.map((affectedItem, index) => (
+                                                                                        <span key={index}>{affectedItem}</span>
+                                                                                    ))
+                                                                                ) : (
+                                                                                    ''
+                                                                                )}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
@@ -766,4 +1062,4 @@ const AddSession = () => {
     );
 };
 
-export default AddSession;
+export default EditPagesettingPrice;

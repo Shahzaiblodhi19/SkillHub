@@ -24,6 +24,7 @@ import AddCourse from './components/AddCourse';
 import CreateBundle from './components/CreateBundle';
 import AddCommunity from './components/AddCommunity';
 import AddSession from './components/AddSession';
+import EditPagesettingPrice from './components/EditSettingsPagePrice';
 
 // Create context
 export const MyContext = createContext();
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
   const [AddBundleModal, setAddBundleModal] = useState(false);
   const [AddCommunityModal, setAddCommunityModal] = useState(false);
   const [AddSessionModal, setAddSessionModal] = useState(false);
+  const [AddEditProduct, setEditProduct] = useState(true);
 
   const [isMobileView, setIsMobileView] = useState(false);
   const [isSmallMobileView, setIsSmallMobileView] = useState(false);
@@ -92,7 +94,9 @@ export default function RootLayout({ children }) {
     AddCommunityModal,
     setAddCommunityModal,
     setAddSessionModal,
-    AddSessionModal
+    AddSessionModal,
+    AddEditProduct,
+    setEditProduct
 
   }
   return (
@@ -191,6 +195,7 @@ export default function RootLayout({ children }) {
                 <CreateBundle />
                 <AddCommunity />
                 <AddSession />
+                <EditPagesettingPrice />
                 <div className='PagesContent h-full' style={{ padding: '20px', background: '#F2F2F2', overflowY: 'auto' }}>
                   {children}
                 </div>
