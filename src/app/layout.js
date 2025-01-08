@@ -25,6 +25,10 @@ import CreateBundle from './components/CreateBundle';
 import AddCommunity from './components/AddCommunity';
 import AddSession from './components/AddSession';
 import EditPagesettingPrice from './components/EditSettingsPagePrice';
+import ChangePassword from './components/changepassword';
+import BillingInvoicesModal from './components/billingpastinvoices';
+import AddInstructorModal from './components/addInstructor';
+import AddTeamMemberModal from './components/addteammember';
 
 // Create context
 export const MyContext = createContext();
@@ -47,8 +51,12 @@ export default function RootLayout({ children }) {
   const [AddBundleModal, setAddBundleModal] = useState(false);
   const [AddCommunityModal, setAddCommunityModal] = useState(false);
   const [AddSessionModal, setAddSessionModal] = useState(false);
-  const [AddEditProduct, setEditProduct] = useState(true);
-
+  const [AddEditProduct, setEditProduct] = useState(false);
+  const [changePassword, setchangePassword] = useState(false);
+  const [billingInvoices, setbillingInvoices] = useState(false);
+  const [AddInstructor, setAddInstructor] = useState(false);
+  const [AddTeamMember, setAddTeamMember] = useState(false);
+ 
   const [isMobileView, setIsMobileView] = useState(false);
   const [isSmallMobileView, setIsSmallMobileView] = useState(false);
 
@@ -84,8 +92,16 @@ export default function RootLayout({ children }) {
 
   const values = {
     isSchoolModal,
+    changePassword,
+    setAddTeamMember,
+    AddTeamMember,
+    setchangePassword,
     setIsSchoolModal,
+    AddInstructor,
+    setAddInstructor,
     activeFilter,
+    billingInvoices,
+    setbillingInvoices,
     setAddCourseModal,
     AddCourseModal,
     AddBundleModal,
@@ -196,6 +212,10 @@ export default function RootLayout({ children }) {
                 <AddCommunity />
                 <AddSession />
                 <EditPagesettingPrice />
+                <ChangePassword />
+                <BillingInvoicesModal />
+                <AddInstructorModal />
+                <AddTeamMemberModal />
                 <div className='PagesContent h-full' style={{ padding: '20px', background: '#F2F2F2', overflowY: 'auto' }}>
                   {children}
                 </div>

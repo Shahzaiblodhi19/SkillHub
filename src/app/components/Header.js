@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Link from "next/link";
 
 const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsupportModal,
   setIsModalOpen2, setIsOpenApplytoTeach, isSidebarSmallActive, setisSidebarSmallActive, isOpenApplytoTeach, setIsPanelActive, isPanelActive }) => {
@@ -672,7 +673,18 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
                         >
                           {item.icon}
                         </span>
-                        {item.label}
+                        {item.label === 'Account Details' ? (
+                          <Link href="/profile">{item.label}</Link>
+                        ) : item.label === 'Sign In & Security' ? (
+                          <Link href="/security">{item.label}</Link>
+                        ) : item.label === 'Billing' ? (
+                          <Link href="/billing">{item.label}</Link>
+                        ) : (
+                          item.label
+                        )}
+
+
+
                       </MenuItem>
                     ))}
 
