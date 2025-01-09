@@ -51,7 +51,7 @@ export default function RootLayout({ children }) {
   const [AddBundleModal, setAddBundleModal] = useState(false);
   const [AddCommunityModal, setAddCommunityModal] = useState(false);
   const [AddSessionModal, setAddSessionModal] = useState(false);
-  const [AddEditProduct, setEditProduct] = useState(false);
+  const [AddEditProduct, setEditProduct] = useState(true);
   const [changePassword, setchangePassword] = useState(false);
   const [billingInvoices, setbillingInvoices] = useState(false);
   const [AddInstructor, setAddInstructor] = useState(false);
