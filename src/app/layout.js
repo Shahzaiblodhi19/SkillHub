@@ -24,7 +24,6 @@ import AddCourse from './components/AddCourse';
 import CreateBundle from './components/CreateBundle';
 import AddCommunity from './components/AddCommunity';
 import AddSession from './components/AddSession';
-import EditPagesettingPrice from './components/EditSettingsPagePrice';
 import ChangePassword from './components/changepassword';
 import BillingInvoicesModal from './components/billingpastinvoices';
 import AddInstructorModal from './components/addInstructor';
@@ -51,7 +50,7 @@ export default function RootLayout({ children }) {
   const [AddBundleModal, setAddBundleModal] = useState(false);
   const [AddCommunityModal, setAddCommunityModal] = useState(false);
   const [AddSessionModal, setAddSessionModal] = useState(false);
-  const [AddEditProduct, setEditProduct] = useState(true);
+  const [AddEditProduct, setEditProduct] = useState(false);
   const [changePassword, setchangePassword] = useState(false);
   const [billingInvoices, setbillingInvoices] = useState(false);
   const [AddInstructor, setAddInstructor] = useState(false);
@@ -211,7 +210,6 @@ export default function RootLayout({ children }) {
                 <CreateBundle />
                 <AddCommunity />
                 <AddSession />
-                <EditPagesettingPrice />
                 <ChangePassword />
                 <BillingInvoicesModal />
                 <AddInstructorModal />

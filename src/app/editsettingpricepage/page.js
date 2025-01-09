@@ -889,9 +889,7 @@ const EditPagesettingPrice = () => {
 
 
     return (
-        context.AddEditProduct &&
-        <div className="modal-overlay h-screen" style={{ overflowY: 'auto' }}>
-            <div className="modal-container h-screen p-0" style={{ width: '80%', textAlign: 'left', height: `calc(100vh - 80px)`, background: '#f2f2f2' }}>
+            <div className="container-fluid p-0" style={{  background: '#f2f2f2' }}>
                 <div className='popup-container'>
                     <div className="popup">
                         <div className="popup-header w-100">
@@ -915,9 +913,6 @@ const EditPagesettingPrice = () => {
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <button className="p-0" onClick={() => context.setEditProduct(!context.AddEditProduct)}>
-                                                ✖
-                                            </button>
                                         </div>
                                         <div className="d-flex flex-column flex-md-row align-items-start aling-items-md-center justify-content-between gap-3">
                                             <div className="d-flex flex-wrap gap-4" style={{ fontSize: '13px', fontWeight: '600' }}>
@@ -2949,7 +2944,6 @@ const EditPagesettingPrice = () => {
                         )}
                     </div>
                 </div>
-            </div>
         </div >
     );
 };
