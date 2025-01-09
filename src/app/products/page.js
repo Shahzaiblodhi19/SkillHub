@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from 'react';
 import { MyContext } from '../layout';
+import Link from 'next/link';
 
 export default function ProductsPage() {
   const productData = [
@@ -743,7 +744,23 @@ export default function ProductsPage() {
                         <div className="tooltip-icon">
                           {item.icon}
                         </div>
-                        <span className="tooltip-text">{item.text}</span>
+                        <span className="tooltip-text">
+                          {item.text === "Edit Landing Page" ? (
+                            <Link href="/editsettingpricepage">
+                              {item.text}
+                            </Link>
+                          ) : item.text === "Edit Settings" ? (
+                            <Link href="/editsettingpricepage">
+                              {item.text}
+                            </Link>
+                          ) : item.text === "Edit Price" ? (
+                            <Link href="/editsettingpricepage">
+                              {item.text}
+                            </Link>
+                          ) : (
+                            item.text
+                          )}
+                        </span>
                         {item.arrow}
                         {item.nested && (
                           <div className="nested-tooltip">
@@ -1059,7 +1076,7 @@ export default function ProductsPage() {
     if (item === 'Session') {
       context.setAddSessionModal(!context.AddSessionModal)
     }
-    
+
   };
 
 
