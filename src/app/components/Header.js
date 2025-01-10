@@ -679,12 +679,12 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
                           <Link href="/security">{item.label}</Link>
                         ) : item.label === 'Billing' ? (
                           <Link href="/billing">{item.label}</Link>
-                        ) : (
-                          item.label
-                        )}
-
-
-
+                        ) :
+                          item.label === 'Preferences' ? (
+                            <Link href="/preferences">{item.label}</Link>
+                          ) : (
+                            item.label
+                          )}
                       </MenuItem>
                     ))}
 
