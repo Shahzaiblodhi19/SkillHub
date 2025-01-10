@@ -652,8 +652,8 @@ export default function Marketing() {
 
             <div className="content-area mt-4">
                 {/* Header */}
-                <div className="header">
-                    <h1>Marketing</h1>
+                <div className="flex items-center justify-between mb-4">
+                    <h1 className='text-xl font-medium'>Marketing</h1>
                     <button onClick={toggleModal} className="new-email-btn" style={{ fontSize: '13px' }} id="newEmailBtn">
                         <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
                             <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -675,7 +675,7 @@ export default function Marketing() {
                         <div className="showing-text">
                             Showing <strong>{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, initialEmails.length)}</strong> of <strong>{initialEmails.length}</strong> products
                         </div>
-                        <div className="controls mb-3 md:mb-0">
+                        <div className="controls mb-3 md:mb-0 flex flex-col items-end sm:flex-row sm:items-center">
                             <div className="relative">
                                 <select
                                     className="control-btn appearance-none" style={{ paddingRight: '40px' }}
