@@ -55,7 +55,7 @@ export default function RootLayout({ children }) {
   const [billingInvoices, setbillingInvoices] = useState(false);
   const [AddInstructor, setAddInstructor] = useState(false);
   const [AddTeamMember, setAddTeamMember] = useState(false);
- 
+
   const [isMobileView, setIsMobileView] = useState(false);
   const [isSmallMobileView, setIsSmallMobileView] = useState(false);
 
@@ -194,6 +194,8 @@ export default function RootLayout({ children }) {
                   schoolName={schoolName}
                   selectedEmoji={selectedEmoji}
                   collectionModal={collectionModal}
+                  isSidebarOpen={isSidebarOpen}
+                  setIsSidebarOpen={setIsSidebarOpen}
                   SetCollectionModal={SetCollectionModal}
                   PlayListModal={PlayListModal}
                   setPlayListModal={setPlayListModal} isSidebarActive={isSidebarActive} setisSidebarActive={setisSidebarActive} />}

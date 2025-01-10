@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { MyContext } from '../layout';
 
 export default function ProductsPage() {
@@ -267,18 +267,26 @@ export default function ProductsPage() {
   const [schoolHasLinkedItems, setSchoolHasLinkedItems] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
+  const modalRef = useRef(null);
+  const buttonRef = useRef(null);
+  const toggleMenu = (event) => {
+    // Prevent the event from bubbling up to the document click handler
+    event.stopPropagation();
+    setIsMenuOpen((prevState) => !prevState);
+  };
   // Close dropdown if clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if the dropdown is open and the clicked element is not inside the dropdown
       const dropdown = document.getElementById('dropdown');
-      const modal = document.getElementById('modal'); // Assuming modal has an ID 'modal'
+      const modal = document.getElementById('modal');
+      const button = document.getElementById('toggleButton');
 
-      // Close dropdown only if the click is outside both the dropdown and the modal
+      // Close the menu if click is outside of both dropdown and modal
       if (
-        dropdown &&
-        !dropdown.contains(event.target) &&
-        (!modal || !modal.contains(event.target))
+        dropdown && !dropdown.contains(event.target) &&
+        modal && !modal.contains(event.target) &&
+        button && !button.contains(event.target)
       ) {
         setCourseTooltip(null);
         setSessionTooltip(null);
@@ -299,6 +307,7 @@ export default function ProductsPage() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
 
   const closeModal = () => setActiveModal(null);
 
@@ -923,7 +932,15 @@ export default function ProductsPage() {
                         className="tooltip-item"
 
                         onClick={() => {
-                          if (item.modal) handleOpenModal(item.modal);
+                          if (item.text === "Edit Landing Page") {
+                            window.location.href = "/editsettingpricepage?tab=Landing Page";
+                          } else if (item.text === "Edit Settings") {
+                            window.location.href = "/editsettingpricepage?tab=Settings";
+                          } else if (item.text === "Edit Price") {
+                            window.location.href = "/editsettingpricepage?tab=Pricing";
+                          } else {
+                            if (item.modal) handleOpenModal(item.modal);
+                          }
                         }}
                       >
                         <div className="tooltip-icon">
@@ -1023,6 +1040,11 @@ export default function ProductsPage() {
                       <div
                         key={index}
                         className="tooltip-item"
+                        onClick={() => {
+                          if (item.text === "Edit Price") {
+                            window.location.href = "/editsettingpricepage?tab=Pricing";
+                          }
+                        }}
                       >
                         <div className="tooltip-icon">
                           {item.icon}
@@ -1231,9 +1253,6 @@ export default function ProductsPage() {
     </div>
   );
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const handleMenuItemClick = (item) => {
     console.log(`Creating a new ${item}`);

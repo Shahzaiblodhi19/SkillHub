@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from 'next/image'; // Import Next.js Image component
 import Logo from '../assets/logo.svg';
 import Link from "next/link";
+import { MyContext } from "../layout";
 
 
-const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSidebarActive,
+const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebarActive, setisSidebarActive,
     setIsSchoolModal, isSchoolModal, isSidebarSmallActive, setisSidebarSmallActive, collectionModal, SetCollectionModal, setPlayListModal, PlayListModal }) => {
     const [isSchoolOpen, setSchoolOpen] = useState(true);
     const [isCollectionOpen, setCollectionOpen] = useState(true);
@@ -14,6 +15,8 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
     const [activeItem, setActiveItem] = useState("Courses"); // Set initial active item
     const [activeSchool, setActiveSchool] = useState(""); // Set initial active item
     const [activeCollection, setActiveCollection] = useState("Collection A"); // Set initial active item
+    const context = useContext(MyContext)
+
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
@@ -44,6 +47,10 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
             setSidebarLinkActive('')
         } else {
         }
+    }
+    const handleActiveLink = (item) => {
+        context.setActiveFilter(item);
+        setSidebarLinkActive('')
     }
     // Map each item to its respective SVG
     const itemIcons = {
@@ -116,7 +123,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         </li>
 
                                         {/* My Products */}
-                                        <li className={`nav-item ${isOpen && isSidebarActive === true ? 'dropdownActive' : ''}`}>
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`}>
                                             <button
                                                 onClick={handleToggle}
                                                 className="flex items-center justify-between w-full p-2"
@@ -138,29 +145,36 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                             </button>
                                         </li>
 
-                                        {isSidebarActive === false ? '' : isOpen && (
+                                        {isSidebarOpen === false ? '' : isOpen && (
                                             <ul className="ml-7 mt-2 ">
-                                                {["Courses", "Sessions", "Communities", "Memberships"].map((item) => (
+                                                {["All Products", "Schools", "Courses", "Sessions", "Communities", "Bundles", "Subscriptions"].map((item) => (
                                                     <li
                                                         key={item}
-                                                        className={`p-2 cursor-pointer ${activeItem === item
+                                                        className={`p-2 cursor-pointer ${context.activeFilter === item
                                                             ? "dropdown-link-active"
                                                             : "dropdown-link"
                                                             }`}
-                                                        onClick={() => handleSetActive(item)}
+                                                        onClick={() => handleActiveLink(item)}
                                                     >
-                                                        {item === "Courses" ? (
-                                                            <Link href="/products">
-                                                                {item}
-                                                            </Link>
-                                                        ) : (
-                                                            item
-                                                        )}
+                                                        {<Link href="/products">
+                                                            {item}
+                                                        </Link>}
                                                     </li>
                                                 ))}
                                             </ul>
                                         )}
-
+                                        <li className={`nav-item ${SidebarLinkActive === 'Sales History' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Sales History')}>
+                                            <Link
+                                                href="/saleshistory"
+                                                className="flex items-center p-2 "
+                                            >
+                                                <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 32 32">
+                                                    <path fill="#828282" d="M9.33341 6.33333C8.89139 6.33333 8.46746 6.50892 8.1549 6.82148C7.84234 7.13404 7.66675 7.55797 7.66675 7.99999V20.734C8.17815 20.473 8.74858 20.3333 9.33341 20.3333H18C18.5523 20.3333 19 20.781 19 21.3333C19 21.8856 18.5523 22.3333 18 22.3333H9.33341C8.89139 22.3333 8.46746 22.5089 8.1549 22.8215C7.84234 23.134 7.66675 23.558 7.66675 24C7.66675 24.442 7.84234 24.8659 8.1549 25.1785C8.46746 25.4911 8.89139 25.6667 9.33341 25.6667H18C18.5523 25.6667 19 26.1144 19 26.6667C19 27.2189 18.5523 27.6667 18 27.6667H9.33341C8.36095 27.6667 7.42832 27.2804 6.74069 26.5927C6.05306 25.9051 5.66675 24.9725 5.66675 24V7.99999C5.66675 7.02753 6.05306 6.0949 6.74069 5.40727C7.42832 4.71964 8.36095 4.33333 9.33341 4.33333H25.3334C25.8857 4.33333 26.3334 4.78104 26.3334 5.33333V12.9998C26.3334 13.5521 25.8857 13.9998 25.3334 13.9998C24.7811 13.9998 24.3334 13.5521 24.3334 12.9998V6.33333H9.33341ZM11.0001 10.6667C11.0001 10.1144 11.4478 9.66666 12.0001 9.66666H20.0001C20.5524 9.66666 21.0001 10.1144 21.0001 10.6667C21.0001 11.2189 20.5524 11.6667 20.0001 11.6667H12.0001C11.4478 11.6667 11.0001 11.2189 11.0001 10.6667Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    <path fill="#828282" d="M25.3334 16C25.8857 16 26.3334 16.4477 26.3334 17V17.3333H28.0001C28.5524 17.3333 29.0001 17.781 29.0001 18.3333C29.0001 18.8856 28.5524 19.3333 28.0001 19.3333H24.6667C24.4015 19.3333 24.1472 19.4387 23.9596 19.6262C23.7721 19.8138 23.6667 20.0681 23.6667 20.3333C23.6667 20.5985 23.7721 20.8529 23.9596 21.0404C24.1472 21.228 24.4015 21.3333 24.6667 21.3333H26.0001C26.7957 21.3333 27.5588 21.6494 28.1214 22.212C28.684 22.7746 29.0001 23.5377 29.0001 24.3333C29.0001 25.129 28.684 25.892 28.1214 26.4547C27.6379 26.9381 27.0064 27.2395 26.3334 27.3148V27.6667C26.3334 28.219 25.8857 28.6667 25.3334 28.6667C24.7811 28.6667 24.3334 28.219 24.3334 27.6667V27.3333H22.6667C22.1145 27.3333 21.6667 26.8856 21.6667 26.3333C21.6667 25.781 22.1145 25.3333 22.6667 25.3333H26.0001C26.2653 25.3333 26.5196 25.228 26.7072 25.0404C26.8947 24.8529 27.0001 24.5985 27.0001 24.3333C27.0001 24.0681 26.8947 23.8138 26.7072 23.6262C26.5196 23.4387 26.2653 23.3333 26.0001 23.3333H24.6667C23.8711 23.3333 23.108 23.0173 22.5454 22.4547C21.9828 21.892 21.6667 21.129 21.6667 20.3333C21.6667 19.5377 21.9828 18.7746 22.5454 18.212C23.0289 17.7285 23.6604 17.4271 24.3334 17.3519V17C24.3334 16.4477 24.7811 16 25.3334 16Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span>Sales History</span>
+                                            </Link>
+                                        </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Marketing' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Marketing')}>
                                             <Link
                                                 href="/marketing"
@@ -172,7 +186,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                                 <span>Marketing</span>
                                             </Link>
                                         </li>
-                                        <li style={{ display: 'none' }} className={`nav-item`} onClick={() => setIsSidebarOpen(true)}>
+                                        <li style={{ display: 'none' }} className={`nav-item`} onClick={() => isMobileView ? setisSidebarActive(true) : setIsSidebarOpen(true)}>
                                             <a
                                                 href="#"
                                                 className="flex items-center p-2 "
@@ -190,19 +204,19 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         <span className="px-3 learn" style={{ fontSize: '10px', fontWeight: '600', color: '#767571' }}>LEARN</span>
                                         {/* Dashboard */}
                                         <li className={`nav-item ${SidebarLinkActive === 'Dash' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Dash')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/dashboard"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 19 19" fill="none">
                                                     <path d="M0.6 7.4V0.6H7.4V7.4H0.6ZM0.6 18.4V11.6H7.4V18.4H0.6ZM11.6 7.4V0.6H18.4V7.4H11.6ZM15 18.4C13.1222 18.4 11.6 16.8778 11.6 15C11.6 13.1222 13.1222 11.6 15 11.6C16.8778 11.6 18.4 13.1222 18.4 15C18.4 16.8778 16.8778 18.4 15 18.4Z" stroke="#4B4B4B" strokeWidth="2.5" />
                                                 </svg>
                                                 <span>Dashboard</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Explore' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Explore')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/explore"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 33 32">
@@ -211,7 +225,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                                     <path fill="white" d="M16.4999 18.4242C17.8388 18.4242 18.9242 17.3388 18.9242 16C18.9242 14.6611 17.8388 13.5757 16.4999 13.5757C15.1611 13.5757 14.0757 14.6611 14.0757 16C14.0757 17.3388 15.1611 18.4242 16.4999 18.4242Z"></path>
                                                 </svg>
                                                 <span>Explore</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={() => handleSidebarLinks('My Learning')}>
                                             <a
@@ -223,19 +237,19 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                             </a>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Learner Report')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/learnerreport"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 24 24">
                                                     <path fill="#4F4F4F" d="M3.71863 3.71841C4.25138 3.18562 4.97399 2.88635 5.72738 2.88635H18.2728C19.0262 2.88635 19.7488 3.18561 20.2816 3.71841C20.8145 4.25117 21.1137 4.97382 21.1137 5.72726V18.2727C21.1137 19.0261 20.8145 19.7487 20.2817 20.2815C20.2817 20.2815 20.2817 20.2815 20.2816 20.2815C20.2816 20.2815 20.2816 20.2816 20.2816 20.2816C19.7488 20.8144 19.0262 21.1136 18.2728 21.1136H5.72738C4.97394 21.1136 4.25129 20.8143 3.71853 20.2815C3.18574 19.7487 2.88647 19.0261 2.88647 18.2727V5.72726C2.88647 4.97387 3.18574 4.25126 3.71853 3.71851C3.71856 3.71848 3.7186 3.71844 3.71863 3.71841ZM5.72738 4.38635C5.37173 4.38635 5.03068 4.52763 4.77929 4.77907L4.77919 4.77917C4.52776 5.03056 4.38647 5.37161 4.38647 5.72726V18.2727C4.38647 18.6284 4.52776 18.9694 4.77919 19.2208L4.77929 19.2209C5.03068 19.4723 5.37173 19.6136 5.72738 19.6136H18.2728C18.6285 19.6136 18.9695 19.4723 19.2209 19.2209L19.221 19.2208C19.4725 18.9694 19.6137 18.6284 19.6137 18.2727V5.72726C19.6137 5.37161 19.4725 5.03056 19.221 4.77917L19.2209 4.77907C18.9695 4.52764 18.6285 4.38635 18.2728 4.38635H5.72738ZM16.1819 7.06817C16.5961 7.06817 16.9319 7.40396 16.9319 7.81817V16.1818C16.9319 16.596 16.5961 16.9318 16.1819 16.9318C15.7677 16.9318 15.4319 16.596 15.4319 16.1818V7.81817C15.4319 7.40396 15.7677 7.06817 16.1819 7.06817ZM12.0001 10.2045C12.4143 10.2045 12.7501 10.5403 12.7501 10.9545V16.1818C12.7501 16.596 12.4143 16.9318 12.0001 16.9318C11.5859 16.9318 11.2501 16.596 11.2501 16.1818V10.9545C11.2501 10.5403 11.5859 10.2045 12.0001 10.2045ZM7.81829 13.3409C8.23251 13.3409 8.56829 13.6767 8.56829 14.0909V16.1818C8.56829 16.596 8.23251 16.9318 7.81829 16.9318C7.40408 16.9318 7.06829 16.596 7.06829 16.1818V14.0909C7.06829 13.6767 7.40408 13.3409 7.81829 13.3409Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                 </svg>
                                                 <span> Learner Report</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         {/* My Products */}
-                                        <li className={`nav-item ${isOpen && isSidebarActive === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
@@ -269,7 +283,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         </li>
 
                                         {/* Accordion Content */}
-                                        {isSidebarActive === false ? '' : isSchoolOpen && (
+                                        {isSidebarOpen === false ? '' : isSchoolOpen && (
                                             <ul className="ml-7 mt-2">
                                                 {[{ name: schoolName, emoji: selectedEmoji }, { name: "School B", emoji: "🎓" }].map((item, index) => (
                                                     <li
@@ -286,15 +300,15 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         )}
 
                                         <li className={`nav-item ${SidebarLinkActive === 'Calendar' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Calendar')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/calendar"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 20 20">
                                                     <path fill="#4F4F4F" d="M6.66671 1.75C7.08092 1.75 7.41671 2.08579 7.41671 2.5V3.41667H12.5834V2.5C12.5834 2.08579 12.9192 1.75 13.3334 1.75C13.7476 1.75 14.0834 2.08579 14.0834 2.5V3.41667H15C15.641 3.41667 16.2557 3.67128 16.7089 4.12449C17.1621 4.5777 17.4167 5.19239 17.4167 5.83333V15.8333C17.4167 16.4743 17.1621 17.089 16.7089 17.5422C16.2557 17.9954 15.641 18.25 15 18.25H5.00004C4.3591 18.25 3.74441 17.9954 3.2912 17.5422C2.83799 17.089 2.58337 16.4743 2.58337 15.8333V5.83333C2.58337 5.19239 2.83799 4.5777 3.2912 4.12449C3.74441 3.67128 4.3591 3.41667 5.00004 3.41667H5.91671V2.5C5.91671 2.08579 6.25249 1.75 6.66671 1.75ZM5.91671 4.91667H5.00004C4.75693 4.91667 4.52377 5.01324 4.35186 5.18515C4.17995 5.35706 4.08337 5.59022 4.08337 5.83333V8.41667H15.9167V5.83333C15.9167 5.59022 15.8201 5.35706 15.6482 5.18515C15.4763 5.01324 15.2432 4.91667 15 4.91667H14.0834V5.83333C14.0834 6.24755 13.7476 6.58333 13.3334 6.58333C12.9192 6.58333 12.5834 6.24755 12.5834 5.83333V4.91667H7.41671V5.83333C7.41671 6.24755 7.08092 6.58333 6.66671 6.58333C6.25249 6.58333 5.91671 6.24755 5.91671 5.83333V4.91667ZM15.9167 9.91667H4.08337V15.8333C4.08337 16.0764 4.17995 16.3096 4.35186 16.4815C4.52377 16.6534 4.75693 16.75 5.00004 16.75H15C15.2432 16.75 15.4763 16.6534 15.6482 16.4815C15.8201 16.3096 15.9167 16.0764 15.9167 15.8333V9.91667ZM8.41671 12.5C8.41671 12.0858 8.75249 11.75 9.16671 11.75H10C10.4143 11.75 10.75 12.0858 10.75 12.5V15C10.75 15.4142 10.4143 15.75 10 15.75C9.58583 15.75 9.25004 15.4142 9.25004 15V13.25H9.16671C8.75249 13.25 8.41671 12.9142 8.41671 12.5Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                 </svg>
                                                 <span>Calendar</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Bookmarks')}>
                                             <a
@@ -305,7 +319,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                                 <span>Bookmarks</span>
                                             </a>
                                         </li>
-                                        <li className={`nav-item ${isOpen && isSidebarActive === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
@@ -334,7 +348,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         </li>
 
                                         {/* Accordion Content */}
-                                        {isSidebarActive === false ? '' : isCollectionOpen && (
+                                        {isSidebarOpen === false ? '' : isCollectionOpen && (
                                             <ul className="ml-7 mt-2">
                                                 {["Collection A", "Collection B", "Collection C"].map((item) => (
                                                     <li
@@ -376,15 +390,15 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                             </a>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Team' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => handleSidebarLinks('Team')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/team"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 32 32">
                                                     <path fill="#333333" d="M16.4847 5.82368C14.8958 5.82368 13.6733 7.05276 13.6733 8.48961C13.6733 9.92647 14.8958 11.1555 16.4847 11.1555C18.0736 11.1555 19.2961 9.92647 19.2961 8.48961C19.2961 7.05276 18.0736 5.82368 16.4847 5.82368ZM11.7324 8.48961C11.7324 5.90979 13.8963 3.88281 16.4847 3.88281C19.0731 3.88281 21.2369 5.90979 21.2369 8.48961C21.2369 11.0694 19.0731 13.0964 16.4847 13.0964C13.8963 13.0964 11.7324 11.0694 11.7324 8.48961ZM7.66046 10.6722C6.76779 10.6722 6.10968 11.3586 6.10968 12.126C6.10968 12.8934 6.76779 13.5798 7.66046 13.5798C8.55312 13.5798 9.21123 12.8934 9.21123 12.126C9.21123 11.3586 8.55312 10.6722 7.66046 10.6722ZM4.16881 12.126C4.16881 10.2156 5.76834 8.7313 7.66046 8.7313C9.55257 8.7313 11.1521 10.2156 11.1521 12.126C11.1521 14.0363 9.55257 15.5207 7.66046 15.5207C5.76834 15.5207 4.16881 14.0363 4.16881 12.126ZM25.3089 10.6722C24.4163 10.6722 23.7582 11.3586 23.7582 12.126C23.7582 12.8934 24.4163 13.5798 25.3089 13.5798C26.2016 13.5798 26.8597 12.8934 26.8597 12.126C26.8597 11.3586 26.2016 10.6722 25.3089 10.6722ZM21.8173 12.126C21.8173 10.2156 23.4168 8.7313 25.3089 8.7313C27.201 8.7313 28.8006 10.2156 28.8006 12.126C28.8006 14.0363 27.201 15.5207 25.3089 15.5207C23.4168 15.5207 21.8173 14.0363 21.8173 12.126ZM16.4847 16.7328C14.2186 16.7328 12.3039 18.078 11.5266 19.9449C11.2851 20.5254 11.1521 21.1585 11.1521 21.8229V23.2768H21.8173V21.8229C21.8173 21.1585 21.6843 20.5254 21.4428 19.9449C20.6655 18.078 18.7508 16.7328 16.4847 16.7328ZM23.4576 19.8169C23.6532 20.4531 23.7582 21.1267 23.7582 21.8229V23.2768H28.1203V21.8229C28.1203 20.3861 26.8978 19.157 25.3089 19.157C24.5952 19.157 23.9494 19.4081 23.4576 19.8169ZM22.6105 18.0304C21.3124 16.0742 19.0455 14.7919 16.4847 14.7919C13.9239 14.7919 11.657 16.0742 10.3589 18.0304C9.59018 17.5156 8.65918 17.2161 7.66046 17.2161C5.0721 17.2161 2.9082 19.2431 2.9082 21.8229V24.2472C2.9082 24.7831 3.34268 25.2176 3.87864 25.2176H29.0908C29.6267 25.2176 30.0612 24.7831 30.0612 24.2472V21.8229C30.0612 19.2431 27.8973 17.2161 25.3089 17.2161C24.3102 17.2161 23.3792 17.5156 22.6105 18.0304ZM9.5118 19.8169C9.01995 19.4081 8.37421 19.157 7.66046 19.157C6.07155 19.157 4.84907 20.3861 4.84907 21.8229V23.2768H9.21123V21.8229C9.21123 21.1267 9.31625 20.4531 9.5118 19.8169Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                 </svg>
                                                 <span>Team</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Settings' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => handleSidebarLinks('Settings')}>
                                             <a
@@ -418,7 +432,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                 </svg>
 
                                 <li className={`nav-item list-none sidebaropentoggle`} style={{ borderRadius: '4px' }} onClick={() => setisSidebarSmallActive(!isSidebarSmallActive)}>
-                                    <button className="close-btn" style={{fontSize: '14px'}} onClick={() => setisSidebarSmallActive(!isSidebarSmallActive)}>
+                                    <button className="close-btn" style={{ fontSize: '14px' }} onClick={() => setisSidebarSmallActive(!isSidebarSmallActive)}>
                                         ✖
                                     </button>
                                 </li>
@@ -442,7 +456,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         </li>
 
                                         {/* My Products */}
-                                        <li className={`nav-item ${isOpen && isSidebarActive === true ? 'dropdownActive' : ''}`}>
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`}>
                                             <button
                                                 onClick={handleToggle}
                                                 className="flex items-center justify-between w-full p-2"
@@ -464,29 +478,36 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                             </button>
                                         </li>
 
-                                        {isSidebarActive === false ? '' : isOpen && (
+                                        {isSidebarOpen === false ? '' : isOpen && (
                                             <ul className="ml-7 mt-2 ">
-                                                {["Courses", "Sessions", "Communities", "Memberships"].map((item) => (
+                                                {["All Products", "Schools", "Courses", "Sessions", "Communities", "Bundles", "Subscriptions"].map((item) => (
                                                     <li
                                                         key={item}
-                                                        className={`p-2 cursor-pointer ${activeItem === item
+                                                        className={`p-2 cursor-pointer ${context.activeFilter === item
                                                             ? "dropdown-link-active"
                                                             : "dropdown-link"
                                                             }`}
-                                                        onClick={() => handleSetActive(item)}
+                                                        onClick={() => handleActiveLink(item)}
                                                     >
-                                                        {item === "Courses" ? (
-                                                            <Link href="/products">
-                                                                {item}
-                                                            </Link>
-                                                        ) : (
-                                                            item
-                                                        )}
+                                                        {<Link href="/products">
+                                                            {item}
+                                                        </Link>}
                                                     </li>
                                                 ))}
                                             </ul>
                                         )}
-
+                                        <li className={`nav-item ${SidebarLinkActive === 'Sales History' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Sales History')}>
+                                            <Link
+                                                href="/saleshistory"
+                                                className="flex items-center p-2 "
+                                            >
+                                                <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 32 32">
+                                                    <path fill="#828282" d="M9.33341 6.33333C8.89139 6.33333 8.46746 6.50892 8.1549 6.82148C7.84234 7.13404 7.66675 7.55797 7.66675 7.99999V20.734C8.17815 20.473 8.74858 20.3333 9.33341 20.3333H18C18.5523 20.3333 19 20.781 19 21.3333C19 21.8856 18.5523 22.3333 18 22.3333H9.33341C8.89139 22.3333 8.46746 22.5089 8.1549 22.8215C7.84234 23.134 7.66675 23.558 7.66675 24C7.66675 24.442 7.84234 24.8659 8.1549 25.1785C8.46746 25.4911 8.89139 25.6667 9.33341 25.6667H18C18.5523 25.6667 19 26.1144 19 26.6667C19 27.2189 18.5523 27.6667 18 27.6667H9.33341C8.36095 27.6667 7.42832 27.2804 6.74069 26.5927C6.05306 25.9051 5.66675 24.9725 5.66675 24V7.99999C5.66675 7.02753 6.05306 6.0949 6.74069 5.40727C7.42832 4.71964 8.36095 4.33333 9.33341 4.33333H25.3334C25.8857 4.33333 26.3334 4.78104 26.3334 5.33333V12.9998C26.3334 13.5521 25.8857 13.9998 25.3334 13.9998C24.7811 13.9998 24.3334 13.5521 24.3334 12.9998V6.33333H9.33341ZM11.0001 10.6667C11.0001 10.1144 11.4478 9.66666 12.0001 9.66666H20.0001C20.5524 9.66666 21.0001 10.1144 21.0001 10.6667C21.0001 11.2189 20.5524 11.6667 20.0001 11.6667H12.0001C11.4478 11.6667 11.0001 11.2189 11.0001 10.6667Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    <path fill="#828282" d="M25.3334 16C25.8857 16 26.3334 16.4477 26.3334 17V17.3333H28.0001C28.5524 17.3333 29.0001 17.781 29.0001 18.3333C29.0001 18.8856 28.5524 19.3333 28.0001 19.3333H24.6667C24.4015 19.3333 24.1472 19.4387 23.9596 19.6262C23.7721 19.8138 23.6667 20.0681 23.6667 20.3333C23.6667 20.5985 23.7721 20.8529 23.9596 21.0404C24.1472 21.228 24.4015 21.3333 24.6667 21.3333H26.0001C26.7957 21.3333 27.5588 21.6494 28.1214 22.212C28.684 22.7746 29.0001 23.5377 29.0001 24.3333C29.0001 25.129 28.684 25.892 28.1214 26.4547C27.6379 26.9381 27.0064 27.2395 26.3334 27.3148V27.6667C26.3334 28.219 25.8857 28.6667 25.3334 28.6667C24.7811 28.6667 24.3334 28.219 24.3334 27.6667V27.3333H22.6667C22.1145 27.3333 21.6667 26.8856 21.6667 26.3333C21.6667 25.781 22.1145 25.3333 22.6667 25.3333H26.0001C26.2653 25.3333 26.5196 25.228 26.7072 25.0404C26.8947 24.8529 27.0001 24.5985 27.0001 24.3333C27.0001 24.0681 26.8947 23.8138 26.7072 23.6262C26.5196 23.4387 26.2653 23.3333 26.0001 23.3333H24.6667C23.8711 23.3333 23.108 23.0173 22.5454 22.4547C21.9828 21.892 21.6667 21.129 21.6667 20.3333C21.6667 19.5377 21.9828 18.7746 22.5454 18.212C23.0289 17.7285 23.6604 17.4271 24.3334 17.3519V17C24.3334 16.4477 24.7811 16 25.3334 16Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span>Sales History</span>
+                                            </Link>
+                                        </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Marketing' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Marketing')}>
                                             <Link
                                                 href="/marketing"
@@ -498,17 +519,6 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                                 <span>Marketing</span>
                                             </Link>
                                         </li>
-                                        <li style={{ display: 'none' }} className={`nav-item`} onClick={() => setIsSidebarOpen(true)}>
-                                            <a
-                                                href="#"
-                                                className="flex items-center p-2 "
-                                            >
-                                                <svg width={15} height={15} viewBox="0 0 448 512">
-                                                    <path d="M48 88c0-13.3-10.7-24-24-24S0 74.7 0 88L0 424c0 13.3 10.7 24 24 24s24-10.7 24-24L48 88zM440.4 273.5c4.8-4.5 7.6-10.9 7.6-17.5s-2.7-12.9-7.6-17.5l-136-128c-9.7-9.1-24.8-8.6-33.9 1s-8.6 24.8 1 33.9L363.5 232 280 232l-128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l128 0 83.5 0-91.9 86.5c-9.7 9.1-10.1 24.3-1 33.9s24.3 10.1 33.9 1l136-128z" fill="#4F4F4F">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </nav>
                                 <nav className="flex-grow">
@@ -516,19 +526,19 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         <span className="px-3 learn" style={{ fontSize: '10px', fontWeight: '600', color: '#767571' }}>LEARN</span>
                                         {/* Dashboard */}
                                         <li className={`nav-item ${SidebarLinkActive === 'Dash' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Dash')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/dashboard"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 19 19" fill="none">
                                                     <path d="M0.6 7.4V0.6H7.4V7.4H0.6ZM0.6 18.4V11.6H7.4V18.4H0.6ZM11.6 7.4V0.6H18.4V7.4H11.6ZM15 18.4C13.1222 18.4 11.6 16.8778 11.6 15C11.6 13.1222 13.1222 11.6 15 11.6C16.8778 11.6 18.4 13.1222 18.4 15C18.4 16.8778 16.8778 18.4 15 18.4Z" stroke="#4B4B4B" strokeWidth="2.5" />
                                                 </svg>
                                                 <span>Dashboard</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Explore' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Explore')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/explore"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 33 32">
@@ -537,7 +547,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                                     <path fill="white" d="M16.4999 18.4242C17.8388 18.4242 18.9242 17.3388 18.9242 16C18.9242 14.6611 17.8388 13.5757 16.4999 13.5757C15.1611 13.5757 14.0757 14.6611 14.0757 16C14.0757 17.3388 15.1611 18.4242 16.4999 18.4242Z"></path>
                                                 </svg>
                                                 <span>Explore</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={() => handleSidebarLinks('My Learning')}>
                                             <a
@@ -549,19 +559,19 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                             </a>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Learner Report')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/learnerreport"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 24 24">
                                                     <path fill="#4F4F4F" d="M3.71863 3.71841C4.25138 3.18562 4.97399 2.88635 5.72738 2.88635H18.2728C19.0262 2.88635 19.7488 3.18561 20.2816 3.71841C20.8145 4.25117 21.1137 4.97382 21.1137 5.72726V18.2727C21.1137 19.0261 20.8145 19.7487 20.2817 20.2815C20.2817 20.2815 20.2817 20.2815 20.2816 20.2815C20.2816 20.2815 20.2816 20.2816 20.2816 20.2816C19.7488 20.8144 19.0262 21.1136 18.2728 21.1136H5.72738C4.97394 21.1136 4.25129 20.8143 3.71853 20.2815C3.18574 19.7487 2.88647 19.0261 2.88647 18.2727V5.72726C2.88647 4.97387 3.18574 4.25126 3.71853 3.71851C3.71856 3.71848 3.7186 3.71844 3.71863 3.71841ZM5.72738 4.38635C5.37173 4.38635 5.03068 4.52763 4.77929 4.77907L4.77919 4.77917C4.52776 5.03056 4.38647 5.37161 4.38647 5.72726V18.2727C4.38647 18.6284 4.52776 18.9694 4.77919 19.2208L4.77929 19.2209C5.03068 19.4723 5.37173 19.6136 5.72738 19.6136H18.2728C18.6285 19.6136 18.9695 19.4723 19.2209 19.2209L19.221 19.2208C19.4725 18.9694 19.6137 18.6284 19.6137 18.2727V5.72726C19.6137 5.37161 19.4725 5.03056 19.221 4.77917L19.2209 4.77907C18.9695 4.52764 18.6285 4.38635 18.2728 4.38635H5.72738ZM16.1819 7.06817C16.5961 7.06817 16.9319 7.40396 16.9319 7.81817V16.1818C16.9319 16.596 16.5961 16.9318 16.1819 16.9318C15.7677 16.9318 15.4319 16.596 15.4319 16.1818V7.81817C15.4319 7.40396 15.7677 7.06817 16.1819 7.06817ZM12.0001 10.2045C12.4143 10.2045 12.7501 10.5403 12.7501 10.9545V16.1818C12.7501 16.596 12.4143 16.9318 12.0001 16.9318C11.5859 16.9318 11.2501 16.596 11.2501 16.1818V10.9545C11.2501 10.5403 11.5859 10.2045 12.0001 10.2045ZM7.81829 13.3409C8.23251 13.3409 8.56829 13.6767 8.56829 14.0909V16.1818C8.56829 16.596 8.23251 16.9318 7.81829 16.9318C7.40408 16.9318 7.06829 16.596 7.06829 16.1818V14.0909C7.06829 13.6767 7.40408 13.3409 7.81829 13.3409Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                 </svg>
                                                 <span> Learner Report</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         {/* My Products */}
-                                        <li className={`nav-item ${isOpen && isSidebarActive === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
@@ -595,7 +605,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         </li>
 
                                         {/* Accordion Content */}
-                                        {isSidebarActive === false ? '' : isSchoolOpen && (
+                                        {isSidebarOpen === false ? '' : isSchoolOpen && (
                                             <ul className="ml-7 mt-2">
                                                 {[{ name: schoolName, emoji: selectedEmoji }, { name: "School B", emoji: "🎓" }].map((item, index) => (
                                                     <li
@@ -612,15 +622,15 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         )}
 
                                         <li className={`nav-item ${SidebarLinkActive === 'Calendar' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Calendar')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/calendar"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 20 20">
                                                     <path fill="#4F4F4F" d="M6.66671 1.75C7.08092 1.75 7.41671 2.08579 7.41671 2.5V3.41667H12.5834V2.5C12.5834 2.08579 12.9192 1.75 13.3334 1.75C13.7476 1.75 14.0834 2.08579 14.0834 2.5V3.41667H15C15.641 3.41667 16.2557 3.67128 16.7089 4.12449C17.1621 4.5777 17.4167 5.19239 17.4167 5.83333V15.8333C17.4167 16.4743 17.1621 17.089 16.7089 17.5422C16.2557 17.9954 15.641 18.25 15 18.25H5.00004C4.3591 18.25 3.74441 17.9954 3.2912 17.5422C2.83799 17.089 2.58337 16.4743 2.58337 15.8333V5.83333C2.58337 5.19239 2.83799 4.5777 3.2912 4.12449C3.74441 3.67128 4.3591 3.41667 5.00004 3.41667H5.91671V2.5C5.91671 2.08579 6.25249 1.75 6.66671 1.75ZM5.91671 4.91667H5.00004C4.75693 4.91667 4.52377 5.01324 4.35186 5.18515C4.17995 5.35706 4.08337 5.59022 4.08337 5.83333V8.41667H15.9167V5.83333C15.9167 5.59022 15.8201 5.35706 15.6482 5.18515C15.4763 5.01324 15.2432 4.91667 15 4.91667H14.0834V5.83333C14.0834 6.24755 13.7476 6.58333 13.3334 6.58333C12.9192 6.58333 12.5834 6.24755 12.5834 5.83333V4.91667H7.41671V5.83333C7.41671 6.24755 7.08092 6.58333 6.66671 6.58333C6.25249 6.58333 5.91671 6.24755 5.91671 5.83333V4.91667ZM15.9167 9.91667H4.08337V15.8333C4.08337 16.0764 4.17995 16.3096 4.35186 16.4815C4.52377 16.6534 4.75693 16.75 5.00004 16.75H15C15.2432 16.75 15.4763 16.6534 15.6482 16.4815C15.8201 16.3096 15.9167 16.0764 15.9167 15.8333V9.91667ZM8.41671 12.5C8.41671 12.0858 8.75249 11.75 9.16671 11.75H10C10.4143 11.75 10.75 12.0858 10.75 12.5V15C10.75 15.4142 10.4143 15.75 10 15.75C9.58583 15.75 9.25004 15.4142 9.25004 15V13.25H9.16671C8.75249 13.25 8.41671 12.9142 8.41671 12.5Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                 </svg>
                                                 <span>Calendar</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Bookmarks')}>
                                             <a
@@ -631,7 +641,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                                 <span>Bookmarks</span>
                                             </a>
                                         </li>
-                                        <li className={`nav-item ${isOpen && isSidebarActive === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
@@ -660,7 +670,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                         </li>
 
                                         {/* Accordion Content */}
-                                        {isSidebarActive === false ? '' : isCollectionOpen && (
+                                        {isSidebarOpen === false ? '' : isCollectionOpen && (
                                             <ul className="ml-7 mt-2">
                                                 {["Collection A", "Collection B", "Collection C"].map((item) => (
                                                     <li
@@ -702,15 +712,15 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarActive, setisSi
                                             </a>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Team' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => handleSidebarLinks('Team')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/team"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 32 32">
                                                     <path fill="#333333" d="M16.4847 5.82368C14.8958 5.82368 13.6733 7.05276 13.6733 8.48961C13.6733 9.92647 14.8958 11.1555 16.4847 11.1555C18.0736 11.1555 19.2961 9.92647 19.2961 8.48961C19.2961 7.05276 18.0736 5.82368 16.4847 5.82368ZM11.7324 8.48961C11.7324 5.90979 13.8963 3.88281 16.4847 3.88281C19.0731 3.88281 21.2369 5.90979 21.2369 8.48961C21.2369 11.0694 19.0731 13.0964 16.4847 13.0964C13.8963 13.0964 11.7324 11.0694 11.7324 8.48961ZM7.66046 10.6722C6.76779 10.6722 6.10968 11.3586 6.10968 12.126C6.10968 12.8934 6.76779 13.5798 7.66046 13.5798C8.55312 13.5798 9.21123 12.8934 9.21123 12.126C9.21123 11.3586 8.55312 10.6722 7.66046 10.6722ZM4.16881 12.126C4.16881 10.2156 5.76834 8.7313 7.66046 8.7313C9.55257 8.7313 11.1521 10.2156 11.1521 12.126C11.1521 14.0363 9.55257 15.5207 7.66046 15.5207C5.76834 15.5207 4.16881 14.0363 4.16881 12.126ZM25.3089 10.6722C24.4163 10.6722 23.7582 11.3586 23.7582 12.126C23.7582 12.8934 24.4163 13.5798 25.3089 13.5798C26.2016 13.5798 26.8597 12.8934 26.8597 12.126C26.8597 11.3586 26.2016 10.6722 25.3089 10.6722ZM21.8173 12.126C21.8173 10.2156 23.4168 8.7313 25.3089 8.7313C27.201 8.7313 28.8006 10.2156 28.8006 12.126C28.8006 14.0363 27.201 15.5207 25.3089 15.5207C23.4168 15.5207 21.8173 14.0363 21.8173 12.126ZM16.4847 16.7328C14.2186 16.7328 12.3039 18.078 11.5266 19.9449C11.2851 20.5254 11.1521 21.1585 11.1521 21.8229V23.2768H21.8173V21.8229C21.8173 21.1585 21.6843 20.5254 21.4428 19.9449C20.6655 18.078 18.7508 16.7328 16.4847 16.7328ZM23.4576 19.8169C23.6532 20.4531 23.7582 21.1267 23.7582 21.8229V23.2768H28.1203V21.8229C28.1203 20.3861 26.8978 19.157 25.3089 19.157C24.5952 19.157 23.9494 19.4081 23.4576 19.8169ZM22.6105 18.0304C21.3124 16.0742 19.0455 14.7919 16.4847 14.7919C13.9239 14.7919 11.657 16.0742 10.3589 18.0304C9.59018 17.5156 8.65918 17.2161 7.66046 17.2161C5.0721 17.2161 2.9082 19.2431 2.9082 21.8229V24.2472C2.9082 24.7831 3.34268 25.2176 3.87864 25.2176H29.0908C29.6267 25.2176 30.0612 24.7831 30.0612 24.2472V21.8229C30.0612 19.2431 27.8973 17.2161 25.3089 17.2161C24.3102 17.2161 23.3792 17.5156 22.6105 18.0304ZM9.5118 19.8169C9.01995 19.4081 8.37421 19.157 7.66046 19.157C6.07155 19.157 4.84907 20.3861 4.84907 21.8229V23.2768H9.21123V21.8229C9.21123 21.1267 9.31625 20.4531 9.5118 19.8169Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                 </svg>
                                                 <span>Team</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Settings' ? 'active' : ''}`} style={{ color: '#949494' }} onClick={() => handleSidebarLinks('Settings')}>
                                             <a
