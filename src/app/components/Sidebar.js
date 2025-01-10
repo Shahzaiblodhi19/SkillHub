@@ -220,15 +220,15 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                             <span className="px-3 learn" style={{ fontSize: '10px', fontWeight: '600', color: '#767571' }}>LEARN</span>
                             {/* Dashboard */}
                             <li className={`nav-item ${SidebarLinkActive === 'Dash' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Dash')}>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/dashboard"
                                     className="flex items-center p-2 "
                                 >
                                     <svg style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 19 19" fill="none">
                                         <path d="M0.6 7.4V0.6H7.4V7.4H0.6ZM0.6 18.4V11.6H7.4V18.4H0.6ZM11.6 7.4V0.6H18.4V7.4H11.6ZM15 18.4C13.1222 18.4 11.6 16.8778 11.6 15C11.6 13.1222 13.1222 11.6 15 11.6C16.8778 11.6 18.4 13.1222 18.4 15C18.4 16.8778 16.8778 18.4 15 18.4Z" stroke="#4B4B4B" strokeWidth="2.5" />
                                     </svg>
                                     <span>Dashboard</span>
-                                </a>
+                                </Link>
                             </li>
                             <li className={`nav-item ${SidebarLinkActive === 'Explore' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Explore')}>
                                 <Link

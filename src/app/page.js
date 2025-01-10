@@ -2,7 +2,7 @@
 import { Chart } from 'chart.js/auto';
 import React from 'react';
 
-export default function Dashboard() {
+export default function Home() {
   // Example stats for dynamic rendering
   const stats = [
     {

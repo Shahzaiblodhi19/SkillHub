@@ -262,6 +262,11 @@ export default function ProductsPage() {
   const [SessionTooltip, setSessionTooltip] = useState(null);
   const [CommunityTooltip, setcommunityTooltip] = useState(null);
   const [BundleSubsTooltip, setBundleSubsTooltip] = useState(null);
+  const [Schooltooltip, setSchooltooltip] = useState(null);
+  const [activeModal, setActiveModal] = useState(null); // 'delete' or 'unlink'
+  const [schoolHasLinkedItems, setSchoolHasLinkedItems] = useState(true);
+
+  const closeModal = () => setActiveModal(null);
 
   const handleTooltipToggle = (productId, product) => {
     if (product.type === 'course') {
@@ -281,6 +286,9 @@ export default function ProductsPage() {
     }
     if (product.type === 'subscription') {
       setBundleSubsTooltip((prevId) => (prevId === productId ? null : productId));
+    }
+    if (product.type === 'school') {
+      setSchooltooltip((prevId) => (prevId === productId ? null : productId));
     }
 
   };
@@ -335,7 +343,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -362,7 +370,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -389,7 +397,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -404,7 +412,7 @@ export default function ProductsPage() {
     },
     {
       action: "edit-settings",
-      icon: <svg class="tabler-icon tabler-icon-settings" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+      icon: <svg className="tabler-icon tabler-icon-settings" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24">
         <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
         <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
       </svg>,
@@ -495,7 +503,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -542,7 +550,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -567,7 +575,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -587,6 +595,72 @@ export default function ProductsPage() {
         <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="currentColor" d="M14.6666 4.5L7.99992 9.16667L1.33325 4.5"></path>
       </svg>,
       text: "New Anouncement",
+      modal: null,
+    },
+
+  ];
+  const SchooltooltipData = [
+
+    {
+      action: "edit-school",
+      icon: <svg fill="none" viewBox="0 0 20 20">
+        <path fill="currentColor" d="M12.561 3.37945C12.938 3.22331 13.342 3.14294 13.75 3.14294C14.1581 3.14294 14.5621 3.22331 14.939 3.37945C15.316 3.53559 15.6585 3.76446 15.947 4.05297C16.2355 4.34148 16.4644 4.684 16.6206 5.06096C16.7767 5.43792 16.8571 5.84195 16.8571 6.24997C16.8571 6.65798 16.7767 7.06201 16.6206 7.43897C16.4644 7.81593 16.2356 8.15845 15.947 8.44696L15.1149 9.27906C15.1145 9.27947 15.1141 9.27989 15.1137 9.2803C15.1133 9.28071 15.1129 9.28113 15.1125 9.28154L7.19704 17.197C7.05639 17.3376 6.86562 17.4166 6.66671 17.4166H3.33337C2.91916 17.4166 2.58337 17.0808 2.58337 16.6666V13.3333C2.58337 13.1344 2.66239 12.9436 2.80304 12.803L11.553 4.05297C11.8416 3.76446 12.1841 3.53559 12.561 3.37945ZM11.25 6.4773L4.08337 13.644V15.9166H6.35605L13.5227 8.74997L11.25 6.4773ZM14.5834 7.68931L12.3107 5.41663L12.6137 5.11363C12.7629 4.96441 12.9401 4.84603 13.1351 4.76527C13.33 4.68451 13.539 4.64294 13.75 4.64294C13.9611 4.64294 14.17 4.68451 14.365 4.76527C14.56 4.84603 14.7372 4.96441 14.8864 5.11363C15.0356 5.26286 15.154 5.44001 15.2347 5.63499C15.3155 5.82996 15.3571 6.03893 15.3571 6.24997C15.3571 6.46101 15.3155 6.66998 15.2347 6.86495C15.154 7.05992 15.0356 7.23708 14.8864 7.3863L14.5834 7.68931Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+      </svg>,
+      text: "Edit School",
+      modal: null,
+    },
+    {
+      action: "preview",
+      icon: <svg fill="none" viewBox="0 0 20 20">
+        <path fill="currentColor" d="M3.38189 10C5.24313 12.9154 7.45153 14.25 10 14.25C12.5485 14.25 14.7569 12.9154 16.6181 10C14.7569 7.0846 12.5485 5.75 10 5.75C7.45153 5.75 5.24313 7.0846 3.38189 10ZM1.85688 9.61413C3.94664 6.13119 6.65833 4.25 10 4.25C13.3417 4.25 16.0534 6.13119 18.1431 9.61413C18.2856 9.85164 18.2856 10.1484 18.1431 10.3859C16.0534 13.8688 13.3417 15.75 10 15.75C6.65833 15.75 3.94664 13.8688 1.85688 10.3859C1.71437 10.1484 1.71437 9.85164 1.85688 9.61413ZM8.29116 8.29116C8.74437 7.83795 9.35906 7.58333 10 7.58333C10.6409 7.58333 11.2556 7.83795 11.7088 8.29116C12.1621 8.74437 12.4167 9.35906 12.4167 10C12.4167 10.6409 12.1621 11.2556 11.7088 11.7088C11.2556 12.1621 10.6409 12.4167 10 12.4167C9.35906 12.4167 8.74437 12.1621 8.29116 11.7088C7.83795 11.2556 7.58333 10.6409 7.58333 10C7.58333 9.35906 7.83795 8.74437 8.29116 8.29116ZM10 9.08333C9.75689 9.08333 9.52373 9.17991 9.35182 9.35182C9.17991 9.52373 9.08333 9.75689 9.08333 10C9.08333 10.2431 9.17991 10.4763 9.35182 10.6482C9.52373 10.8201 9.75689 10.9167 10 10.9167C10.2431 10.9167 10.4763 10.8201 10.6482 10.6482C10.8201 10.4763 10.9167 10.2431 10.9167 10C10.9167 9.75689 10.8201 9.52373 10.6482 9.35182C10.4763 9.17991 10.2431 9.08333 10 9.08333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+      </svg>,
+      text: "Preview",
+      modal: null,
+    },
+    {
+      action: "view-linked-courses",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+      </svg>,
+      text: "View Linked Courses",
+      nested: [
+        {
+          name: "Web Development Pro",
+          img: "https://i.ibb.co/640kJN2/c1.jpg",
+        },
+        {
+          name: "Data Science Master",
+          img: "https://i.ibb.co/NKffPZQ/c4.jpg",
+        },
+      ],
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
+        <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
+      </svg>,
+    },
+    {
+      action: "view-linked-session",
+      icon: <svg fill="none" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+      </svg>,
+      text: "View Linked Sessions",
+      nested: [
+        {
+          name: "Advanced JavaScript Concepts",
+          img: "https://i.ibb.co/640kJN2/c1.jpg",
+        },
+        {
+          name: "React Performance Workshop",
+          img: "https://i.ibb.co/NKffPZQ/c4.jpg",
+        },
+      ],
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
+        <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
+      </svg>,
+    },
+    {
+      action: "delete-school",
+      icon: <svg viewBox="0 0 20 20"><g fill-rule="nonzero" fill="#F44336"><path d="M11.429 2.357c1.014 0 1.845.783 1.922 1.778l.006.15v1.43a.5.5 0 0 1-.992.09l-.008-.09v-1.43a.93.93 0 0 0-.82-.922l-.108-.006H8.57a.93.93 0 0 0-.922.82l-.006.109v1.428a.5.5 0 0 1-.992.09l-.008-.09V4.286c0-1.015.783-1.846 1.778-1.923l.15-.006z"></path><path d="M16.429 5.214a.5.5 0 0 1 .09.992l-.09.008H3.57a.5.5 0 0 1-.09-.992l.09-.008z"></path><path d="M15 5.214H5a.5.5 0 0 0-.5.5v10c0 1.065.863 1.929 1.929 1.929h7.142a1.93 1.93 0 0 0 1.929-1.929v-10a.5.5 0 0 0-.5-.5m-9.5 1h9v9.5a.93.93 0 0 1-.929.929H6.43l-.109-.006a.93.93 0 0 1-.82-.923z"></path></g></svg>,
+      text: "Delete School",
       modal: null,
     },
 
@@ -746,21 +820,22 @@ export default function ProductsPage() {
                         </div>
                         <span className="tooltip-text">
                           {item.text === "Edit Landing Page" ? (
-                            <Link href="/editsettingpricepage">
+                            <Link href="/editsettingpricepage?tab=Landing Page">
                               {item.text}
                             </Link>
                           ) : item.text === "Edit Settings" ? (
-                            <Link href="/editsettingpricepage">
+                            <Link href="/editsettingpricepage?tab=Settings">
                               {item.text}
                             </Link>
                           ) : item.text === "Edit Price" ? (
-                            <Link href="/editsettingpricepage">
+                            <Link href="/editsettingpricepage?tab=Pricing">
                               {item.text}
                             </Link>
                           ) : (
                             item.text
                           )}
                         </span>
+
                         {item.arrow}
                         {item.nested && (
                           <div className="nested-tooltip">
@@ -771,7 +846,7 @@ export default function ProductsPage() {
                                   <div className="bundle-name">{nestedItem.name}</div>
                                 </div>
                                 <div className="bundle-price">{nestedItem.price}</div>
-                                <svg class="bundle-check" viewBox="0 0 24 24">
+                                <svg className="bundle-check" viewBox="0 0 24 24">
                                   <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                                 </svg>
                               </div>
@@ -836,7 +911,7 @@ export default function ProductsPage() {
                                   <div className="bundle-name">{nestedItem.name}</div>
                                 </div>
                                 <div className="bundle-price">{nestedItem.price}</div>
-                                <svg class="bundle-check" viewBox="0 0 24 24">
+                                <svg className="bundle-check" viewBox="0 0 24 24">
                                   <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                                 </svg>
                               </div>
@@ -898,7 +973,7 @@ export default function ProductsPage() {
                                   <div className="bundle-name">{nestedItem.name}</div>
                                 </div>
                                 <div className="bundle-price">{nestedItem.price}</div>
-                                <svg class="bundle-check" viewBox="0 0 24 24">
+                                <svg className="bundle-check" viewBox="0 0 24 24">
                                   <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                                 </svg>
                               </div>
@@ -934,7 +1009,7 @@ export default function ProductsPage() {
                                   <div className="bundle-name">{nestedItem.name}</div>
                                 </div>
                                 <div className="bundle-price">{nestedItem.price}</div>
-                                <svg class="bundle-check" viewBox="0 0 24 24">
+                                <svg className="bundle-check" viewBox="0 0 24 24">
                                   <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                                 </svg>
                               </div>
@@ -944,6 +1019,80 @@ export default function ProductsPage() {
                       </div>
                     ))}
                   </div>
+                </>
+              }
+            </div>
+            <div className="pager" >
+              {Schooltooltip === product.id &&
+                <>
+                  <div className={`course-tooltip active`}>
+                    {SchooltooltipData.map((item, index) => (
+                      <div
+                        key={index}
+                        className={`tooltip-item ${item.text === 'Delete School' ? 'delete' : ''}`}
+                        onClick={item.text === 'Delete School' ? () => setActiveModal("delete") : undefined}
+                      >
+                        <div className="tooltip-icon">
+                          {item.icon}
+                        </div>
+                        <span className="tooltip-text">{item.text}</span>
+                        {item.arrow}
+                        {item.nested && (
+                          <div className="nested-tooltip">
+                            {item.nested.map((nestedItem, idx) => (
+                              <div key={idx} className="bundle-item">
+                                <img className='bundle-image' src={nestedItem.img} alt={nestedItem.name} />
+                                <div className="bundle-details">
+                                  <div className="bundle-name">{nestedItem.name}</div>
+                                </div>
+                                <div className="bundle-price">{nestedItem.price}</div>
+                                <svg onClick={() => setActiveModal("unlink")} className="linked-remove" fill="none" viewBox="0 0 15 15">
+                                  <path clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"></path>
+                                </svg>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {activeModal && activeModal === "delete" &&
+                    <div className='school-delete'>
+                      <div className={`modal-overlay ${activeModal === 'delete' ? 'active' : ''}`} onClick={closeModal} id="deleteModal">
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="modal-title">Delete School?</div>
+                          <div className="modal-message">Are you sure you want to delete this school? This action cannot be undone.</div>
+                          {schoolHasLinkedItems && (
+                            <div className="modal-warning" id="deleteWarning">
+                              <svg className="warning-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z" />
+                              </svg>
+                              <div className="warning-text">
+                                This school cannot be deleted because it has linked courses or sessions. Please remove all linked items first.
+                              </div>
+                            </div>
+                          )}
+                          <div className="modal-buttons">
+                            <button onClick={closeModal} className="modal-button cancel">Cancel</button>
+                            <button className="modal-button delete" style={{ cursor: schoolHasLinkedItems ? 'not-allowed' : 'pointer', opacity: schoolHasLinkedItems ? '0.5' : '1' }} id="confirmDelete">Delete School</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  {activeModal && activeModal === "unlink" &&
+                    <div className='school-delete'>
+                      <div className={`modal-overlay ${activeModal === 'unlink' ? 'active' : ''}`} onClick={closeModal} id="deleteModal">
+                        <div class="modal-content">
+                          <div class="modal-title">Remove Item</div>
+                          <div class="modal-message">Are you sure you want to remove this item from the school? The item itself won't be deleted.</div>
+                          <div class="modal-buttons">
+                            <button class="modal-button cancel">Cancel</button>
+                            <button class="modal-button delete">Remove</button>
+                          </div>
+                        </div>
+                      </div></div>}
                 </>
               }
             </div>
@@ -1131,7 +1280,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -1158,7 +1307,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -1185,7 +1334,7 @@ export default function ProductsPage() {
           img: "https://i.ibb.co/rkkdzYx/c6.jpg",
         },
       ],
-      arrow: <svg class="bundle-arrow" viewBox="0 0 25 40">
+      arrow: <svg className="bundle-arrow" viewBox="0 0 25 40">
         <path d="M0.494387 4.20556C0.221231 4.47872 0.22099 4.92152 0.493848 5.19497L14.7733 19.5056C15.0459 19.7788 15.0459 20.2212 14.7733 20.4944L0.493849 34.805C0.220991 35.0785 0.221231 35.5213 0.494388 35.7944L4.20498 39.505C4.47834 39.7784 4.92156 39.7784 5.19493 39.505L24.205 20.495C24.4783 20.2216 24.4783 19.7784 24.205 19.505L5.19493 0.494976C4.92156 0.221609 4.47834 0.221608 4.20498 0.494975L0.494387 4.20556Z"></path>
       </svg>,
     },
@@ -1200,7 +1349,7 @@ export default function ProductsPage() {
     },
     {
       action: "edit-settings",
-      icon: <svg class="tabler-icon tabler-icon-settings" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+      icon: <svg className="tabler-icon tabler-icon-settings" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24">
         <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
         <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
       </svg>,
