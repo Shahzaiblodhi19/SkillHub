@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Explore() {
     const allCourses = [
@@ -358,6 +358,31 @@ export default function Explore() {
         );
         setIsPopupVisible(false);
     };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Check if the dropdown is open and the clicked element is not inside the dropdown
+            const dropdown = document.getElementById('dropdown');
+            const modal = document.getElementById('modal'); // Assuming modal has an ID 'modal'
+
+            // Close dropdown only if the click is outside both the dropdown and the modal
+            if (
+                dropdown &&
+                !dropdown.contains(event.target) &&
+                (!modal || !modal.contains(event.target))
+            ) {
+                setIsPopupVisible(false);
+                setDropdownVisible(false)
+            }
+        };
+
+        // Attach event listener on mount
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Cleanup event listener on unmount
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
     return (
         <div style={{ padding: "10px", fontFamily: "Arial, sans-serif" }}>
             {/* Tabs */}
@@ -500,6 +525,7 @@ export default function Explore() {
                                         </span>
                                         {dropdownVisible[course.id] && (
                                             <div
+                                                id="dropdown"
                                                 style={{
                                                     position: "absolute",
                                                     top: "34px",
@@ -562,6 +588,7 @@ export default function Explore() {
                                                         {/* Popup Modal */}
                                                         {isPopupVisible && (
                                                             <div
+                                                                id="dropdown"
                                                                 style={{
                                                                     position: "fixed",
                                                                     top: "50%",
@@ -997,6 +1024,7 @@ export default function Explore() {
                                         </span>
                                         {dropdownVisible[course.id] && (
                                             <div
+                                                id="dropdown"
                                                 style={{
                                                     position: "absolute",
                                                     top: "34px",
@@ -1059,6 +1087,7 @@ export default function Explore() {
                                                         {/* Popup Modal */}
                                                         {isPopupVisible && (
                                                             <div
+                                                                id="dropdown"
                                                                 style={{
                                                                     position: "fixed",
                                                                     top: "50%",

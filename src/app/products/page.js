@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useContext } from 'react';
 import { MyContext } from '../layout';
-import Link from 'next/link';
 
 export default function ProductsPage() {
   const productData = [
@@ -101,6 +100,7 @@ export default function ProductsPage() {
   const [sortOption, setSortOption] = useState('Newest');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [AllProductsToolTip, setAllProductsToolTip] = useState(false);
   const context = useContext(MyContext)
   // State for items per page
   const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -265,6 +265,40 @@ export default function ProductsPage() {
   const [Schooltooltip, setSchooltooltip] = useState(null);
   const [activeModal, setActiveModal] = useState(null); // 'delete' or 'unlink'
   const [schoolHasLinkedItems, setSchoolHasLinkedItems] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close dropdown if clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the dropdown is open and the clicked element is not inside the dropdown
+      const dropdown = document.getElementById('dropdown');
+      const modal = document.getElementById('modal'); // Assuming modal has an ID 'modal'
+
+      // Close dropdown only if the click is outside both the dropdown and the modal
+      if (
+        dropdown &&
+        !dropdown.contains(event.target) &&
+        (!modal || !modal.contains(event.target))
+      ) {
+        setCourseTooltip(null);
+        setSessionTooltip(null);
+        setcommunityTooltip(null);
+        setBundleSubsTooltip(null);
+        setIsMenuOpen(false);
+        setAllProductsToolTip(false);
+        setSchooltooltip(null);
+        setActiveModal(null);
+      }
+    };
+
+    // Attach event listener on mount
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup event listener on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const closeModal = () => setActiveModal(null);
 
@@ -806,34 +840,28 @@ export default function ProductsPage() {
             <div className="pager" >
               {CourseTooltip === product.id &&
                 <>
-                  <div className={`course-tooltip active`}>
+                  <div id='dropdown' className={`course-tooltip active`}>
                     {tooltipData.map((item, index) => (
                       <div
                         key={index}
                         className="tooltip-item"
                         onClick={() => {
-                          if (item.modal) handleOpenModal(item.modal);
+                          if (item.text === "Edit Landing Page") {
+                            window.location.href = "/editsettingpricepage?tab=Landing Page";
+                          } else if (item.text === "Edit Settings") {
+                            window.location.href = "/editsettingpricepage?tab=Settings";
+                          } else if (item.text === "Edit Price") {
+                            window.location.href = "/editsettingpricepage?tab=Pricing";
+                          } else {
+                            if (item.modal) handleOpenModal(item.modal);
+                          }
                         }}
                       >
                         <div className="tooltip-icon">
                           {item.icon}
                         </div>
                         <span className="tooltip-text">
-                          {item.text === "Edit Landing Page" ? (
-                            <Link href="/editsettingpricepage?tab=Landing Page">
-                              {item.text}
-                            </Link>
-                          ) : item.text === "Edit Settings" ? (
-                            <Link href="/editsettingpricepage?tab=Settings">
-                              {item.text}
-                            </Link>
-                          ) : item.text === "Edit Price" ? (
-                            <Link href="/editsettingpricepage?tab=Pricing">
-                              {item.text}
-                            </Link>
-                          ) : (
-                            item.text
-                          )}
+                          {item.text}
                         </span>
 
                         {item.arrow}
@@ -857,7 +885,7 @@ export default function ProductsPage() {
                     ))}
                   </div>
                   {modalData && (
-                    <div className={`modal-overlay ${modalData !== null ? 'active' : ''}`} onClick={handleCloseModal}>
+                    <div id='modal' className={`modal-overlay ${modalData !== null ? 'active' : ''}`} onClick={handleCloseModal}>
                       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <img src={modalData.image} alt={modalData.title} className="modal-image" />
                         <div className="modal-title">{modalData.title}</div>
@@ -885,14 +913,15 @@ export default function ProductsPage() {
                 </>
               }
             </div>
-            <div className="pager" >
+            <div className="pager"  >
               {SessionTooltip === product.id &&
                 <>
-                  <div className={`course-tooltip active`}>
+                  <div id='dropdown' className={`course-tooltip active`}>
                     {SessiontooltipData.map((item, index) => (
                       <div
                         key={index}
                         className="tooltip-item"
+
                         onClick={() => {
                           if (item.modal) handleOpenModal(item.modal);
                         }}
@@ -922,7 +951,7 @@ export default function ProductsPage() {
                     ))}
                   </div>
                   {modalData && (
-                    <div className={`modal-overlay ${modalData !== null ? 'active' : ''}`} onClick={handleCloseModal}>
+                    <div id='modal' className={`modal-overlay ${modalData !== null ? 'active' : ''}`} onClick={handleCloseModal}>
                       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <img src={modalData.image} alt={modalData.title} className="modal-image" />
                         <div className="modal-title">{modalData.title}</div>
@@ -953,7 +982,7 @@ export default function ProductsPage() {
             <div className="pager" >
               {CommunityTooltip === product.id &&
                 <>
-                  <div className={`course-tooltip active`}>
+                  <div id='dropdown' className={`course-tooltip active`}>
                     {CommunitytooltipData.map((item, index) => (
                       <div
                         key={index}
@@ -989,7 +1018,7 @@ export default function ProductsPage() {
             <div className="pager" >
               {BundleSubsTooltip === product.id &&
                 <>
-                  <div className={`course-tooltip active`}>
+                  <div id='dropdown' className={`course-tooltip active`}>
                     {BundleSubstooltipData.map((item, index) => (
                       <div
                         key={index}
@@ -1025,7 +1054,7 @@ export default function ProductsPage() {
             <div className="pager" >
               {Schooltooltip === product.id &&
                 <>
-                  <div className={`course-tooltip active`}>
+                  <div id='dropdown' className={`course-tooltip active`}>
                     {SchooltooltipData.map((item, index) => (
                       <div
                         key={index}
@@ -1201,7 +1230,6 @@ export default function ProductsPage() {
       </button>
     </div>
   );
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -1468,7 +1496,6 @@ export default function ProductsPage() {
       count: productTypeCounts['subscription'] || 0,
     },
   ];
-  const [AllProductsToolTip, setAllProductsToolTip] = useState(false);
 
   return (
     <div className="container-products">
@@ -1480,7 +1507,7 @@ export default function ProductsPage() {
               <path strokeWidth={3} d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             {AllProductsToolTip &&
-              <div className="tooltip-display">
+              <div id='dropdown' className="tooltip-display">
                 {tooltipItems.map((item, index) => (
                   <div className="tooltip-item" key={index} onClick={() => {
                     // Set the active filter dynamically when the item is clicked
@@ -1508,7 +1535,7 @@ export default function ProductsPage() {
             <path d="M19 9l-7 7-7-7" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           {isMenuOpen && (
-            <div className="create-menu" style={{ zIndex: '1000' }}>
+            <div id='dropdown' className="create-menu" style={{ zIndex: '1000' }}>
               {/* New school */}
               <div
                 className="create-menu-item"
