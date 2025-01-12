@@ -62,16 +62,16 @@ const CourseDetails = () => {
         });
     };
 
-    const toggleAllSections = () => {
-        if (typeof window !== 'undefined') {
-            const allExpanded = document.querySelectorAll('.section').length === expandedSections.length;
-            if (allExpanded) {
-                setExpandedSections([]);
-            } else {
-                setExpandedSections(Array.from(Array(document.querySelectorAll('.section').length).keys()));
-            }
-        }
-    };
+    // const toggleAllSections = () => {
+    //     if (typeof window !== 'undefined') {
+    //         const allExpanded = document.querySelectorAll('.section').length === expandedSections.length;
+    //         if (allExpanded) {
+    //             setExpandedSections([]);
+    //         } else {
+    //             setExpandedSections(Array.from(Array(document.querySelectorAll('.section').length).keys()));
+    //         }
+    //     }
+    // };
     
 
     const handleModalClose = () => {
