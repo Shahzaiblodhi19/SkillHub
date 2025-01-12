@@ -63,49 +63,52 @@ const CourseDetails = () => {
     };
 
     const toggleAllSections = () => {
-        const allExpanded = document.querySelectorAll('.section').length === expandedSections.length;
-        if (allExpanded) {
-            setExpandedSections([]);
-        } else {
-            setExpandedSections(Array.from(Array(document.querySelectorAll('.section').length).keys()));
+        if (typeof window !== 'undefined') {
+            const allExpanded = document.querySelectorAll('.section').length === expandedSections.length;
+            if (allExpanded) {
+                setExpandedSections([]);
+            } else {
+                setExpandedSections(Array.from(Array(document.querySelectorAll('.section').length).keys()));
+            }
         }
     };
+    
 
     const handleModalClose = () => {
         setModalActive(false);
     };
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined') {
-    //         // Hover Effect
-    //         const courseCards = document.querySelectorAll('.course-card');
-    //         courseCards.forEach((card) => {
-    //             card.addEventListener('mouseenter', () => {
-    //                 card.style.transform = 'translateY(-4px)';
-    //                 card.style.transition = 'transform 0.3s ease';
-    //             });
-    //             card.addEventListener('mouseleave', () => {
-    //                 card.style.transform = 'translateY(0)';
-    //             });
-    //         });
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            // Hover Effect
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach((card) => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                    card.style.transition = 'transform 0.3s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
     
-    //         // Add ripple effect to buttons
-    //         const buttons = document.querySelectorAll('.add-to-cart');
-    //         buttons.forEach((button) => {
-    //             button.addEventListener('click', (e) => {
-    //                 const ripple = document.createElement('div');
-    //                 ripple.classList.add('ripple');
-    //                 const rect = button.getBoundingClientRect();
-    //                 const size = Math.max(rect.width, rect.height);
-    //                 ripple.style.width = `${size}px`;
-    //                 ripple.style.height = `${size}px`;
-    //                 ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
-    //                 ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-    //                 button.appendChild(ripple);
-    //                 setTimeout(() => ripple.remove(), 600);
-    //             });
-    //         });
-    //     }
-    // }, []);
+            // Add ripple effect to buttons
+            const buttons = document.querySelectorAll('.add-to-cart');
+            buttons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    const ripple = document.createElement('div');
+                    ripple.classList.add('ripple');
+                    const rect = button.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.style.width = `${size}px`;
+                    ripple.style.height = `${size}px`;
+                    ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+                    ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+                    button.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        }
+    }, []);
     
     
     const courses = [
