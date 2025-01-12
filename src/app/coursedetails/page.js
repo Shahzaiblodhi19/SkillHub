@@ -87,7 +87,7 @@ const CourseDetails = () => {
                     card.style.transform = 'translateY(0)';
                 });
             });
-
+    
             // Add ripple effect to buttons
             const buttons = document.querySelectorAll('.add-to-cart');
             buttons.forEach((button) => {
@@ -106,6 +106,7 @@ const CourseDetails = () => {
             });
         }
     }, []);
+    
     const courses = [
         {
             id: 1,
