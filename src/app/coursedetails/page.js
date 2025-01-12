@@ -75,34 +75,36 @@ const CourseDetails = () => {
         setModalActive(false);
     };
     useEffect(() => {
-        // Hover Effect
-        const courseCards = document.querySelectorAll('.course-card');
-        courseCards.forEach((card) => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-4px)';
-                card.style.transition = 'transform 0.3s ease';
+        if (typeof window !== 'undefined') {
+            // Hover Effect
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach((card) => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                    card.style.transition = 'transform 0.3s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
             });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
 
-        // Add ripple effect to buttons
-        const buttons = document.querySelectorAll('.add-to-cart');
-        buttons.forEach((button) => {
-            button.addEventListener('click', (e) => {
-                const ripple = document.createElement('div');
-                ripple.classList.add('ripple');
-                const rect = button.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                ripple.style.width = `${size}px`;
-                ripple.style.height = `${size}px`;
-                ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
-                ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-                button.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
+            // Add ripple effect to buttons
+            const buttons = document.querySelectorAll('.add-to-cart');
+            buttons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    const ripple = document.createElement('div');
+                    ripple.classList.add('ripple');
+                    const rect = button.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.style.width = `${size}px`;
+                    ripple.style.height = `${size}px`;
+                    ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+                    ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+                    button.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
             });
-        });
+        }
     }, []);
     const courses = [
         {
@@ -437,7 +439,7 @@ const CourseDetails = () => {
                                 <div class="stat-value">Beg. & Int.</div>
                             </div>
 
-                            <div class="stat-item" style={{flexDirection: 'column`'}}       >
+                            <div class="stat-item" style={{ flexDirection: 'column`' }}       >
                                 <div class="stat-label-group">
                                     <svg class="stat-icon" viewBox="0 0 32 32">
                                         <path fill="#4F4F4F" d="M6.66667 7.66406C5.75228 7.66406 5 8.41635 5 9.33073V22.6641C5 23.1061 5.17559 23.53 5.48816 23.8426C5.80072 24.1551 6.22464 24.3307 6.66667 24.3307H13.3333C13.8856 24.3307 14.3333 24.7784 14.3333 25.3307C14.3333 25.883 13.8856 26.3307 13.3333 26.3307H6.66667C5.69421 26.3307 4.76157 25.9444 4.07394 25.2568C3.38631 24.5692 3 23.6365 3 22.6641V9.33073C3 7.31178 4.64772 5.66406 6.66667 5.66406H25.3333C26.3058 5.66406 27.2384 6.05037 27.9261 6.738C28.6137 7.42564 29 8.35827 29 9.33073V22.6651C28.9993 23.3081 28.8296 23.9396 28.5078 24.4963C28.186 25.053 27.7235 25.5153 27.1667 25.8368C26.6884 26.1129 26.0768 25.949 25.8006 25.4707C25.5245 24.9924 25.6884 24.3808 26.1667 24.1047C26.4198 23.9586 26.63 23.7484 26.7763 23.4954C26.9226 23.2424 26.9997 22.9553 27 22.663V9.33073C27 8.8887 26.8244 8.46478 26.5118 8.15222C26.1993 7.83966 25.7754 7.66406 25.3333 7.66406H6.66667Z" clip-rule="evenodd" fill-rule="evenodd"></path>
@@ -458,7 +460,7 @@ const CourseDetails = () => {
                                         <path fill="#4F4F4F" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441C9.09203 3.29004 9.08325 3.31123 9.08325 3.33333V8.33333C9.08325 8.35543 9.09203 8.37663 9.10766 8.39226C9.12329 8.40789 9.14448 8.41667 9.16659 8.41667H14.9999C15.1988 8.41667 15.3896 8.49569 15.5302 8.63634L16.7499 9.85601V3.33333C16.7499 3.31123 16.7411 3.29003 16.7255 3.27441C16.7099 3.25878 16.6887 3.25 16.6666 3.25H9.16659Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                     </svg>
                                     <div class="stat-label">Community</div>
-                                </div> 
+                                </div>
                                 <div class="stat-value verified cursor-pointer" onClick={() => setincludedTooltip(!includedTooltip)}>
                                     <svg fill="none" viewBox="0 0 32 32">
                                         <path stroke-width="2.13599" stroke="#13C4CC" d="M9.90625 16.5733L13.5982 20.4108L22.4576 12.1875"></path>
