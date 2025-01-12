@@ -861,6 +861,8 @@ export default function ProductsPage() {
                             window.location.href = "/editsettingpricepage?tab=Settings";
                           } else if (item.text === "Edit Price") {
                             window.location.href = "/editsettingpricepage?tab=Pricing";
+                          } else if (item.text === "View Course Details Page") {
+                            window.location.href = "/coursedetails";
                           } else {
                             if (item.modal) handleOpenModal(item.modal);
                           }
@@ -1538,7 +1540,6 @@ export default function ProductsPage() {
                       <span className="count">{item.count}</span>
                     </div>
                   </div>
-
                 ))}
               </div>
             }
