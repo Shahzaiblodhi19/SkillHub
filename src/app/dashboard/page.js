@@ -317,12 +317,12 @@ export default function Dashboard() {
                         {contentInProgress.map((item, index) => (
                             <div
                                 key={index}
-                                className="p-4 flex items-center space-y-2 border gap-3"
+                                className="p-3 p-md-4 flex flex-col md:flex-row items-center space-y-2 border gap-3"
                             >
                                 <img
                                     src={item.placeholderImage}
                                     alt={item.title}
-                                    className='rounded-sm'
+                                    className='rounded-sm dashboard-img'
                                     style={{ objectFit: 'cover', height: '150px', width: '115px' }}
                                 />
                                 <div className='info mt-0'>
@@ -368,12 +368,12 @@ export default function Dashboard() {
                                 <div className='' key={index}>
                                     <div className='border text-lg font-bold px-4 py-3'>{item.mainTitle} ({item.productsLength})</div>
                                     <div
-                                        className="p-4 flex items-center space-y-2 border gap-3"
+                                        className="p-3 p-md-4 flex flex-col md:flex-row items-center space-y-2 border gap-3"
                                     >
                                         <img
                                             src={item.placeholderImage}
                                             alt={item.title}
-                                            className='rounded-sm'
+                                            className='rounded-sm dashboard-img'
                                             style={{ objectFit: 'cover', height: '150px', width: '115px' }}
                                         />
                                         <div className='info mt-0'>

@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MyContext } from "../layout";
 import { FaBullhorn, FaNewspaper, FaStar, FaQuestionCircle, FaComments } from "react-icons/fa";
 
@@ -11,7 +11,7 @@ const EditPagesettingPrice = () => {
     const [url, setUrl] = useState("");
     const [charCount, setCharCount] = useState(0);
     const context = useContext(MyContext);
-    const [activeTab, setActiveTab] = useState("Pricing");
+    const [activeTab, setActiveTab] = useState("Outline");
 
     const generateRandomString = (length) => {
         const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -637,6 +637,8 @@ const EditPagesettingPrice = () => {
             [index]: !prevState[index],
         }));
     };
+
+
     const toggleExpand2 = (index) => {
         setExpandedState2((prevState) => ({
             ...prevState,
@@ -898,6 +900,59 @@ const EditPagesettingPrice = () => {
         }
     }, []); // Empty dependency array ensures this runs once on mount
 
+    const [isSectionExpanded, setIsSectionExpanded] = useState(true);
+    const [OutlineExpandedState11, setOutlineExpandedState11] = useState(true);
+    const [OutlineExpandedState12, setOutlineExpandedState12] = useState(true);
+    const [OutlineExpandedState13, setOutlineExpandedState13] = useState(true);
+    const [isSectionExpanded2, setIsSectionExpanded2] = useState(false);
+    const [isSectionExpanded3, setIsSectionExpanded3] = useState(false);
+    const [isSectionExpanded4, setIsSectionExpanded4] = useState(true);
+    const [OutlineExpandedState4, setOutlineExpandedState4] = useState(false);
+    const [OutlineExpandedState42, setOutlineExpandedState42] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isEditVideo, setisEditVideo] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef(null);
+    const dropdownRef = useRef(null);
+
+    const handleexpandAllOutline = () => {
+        setOutlineExpandedState42(true);
+        setOutlineExpandedState4(true);
+        setIsSectionExpanded4(true);
+        setIsSectionExpanded3(true);
+        setIsSectionExpanded2(true);
+        setOutlineExpandedState13(true);
+        setOutlineExpandedState12(true);
+        setOutlineExpandedState11(true);
+        setIsSectionExpanded(true);
+    }
+    const handleDropdownToggle = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleOutsideClick = (e) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+            setIsDropdownOpen(false);
+            setIsDropdownOpen(false)
+        }
+    };
+
+    const togglePlayPause = () => {
+        if (videoRef.current.paused) {
+            videoRef.current.play();
+            setIsPlaying(true);
+        } else {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleOutsideClick);
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, []);
 
     return (
         <div className="container-fluid p-0" style={{ background: '#f2f2f2' }}>
@@ -1527,131 +1582,129 @@ const EditPagesettingPrice = () => {
                     {activeTab === "Landing Page" && (
                         <>
                             <div className="row justify-between w-100 pl-10 pr-4 ">
-                                <div className="col-xl-5 col-md-12 pt-3 pl-0 mb-3 mb-xl-0">
-                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '500' }}>Event Details</h2>
-                                    <p style={{ fontSize: '15px', color: 'grey' }}>Enter the basic event details such as the title and description. We'll use your title to generate the URL.</p>
+                                <div className="col-xl-5 col-md-12 pt-3 pl-0 mb-3 mb-xl-0 pr-5">
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '500' }}>Promotional Video</h2>
+                                    <p style={{ fontSize: '15px', color: 'grey' }}>Your promo video is a quick and compelling way for students to preview what they’ll learn in your course. Students considering your course are more likely to enroll if your promo video is well-made.</p>
                                 </div>
                                 <div className="bg-white col-xl-7 col-md-12 border rounded">
-                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
-                                        <h2 className="popup-title mb-1" style={{ fontSize: '16px', fontWeight: '500' }}>Event Details</h2>
-                                        <form onSubmit={handleSubmit} id="courseForm">
-                                            <div className="form-group mt-4">
-                                                <label className="form-label" htmlFor="courseTitle">
-                                                    Event Title
-                                                </label>
-                                                <span className="char-counter">{charCount}/60</span>
-                                                <input
-                                                    type="text"
-                                                    id="courseTitle"
-                                                    className="input-field"
-                                                    placeholder="e.g., UX Design Masterclass"
-                                                    maxLength="60"
-                                                    value={title}
-                                                    onChange={handleTitleChange}
-                                                    required
+                                    <div className="popup-content pb-4.5 pt-4.5 px-2 -lg">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-1/4 relative">
+                                                <img
+                                                    src="https://i.ibb.co/jJ4GHXP/img1.jpg" // Replace with any image URL
+                                                    alt="Promotional Video"
+                                                    className="rounded-md object-cover w-full h-24"
                                                 />
+                                                <button
+                                                    onClick={togglePlayPause}
+                                                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-10 rounded-md"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="#13C4CC"
+                                                        viewBox="0 0 24 24"
+                                                        className="w-12 h-12  rounded-full"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M5.25 5.25v13.5L18 12 5.25 5.25z"
+                                                        />
+                                                    </svg>
+                                                </button>
                                             </div>
+                                            <div>
+                                                {/* Video Details */}
+                                                <div className="flex-1">
+                                                    <h3 className="text-sm font-medium text-gray-500">Promotional video</h3>
+                                                </div>
 
-                                            <div className="form-group">
-                                                <label className="form-label" htmlFor="courseUrl">
-                                                    Event URL
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="courseUrl"
-                                                    className="input-field readonly"
-                                                    value={url}
-                                                    readOnly
-                                                />
-                                            </div>
-
-                                            <div className="form-group rounded-lg">
-                                                <label className="form-label">
-                                                    Description
-                                                </label>
-                                                <div className="rich-text-editor">
-                                                    <div className="editor-toolbar">
+                                                {/* Edit Video Dropdown */}
+                                                <div className="relative" style={{ marginTop: '48px' }}>
+                                                    <div className="flex items-center justify-between">
                                                         <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="undo"
-                                                            onClick={() => handleToolbarClick('undo')}
+                                                            onClick={() => setisEditVideo(!isEditVideo)}
+                                                            className="flex items-center gap-1.5 fw-medium text-sm border-2 rounded-full  px-3 py-1"
                                                         >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="redo"
-                                                            onClick={() => handleToolbarClick('redo')}
-                                                        >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="bold"
-                                                            onClick={() => handleToolbarClick('bold')}
-                                                        >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="italic"
-                                                            onClick={() => handleToolbarClick('italic')}
-                                                        >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="underline"
-                                                            onClick={() => handleToolbarClick('underline')}
-                                                        >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="insertOrderedList"
-                                                            onClick={() => handleToolbarClick('insertOrderedList')}
-                                                        >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="editor-button"
-                                                            data-command="insertUnorderedList"
-                                                            onClick={() => handleToolbarClick('insertUnorderedList')}
-                                                        >
-                                                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
+                                                            Edit Video <svg className="w-4 h-4"
+                                                                style={{ transform: isEditVideo ? 'rotate(180deg)' : 'rotate(0deg)',transition: 'transform all 0.3s ease' }}
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                                             </svg>
                                                         </button>
                                                     </div>
-                                                    <div
-                                                        className="editor-content"
-                                                        id="description"
-                                                        contentEditable="true"
-                                                        style={{ fontSize: '13px' }}
-                                                        onInput={handleDescriptionChange}
-                                                    ></div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
+                                        {isEditVideo && (
+                                            <div className="w-100 mt-3" >
+                                                {/* Video Section */}
+                                                <h2 className="text-sm font-semibold mb-2">Course Video Preview</h2>
+                                                <div className="relative">
+                                                    <video
+                                                        ref={videoRef}
+                                                        className="w-full h-auto rounded-md"
+                                                        poster="https://via.placeholder.com/800x450.png?text=Video+Preview"
+                                                        controls
+                                                    >
+                                                        <source
+                                                            src="https://www.w3schools.com/html/mov_bbb.mp4"
+                                                            type="video/mp4"
+                                                        />
+                                                        Your browser does not support the video tag.
+                                                    </video>
+
+                                                    {/* Play Button Overlay */}
+                                                    {!isPlaying && (
+                                                        <button
+                                                            onClick={togglePlayPause}
+                                                            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 rounded-md"
+                                                        >
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="#13C4CC"
+                                                                viewBox="0 0 24 24"
+                                                                className="w-16 h-16  rounded-full"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    d="M5.25 5.25v13.5L18 12 5.25 5.25z"
+                                                                />
+                                                            </svg>
+                                                        </button>
+                                                    )}
+                                                </div>
+
+                                                {/* Video Actions */}
+                                                <div className="mt-3 relative" >
+                                                    <div className="flex items-center justify-between">
+                                                        <button
+                                                            onClick={handleDropdownToggle}
+                                                            className="flex items-center gap-1.5 fw-medium text-sm"
+                                                        >
+                                                            Video Actions <svg className="w-4 h-4"
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </button>
+                                                        <span className="text-sm">Use current frame as thumbnail</span>
+                                                    </div>
+                                                    {isDropdownOpen && (
+                                                        <div className="dropdown absolute mt-2 bg-white border border-gray-300 rounded-md shadow-md w-40" style={{ zIndex: '1000' }}>
+                                                            <ul className="text-sm">
+                                                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                                                    Replace Video
+                                                                </li>
+                                                                <li className="px-4 py-2 text-red-500 hover:bg-red-100 cursor-pointer">
+                                                                    Remove Video
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -2949,6 +3002,381 @@ const EditPagesettingPrice = () => {
                                             </div>
                                         )
                                     })}
+                                </div>
+                            </div>
+                        </>
+                    )}
+                    {activeTab === "Outline" && (
+                        <>
+                            <div className="row checklist-modal justify-between w-100 pl-10 pr-4 ">
+                                <div className="course-content col-12 border rounded">
+                                    <div className="content-header px-3">
+                                        <div className="header-left">
+                                            <h1 className="header-title">Outline</h1>
+                                        </div>
+                                        <span className="hover:underline cursor-pointer" onClick={handleexpandAllOutline} style={{ color: '#13C4CC' }}>Expand all sections</span>
+                                    </div>
+                                    <div className={`section ${isSectionExpanded === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
+                                        <div className="section-header mb-0" onClick={() => setIsSectionExpanded(!isSectionExpanded)}>
+                                            <div className="header-left">
+                                                <div className="section-title mb-0"><span className="text-sm mr-4">Section 1:</span> Course Introduction & Setup</div>
+                                            </div>
+                                            <div className="header-right">
+                                                <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        {isSectionExpanded &&
+                                            <div className="section-content" >
+                                                <div className="checklist-item">
+                                                    <div className="item-header" >
+                                                        <div className="item-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div className="item-title">Course Introduction & Overview</div>
+                                                        <button className="fix-button">Upload Preview</button>
+                                                        <div className="item-expand" onClick={() => setOutlineExpandedState11(!OutlineExpandedState11)}>
+                                                            <svg style={{
+                                                                transform: OutlineExpandedState11 ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                transition: 'transform 0.2s ease',
+                                                            }}
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div className={`item-details ${OutlineExpandedState11 ? 'expanded' : ''
+                                                        }`}>
+                                                        <div>
+                                                            <label
+                                                                htmlFor="learning-unit-id"
+                                                                className="block text-sm font-medium text-gray-700 mt-2"
+                                                            >
+                                                                Learning Unit ID
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="learning-unit-id"
+                                                                value="674376cbbb11ae864a00abed"
+                                                                readOnly
+                                                                className="mt-2 school-inputs"
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                htmlFor="learning-unit-subtitle"
+                                                                className="block text-sm font-medium text-gray-700 mt-3"
+                                                            >
+                                                                Learning Unit Subtitle
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="learning-unit-subtitle"
+                                                                value="Comprehensive introduction to the course curriculum and learning objectives"
+                                                                readOnly
+                                                                className="mt-2 school-inputs"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="checklist-item mt-4" style={{ overflow: 'visible' }}>
+                                                    <div className="item-header" >
+                                                        <div className="item-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div className="item-title">Course Resources & Materials</div>
+                                                        <button className="fix-button text-danger">Delete Preview</button>
+                                                        <div className="item-expand" onClick={() => setOutlineExpandedState12(!OutlineExpandedState12)}>
+                                                            <svg style={{
+                                                                transform: OutlineExpandedState12 ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                transition: 'transform 0.2s ease',
+                                                            }}
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div className={`item-details ${OutlineExpandedState12 ? 'expanded' : ''
+                                                        }`}>
+                                                        <div>
+                                                            <label
+                                                                htmlFor="learning-unit-id"
+                                                                className="block text-sm font-medium text-gray-700 mt-2"
+                                                            >
+                                                                Learning Unit ID
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="learning-unit-id"
+                                                                value="674376cbbb11ae864a00abed"
+                                                                readOnly
+                                                                className="mt-2 school-inputs"
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                htmlFor="learning-unit-subtitle"
+                                                                className="block text-sm font-medium text-gray-700 mt-3"
+                                                            >
+                                                                Learning Unit Subtitle
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="learning-unit-subtitle"
+                                                                value="Comprehensive introduction to the course curriculum and learning objectives"
+                                                                readOnly
+                                                                className="mt-2 school-inputs"
+                                                            />
+                                                        </div>
+                                                        <div className="w-100 mt-3" >
+                                                            {/* Video Section */}
+                                                            <h2 className="text-sm font-semibold mb-2">Course Video Preview</h2>
+                                                            <div className="relative">
+                                                                <video
+                                                                    ref={videoRef}
+                                                                    className="w-full h-auto rounded-md"
+                                                                    poster="https://via.placeholder.com/800x450.png?text=Video+Preview"
+                                                                    controls
+                                                                >
+                                                                    <source
+                                                                        src="https://www.w3schools.com/html/mov_bbb.mp4"
+                                                                        type="video/mp4"
+                                                                    />
+                                                                    Your browser does not support the video tag.
+                                                                </video>
+
+                                                                {/* Play Button Overlay */}
+                                                                {!isPlaying && (
+                                                                    <button
+                                                                        onClick={togglePlayPause}
+                                                                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 rounded-md"
+                                                                    >
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="#13C4CC"
+                                                                            viewBox="0 0 24 24"
+                                                                            className="w-16 h-16  rounded-full"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                d="M5.25 5.25v13.5L18 12 5.25 5.25z"
+                                                                            />
+                                                                        </svg>
+                                                                    </button>
+                                                                )}
+                                                            </div>
+
+                                                            {/* Video Actions */}
+                                                            <div className="mt-3 relative" >
+                                                                <div className="flex items-center justify-between">
+                                                                    <button
+                                                                        onClick={handleDropdownToggle}
+                                                                        className="flex items-center gap-1.5 fw-medium text-sm"
+                                                                    >
+                                                                        Video Actions <svg className="w-4 h-4"
+                                                                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                                        </svg>
+                                                                    </button>
+                                                                    <span className="text-sm">Use current frame as thumbnail</span>
+                                                                </div>
+                                                                {isDropdownOpen && (
+                                                                    <div className="dropdown absolute mt-2 bg-white border border-gray-300 rounded-md shadow-md w-40" style={{ zIndex: '1000' }}>
+                                                                        <ul className="text-sm">
+                                                                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                                                                Replace Video
+                                                                            </li>
+                                                                            <li className="px-4 py-2 text-red-500 hover:bg-red-100 cursor-pointer">
+                                                                                Remove Video
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="checklist-item">
+                                                    <div className="item-header" >
+                                                        <div className="item-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div className="item-title">Setup & Installation Guide</div>
+                                                        <button className="fix-button">Upload Preview</button>
+                                                        <div className="item-expand" onClick={() => setOutlineExpandedState13(!OutlineExpandedState13)}>
+                                                            <svg style={{
+                                                                transform: !OutlineExpandedState13 ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                transition: 'transform 0.2s ease',
+                                                            }}
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    {/* <div className={`item-details ${!OutlineExpandedState ? 'expanded' : ''
+                                                                }`}>
+                                                                <div>
+                                                                    <label
+                                                                        htmlFor="learning-unit-id"
+                                                                        className="block text-sm font-medium text-gray-700 mt-2"
+                                                                    >
+                                                                        Learning Unit ID
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="learning-unit-id"
+                                                                        value="674376cbbb11ae864a00abed"
+                                                                        readOnly
+                                                                        className="mt-2 school-inputs"
+                                                                    />
+                                                                </div>
+                                                                <div>
+                                                                    <label
+                                                                        htmlFor="learning-unit-subtitle"
+                                                                        className="block text-sm font-medium text-gray-700 mt-3"
+                                                                    >
+                                                                        Learning Unit Subtitle
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="learning-unit-subtitle"
+                                                                        value="Comprehensive introduction to the course curriculum and learning objectives"
+                                                                        readOnly
+                                                                        className="mt-2 school-inputs"
+                                                                    />
+                                                                </div>
+                                                            </div> */}
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className={`section ${isSectionExpanded2 === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
+                                        <div className="section-header mb-0" onClick={() => setIsSectionExpanded2(!isSectionExpanded2)}>
+                                            <div className="header-left">
+                                                <div className="section-title mb-0"><span className="text-sm mr-4">Section 2:</span> Fundamentals Concepts</div>
+                                            </div>
+                                            <div className="header-right">
+                                                <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={`section ${isSectionExpanded3 === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
+                                        <div className="section-header mb-0" onClick={() => setIsSectionExpanded3(!isSectionExpanded3)}>
+                                            <div className="header-left">
+                                                <div className="section-title mb-0"><span className="text-sm mr-4">Section 3:</span> Advanced Topics</div>
+                                            </div>
+                                            <div className="header-right">
+                                                <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={`section ${isSectionExpanded4 === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
+                                        <div className="section-header mb-0" onClick={() => setIsSectionExpanded4(!isSectionExpanded4)}>
+                                            <div className="header-left">
+                                                <div className="section-title mb-0"><span className="text-sm mr-4">Section 4:</span> Advanced Course Topics & Guide</div>
+                                            </div>
+                                            <div className="header-right">
+                                                <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        {isSectionExpanded4 &&
+                                            <div className="section-content" >
+                                                <div className="checklist-item">
+                                                    <div className="item-header" >
+                                                        <div className="item-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div className="item-title">Course Advanced Topics</div>
+                                                        <button className="fix-button">Upload Preview</button>
+                                                        <div className="item-expand" onClick={() => setOutlineExpandedState4(!OutlineExpandedState4)}>
+                                                            <svg style={{
+                                                                transform: OutlineExpandedState4 ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                transition: 'transform 0.2s ease',
+                                                            }}
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div className={`item-details ${OutlineExpandedState4 ? 'expanded' : ''
+                                                        }`}>
+                                                        <div>
+                                                            <label
+                                                                htmlFor="learning-unit-id"
+                                                                className="block text-sm font-medium text-gray-700 mt-2"
+                                                            >
+                                                                Learning Unit ID
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="learning-unit-id"
+                                                                value="674376cbbb11ae864a00abed"
+                                                                readOnly
+                                                                className="mt-2 school-inputs"
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                htmlFor="learning-unit-subtitle"
+                                                                className="block text-sm font-medium text-gray-700 mt-3"
+                                                            >
+                                                                Learning Unit Subtitle
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="learning-unit-subtitle"
+                                                                value="Comprehensive introduction to the course curriculum and learning objectives"
+                                                                readOnly
+                                                                className="mt-2 school-inputs"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="checklist-item mt-4" style={{ overflow: 'visible' }}>
+                                                    <div className="item-header" >
+                                                        <div className="item-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div className="item-title">Course PDF & Materials</div>
+                                                        <button className="fix-button text-danger">Delete Preview</button>
+                                                        <div className="item-expand" onClick={() => setOutlineExpandedState42(!OutlineExpandedState42)}>
+                                                            <svg style={{
+                                                                transform: OutlineExpandedState42 ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                transition: 'transform 0.2s ease',
+                                                            }}
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </>

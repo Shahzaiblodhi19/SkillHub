@@ -384,7 +384,7 @@ export default function Explore() {
         };
     }, []);
     return (
-        <div style={{ padding: "10px", fontFamily: "Arial, sans-serif" }}>
+        <div className="explorecontainer" style={{ padding: "10px", fontFamily: "Arial, sans-serif" }}>
             {/* Tabs */}
             <div className="flex shadow-md items-center py-3 px-4 w-100 items-center responsive-tab-container gap-4" style={{ marginBottom: "20px", display: "flex", background: '#fff', borderRadius: '15px' }}>
                 <div className="responsive-tab-list"

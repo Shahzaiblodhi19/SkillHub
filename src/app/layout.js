@@ -14,7 +14,9 @@ import Playlist from './components/PlayList';
 import SupportModal from './components/SupportModal';
 import ResponsiveSidebar from './components/ResponsiveSidebar';
 import BottomNavigation from './components/ResponsiveFooter';
-
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the Font Awesome CSS
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 // export const metadata = {
 //   title: "Skill Hub",
 //   description: "A Platform for Teaching and Buy Courses",
@@ -216,7 +218,7 @@ export default function RootLayout({ children }) {
                 <BillingInvoicesModal />
                 <AddInstructorModal />
                 <AddTeamMemberModal />
-                <div className='PagesContent h-full' style={{ padding: '20px', background: '#F2F2F2', overflowY: 'auto' }}>
+                <div className='PagesContent h-full' style={{ padding: isSmallMobileView ?  '10px 10px 35px 10px' : '20px', background: '#F2F2F2', overflowY: 'auto' }}>
                   {children}
                 </div>
                 {/* Home Page should be here */}

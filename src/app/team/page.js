@@ -118,7 +118,7 @@ export default function TeamMembers() {
                     Co-Instructors
                 </button>
             </div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between flex-col gap-3 md:gap-0 items-start md:flex-row md:items-center mb-4">
                 <h2 className="text-xl font-bold">{activeTab === 'Team' ? 'Team Members' : ''}{activeTab === 'Co-Instructors' ? 'Instructors' : ''}</h2>
                 <button onClick={() => {
                     if (activeTab === "Team") {
@@ -134,7 +134,7 @@ export default function TeamMembers() {
             {activeTab === 'Team' ?
                 <>
                     <div className="flex flex-col md:flex-row items-end md:items-center gap-3 md:gap-0 justify-between mb-4 w-100">
-                        <div className="flex items-center gap-3 w-100">
+                        <div className="flex items-center flex-col md:flex-row items-end md:items-center gap-3 md:gap-0 w-100">
                             <div className="relative">
                                 <select
                                     value={statusFilter}
@@ -329,7 +329,7 @@ export default function TeamMembers() {
             {activeTab === 'Co-Instructors' ?
                 <>
                     <div className="flex flex-col md:flex-row items-end md:items-center gap-3 md:gap-0 justify-between mb-4 w-100">
-                        <div className="flex items-center gap-3 w-100">
+                        <div className="flex flex-col md:flex-row items-end md:items-center gap-3 md:gap-0 w-100">
                             <div className="relative">
                                 <select
                                     value={statusFilter}
