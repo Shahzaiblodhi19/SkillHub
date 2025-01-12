@@ -107,6 +107,7 @@ const CourseDetails = () => {
         }
     }, []);
     
+    
     const courses = [
         {
             id: 1,
