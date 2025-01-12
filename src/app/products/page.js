@@ -862,7 +862,7 @@ export default function ProductsPage() {
                           } else if (item.text === "Edit Price") {
                             window.location.href = "/editsettingpricepage?tab=Pricing";
                           } else if (item.text === "View Course Details Page") {
-                            window.location.href = "/coursedetails";
+                            <Link to="/coursedetails">{item.text}</Link>
                           } else {
                             if (item.modal) handleOpenModal(item.modal);
                           }
