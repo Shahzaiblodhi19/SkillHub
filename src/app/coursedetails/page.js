@@ -62,17 +62,17 @@ const CourseDetails = () => {
         });
     };
 
-    // const toggleAllSections = () => {
-    //     if (typeof window !== 'undefined') {
-    //         const allExpanded = document.querySelectorAll('.section').length === expandedSections.length;
-    //         if (allExpanded) {
-    //             setExpandedSections([]);
-    //         } else {
-    //             setExpandedSections(Array.from(Array(document.querySelectorAll('.section').length).keys()));
-    //         }
-    //     }
-    // };
-    
+    const toggleAllSections = () => {
+        if (typeof window !== 'undefined') {
+            const allExpanded = document.querySelectorAll('.section').length === expandedSections.length;
+            if (allExpanded) {
+                setExpandedSections([]);
+            } else {
+                setExpandedSections(Array.from(Array(document.querySelectorAll('.section').length).keys()));
+            }
+        }
+    };
+
 
     const handleModalClose = () => {
         setModalActive(false);
@@ -90,7 +90,7 @@ const CourseDetails = () => {
                     card.style.transform = 'translateY(0)';
                 });
             });
-    
+
             // Add ripple effect to buttons
             const buttons = document.querySelectorAll('.add-to-cart');
             buttons.forEach((button) => {
@@ -109,8 +109,8 @@ const CourseDetails = () => {
             });
         }
     }, []);
-    
-    
+
+
     const courses = [
         {
             id: 1,
@@ -807,9 +807,21 @@ const CourseDetails = () => {
                                 <h1>Course Content</h1>
                                 <div className="content-stats">
                                     <span>21 sections • 344 lectures • 29h 40m total length</span>
-                                    <button className="expand-all" onClick={toggleAllSections}>
-                                        {expandedSections.length === document.querySelectorAll('.section').length ? 'Collapse all sections' : 'Expand all sections'}
+                                    <button
+                                        className="expand-all"
+                                        onClick={() => {
+                                            if (typeof document !== 'undefined') {
+                                                const allSections = document.querySelectorAll('.section').length;
+                                                toggleAllSections(allSections);
+                                            }
+                                        }}
+                                    >
+                                        {typeof document !== 'undefined' &&
+                                            expandedSections.length === document.querySelectorAll('.section').length
+                                            ? 'Collapse all sections'
+                                            : 'Expand all sections'}
                                     </button>
+
                                 </div>
                             </div>
 
