@@ -244,13 +244,13 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                                 </Link>
                             </li>
                             <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={() => handleSidebarLinks('My Learning')}>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/mylearning"
                                     className="flex items-center p-2 "
                                 >
                                     <svg width={16} height={16} style={{ marginRight: '10px' }} viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M16.73 1l.6.998.997.598-.998.6-.599.997-.598-.998-.998-.599.998-.598L16.73 1zm4.706 6.227a.72.72 0 01.284.573v1.45h2.03v14.5H.25V9.25h2.03V7.8a.72.72 0 01.913-.694L12 9.562l8.807-2.456a.72.72 0 01.629.12zm-8.716 3.628v10.397l7.56-2.108V8.748l-7.56 2.107zm-1.44 10.397V10.856L3.72 8.748v10.396l7.56 2.108zm-1.781.998H1.75v-11.5h.53v8.94a.72.72 0 00.527.694l6.692 1.866zm12.221-2.56v-8.94h.53v11.5h-7.749l6.692-1.866a.72.72 0 00.527-.694zM13.898 4.344L13 2.847l-.898 1.496-1.497.898 1.497.898L13 7.636l.898-1.497 1.497-.898-1.497-.898z" fill="#4F4F4F"></path></svg>
                                     <span>My Learning</span>
-                                </a>
+                                </Link>
                             </li>
                             <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Learner Report')}>
                                 <Link

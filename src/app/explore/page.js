@@ -208,6 +208,9 @@ export default function Explore() {
     const [displayedCourses3, setDisplayedCourses3] = useState(
         allCourses.slice(0, coursesPerPage)
     );
+    const [Bundle, setBundle] = useState(
+        allCourses.slice(0, coursesPerPage)
+    );
     const [AllCourses, setAllCourses] = useState(
         allCourses.slice(0, 10)
     );
@@ -265,38 +268,52 @@ export default function Explore() {
         setTopicsShow(true);
         setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
         setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+        setBundle(allCourses.slice(0, coursesPerPage))
         setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
         if (tab === "All") {
             setAllCourses(allCourses.slice(0, 10));
         } else if (tab === "Courses") {
+            setBundle(allCourses.slice(0, coursesPerPage))
             setAllCourses(allCourses.slice(0, 8));
-            setTopicsShow(false);
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
+            setTopicsShow(true);
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
         } else if (tab === "Sessions") {
-            setTopicsShow(false);
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
+            setTopicsShow(true);
+            setBundle(allCourses.slice(0, coursesPerPage))
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
             setAllCourses(allCourses.slice(3, 8));
         } else if (tab === "Communities") {
-            setTopicsShow(false);
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
+            setTopicsShow(true);
+            setBundle(allCourses.slice(0, coursesPerPage))
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
             setAllCourses(allCourses.slice(2, 9));
         } else if (tab === "Instructors") {
-            setDisplayedCourses3([]);
-            setTopicsShow(false);
-            setDisplayedCourses2([]);
-            setDisplayedCourses([]);
+            setTopicsShow(true);
+            setBundle(allCourses.slice(0, coursesPerPage))
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
             setAllCourses(allCourses.slice(4, 12));
         } else if (tab === "Subscriptions") {
-            setDisplayedCourses3([]);
-            setDisplayedCourses2([]);
-            setTopicsShow(false);
-            setDisplayedCourses([]);
+            setBundle(allCourses.slice(0, coursesPerPage))
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setTopicsShow(true);
+            setAllCourses(allCourses.slice(2, 10));
+        }
+        else if (tab === "Bundles") {
+            setBundle(allCourses.slice(0, coursesPerPage))
+            setDisplayedCourses(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses2(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setDisplayedCourses3(allCourses.slice(0, coursesPerPage)); // Show only 4 courses
+            setTopicsShow(true);
             setAllCourses(allCourses.slice(2, 10));
         }
     };
@@ -426,6 +443,11 @@ export default function Explore() {
                                 <path fill="currentColor" d="M17 12.7992V13.5992C17.4418 13.5992 17.8 13.241 17.8 12.7992H17ZM17 8.39922H17.8C17.8 7.95739 17.4418 7.59922 17 7.59922V8.39922ZM4.96739 4.12628C4.59574 4.3652 4.48814 4.86017 4.72706 5.23183C4.96598 5.60348 5.46095 5.71108 5.83261 5.47216L4.96739 4.12628ZM11 1.19922L11.6315 0.708066C11.3773 0.381231 10.9157 0.302372 10.5674 0.526276L11 1.19922ZM13.1685 5.29037C13.4398 5.63913 13.9424 5.70196 14.2912 5.4307C14.6399 5.15945 14.7027 4.65682 14.4315 4.30807L13.1685 5.29037ZM17 11.9992H14.4V13.5992H17V11.9992ZM14.4 9.19922H17V7.59922H14.4V9.19922ZM16.2 8.39922V12.7992H17.8V8.39922H16.2ZM13 10.5992C13 9.82602 13.6268 9.19922 14.4 9.19922V7.59922C12.7431 7.59922 11.4 8.94237 11.4 10.5992H13ZM14.4 11.9992C13.6268 11.9992 13 11.3724 13 10.5992H11.4C11.4 12.2561 12.7431 13.5992 14.4 13.5992V11.9992ZM5.83261 5.47216L11.4326 1.87216L10.5674 0.526276L4.96739 4.12628L5.83261 5.47216ZM10.3685 1.69037L13.1685 5.29037L14.4315 4.30807L11.6315 0.708066L10.3685 1.69037ZM1.8 5.59922H15.4V3.99922H1.8V5.59922ZM15.4 15.9992H1.8V17.5992H15.4V15.9992ZM1.8 15.9992V5.59922H0.2V15.9992H1.8ZM1.8 15.9992H1.8H0.2C0.2 16.8829 0.916343 17.5992 1.8 17.5992V15.9992ZM15.4 15.9992H15.4V17.5992C16.2837 17.5992 17 16.8829 17 15.9992H15.4ZM15.4 5.59922H15.4H17C17 4.71556 16.2837 3.99922 15.4 3.99922V5.59922ZM1.8 3.99922C0.916344 3.99922 0.2 4.71556 0.2 5.59922H1.8H1.8V3.99922ZM15.4 13.3992V15.9992H17V13.3992H15.4ZM15.4 5.59922V7.69922H17V5.59922H15.4Z"></path>
                             </svg>
                         },
+                        {
+                            name: "Bundles", svg: <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path fill="currentColor" d="M17 12.7992V13.5992C17.4418 13.5992 17.8 13.241 17.8 12.7992H17ZM17 8.39922H17.8C17.8 7.95739 17.4418 7.59922 17 7.59922V8.39922ZM4.96739 4.12628C4.59574 4.3652 4.48814 4.86017 4.72706 5.23183C4.96598 5.60348 5.46095 5.71108 5.83261 5.47216L4.96739 4.12628ZM11 1.19922L11.6315 0.708066C11.3773 0.381231 10.9157 0.302372 10.5674 0.526276L11 1.19922ZM13.1685 5.29037C13.4398 5.63913 13.9424 5.70196 14.2912 5.4307C14.6399 5.15945 14.7027 4.65682 14.4315 4.30807L13.1685 5.29037ZM17 11.9992H14.4V13.5992H17V11.9992ZM14.4 9.19922H17V7.59922H14.4V9.19922ZM16.2 8.39922V12.7992H17.8V8.39922H16.2ZM13 10.5992C13 9.82602 13.6268 9.19922 14.4 9.19922V7.59922C12.7431 7.59922 11.4 8.94237 11.4 10.5992H13ZM14.4 11.9992C13.6268 11.9992 13 11.3724 13 10.5992H11.4C11.4 12.2561 12.7431 13.5992 14.4 13.5992V11.9992ZM5.83261 5.47216L11.4326 1.87216L10.5674 0.526276L4.96739 4.12628L5.83261 5.47216ZM10.3685 1.69037L13.1685 5.29037L14.4315 4.30807L11.6315 0.708066L10.3685 1.69037ZM1.8 5.59922H15.4V3.99922H1.8V5.59922ZM15.4 15.9992H1.8V17.5992H15.4V15.9992ZM1.8 15.9992V5.59922H0.2V15.9992H1.8ZM1.8 15.9992H1.8H0.2C0.2 16.8829 0.916343 17.5992 1.8 17.5992V15.9992ZM15.4 15.9992H15.4V17.5992C16.2837 17.5992 17 16.8829 17 15.9992H15.4ZM15.4 5.59922H15.4H17C17 4.71556 16.2837 3.99922 15.4 3.99922V5.59922ZM1.8 3.99922C0.916344 3.99922 0.2 4.71556 0.2 5.59922H1.8H1.8V3.99922ZM15.4 13.3992V15.9992H17V13.3992H15.4ZM15.4 5.59922V7.69922H17V5.59922H15.4Z"></path>
+                            </svg>
+                        },
                     ].map((tab) => (
                         <button
                             key={tab.name}
@@ -471,7 +493,7 @@ export default function Explore() {
                             fontWeight: 'bold',
                         }}
                     >
-                        {activeTab === 'All' ? 'Trending Courses' : 'All ' + activeTab}
+                        {activeTab === 'All' ? 'Trending Courses' : 'Trending ' + activeTab}
                     </h1>
 
                     <div
@@ -707,7 +729,20 @@ export default function Explore() {
                                         background: '#fff',
                                     }}
                                 >
-                                    <img
+                                    {(activeTab === 'Courses' || activeTab === 'All') ? (
+                                        <Link href="/coursedetails" className="hover:text-blue-600">
+                                            <img
+                                                src={course.img}
+                                                alt={course.title}
+                                                className="rounded"
+                                                style={{
+                                                    width: '100%',
+                                                    height: '150px',
+                                                    objectFit: 'cover',
+                                                }}
+                                            />
+                                        </Link>
+                                    ) : (<img
                                         src={course.img}
                                         alt={course.title}
                                         className="rounded"
@@ -717,16 +752,33 @@ export default function Explore() {
                                             objectFit: 'cover',
                                         }}
                                     />
+                                    )}
                                     <div style={{ padding: '28px 38px 10px 12px' }}>
-                                        <h4
-                                            className="h-13"
-                                            style={{
-                                                fontSize: '15px',
-                                                marginBottom: '4px',
-                                            }}
-                                        >
-                                            {course.title}
-                                        </h4>
+                                        {(activeTab === 'Courses' || activeTab === 'All') ? (
+                                            <Link href="/coursedetails" className="hover:text-blue-600">
+                                                <h4
+                                                    className="h-13"
+                                                    style={{
+                                                        fontSize: '15px',
+                                                        marginBottom: '4px',
+                                                    }}
+                                                >
+                                                    {course.title}
+                                                </h4>
+                                            </Link>
+                                        ) : (
+                                            <h4
+                                                className="h-13"
+                                                style={{
+                                                    fontSize: '15px',
+                                                    marginBottom: '4px',
+                                                    color: 'gray', // Optional: Indicate disabled state
+                                                }}
+                                            >
+                                                {course.title}
+                                            </h4>
+                                        )}
+
                                         <p
                                             className="mb-4"
                                             style={{
@@ -972,7 +1024,7 @@ export default function Explore() {
                             fontWeight: 'bold',
                         }}
                     >
-                        Latest Courses
+                        {activeTab === 'All' ? 'Latest Courses' : 'Latest ' + activeTab}
                     </h1>
 
                     <div
@@ -1396,7 +1448,8 @@ export default function Explore() {
                             fontWeight: 'bold',
                         }}
                     >
-                        Most Watched
+                        {activeTab === 'Communities' ? 'Most Activity' : 'Most Watched'}
+
                     </h1>
 
                     <div
@@ -1818,7 +1871,7 @@ export default function Explore() {
                             fontWeight: 'bold',
                         }}
                     >
-                        Customer Favorites
+                        {activeTab === 'Communities' ? 'Highest Rated' : activeTab === 'Instructors' || activeTab === 'Bundles'  ? 'Highest Rated' : 'Customer Favorites'}
                     </h1>
 
                     <div
@@ -2224,6 +2277,7 @@ export default function Explore() {
             ) : (
                 ''
             )}
+            
 
         </div>
     );

@@ -1019,7 +1019,7 @@ const CourseDetails = () => {
                 </div>
                 <div className="instructor-container mt-4">
                     <div className='flex items-center justify-between mb-4 w-100'>
-                        <div className='flex items-center gap-2'>
+                        <div className='flex flex-col md:flex-row items-start md:items-center gap-2'>
                             <h2 className="text-lg font-bold ">Frequently Bought Together</h2>
                             <div className="flex items-center justify-between text-lg text-gray-500 gap-1">
                                 <span className="text-dark fw-bold">${totalPrice.toFixed(2)}</span>
@@ -1032,12 +1032,12 @@ const CourseDetails = () => {
                     </div>
                     <div className="space-y-4">
                         {courses.map((course) => (
-                            <div key={course.id} className="flex items-start gap-2">
+                            <div key={course.id} className="flex items-start gap-2 mt-5 md:mt-0">
                                 <input type='checkbox' className='w-4 h-4'
                                     checked={checkedState[course.id]}
                                     onChange={() => handleCheckboxChange(course.id)} />
-                                <div className='flex items-center gap-3'>
-                                    <img className='rounded-md' src={course.image} alt={course.title} style={{ width: '140px', height: '80px', objectFit: 'cover' }} />
+                                <div className='flex items-center gap-3 md:flex-row flex-col'>
+                                    <img className='rounded-md imgfreq' src={course.image} alt={course.title} style={{ width: '140px', height: '80px', objectFit: 'cover' }} />
                                     <div className='flex flex-col gap-2'>
                                         <h3 className="font-medium text-gray-800">{course.title}</h3>
                                         <p className="text-sm text-gray-500 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 280 40" fill="none">
