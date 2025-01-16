@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { MyContext } from "../layout";
 import { FaBullhorn, FaNewspaper, FaStar, FaQuestionCircle, FaComments } from "react-icons/fa";
 
+import { MdDelete } from 'react-icons/md';
 
 const EditPagesettingPrice = () => {
     const [title, setTitle] = useState("");
@@ -120,6 +121,71 @@ const EditPagesettingPrice = () => {
         updatedItems[index] = value;
         setItems(updatedItems);
     };
+
+    const [Bulletitems, setBulletItems] = useState(["Bullet Point 1", "Bullet Point 2", "Bullet Point 3", "Bullet Point 4",]);
+
+    const handleAddBulletItem = () => {
+        setBulletItems([...Bulletitems, `Bullet Point ${Bulletitems.length + 1}`]);
+    };
+
+    const handleRemoveBulletItem = (index) => {
+        setBulletItems(Bulletitems.filter((_, i) => i !== index));
+    };
+
+    const handleUpdateBulletItem = (index, value) => {
+        const updatedItems = [...Bulletitems];
+        updatedItems[index] = value;
+        setBulletItems(updatedItems);
+    };
+
+    const [requirementitems, setrequirementItems] = useState(["Example: No photography experience needed. You will learn everything from A-Z", "Add another requirement",]);
+
+    const handleAddrequirementItem = () => {
+        setrequirementItems([...requirementitems, `Add another requirement`]);
+    };
+
+    const handleRemoverequirementItem = (index) => {
+        setrequirementItems(requirementitems.filter((_, i) => i !== index));
+    };
+
+    const handleUpdaterequirementItem = (index, value) => {
+        const updatedItems = [...requirementitems];
+        updatedItems[index] = value;
+        setrequirementItems(updatedItems);
+    };
+    const [Intendeditems, setIntendedItems] = useState(["Example: Amateur photographers curious about lighting"]);
+
+    const handleAddIntendedItem = () => {
+        setIntendedItems([...Intendeditems, `Add another item`]);
+    };
+
+    const handleRemoveIntendedItem = (index) => {
+        setIntendedItems(Intendeditems.filter((_, i) => i !== index));
+    };
+
+    const handleUpdateIntendedItem = (index, value) => {
+        const updatedItems = [...Intendeditems];
+        updatedItems[index] = value;
+        setIntendedItems(updatedItems);
+    };
+
+    const [shippingitems, setshippingItems] = useState(["Hands-on learning experience", "Complete art kit included"]);
+
+    const handleAddshippingItem = () => {
+        setshippingItems([...shippingitems, `Add another item`]);
+    };
+
+    const handleRemoveshippingItem = (index) => {
+        setshippingItems(shippingitems.filter((_, i) => i !== index));
+    };
+
+    const handleUpdateshippingItem = (index, value) => {
+        const updatedItems = [...shippingitems];
+        updatedItems[index] = value;
+        setshippingItems(updatedItems);
+    };
+
+
     const [selectedLanguage, setSelectedLanguage] = useState("");
     const [selectedLevel, setSelectedLevel] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -602,23 +668,6 @@ const EditPagesettingPrice = () => {
         setShowCompleted(!showCompleted);
     };
 
-    // Function to filter checklist items
-    const getFilteredChecklistItems = (checklistData) => {
-        return checklistData.map((section) => ({
-            ...section,
-            checklistItems: showCompleted
-                ? section.checklistItems.filter((item) => item.status === "completed") // Only show completed items
-                : section.checklistItems, // Show all items if not filtering
-        }));
-    };
-
-    // Filtered checklist data
-    const filteredCourseChecklistData = getFilteredChecklistItems(courseChecklistData);
-    const filteredProfileChecklistData = getFilteredChecklistItems(profileChecklistData);
-    const filteredSessionChecklistData = getFilteredChecklistItems(SessionChecklistData);
-    const filteredCommunityChecklistData = getFilteredChecklistItems(communityChecklistData);
-
-
     const [expandmenu, setexpandmenu] = useState(false);
 
     const [coursesectionexpand, setcoursesectionexpand] = useState(false);
@@ -953,6 +1002,141 @@ const EditPagesettingPrice = () => {
             document.removeEventListener("mousedown", handleOutsideClick);
         };
     }, []);
+
+    const [questions, setQuestions] = useState([
+        { id: 1, name: 'Question 1', description: '', isOpen: false },
+    ]);
+
+    const toggleDropdown = (id) => {
+        setQuestions(
+            questions.map((q) =>
+                q.id === id ? { ...q, isOpen: !q.isOpen } : q
+            )
+        );
+    };
+
+    const handleInputChange = (id, field, value) => {
+        setQuestions(
+            questions.map((q) =>
+                q.id === id ? { ...q, [field]: value } : q
+            )
+        );
+    };
+
+    const handleAddQuestion = () => {
+        setQuestions([
+            ...questions,
+            { id: questions.length + 1, name: `Question ${questions.length + 1}`, description: '', isOpen: false },
+        ]);
+    };
+
+    const handleRemoveQuestion = (id) => {
+        setQuestions(questions.filter((q) => q.id !== id));
+    };
+
+    const handleSave = () => {
+        console.log('Saved Questions:', questions);
+
+        // Close all dropdowns after saving
+        setQuestions(
+            questions.map((q) => ({
+                ...q,
+                isOpen: false, // Set all dropdowns to closed
+            }))
+        );
+    };
+    const [testimonials, setTestimonials] = useState([
+        {
+            id: 1,
+            firstName: 'John',
+            lastName: 'Doe',
+            occupation: 'Head of Impact Academy',
+            avatar: 'https://randomuser.me/api/portraits/men/1.jpg', // Replace with actual path
+            thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAKlBMVEXh4eH////i4uLz8/Pt7e3l5eX6+vre3t7v7+/o6Oj19fXq6ur8/Pzu7u4uYrGjAAAEEklEQVR4nO2cbZebIBBGcQCHF/3/f7czgEaNSUw/1O3y3G1rNJ4e9p4Bh1E0BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQHXR3A/4z+O4G/A8wsyGfQxr93U35uYgjQzHPNk1DJSG4Go9RqVpyNo2LpcYIWSusf6S/PVuaxmSzbO9u4c+AZVCazyXN2VMZuOQ7XBOV9GwpOO+3cjgNA0Z4gVZJU0pOQ0kvgWafXtlhyDe17wdBxHqpC9n7JomIyj9UPxeMG4b5sdtvj+SxjkfvHLCM8HZzOeS3Z/9mUuliGk45uxcEyR12B3qVNQ+DK66GLxjvbvVNaBfTrf9GVq9pl0hKbStXxEv0K4tap1JZekX8TM8J/TRMulFZV0ZtYtexrHGYND2HrAvoXCaaoywyr5KDvmW1ucxO1psQ61uW/O6Bn7rhy/pV17JMrHXQjSztgUGm1cQnEda3LF/roFtZJpa6zRRP4qtvWZJoae6wi6ylbIPIOlLroBtZOuZX7O7E8nXnsmod9CGLJPVaJsybfkjVVt+yWu6wlTWdyMqhfu5cVtAizS51SIustJ4US4JBvcvSorHdD/BxkdVuU1CZPA+WJZnoWxbVIs02sjTYFLfsx6H0zCCJV+eyTBmbdhk8+zRNY+R2/ctLpGlP7FqW4fLLv6468NorS2x1Lqvc4DlUHXidTEtcbe7DOtOzLGo3nF9E1qYPtjS1Z1mm3nDmfYlmqWYdXUGWFmnMuax9H4SsUqSxD1nEttSZiUpcTYisHVqkecgq0+hQKsvHPghZrUizyrJtosMncQVZ9W7YImspz0zxJK4gS++GDb7JCquWyT7HFWSVaPJUZaWNmBNXkKXhlFKRxelEEGRtcc0ElakPZL1lmSlD1mfIuOAyZF2izG3q1RBj1ifKTNAjsi6xlXUhsnp+mK3RktJPkRUgy6yyfPTviB6yzCLr47N/RJCFB3C/QmWN14AsLBq4Dn21HGXq/QUGPtnL+E4XOj3ga+N7XZZ4d2MB+GX0utTyb+DDA9zPz3NvHhPpHLkKztt9mulJF1lj7PFgj3hrstUJtCMTnTeUKGbvDOXI5LLxuoQ6MY8sBz15ch2/48FbERFTjDlF65NEUQghxUQ5ef0JUWJqsmkysufKsbubfB8iy6ToWEQEbyyT5Jy6G6zIYytHZ40sOUcsukhjCL7b1/j4JHEUnSlRY1WW8xJMKbhRvpK/OYssw6OckV1mO7vP/+lvhaguntAEQi3VV4boW49EJI2GZBjjuljTl/N81wk8LT8U5nqvh9sm27ICZT1vv+2Q+gTbzsAxSdWgqy+paZ//YfMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwxB9tox9y/+ljpQAAAABJRU5ErkJggg==',
+            testimonial: 'This is a sample testimonial text from John Doe.',
+        },
+    ]);
+    const [thumbnailPreview, setThumbnailPreview] = useState(null);
+    const [avatar, setAvatar] = useState(null);
+    const [preview, setPreview] = useState(null);
+
+    const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+
+
+    const handleAvatarChange = (id, event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setTestimonials((prevTestimonials) =>
+                    prevTestimonials.map((testimonial) =>
+                        testimonial.id === id
+                            ? { ...testimonial, avatar: reader.result }
+                            : testimonial
+                    )
+                );
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleFileChange = (id, e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setTestimonials((prevTestimonials) =>
+                    prevTestimonials.map((testimonial) =>
+                        testimonial.id === id
+                            ? { ...testimonial, thumbnail: reader.result }
+                            : testimonial
+                    )
+                );
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleDropdownClick = (id) => {
+        setSelectedTestimonial(selectedTestimonial === id ? null : id);
+    };
+
+    const handleChange = (id, field, value) => {
+        setTestimonials((prev) =>
+            prev.map((item) => {
+                if (item.id === id) {
+                    const updatedItem = { ...item, [field]: value };
+                    if (field === 'avatar') {
+                        updatedItem.avatar = preview;
+                    } else if (field === 'thumbnail') {
+                        updatedItem.thumbnail = thumbnailPreview;
+                    }
+                    return updatedItem;
+                }
+                return item;
+            })
+        );
+    };
+
+    const addTestimonial = () => {
+        setTestimonials((prev) => [
+            ...prev,
+            {
+                id: prev.length + 1,
+                firstName: '',
+                lastName: '',
+                occupation: '',
+                avatar: '',
+                thumbnail: '',
+                testimonial: '',
+            },
+        ]);
+    };
+
+    const deleteTestimonial = (id) => {
+        setTestimonials((prev) => prev.filter((item) => item.id !== id));
+    };
+
 
     return (
         <div className="container-fluid p-0" style={{ background: '#f2f2f2' }}>
@@ -1627,7 +1811,7 @@ const EditPagesettingPrice = () => {
                                                             className="flex items-center gap-1.5 fw-medium text-sm border-2 rounded-full  px-3 py-1"
                                                         >
                                                             Edit Video <svg className="w-4 h-4"
-                                                                style={{ transform: isEditVideo ? 'rotate(180deg)' : 'rotate(0deg)',transition: 'transform all 0.3s ease' }}
+                                                                style={{ transform: isEditVideo ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform all 0.3s ease' }}
                                                                 fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                                             </svg>
@@ -1710,109 +1894,27 @@ const EditPagesettingPrice = () => {
                             </div>
                             <div className="row justify-between w-100 pl-10 pr-4 mt-3">
                                 <div className="col-xl-5 col-md-12 pt-3 pl-0">
-                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Access Settings</h2>
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Bullet Points</h2>
                                     <p className="mb-3" style={{ fontSize: '15x', color: 'grey' }}>
-                                        Configure event access options.
-                                    </p>
+                                        You must enter at least 4 learning objectives or outcomes that learners can expect to achieve after completing your course.                                    </p>
                                 </div>
                                 <div className="bg-white col-xl-7 col-md-12 border rounded">
                                     <div className="popup-content pb-0 pt-4.5 px-2 -lg">
-                                        <h2 className="popup-title mb-1 " style={{ fontSize: '17px', fontWeight: '600' }}>Include This Event Free</h2>
-                                        <p className="mb-3" style={{ fontSize: '12px', color: 'grey' }}>
-                                            Select the courses that will include this event for free.
-                                        </p>
-                                        <form onSubmit={handleSubmit} id="courseForm">
-                                            <div className="form-group">
-                                                {/* Selected Courses */}
-                                                <div className="space-y-3 mb-3">
-                                                    {selectedCourses.map((course) => (
-                                                        <div
-                                                            key={course.id}
-                                                            className="flex items-center justify-between border p-3 rounded-md cursor-pointer"
-                                                        >
-                                                            <div className="flex items-center gap-3">
-                                                                <img
-                                                                    src={course.image}
-                                                                    alt={course.title}
-                                                                    className="w-20 h-12 rounded-md"
-                                                                    style={{ objectFit: 'cover' }}
-                                                                />
-                                                                <span className="fw-medium text-sm">{course.title}</span>
-                                                            </div>
-                                                            <button
-                                                                onClick={() => handleRemoveCourse(course.id)}
-                                                                className="text-red-500 hover:text-red-700"
-                                                            >
-                                                                ✖
-                                                            </button>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                <div className="position-relative">
-                                                    <svg style={{ top: '11.5px' }} className="absolute left-3" width='20' height='20' viewBox="1 1 60 60">
-                                                        <path d="M27.765 42.244c-8.614 0-15.622-7.008-15.622-15.622S19.151 11 27.765 11s15.622 7.008 15.622 15.622-7.007 15.622-15.622 15.622zm0-28.398c-7.045 0-12.775 5.73-12.775 12.775s5.73 12.775 12.775 12.775 12.775-5.73 12.775-12.775-5.73-12.775-12.775-12.775z"></path><path d="M34.869 39.146l4.014-3.738 9.286 9.114a3.164 3.164 0 01-.07 4.562l-.071.066a3.163 3.163 0 01-4.561-.257l-8.598-9.747zM27.77 34.173c-2.882 0-5.412-.876-7.656-2.526a1.002 1.002 0 01-.35-.81c.008-.461.445-.969 1.02-.959.284.005.493.153.713.308 1.837 1.302 3.832 1.971 6.275 1.971 1.875 0 4.492-.476 6.314-2.118a.98.98 0 01.638-.261.92.92 0 01.686.241c.222.209.33.527.336.735a1.02 1.02 0 01-.318.775c-1.333 1.237-4.262 2.644-7.658 2.644z"></path>
-                                                    </svg>
-                                                    <input
-                                                        type="text"
-                                                        className="school-inputs"
-                                                        style={{ paddingLeft: '38px' }}
-                                                        value={searchTerm}
-                                                        onChange={handleSearch}
-                                                        placeholder="Search courses..."
-                                                    />
-                                                </div>
-                                                {/* Course List */}
-                                                <div className="space-y-3 mt-3">
-                                                    {filteredCourses.map((course) => (
-                                                        <div
-                                                            key={course.id}
-                                                            className="flex items-center justify-between border p-3 rounded-md cursor-pointer"
-                                                            onClick={() => handleSelectCourse(course)}
-                                                        >
-                                                            <div className="flex items-center gap-3">
-                                                                <img
-                                                                    src={course.image}
-                                                                    alt={course.title}
-                                                                    className="w-16 h-12 rounded-md"
-                                                                    style={{ objectFit: 'cover' }}
-                                                                />
-                                                                <span className="fw-medium">{course.title}</span>
-                                                            </div>
-                                                            {selectedCourses.find((item) => item.id === course.id) && (
-                                                                <span className="text-green-500 font-bold">✔</span>
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row justify-between w-100 pl-10 pr-4 mt-3">
-                                <div className="col-xl-5 col-md-12 pt-3 pl-0">
-                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Agenda</h2>
-                                    <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>
-                                        List all the items you plan to cover in this session.
-                                    </p>
-                                </div>
-                                <div className="bg-white col-xl-7 col-md-12 border rounded">
-                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
-                                        <h2 className="popup-title mb-3" style={{ fontSize: '17px', fontWeight: '600' }}>List all the items you plan to cover</h2>
+                                        <h2 className="popup-title mb-3" style={{ fontSize: '17px', fontWeight: '600' }}>What will students learn in your course?</h2>
                                         <form onSubmit={handleSubmit} id="courseForm">
                                             <div className="form-group">
                                                 <div className="space-y-2">
-                                                    {items.map((item, index) => (
+                                                    {Bulletitems.map((item, index) => (
                                                         <div key={index} className="flex items-center gap-2 relative">
                                                             <input
                                                                 type="text"
                                                                 value={item}
-                                                                onChange={(e) => handleUpdateItem(index, e.target.value)}
+                                                                onChange={(e) => handleUpdateBulletItem(index, e.target.value)}
                                                                 className="rounded-lg px-3 flex-1 school-inputs"
                                                             />
                                                             <button
                                                                 type="button"
-                                                                onClick={() => handleRemoveItem(index)}
+                                                                onClick={() => handleRemoveBulletItem(index)}
                                                                 className="text-red-500 hover:text-red-700 absolute right-3 text-sm top-3"
                                                             >
                                                                 ✖
@@ -1821,7 +1923,7 @@ const EditPagesettingPrice = () => {
                                                     ))}
                                                     <button
                                                         type="button"
-                                                        onClick={handleAddItem}
+                                                        onClick={handleAddBulletItem}
                                                         style={{ fontSize: '14px' }}
                                                         className="flex items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
                                                     >
@@ -1829,7 +1931,103 @@ const EditPagesettingPrice = () => {
                                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                                         </svg>
-                                                        Add item
+                                                        Add more to your response
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-between w-100 pl-10 pr-4 mt-3">
+                                <div className="col-xl-5 col-md-12 pt-3 pl-0">
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Course Requirements</h2>
+                                    <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>
+                                        List the required skills, experience, tools or equipment learners should have prior to taking your course. If there are no requirements, use this space as an opportunity to lower the barrier for beginners.
+                                    </p>
+                                </div>
+                                <div className="bg-white col-xl-7 col-md-12 border rounded">
+                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
+                                        <h2 className="popup-title mb-3" style={{ fontSize: '17px', fontWeight: '600' }}>What are the requirements or prerequisites for taking your course?</h2>
+                                        <form onSubmit={handleSubmit} id="courseForm">
+                                            <div className="form-group">
+                                                <div className="space-y-2">
+                                                    {requirementitems.map((item, index) => (
+                                                        <div key={index} className="flex items-center gap-2 relative">
+                                                            <input
+                                                                type="text"
+                                                                value={item}
+                                                                onChange={(e) => handleUpdaterequirementItem(index, e.target.value)}
+                                                                className="rounded-lg px-3 flex-1 school-inputs"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => handleRemoverequirementItem(index)}
+                                                                className="text-red-500 hover:text-red-700 absolute right-3 text-sm top-3"
+                                                            >
+                                                                ✖
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        type="button"
+                                                        onClick={handleAddrequirementItem}
+                                                        style={{ fontSize: '14px' }}
+                                                        className="flex items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
+                                                    >
+                                                        <svg strokeWidth={2.5} xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                        </svg>
+                                                        Add more to your response
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-between w-100 pl-10 pr-4 mt-3">
+                                <div className="col-xl-5 col-md-12 pt-3 pl-0">
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Intended Learners</h2>
+                                    <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>
+                                        Write a clear description of the intended learners for your course who will find your course content valuable.
+                                    </p>
+                                </div>
+                                <div className="bg-white col-xl-7 col-md-12 border rounded">
+                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
+                                        <h2 className="popup-title mb-3" style={{ fontSize: '17px', fontWeight: '600' }}>Who is this course for?</h2>
+                                        <form onSubmit={handleSubmit} id="courseForm">
+                                            <div className="form-group">
+                                                <div className="space-y-2">
+                                                    {Intendeditems.map((item, index) => (
+                                                        <div key={index} className="flex items-center gap-2 relative">
+                                                            <input
+                                                                type="text"
+                                                                value={item}
+                                                                onChange={(e) => handleUpdateIntendedItem(index, e.target.value)}
+                                                                className="rounded-lg px-3 flex-1 school-inputs"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => handleRemoveIntendedItem(index)}
+                                                                className="text-red-500 hover:text-red-700 absolute right-3 text-sm top-3"
+                                                            >
+                                                                ✖
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        type="button"
+                                                        onClick={handleAddIntendedItem}
+                                                        style={{ fontSize: '14px' }}
+                                                        className="flex items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
+                                                    >
+                                                        <svg strokeWidth={2.5} xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                        </svg>
+                                                        Add more to your response
                                                     </button>
                                                 </div>
                                             </div>
@@ -1995,6 +2193,567 @@ const EditPagesettingPrice = () => {
                             </div>
                             <div className="row justify-between w-100 pl-10 pr-4 mt-3">
                                 <div className="col-xl-5 col-md-12 pt-3 pl-0">
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Forward Shipping</h2>
+                                    <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>
+                                        Enhance your student’s experience with hand-picked supplies needed to bring your project to life.
+                                    </p>
+                                </div>
+                                <div className="bg-white col-xl-7 col-md-12 border rounded">
+                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <label className="toggle-switch">
+                                                <input
+                                                    type="checkbox"
+                                                    id="viewShipping"
+                                                />
+                                                <span className="toggle-slider"></span>
+                                            </label>
+                                            <label htmlFor="viewShipping" className="toggle-label cursor-pointer fw-medium">Forward Shipping</label>
+                                        </div>
+                                        <form onSubmit={handleSubmit} id="courseForm">
+                                            <div className="form-group">
+
+                                                <div className="space-y-2">
+                                                    {shippingitems.map((item, index) => (
+                                                        <div key={index} className="flex items-center gap-2 relative">
+                                                            <input
+                                                                type="text"
+                                                                value={item}
+                                                                onChange={(e) => handleUpdateshippingItem(index, e.target.value)}
+                                                                className="rounded-lg px-3 flex-1 school-inputs"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => handleRemoveshippingItem(index)}
+                                                                className="text-red-500 hover:text-red-700 absolute right-3 text-sm top-3"
+                                                            >
+                                                                ✖
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        type="button"
+                                                        onClick={handleAddshippingItem}
+                                                        style={{ fontSize: '14px' }}
+                                                        className="flex items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
+                                                    >
+                                                        <svg strokeWidth={2.5} xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                        </svg>
+                                                        Add more to your response
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-between w-100 pl-10 pr-4 mt-3">
+                                <div className="col-xl-5 col-md-12 pt-3 pl-0">
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Q&A</h2>
+                                    <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>
+                                        Add frequently asked questions and their answers to help students better understand your course.
+                                    </p>
+                                </div>
+                                <div className="bg-white col-xl-7 col-md-12 border rounded">
+                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
+                                        <form onSubmit={handleSubmit} id="courseForm">
+                                            <div className="form-group">
+                                                <h1 className="text-md font-semibold mb-3">Q&A</h1>
+                                                {questions.map((question) => (
+                                                    <div key={question.id} className="mb-3 px-3 py-3 rounded" style={{ background: '#f8f8f8' }}>
+                                                        {/* Question Label */}
+                                                        <div
+                                                            className="flex justify-between items-center cursor-pointer gap-3"
+                                                            onClick={() => toggleDropdown(question.id)}
+                                                        >
+                                                            {question.isOpen ? (
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control school-inputs" style={{ borderRadius: '10px' }}
+                                                                    value={question.name}
+                                                                    onChange={(e) =>
+                                                                        handleInputChange(question.id, 'name', e.target.value)
+                                                                    }
+                                                                    onClick={(e) => e.stopPropagation()} // Prevent toggling when clicking inside input
+                                                                />
+                                                            ) : (
+                                                                <span className="font-medium text-sm">{question.name}</span>
+                                                            )}
+                                                            <span className="text-gray-500 text-sm">{question.isOpen ? '▲' : '▼'}</span>
+                                                        </div>
+
+                                                        {/* Expanded View */}
+                                                        {question.isOpen && (
+                                                            <div className="p-0 mt-3">
+                                                                <div className="form-group rounded-lg">
+                                                                    <div className="rich-text-editor bg-white">
+                                                                        <div className="editor-toolbar">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="undo"
+                                                                                onClick={() => handleToolbarClick('undo')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="redo"
+                                                                                onClick={() => handleToolbarClick('redo')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="bold"
+                                                                                onClick={() => handleToolbarClick('bold')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="italic"
+                                                                                onClick={() => handleToolbarClick('italic')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="underline"
+                                                                                onClick={() => handleToolbarClick('underline')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="insertOrderedList"
+                                                                                onClick={() => handleToolbarClick('insertOrderedList')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="insertUnorderedList"
+                                                                                onClick={() => handleToolbarClick('insertUnorderedList')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div
+                                                                            className="editor-content"
+                                                                            id="description"
+                                                                            contentEditable="true"
+                                                                            style={{ fontSize: '13px' }}
+                                                                            onInput={handleDescriptionChange}
+                                                                        ></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex items-center justify-between">
+                                                                    <button
+                                                                        onClick={() => handleRemoveQuestion(question.id)}
+                                                                        className="flex items-center text-red-500 hover:text-red-700 text-sm"
+                                                                    >
+                                                                        <MdDelete className="mr-1" /> Delete Question
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={handleSave}
+                                                                        className="ml-4 bg-dark text-white py-2 px-3 rounded-lg hover:bg-green-700 text-sm"
+                                                                    >
+                                                                        Save
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                                <button
+                                                    type="button"
+                                                    onClick={handleAddQuestion}
+                                                    style={{ fontSize: '14px' }}
+                                                    className="flex items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
+                                                >
+                                                    <svg strokeWidth={2.5} xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                    </svg>
+                                                    Add Question
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-between w-100 pl-10 pr-4 mt-3">
+                                <div className="col-xl-5 col-md-12 pt-3 pl-0">
+                                    <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>Q&A</h2>
+                                    <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>
+                                        Add frequently asked questions and their answers to help students better understand your course.
+                                    </p>
+                                </div>
+                                <div className="bg-white col-xl-7 col-md-12 border rounded">
+                                    <div className="popup-content pb-0 pt-4.5 px-2 -lg">
+                                        <div>
+                                            <div style={{ marginBottom: '20px' }}>
+                                                <div className="form-group">
+                                                    <label className="form-label" htmlFor="courseTitle">
+                                                        Title
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        id="courseTitle"
+                                                        className="input-field"
+                                                        defaultValue="Decipher Political Realities"
+                                                        maxLength="60"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="form-group mt-4">
+                                                    <label className="form-label" htmlFor="courseSubTitle">
+                                                        Subtitle
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        id="courseSubTitle"
+                                                        className="input-field"
+                                                        maxLength="60"
+                                                        defaultValue="Don't take our word for it. See what some of our students have to say."
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <h2>Testimonials</h2>
+                                            <div style={{ marginTop: '20px' }}>
+                                                {testimonials.map((item) => (
+                                                    <div key={item.id} style={{ marginBottom: '20px' }}>
+                                                        <div
+                                                            className="ronded-lg fw-medium"
+                                                            onClick={() => handleDropdownClick(item.id)}
+                                                            style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                cursor: 'pointer',
+                                                                background: '#f9f9f9',
+                                                                padding: '10px',
+                                                                borderRadius: '5px',
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={item.avatar} // Replace with default avatar path
+                                                                alt={`${item.firstName} ${item.lastName}`}
+                                                                style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
+                                                            />
+                                                            <span>{item.firstName} {item.lastName}</span>
+                                                        </div>
+                                                        {selectedTestimonial === item.id && (
+                                                            <div
+                                                                style={{
+                                                                    marginTop: '10px',
+                                                                    padding: '10px',
+                                                                    background: '#fff',
+                                                                    border: '1px solid #ddd',
+                                                                    borderRadius: '5px',
+                                                                }}
+                                                            >
+                                                                <div className="form-group">
+                                                                    <label className="form-label" >
+                                                                        First Name
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="input-field"
+                                                                        value={item.firstName}
+                                                                        onChange={(e) => handleChange(item.id, 'firstName', e.target.value)}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="form-group">
+                                                                    <label className="form-label" >
+                                                                        Last Name
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="input-field"
+                                                                        value={item.lastName}
+                                                                        onChange={(e) => handleChange(item.id, 'lastName', e.target.value)}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="form-group">
+                                                                    <label className="form-label" >
+                                                                        Occupation
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="input-field"
+                                                                        value={item.occupation}
+                                                                        onChange={(e) => handleChange(item.id, 'occupation', e.target.value)}
+                                                                        required
+                                                                    />
+                                                                </div>
+
+                                                                <div className="form-group px-3 py-3 border rounded-lg">
+                                                                    <label
+                                                                        style={{
+                                                                            display: "block",
+                                                                            marginBottom: "18px",
+                                                                            fontWeight: "bold",
+                                                                            color: "#333",
+                                                                            fontSize: '15px'
+                                                                        }}
+                                                                    >
+                                                                        Avatar
+                                                                    </label>
+                                                                    {/* Avatar Preview */}
+                                                                    <div className="flex items-center gap-4" style={{ width: "100%" }}>
+                                                                        <img
+                                                                            src={item.avatar || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHylL97CjJ3JctnR5MzdMVvsJSeR5-TnVL4w&s"}
+                                                                            alt="Avatar Preview"
+                                                                            style={{
+                                                                                width: "55px",
+                                                                                height: "55px",
+                                                                                borderRadius: "50px",
+                                                                                objectFit: "cover",
+                                                                            }}
+                                                                        />
+                                                                        {/* Upload Button */}
+                                                                        <div className="flex flex-col">
+                                                                            <span className="mb-1" style={{ fontSize: "12px", color: "#666" }}>
+                                                                                Recommended dimensions of <strong>100×100</strong>
+                                                                            </span>
+                                                                            <input
+                                                                                type="file"
+                                                                                accept="image/*"
+                                                                                id="avatarInput"
+                                                                                onChange={(e) => handleAvatarChange(item.id, e)}
+                                                                                style={{ display: "none" }}
+                                                                            />
+                                                                            <label
+                                                                                htmlFor="avatarInput"
+                                                                                className="upload-button inline-flex items-center gap-2 mt-2 w-fit"
+                                                                                style={{ display: "inline-flex", fontWeight: '500' }}>
+                                                                                {item.avatar === null ?
+                                                                                    <svg
+                                                                                        fill="none"
+                                                                                        viewBox="0 0 48 48"
+                                                                                        width="24"
+                                                                                        height="24"
+                                                                                    >
+                                                                                        <rect fill="#F0F9FF" rx="24" height="48" width="48"></rect>
+                                                                                        <path
+                                                                                            fill="#283593"
+                                                                                            d="M17.3307 13C16.8887 13 16.4648 13.1756 16.1522 13.4882C15.8397 13.8007 15.6641 14.2246 15.6641 14.6667V33.3333C15.6641 33.7754 15.8397 34.1993 16.1522 34.5118C16.4648 34.8244 16.8887 35 17.3307 35H30.6641C31.1061 35 31.53 34.8244 31.8426 34.5118C32.1551 34.1993 32.3307 33.7754 32.3307 33.3333V19.6667H27.9974C27.3786 19.6667 26.7851 19.4208 26.3475 18.9832C25.9099 18.5457 25.6641 17.9522 25.6641 17.3333V13H17.3307ZM27.6641 14.4142L30.9165 17.6667H27.9974C27.909 17.6667 27.8242 17.6315 27.7617 17.569C27.6992 17.5065 27.6641 17.4217 27.6641 17.3333V14.4142Z"
+                                                                                            clipRule="evenodd"
+                                                                                            fillRule="evenodd"
+                                                                                        ></path>
+                                                                                    </svg>
+                                                                                    :
+                                                                                    ""}
+                                                                                {item.avatar === null ? 'Choose Avatar' : 'Replace Avatar'}
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div className="form-group">
+                                                                    <label htmlFor="thumbnail" className="form-label mb-2">
+                                                                        Thumbnail Image
+                                                                    </label>
+                                                                    <div className="upload-section">
+                                                                        <div className="upload-preview relative flex-col flex-md-row">
+                                                                            <div className="" id="thumbnailPreview">
+                                                                                <>
+                                                                                    <img
+                                                                                        src={item.thumbnail}
+                                                                                        alt="Thumbnail Preview"
+                                                                                        className="object-cover h-24 w-28 rounded-lg"
+                                                                                    />
+                                                                                </>
+                                                                            </div>
+                                                                            <div className="upload-info">
+                                                                                <p className="upload-dimensions" style={{ fontSize: '12.5px' }}>
+                                                                                    Recommended dimensions of <strong>1280×720</strong>
+                                                                                </p>
+                                                                                <label
+                                                                                    htmlFor="thumbnailInput"
+                                                                                    className="upload-button inline-flex items-center gap-2 mt-1 w-auto"
+                                                                                    style={{ display: "inline-flex", fontSize: '13px', fontWeight: '500' }}
+                                                                                >
+                                                                                    {item.thumbnail === null ?
+                                                                                        <svg
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 48 48"
+                                                                                            width="24"
+                                                                                            height="24"
+                                                                                        >
+                                                                                            <rect fill="#F0F9FF" rx="24" height="48" width="48"></rect>
+                                                                                            <path
+                                                                                                fill="#283593"
+                                                                                                d="M17.3307 13C16.8887 13 16.4648 13.1756 16.1522 13.4882C15.8397 13.8007 15.6641 14.2246 15.6641 14.6667V33.3333C15.6641 33.7754 15.8397 34.1993 16.1522 34.5118C16.4648 34.8244 16.8887 35 17.3307 35H30.6641C31.1061 35 31.53 34.8244 31.8426 34.5118C32.1551 34.1993 32.3307 33.7754 32.3307 33.3333V19.6667H27.9974C27.3786 19.6667 26.7851 19.4208 26.3475 18.9832C25.9099 18.5457 25.6641 17.9522 25.6641 17.3333V13H17.3307ZM27.6641 14.4142L30.9165 17.6667H27.9974C27.909 17.6667 27.8242 17.6315 27.7617 17.569C27.6992 17.5065 27.6641 17.4217 27.6641 17.3333V14.4142Z"
+                                                                                                clipRule="evenodd"
+                                                                                                fillRule="evenodd"
+                                                                                            ></path>
+                                                                                        </svg>
+                                                                                        : ''
+                                                                                    }
+                                                                                    {item.thumbnail === null ? 'Choose Image' : 'Replace Image'}
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <input
+                                                                            type="file"
+                                                                            id="thumbnailInput"
+                                                                            accept="image/*"
+                                                                            onChange={(e) => handleFileChange(item.id, e)}
+                                                                            className="hidden"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="form-group rounded-lg">
+                                                                    <label className="fw-normal">Testimonial</label>
+                                                                    <div className="rich-text-editor bg-white">
+                                                                        <div className="editor-toolbar">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="undo"
+                                                                                onClick={() => handleToolbarClick('undo')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="redo"
+                                                                                onClick={() => handleToolbarClick('redo')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="bold"
+                                                                                onClick={() => handleToolbarClick('bold')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="italic"
+                                                                                onClick={() => handleToolbarClick('italic')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="underline"
+                                                                                onClick={() => handleToolbarClick('underline')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="insertOrderedList"
+                                                                                onClick={() => handleToolbarClick('insertOrderedList')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="editor-button"
+                                                                                data-command="insertUnorderedList"
+                                                                                onClick={() => handleToolbarClick('insertUnorderedList')}
+                                                                            >
+                                                                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                                                                    <path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div
+                                                                            className="editor-content"
+                                                                            id="description"
+                                                                            contentEditable="true"
+                                                                            style={{ fontSize: '13px' }}
+                                                                            onChange={(e) => handleChange(item.id, 'testimonial', e.target.value)}
+                                                                        ></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="flex items-center justify-between">
+                                                                    <button
+                                                                        onClick={() => deleteTestimonial(item.id)}
+                                                                        className="flex items-center text-red-500 hover:text-red-700 text-sm"
+                                                                    >
+                                                                        <MdDelete className="mr-1" /> Delete Testimonial
+                                                                    </button>
+                                                                    <button
+                                                                        className="ml-4 bg-dark text-white py-2 px-3 rounded-lg hover:bg-green-700 text-sm"
+                                                                    >
+                                                                        Save
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <button
+                                                onClick={addTestimonial}
+                                                style={{
+                                                    background: 'black',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    borderRadius: '5px',
+                                                    padding: '10px 20px',
+                                                    cursor: 'pointer',
+                                                }}
+                                            >
+                                                + Add Testimonial
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-between w-100 pl-10 pr-4 mt-3">
+                                <div className="col-xl-5 col-md-12 pt-3 pl-0">
                                     <h2 className="popup-title mb-1" style={{ fontSize: '18px', fontWeight: '500' }}>Co-Instructors</h2>
                                     <p className="mb-3" style={{ fontSize: '15px', color: 'grey' }}>Add Instructors and hosts.</p>
                                 </div>
@@ -2100,7 +2859,7 @@ const EditPagesettingPrice = () => {
                             </div>
                             <div className="flex items-center justify-end mt-2 mb-4 mr-7">
                                 <button type="submit" className="submit-btn mt-1" style={{ marginLeft: 'auto' }}>
-                                    Save Session
+                                    Save Landing Page
                                 </button>
                             </div>
                         </>
