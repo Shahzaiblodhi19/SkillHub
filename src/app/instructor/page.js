@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react'
+import profile from '../assets/profile.png';
+import Image from 'next/image';
 
 function Instructor() {
     const [activeTab, setactiveTab] = useState('courses');
