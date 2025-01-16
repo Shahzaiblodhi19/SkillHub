@@ -4,6 +4,259 @@ import React, { useState } from 'react'
 function Instructor() {
     const [activeTab, setactiveTab] = useState('courses');
     const [viewMoreActive, setviewMoreActive] = useState(false)
+    const [viewMoreActive2, setviewMoreActive2] = useState(false)
+    const [viewMoreActive3, setviewMoreActive3] = useState(false)
+
+    const sessions = [
+        {
+            id: 1,
+            title: 'Advanced Machine Learning Workshop',
+            author: 'Dr. Sarah Connor',
+            img: "https://i.ibb.co/640kJN2/c1.jpg",
+            profileImg: profile,
+            description: 'Deep dive into advanced ML algorithms, neural networks, and practical applications. Learn to solve real-world problems with hands-on experience.',
+            type: '1on1',
+            members: '28k',
+            rating: '4.8',
+            reviews: '(2.3k)',
+        },
+        {
+            id: 2,
+            title: 'Web Development Masterclass',
+            author: 'David Chen',
+            img: "https://i.ibb.co/NKffPZQ/c4.jpg",
+            profileImg: profile,
+            description: 'Master modern web development with React, Node.js, and cloud technologies. Build scalable applications and learn industry best practices.',
+            type: 'Group',
+            members: '35k',
+            rating: '4.7',
+            reviews: '(1.9k)',
+        },
+        {
+            id: 3,
+            title: 'Data Science Bootcamp',
+            author: 'Jane Doe',
+            img: "https://i.ibb.co/GFhHTqZ/c2.jpg",
+            profileImg: profile,
+            description: 'Comprehensive bootcamp covering data analysis, visualization, and machine learning techniques. Gain skills for a successful career in data science.',
+            type: '1on1',
+            members: '28k',
+            rating: '4.9',
+            reviews: '(3.1k)',
+        },
+        {
+            id: 4,
+            title: 'AI for Beginners',
+            author: 'John Smith',
+            img: "https://i.ibb.co/rkkdzYx/c6.jpg",
+            profileImg: profile,
+            description: 'An introductory course on AI concepts, tools, and applications. Designed for beginners to grasp the foundations of artificial intelligence.',
+            type: 'Group',
+            members: '35k',
+            rating: '4.6',
+            reviews: '(1.2k)',
+        },
+        {
+            id: 5,
+            title: 'Data Science Bootcamp',
+            author: 'Jane Doe',
+            img: "https://i.ibb.co/GFhHTqZ/c2.jpg",
+            profileImg: profile,
+            description: 'Comprehensive bootcamp covering data analysis, visualization, and machine learning techniques. Gain skills for a successful career in data science.',
+            type: '1on1',
+            members: '28k',
+            rating: '4.9',
+            reviews: '(3.1k)',
+        },
+        {
+            id: 6,
+            title: 'AI for Beginners',
+            author: 'John Smith',
+            img: "https://i.ibb.co/rkkdzYx/c6.jpg",
+            profileImg: profile,
+            description: 'An introductory course on AI concepts, tools, and applications. Designed for beginners to grasp the foundations of artificial intelligence.',
+            type: 'Group',
+            members: '35k',
+            rating: '4.6',
+            reviews: '(1.2k)',
+        },
+        {
+            id: 7,
+            title: 'Web Development Masterclass',
+            author: 'David Chen',
+            img: "https://i.ibb.co/NKffPZQ/c4.jpg",
+            profileImg: profile,
+            description: 'Master modern web development with React, Node.js, and cloud technologies. Build scalable applications and learn industry best practices.',
+            type: 'Group',
+            members: '35k',
+            rating: '4.7',
+            reviews: '(1.9k)',
+        },
+        {
+            id: 8,
+            title: 'Data Science Bootcamp',
+            author: 'Jane Doe',
+            img: "https://i.ibb.co/GFhHTqZ/c2.jpg",
+            profileImg: profile,
+            description: 'Comprehensive bootcamp covering data analysis, visualization, and machine learning techniques. Gain skills for a successful career in data science.',
+            type: '1on1',
+            members: '28k',
+            rating: '4.9',
+            reviews: '(3.1k)',
+        },
+        {
+            id: 9,
+            title: 'AI for Beginners',
+            author: 'John Smith',
+            img: "https://i.ibb.co/rkkdzYx/c6.jpg",
+            profileImg: profile,
+            description: 'An introductory course on AI concepts, tools, and applications. Designed for beginners to grasp the foundations of artificial intelligence.',
+            type: 'Group',
+            members: '35k',
+            rating: '4.6',
+            reviews: '(1.2k)',
+        },
+
+    ];
+
+    const [displayedCourses, setDisplayedCourses] = useState(sessions);
+    const communities = [
+        {
+            id: 1,
+            title: 'UI/UX Design Community Hub',
+            author: 'Sarah Anderson',
+            role: 'Lead Designer at DesignPro',
+            profileImg: profile,
+            img: "https://i.ibb.co/NKffPZQ/c4.jpg",
+            description: 'Join our vibrant community of UI/UX designers. Share insights, get feedback, and stay updated with the latest design trends.',
+            type: 'Community',
+            members: '12.5k',
+            posts: '45.2k',
+            price: '$24.00',
+        },
+        {
+            id: 2,
+            title: 'Frontend Development Collective',
+            author: 'Michael Chen',
+            role: 'Cofounder of DevStack',
+            profileImg: profile,
+            img: "https://i.ibb.co/640kJN2/c1.jpg",
+            description: 'A collaborative space for frontend developers to share knowledge, discuss new technologies, and grow.',
+            type: 'Collective',
+            members: '8.2k',
+            posts: '32.7k',
+            price: '$18.99',
+        },
+        {
+            id: 3,
+            title: 'UI/UX Design Community Hub',
+            author: 'Sarah Anderson',
+            role: 'Lead Designer at DesignPro',
+            profileImg: profile,
+            img: "https://i.ibb.co/rkkdzYx/c6.jpg",
+            description: 'Join our vibrant community of UI/UX designers. Share insights, get feedback, and stay updated with the latest design trends.',
+            type: 'Community',
+            members: '12.5k',
+            posts: '45.2k',
+            price: '$24.00',
+        },
+        {
+            id: 4,
+            title: 'Frontend Development Collective',
+            author: 'Michael Chen',
+            role: 'Cofounder of DevStack',
+            profileImg: profile,
+            img: "https://i.ibb.co/hBpWGQ7/c3.jpg",
+            description: 'A collaborative space for frontend developers to share knowledge, discuss new technologies, and grow their skills.',
+            type: 'Collective',
+            members: '8.2k',
+            posts: '32.7k',
+            price: '$18.99',
+        },
+        {
+            id: 5,
+            title: 'UI/UX Design Community Hub',
+            author: 'Sarah Anderson',
+            role: 'Lead Designer at DesignPro',
+            profileImg: profile,
+            img: "https://i.ibb.co/rkkdzYx/c6.jpg",
+            description: 'Join our vibrant community of UI/UX designers. Share insights, get feedback, and stay updated with the latest design trends.',
+            type: 'Community',
+            members: '12.5k',
+            posts: '45.2k',
+            price: '$24.00',
+        },
+        {
+            id: 6,
+            title: 'Frontend Development Collective',
+            author: 'Michael Chen',
+            role: 'Cofounder of DevStack',
+            profileImg: profile,
+            img: "https://i.ibb.co/hBpWGQ7/c3.jpg",
+            description: 'A collaborative space for frontend developers to share knowledge, discuss new technologies, and grow their skills.',
+            type: 'Collective',
+            members: '8.2k',
+            posts: '32.7k',
+            price: '$18.99',
+        },
+        {
+            id: 7,
+            title: 'Frontend Development Collective',
+            author: 'Michael Chen',
+            role: 'Cofounder of DevStack',
+            profileImg: profile,
+            img: "https://i.ibb.co/hBpWGQ7/c3.jpg",
+            description: 'A collaborative space for frontend developers to share knowledge, discuss new technologies, and grow their skills.',
+            type: 'Collective',
+            members: '8.2k',
+            posts: '32.7k',
+            price: '$18.99',
+        },
+        {
+            id: 8,
+            title: 'UI/UX Design Community Hub',
+            author: 'Sarah Anderson',
+            role: 'Lead Designer at DesignPro',
+            profileImg: profile,
+            img: "https://i.ibb.co/rkkdzYx/c6.jpg",
+            description: 'Join our vibrant community of UI/UX designers. Share insights, get feedback, and stay updated with the latest design trends.',
+            type: 'Community',
+            members: '12.5k',
+            posts: '45.2k',
+            price: '$24.00',
+        },
+        {
+            id: 9,
+            title: 'Frontend Development Collective',
+            author: 'Michael Chen',
+            role: 'Cofounder of DevStack',
+            profileImg: profile,
+            img: "https://i.ibb.co/hBpWGQ7/c3.jpg",
+            description: 'A collaborative space for frontend developers to share knowledge, discuss new technologies, and grow their skills.',
+            type: 'Collective',
+            members: '8.2k',
+            posts: '32.7k',
+            price: '$18.99',
+        },
+    ];
+    const [displayedCommunities, setDisplayedCommunities] = useState(communities);
+
+    const handleToggleViewMore = () => {
+        if (viewMoreActive2) {
+            setDisplayedCourses(sessions.slice(0, 6)); // Show only 4 courses
+        } else {
+            setDisplayedCourses(sessions.slice(0, 9)); // Show all 8 courses
+        }
+        setviewMoreActive2(!viewMoreActive2); // Toggle the button state
+    };
+    const handleToggleViewMore2 = () => {
+        if (viewMoreActive3) {
+            setDisplayedCommunities(communities.slice(0, 6)); // Show only 4 courses
+        } else {
+            setDisplayedCommunities(communities.slice(0, 9)); // Show all 8 courses
+        }
+        setviewMoreActive3(!viewMoreActive3); // Toggle the button state
+    };
     return (
         <div className='instructor'>
             <div className="page-container p-0">
@@ -453,6 +706,577 @@ function Instructor() {
 
                                     >
                                         {!viewMoreActive ? <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                                stroke="2px"
+                                            />
+                                        </svg>
+                                            : <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                                />
+                                            </svg>
+                                        }
+                                    </button>
+                                </div>
+                            </>
+                        }
+                        {activeTab === 'Bundles' &&
+                            <div className='bundle'>
+                                <div class="bundle-grid">
+                                    <div class="bundle-card">
+                                        <div class="bundle-image-container">
+                                            <img src="https://i.ibb.co/sw4yS26/img1.jpg" alt="Bundle cover" class="bundle-image" loading="lazy" />
+                                            <img src="https://i.ibb.co/dJh6T3K/AVATAR-midtone-ux-instrgram.jpg" alt="Instructor" class="instructor-thumbnail" loading="lazy" />
+                                        </div>
+                                        <div class="bundle-content">
+                                            <h3 class="bundle-title">Web Development Master Bundle</h3>
+                                            <p class="bundle-description">
+                                                Complete web development bundle covering frontend, backend, and full-stack development.
+                                            </p>
+
+                                            <div class="courses-preview">
+                                                <div class="course-thumbnails">
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/640kJN2/c1.jpg" alt="Course 1" class="course-thumbnail" />
+                                                        <div class="course-tooltip">The Complete Web Development Bootcamp</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/GFhHTqZ/c2.jpg" alt="Course 2" class="course-thumbnail" />
+                                                        <div class="course-tooltip">Advanced JavaScript Concepts</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/hBpWGQ7/c3.jpg" alt="Course 3" class="course-thumbnail" />
+                                                        <div class="course-tooltip">React Native - The Practical Guide</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/NKffPZQ/c4.jpg" alt="Course 4" class="course-thumbnail" />
+                                                        <div class="course-tooltip">UI/UX Design Masterclass</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/ss92kB8/c5.jpg" alt="Course 5" class="course-thumbnail" />
+                                                        <div class="course-tooltip">Design Systems Workshop</div>
+                                                    </div>
+                                                </div>
+                                                <button class="view-all-button">
+                                                    View All
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            <div class="pricing">
+                                                <div class="price-wrapper">
+                                                    <span class="current-price">$499.99</span>
+                                                    <span class="original-price">$899.99</span>
+                                                </div>
+                                                <div class="buy-button-container">
+                                                    <button class="add-to-cart">
+                                                        <svg fill="none" viewBox="0 0 24 24">
+                                                            <path fill="white" d="M22.5 16.14L23.92 6l-18.8-.81L4.92 4A4.43 4.43 0 002.51.8L.58 0 0 1.39l1.88.78a2.88 2.88 0 011.56 2.11l2.5 14.86a2.54 2.54 0 103.57 3h5.93a2.54 2.54 0 100-1.5H9.52a2.53 2.53 0 00-2.1-1.79l-.31-1.83 15.39-.88zm-4.65 4.21a1 1 0 11-.1 1.997 1 1 0 01.1-1.997zm4.36-12.92l-1 7.29-14.33.84-1.51-8.85 16.84.72zM8.14 21.4a1 1 0 11-2 0 1 1 0 012 0z" />
+                                                        </svg>
+                                                        Buy Now
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M6 9L12 15L18 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </button>
+                                                    <div class="payment-plans-tooltip">
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">PAY ONCE</div>
+                                                            <div class="plan-details">One-time payment of $499.99</div>
+                                                        </div>
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">Silver Bundle Plan</div>
+                                                            <div class="plan-details">5 payments of $110/month (Total: $550)</div>
+                                                        </div>
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">Gold Bundle Plan</div>
+                                                            <div class="plan-details">10 payments of $60/month (Total: $600)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bundle-footer">
+                                            <div class="stat">
+                                                <div class="tooltip">Total Courses</div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                                                    <path fill="#4F4F4F" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="stat-value">12</span>
+                                            </div>
+                                            <div class="stat">
+
+
+                                                <div class="tooltip">Total Students</div>
+                                                <svg fill="none" viewBox="0 0 20 20">
+                                                    <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="stat-value">15.2K</span>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="tooltip">Rating</div>
+                                                <svg viewBox="0 0 16 15" class="star-icon">
+                                                    <path fill="#13C4CC" d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z" />
+                                                </svg>
+                                                <span class="stat-value">4.7</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bundle-card">
+                                        <div class="bundle-image-container">
+                                            <img src="https://i.ibb.co/sw4yS26/img1.jpg" alt="Bundle cover" class="bundle-image" loading="lazy" />
+                                            <img src="https://i.ibb.co/NKp6WsG/AVATAR-Kostis-Kapelonis.png" alt="Instructor" class="instructor-thumbnail" loading="lazy" />
+                                        </div>
+
+                                        <div class="bundle-content">
+                                            <h3 class="bundle-title">Web Development Master Bundle</h3>
+                                            <p class="bundle-description">
+                                                Complete web development bundle covering frontend, backend, and full-stack development.
+                                            </p>
+
+                                            <div class="courses-preview">
+                                                <div class="course-thumbnails">
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/640kJN2/c1.jpg" alt="Course 1" class="course-thumbnail" />
+                                                        <div class="course-tooltip">The Complete Web Development Bootcamp</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/GFhHTqZ/c2.jpg" alt="Course 2" class="course-thumbnail" />
+                                                        <div class="course-tooltip">Advanced JavaScript Concepts</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/hBpWGQ7/c3.jpg" alt="Course 3" class="course-thumbnail" />
+                                                        <div class="course-tooltip">React Native - The Practical Guide</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/NKffPZQ/c4.jpg" alt="Course 4" class="course-thumbnail" />
+                                                        <div class="course-tooltip">UI/UX Design Masterclass</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/ss92kB8/c5.jpg" alt="Course 5" class="course-thumbnail" />
+                                                        <div class="course-tooltip">Design Systems Workshop</div>
+                                                    </div>
+                                                </div>
+                                                <button class="view-all-button">
+                                                    View All
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            <div class="pricing">
+                                                <div class="price-wrapper">
+                                                    <span class="current-price">$499.99</span>
+                                                    <span class="original-price">$899.99</span>
+                                                </div>
+                                                <div class="buy-button-container">
+                                                    <button class="add-to-cart">
+                                                        <svg fill="none" viewBox="0 0 24 24">
+                                                            <path fill="white" d="M22.5 16.14L23.92 6l-18.8-.81L4.92 4A4.43 4.43 0 002.51.8L.58 0 0 1.39l1.88.78a2.88 2.88 0 011.56 2.11l2.5 14.86a2.54 2.54 0 103.57 3h5.93a2.54 2.54 0 100-1.5H9.52a2.53 2.53 0 00-2.1-1.79l-.31-1.83 15.39-.88zm-4.65 4.21a1 1 0 11-.1 1.997 1 1 0 01.1-1.997zm4.36-12.92l-1 7.29-14.33.84-1.51-8.85 16.84.72zM8.14 21.4a1 1 0 11-2 0 1 1 0 012 0z" />
+                                                        </svg>
+                                                        Buy Now
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M6 9L12 15L18 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </button>
+                                                    <div class="payment-plans-tooltip">
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">PAY ONCE</div>
+                                                            <div class="plan-details">One-time payment of $499.99</div>
+                                                        </div>
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">Silver Bundle Plan</div>
+                                                            <div class="plan-details">5 payments of $110/month (Total: $550)</div>
+                                                        </div>
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">Gold Bundle Plan</div>
+                                                            <div class="plan-details">10 payments of $60/month (Total: $600)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bundle-footer">
+                                            <div class="stat">
+                                                <div class="tooltip">Total Courses</div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                                                    <path fill="#4F4F4F" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="stat-value">12</span>
+                                            </div>
+                                            <div class="stat">
+
+
+                                                <div class="tooltip">Total Students</div>
+                                                <svg fill="none" viewBox="0 0 20 20">
+                                                    <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="stat-value">15.2K</span>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="tooltip">Rating</div>
+                                                <svg viewBox="0 0 16 15" class="star-icon">
+                                                    <path fill="#13C4CC" d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z" />
+                                                </svg>
+                                                <span class="stat-value">4.7</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bundle-card">
+                                        <div class="bundle-image-container">
+                                            <img src="https://i.ibb.co/sw4yS26/img1.jpg" alt="Bundle cover" class="bundle-image" loading="lazy" />
+                                            <img src="https://i.ibb.co/cF4gPr5/AVATAR-github-com-biowaffeln.png" alt="Instructor" class="instructor-thumbnail" loading="lazy" />
+                                        </div>
+
+                                        <div class="bundle-content">
+                                            <h3 class="bundle-title">Web Development Master Bundle</h3>
+                                            <p class="bundle-description">
+                                                Complete web development bundle covering frontend, backend, and full-stack development.
+                                            </p>
+
+                                            <div class="courses-preview">
+                                                <div class="course-thumbnails">
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/640kJN2/c1.jpg" alt="Course 1" class="course-thumbnail" />
+                                                        <div class="course-tooltip">The Complete Web Development Bootcamp</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/GFhHTqZ/c2.jpg" alt="Course 2" class="course-thumbnail" />
+                                                        <div class="course-tooltip">Advanced JavaScript Concepts</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/hBpWGQ7/c3.jpg" alt="Course 3" class="course-thumbnail" />
+                                                        <div class="course-tooltip">React Native - The Practical Guide</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/NKffPZQ/c4.jpg" alt="Course 4" class="course-thumbnail" />
+                                                        <div class="course-tooltip">UI/UX Design Masterclass</div>
+                                                    </div>
+                                                    <div class="course-thumbnail-container">
+                                                        <img src="https://i.ibb.co/ss92kB8/c5.jpg" alt="Course 5" class="course-thumbnail" />
+                                                        <div class="course-tooltip">Design Systems Workshop</div>
+                                                    </div>
+                                                </div>
+                                                <button class="view-all-button">
+                                                    View All
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            <div class="pricing">
+                                                <div class="price-wrapper">
+                                                    <span class="current-price">$499.99</span>
+                                                    <span class="original-price">$899.99</span>
+                                                </div>
+                                                <div class="buy-button-container">
+                                                    <button class="add-to-cart">
+                                                        <svg fill="none" viewBox="0 0 24 24">
+                                                            <path fill="white" d="M22.5 16.14L23.92 6l-18.8-.81L4.92 4A4.43 4.43 0 002.51.8L.58 0 0 1.39l1.88.78a2.88 2.88 0 011.56 2.11l2.5 14.86a2.54 2.54 0 103.57 3h5.93a2.54 2.54 0 100-1.5H9.52a2.53 2.53 0 00-2.1-1.79l-.31-1.83 15.39-.88zm-4.65 4.21a1 1 0 11-.1 1.997 1 1 0 01.1-1.997zm4.36-12.92l-1 7.29-14.33.84-1.51-8.85 16.84.72zM8.14 21.4a1 1 0 11-2 0 1 1 0 012 0z" />
+                                                        </svg>
+                                                        Buy Now
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M6 9L12 15L18 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </button>
+                                                    <div class="payment-plans-tooltip">
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">PAY ONCE</div>
+                                                            <div class="plan-details">One-time payment of $499.99</div>
+                                                        </div>
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">Silver Bundle Plan</div>
+                                                            <div class="plan-details">5 payments of $110/month (Total: $550)</div>
+                                                        </div>
+                                                        <div class="payment-plan">
+                                                            <div class="plan-name">Gold Bundle Plan</div>
+                                                            <div class="plan-details">10 payments of $60/month (Total: $600)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bundle-footer">
+                                            <div class="stat">
+                                                <div class="tooltip">Total Courses</div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                                                    <path fill="#4F4F4F" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="stat-value">12</span>
+                                            </div>
+                                            <div class="stat">
+
+
+                                                <div class="tooltip">Total Students</div>
+                                                <svg fill="none" viewBox="0 0 20 20">
+                                                    <path fill="#4F4F4F" d="M9.72154 3.47033C9.90035 3.39881 10.0998 3.39881 10.2786 3.47033L18.612 6.80366C18.8967 6.91756 19.0834 7.19334 19.0834 7.50002V12.5C19.0834 12.9142 18.7476 13.25 18.3334 13.25C17.9192 13.25 17.5834 12.9142 17.5834 12.5V8.6078L15.7501 9.34113V13.3334C15.7501 14.4243 14.9016 15.2566 13.871 15.7719C12.8053 16.3048 11.4126 16.5834 10.0001 16.5834C8.58758 16.5834 7.19484 16.3048 6.12914 15.7719C5.09852 15.2566 4.25008 14.4243 4.25008 13.3334V9.34113L1.38821 8.19638C1.10346 8.08248 0.916748 7.8067 0.916748 7.50002C0.916748 7.19334 1.10346 6.91756 1.38821 6.80366L9.72154 3.47033ZM5.29422 8.14324C5.2838 8.13879 5.27326 8.13457 5.2626 8.13059L3.68619 7.50002L10.0001 4.97446L16.314 7.50002L14.7376 8.13059C14.7269 8.13457 14.7164 8.13879 14.7059 8.14323L10.0001 10.0256L5.29422 8.14324ZM5.75008 9.94113V13.3334C5.75008 13.5685 5.95521 14.0079 6.79996 14.4303C7.60962 14.8351 8.76042 15.0834 10.0001 15.0834C11.2397 15.0834 12.3905 14.8351 13.2002 14.4303C14.0449 14.0079 14.2501 13.5685 14.2501 13.3334V9.94113L10.2786 11.5297C10.0998 11.6012 9.90035 11.6012 9.72154 11.5297L5.75008 9.94113Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                                <span class="stat-value">15.2K</span>
+                                            </div>
+                                            <div class="stat">
+                                                <div class="tooltip">Rating</div>
+                                                <svg viewBox="0 0 16 15" class="star-icon">
+                                                    <path fill="#13C4CC" d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z" />
+                                                </svg>
+                                                <span class="stat-value">4.7</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        {activeTab === 'Sessions' &&
+                            <>
+                                <div
+                                    style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 3fr))',
+                                        gap: '20px',
+                                    }}
+                                >
+                                    {displayedCourses.map((course) => (
+                                        <div
+                                            key={course.id}
+                                            className="relative group w-100"
+                                            style={{
+                                                background: '#fff',
+                                                borderRadius: '10px',
+                                                width: '100%',
+                                                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                                overflow: 'hidden',
+                                            }}
+                                        >
+
+                                            {/* Image */}
+                                            <img
+                                                src={course.img}
+                                                alt={course.title}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '150px',
+                                                    objectFit: 'cover',
+                                                }}
+                                            />
+
+                                            <div style={{ padding: '15px', marginTop: '-50px', zIndex: '100', position: 'relative' }}>
+                                                <Image
+                                                    src={course.profileImg}
+                                                    alt={course.title}
+                                                    style={{
+                                                        width: '65px',
+                                                        border: '3px solid #fff',
+                                                        borderRadius: '15px',
+                                                        height: '65px',
+                                                        objectFit: 'cover',
+                                                    }}
+                                                    className="mb-2"
+                                                />
+                                                <h4 className="h-8" style={{ fontSize: '15px', marginBottom: '10px', fontWeight: 'bold' }}>{course.title}</h4>
+                                                <p style={{ fontSize: '14px', color: 'gray', marginBottom: '10px' }}>
+                                                    {course.author}
+                                                </p>
+                                                <p style={{ fontSize: '15.5px', color: '#646360' }}>{course.description.slice(0, 70) + ' ...'}</p>
+                                                <button className="text-white w-100 py-2.5 rounded-lg text-sm mt-3 mb-4" style={{ background: '#13C4CC' }}>Book Now</button>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    background: '#F8F9FB',
+                                                    padding: '10px',
+                                                    display: 'flex',
+                                                    justifyContent: 'space-between',
+                                                }}
+                                            >
+                                                <div className="tooltip-item">
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 32 32">
+                                                        <path fill="#333333" d="M9.15646 7.75385C9.54698 8.14438 9.54696 8.77755 9.15643 9.16806C8.25874 10.0657 7.54666 11.1314 7.06083 12.3042C6.575 13.4771 6.32495 14.7341 6.32495 16.0036C6.32495 17.2731 6.575 18.5301 7.06083 19.703C7.54666 20.8758 8.25874 21.9415 9.15643 22.8391C9.54696 23.2297 9.54698 23.8628 9.15646 24.2534C8.76595 24.6439 8.13279 24.6439 7.74225 24.2534C6.65884 23.17 5.79942 21.8839 5.21308 20.4684C4.62674 19.0529 4.32495 17.5357 4.32495 16.0036C4.32495 14.4715 4.62674 12.9543 5.21308 11.5388C5.79942 10.1233 6.65884 8.83717 7.74225 7.75381C8.13279 7.3633 8.76595 7.36331 9.15646 7.75385ZM22.8355 7.75385C23.2261 7.36331 23.8592 7.3633 24.2498 7.75381C25.3332 8.83717 26.1926 10.1233 26.7789 11.5388C27.3653 12.9543 27.6671 14.4715 27.6671 16.0036C27.6671 17.5357 27.3653 19.0529 26.7789 20.4684C26.1926 21.8839 25.3332 23.17 24.2498 24.2534C23.8592 24.6439 23.2261 24.6439 22.8355 24.2534C22.445 23.8628 22.445 23.2297 22.8356 22.8391C23.7333 21.9415 24.4454 20.8758 24.9312 19.703C25.417 18.5301 25.6671 17.2731 25.6671 16.0036C25.6671 14.7341 25.417 13.4771 24.9312 12.3042C24.4454 11.1314 23.7333 10.0657 22.8356 9.16806C22.445 8.77755 22.445 8.14438 22.8355 7.75385ZM12.931 11.5257C13.3216 11.9162 13.3217 12.5493 12.9312 12.9399C12.1188 13.7525 11.6625 14.8545 11.6625 16.0036C11.6625 17.1526 12.1188 18.2546 12.9312 19.0672C13.3217 19.4578 13.3216 20.091 12.931 20.4815C12.5404 20.8719 11.9073 20.8718 11.5168 20.4812C10.3295 19.2936 9.66248 17.683 9.66248 16.0036C9.66248 14.3242 10.3295 12.7136 11.5168 11.5259C11.9073 11.1353 12.5404 11.1352 12.931 11.5257ZM19.0637 11.5257C19.4543 11.1352 20.0874 11.1353 20.4779 11.5259C21.6652 12.7136 22.3322 14.3242 22.3322 16.0036C22.3322 17.683 21.6652 19.2936 20.4779 20.4812C20.0874 20.8718 19.4543 20.8719 19.0637 20.4815C18.6731 20.091 18.673 19.4578 19.0635 19.0672C19.8758 18.2546 20.3322 17.1526 20.3322 16.0036C20.3322 14.8545 19.8758 13.7525 19.0635 12.9399C18.673 12.5493 18.6731 11.9162 19.0637 11.5257ZM16 15.0036C16.5523 15.0036 17 15.4513 17 16.0036V16.0169C17 16.5692 16.5523 17.0169 16 17.0169C15.4477 17.0169 15 16.5692 15 16.0169V16.0036C15 15.4513 15.4477 15.0036 16 15.0036Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span className="text-sm" style={{ fontWeight: '500' }}>{course.type}</span>
+                                                    <span className="tooltip">{course.type} session</span>
+                                                </div>
+                                                <div className="tooltip-item">
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                                        <path fill="#4F4F4F" d="M5.64124 3.64124C6.53204 2.75044 7.74022 2.25 9 2.25C10.2598 2.25 11.468 2.75044 12.3588 3.64124C13.2496 4.53204 13.75 5.74022 13.75 7C13.75 8.25978 13.2496 9.46796 12.3588 10.3588C11.468 11.2496 10.2598 11.75 9 11.75C7.74022 11.75 6.53204 11.2496 5.64124 10.3588C4.75044 9.46796 4.25 8.25978 4.25 7C4.25 5.74022 4.75044 4.53204 5.64124 3.64124ZM9 3.75C8.13805 3.75 7.3114 4.09241 6.7019 4.7019C6.09241 5.3114 5.75 6.13805 5.75 7C5.75 7.86195 6.09241 8.6886 6.7019 9.2981C7.3114 9.90759 8.13805 10.25 9 10.25C9.86195 10.25 10.6886 9.90759 11.2981 9.2981C11.9076 8.6886 12.25 7.86195 12.25 7C12.25 6.13805 11.9076 5.3114 11.2981 4.7019C10.6886 4.09241 9.86195 3.75 9 3.75ZM15.2734 2.94385C15.3762 2.54258 15.7848 2.30058 16.186 2.40332C17.2078 2.66493 18.1134 3.25915 18.7601 4.09231C19.4068 4.92547 19.7578 5.95018 19.7578 7.00488C19.7578 8.05959 19.4068 9.08429 18.7601 9.91745C18.1134 10.7506 17.2078 11.3448 16.186 11.6064C15.7848 11.7092 15.3762 11.4672 15.2734 11.0659C15.1707 10.6646 15.4127 10.2561 15.814 10.1533C16.5131 9.97433 17.1327 9.56775 17.5752 8.99769C18.0177 8.42763 18.2578 7.72652 18.2578 7.00488C18.2578 6.28325 18.0177 5.58213 17.5752 5.01207C17.1327 4.44201 16.5131 4.03544 15.814 3.85645C15.4127 3.7537 15.1707 3.34512 15.2734 2.94385ZM7 15.75C6.13805 15.75 5.3114 16.0924 4.7019 16.7019C4.09241 17.3114 3.75 18.138 3.75 19V21C3.75 21.4142 3.41421 21.75 3 21.75C2.58579 21.75 2.25 21.4142 2.25 21V19C2.25 17.7402 2.75044 16.532 3.64124 15.6412C4.53204 14.7504 5.74022 14.25 7 14.25H11C12.2598 14.25 13.468 14.7504 14.3588 15.6412C15.2496 16.532 15.75 17.7402 15.75 19V21C15.75 21.4142 15.4142 21.75 15 21.75C14.5858 21.75 14.25 21.4142 14.25 21V19C14.25 18.138 13.9076 17.3114 13.2981 16.7019C12.6886 16.0924 11.862 15.75 11 15.75H7ZM17.2738 14.9624C17.3774 14.5614 17.7864 14.3202 18.1875 14.4237C19.2026 14.6858 20.1025 15.2763 20.7469 16.1033C21.3913 16.9303 21.744 17.9472 21.75 18.9956L21.75 18.9999L21.75 20.9999C21.75 21.4141 21.4142 21.7499 21 21.7499C20.5858 21.7499 20.25 21.4141 20.25 20.9999V19.002C20.2454 18.2855 20.0041 17.5905 19.5637 17.0253C19.1228 16.4595 18.5071 16.0554 17.8125 15.8761C17.4115 15.7725 17.1703 15.3635 17.2738 14.9624Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span className="text-sm" style={{ fontWeight: '500' }}>{course.members}</span>
+                                                    <span className="tooltip">Member Count</span>
+                                                </div>
+                                                <div className="tooltip-item">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="16"
+                                                        height="16"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 16 16"
+                                                        style={{
+                                                            marginBottom: '2px',
+                                                        }}
+                                                    >
+                                                        <path
+                                                            fill="#2FB3BF"
+                                                            d="M3.612 15.443c-.396.199-.824-.149-.746-.592l.83-4.73-3.523-3.356c-.33-.314-.158-.888.283-.95l4.898-.696 2.067-4.125c.197-.39.73-.39.927 0l2.067 4.125 4.898.696c.441.062.612.636.282.95l-3.523 3.356.83 4.73c.078.443-.35.791-.746.592L8 13.187l-4.389 2.256z"
+                                                        />
+                                                    </svg>
+                                                    <span>
+                                                        {course.rating}{' '}
+                                                        <span style={{ color: 'gray' }}>{course.reviews}</span>
+                                                    </span>
+                                                    <span className="tooltip">{course.rating} Rating</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
+                                    <button
+                                    >
+                                        {!viewMoreActive2 ? <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                                stroke="2px"
+                                            />
+                                        </svg>
+                                            : <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M1.646 11.354a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708 0z"
+                                                />
+                                            </svg>
+                                        }
+                                    </button>
+                                </div>
+                            </>
+                        }
+                        {activeTab === 'Communities' &&
+                            <>
+                                <div
+                                    style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 3fr))',
+                                        gap: '20px',
+                                    }}
+                                >
+                                    {displayedCommunities.map((course) => (
+                                        <div
+                                            key={course.id}
+                                            className="relative group w-100"
+                                            style={{
+                                                background: '#fff',
+                                                borderRadius: '10px',
+                                                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                                                overflow: 'hidden',
+                                            }}
+                                        >
+
+                                            {/* Image */}
+                                            <img
+                                                src={course.img}
+                                                alt={course.title}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '150px',
+                                                    objectFit: 'cover',
+                                                }}
+                                            />
+
+                                            <div style={{ padding: '15px', zIndex: '100', position: 'relative' }}>
+                                                <h4 className="h-9 mt-2 mb-3" style={{ fontSize: '16px', marginBottom: '10px', fontWeight: 'bold' }}>{course.title}</h4>
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <Image
+                                                        src={course.profileImg}
+                                                        alt={course.title}
+                                                        style={{
+                                                            width: '50px',
+                                                            borderRadius: '10px',
+                                                            height: '50px',
+                                                            objectFit: 'cover',
+                                                        }}
+                                                    />
+                                                    <div className="flex flex-col gap-1.5">
+                                                        <h3 style={{ fontSize: '14.5px', fontWeight: '600' }}>
+                                                            {course.author}
+                                                        </h3>
+                                                        <p style={{ fontSize: '12px' }}>{course.role}</p>
+                                                    </div>
+                                                </div>
+                                                <p style={{ fontSize: '15.5px', color: '#646360' }}>{course.description.slice(0, 93) + ' ...'}</p>
+                                                <button className="text-white w-100 py-2.5 rounded-lg text-sm mt-3 mb-4" style={{ background: '#13C4CC' }}>Join Now</button>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    background: '#F8F9FB',
+                                                    padding: '10px',
+                                                    display: 'flex',
+                                                    justifyContent: 'space-between',
+                                                }}
+                                            >
+                                                <div className="tooltip-item">
+                                                    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                        <path fill="#343332" d="M10.3031 4.71338C10.638 4.71338 10.9096 4.98493 10.9096 5.3199V5.62947C11.7726 5.74654 12.5494 6.11208 13.0363 6.67319C13.2559 6.92617 13.2288 7.30925 12.9758 7.52881C12.7229 7.74837 12.3398 7.72128 12.1202 7.4683C11.8892 7.20209 11.4627 6.96219 10.9096 6.85747V9.13097C11.5063 9.2117 12.0549 9.41056 12.4966 9.70499C13.0803 10.0941 13.5358 10.6984 13.5358 11.4478C13.5358 12.1973 13.0803 12.8015 12.4966 13.1907C12.0549 13.4851 11.5063 13.684 10.9096 13.7647V14.0741C10.9096 14.4091 10.638 14.6806 10.3031 14.6806C9.9681 14.6806 9.69656 14.4091 9.69656 14.0741V13.7645C8.83357 13.6474 8.0568 13.2819 7.5698 12.7208C7.35024 12.4678 7.37733 12.0847 7.63031 11.8652C7.88329 11.6456 8.26636 11.6727 8.48592 11.9257C8.71697 12.1919 9.14345 12.4318 9.69656 12.5365V10.263C9.09982 10.1823 8.55128 9.98342 8.10959 9.68899C7.52581 9.29985 7.07031 8.69563 7.07031 7.94614C7.07031 7.19665 7.52581 6.59244 8.10959 6.2033C8.55128 5.90886 9.09982 5.71 9.69656 5.62928V5.3199C9.69656 4.98493 9.9681 4.71338 10.3031 4.71338ZM9.69656 6.85766C9.33347 6.92644 9.02055 7.0539 8.78241 7.21264C8.4157 7.45709 8.28336 7.7283 8.28336 7.94614C8.28336 8.16399 8.4157 8.4352 8.78241 8.67964C9.02055 8.83839 9.33347 8.96585 9.69656 9.03463V6.85766ZM10.9096 10.3594V12.5363C11.2727 12.4675 11.5856 12.3401 11.8237 12.1813C12.1905 11.9369 12.3228 11.6657 12.3228 11.4478C12.3228 11.23 12.1905 10.9588 11.8237 10.7143C11.5856 10.5556 11.2727 10.4281 10.9096 10.3594Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                        <path fill="#343332" d="M10.3399 2.51392C6.38177 2.51392 3.1731 5.72259 3.1731 9.6807C3.1731 13.6388 6.38177 16.8475 10.3399 16.8475C14.298 16.8475 17.5067 13.6388 17.5067 9.6807C17.5067 5.72259 14.298 2.51392 10.3399 2.51392ZM1.9231 9.6807C1.9231 5.03224 5.69142 1.26392 10.3399 1.26392C14.9883 1.26392 18.7567 5.03224 18.7567 9.6807C18.7567 14.3292 14.9883 18.0975 10.3399 18.0975C5.69142 18.0975 1.9231 14.3292 1.9231 9.6807Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span className="text-sm" style={{ fontWeight: '500' }}>{course.price.slice(1)}</span>
+                                                    <span className="tooltip">{course.price}</span>
+                                                </div>
+                                                <div className="tooltip-item">
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                                        <path fill="#4F4F4F" d="M5.64124 3.64124C6.53204 2.75044 7.74022 2.25 9 2.25C10.2598 2.25 11.468 2.75044 12.3588 3.64124C13.2496 4.53204 13.75 5.74022 13.75 7C13.75 8.25978 13.2496 9.46796 12.3588 10.3588C11.468 11.2496 10.2598 11.75 9 11.75C7.74022 11.75 6.53204 11.2496 5.64124 10.3588C4.75044 9.46796 4.25 8.25978 4.25 7C4.25 5.74022 4.75044 4.53204 5.64124 3.64124ZM9 3.75C8.13805 3.75 7.3114 4.09241 6.7019 4.7019C6.09241 5.3114 5.75 6.13805 5.75 7C5.75 7.86195 6.09241 8.6886 6.7019 9.2981C7.3114 9.90759 8.13805 10.25 9 10.25C9.86195 10.25 10.6886 9.90759 11.2981 9.2981C11.9076 8.6886 12.25 7.86195 12.25 7C12.25 6.13805 11.9076 5.3114 11.2981 4.7019C10.6886 4.09241 9.86195 3.75 9 3.75ZM15.2734 2.94385C15.3762 2.54258 15.7848 2.30058 16.186 2.40332C17.2078 2.66493 18.1134 3.25915 18.7601 4.09231C19.4068 4.92547 19.7578 5.95018 19.7578 7.00488C19.7578 8.05959 19.4068 9.08429 18.7601 9.91745C18.1134 10.7506 17.2078 11.3448 16.186 11.6064C15.7848 11.7092 15.3762 11.4672 15.2734 11.0659C15.1707 10.6646 15.4127 10.2561 15.814 10.1533C16.5131 9.97433 17.1327 9.56775 17.5752 8.99769C18.0177 8.42763 18.2578 7.72652 18.2578 7.00488C18.2578 6.28325 18.0177 5.58213 17.5752 5.01207C17.1327 4.44201 16.5131 4.03544 15.814 3.85645C15.4127 3.7537 15.1707 3.34512 15.2734 2.94385ZM7 15.75C6.13805 15.75 5.3114 16.0924 4.7019 16.7019C4.09241 17.3114 3.75 18.138 3.75 19V21C3.75 21.4142 3.41421 21.75 3 21.75C2.58579 21.75 2.25 21.4142 2.25 21V19C2.25 17.7402 2.75044 16.532 3.64124 15.6412C4.53204 14.7504 5.74022 14.25 7 14.25H11C12.2598 14.25 13.468 14.7504 14.3588 15.6412C15.2496 16.532 15.75 17.7402 15.75 19V21C15.75 21.4142 15.4142 21.75 15 21.75C14.5858 21.75 14.25 21.4142 14.25 21V19C14.25 18.138 13.9076 17.3114 13.2981 16.7019C12.6886 16.0924 11.862 15.75 11 15.75H7ZM17.2738 14.9624C17.3774 14.5614 17.7864 14.3202 18.1875 14.4237C19.2026 14.6858 20.1025 15.2763 20.7469 16.1033C21.3913 16.9303 21.744 17.9472 21.75 18.9956L21.75 18.9999L21.75 20.9999C21.75 21.4141 21.4142 21.7499 21 21.7499C20.5858 21.7499 20.25 21.4141 20.25 20.9999V19.002C20.2454 18.2855 20.0041 17.5905 19.5637 17.0253C19.1228 16.4595 18.5071 16.0554 17.8125 15.8761C17.4115 15.7725 17.1703 15.3635 17.2738 14.9624Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span className="text-sm" style={{ fontWeight: '500' }}>{course.members}</span>
+                                                    <span className="tooltip">Member Count</span>
+                                                </div>
+                                                <div className="tooltip-item">
+                                                    <svg className="w-4 h-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                        <path fill="#4F4F4F" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441C9.09203 3.29004 9.08325 3.31123 9.08325 3.33333V8.33333C9.08325 8.35543 9.09203 8.37663 9.10766 8.39226C9.12329 8.40789 9.14448 8.41667 9.16659 8.41667H14.9999C15.1988 8.41667 15.3896 8.49569 15.5302 8.63634L16.7499 9.85601V3.33333C16.7499 3.31123 16.7411 3.29003 16.7255 3.27441C16.7099 3.25878 16.6887 3.25 16.6666 3.25H9.16659ZM8.047 2.21375C8.34393 1.91682 8.74666 1.75 9.16659 1.75H16.6666C17.0865 1.75 17.4892 1.91681 17.7862 2.21375C18.0831 2.51068 18.2499 2.91341 18.2499 3.33333V11.6667C18.2499 11.97 18.0672 12.2435 17.7869 12.3596C17.5067 12.4757 17.1841 12.4115 16.9696 12.197L14.6893 9.91667H9.16659C8.74666 9.91667 8.34393 9.74985 8.047 9.45292C7.75007 9.15599 7.58325 8.75326 7.58325 8.33333V3.33333C7.58325 2.91341 7.75007 2.51068 8.047 2.21375Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                        <path fill="#4F4F4F" d="M3.33333 9.08333C3.31123 9.08333 3.29004 9.09211 3.27441 9.10774C3.25878 9.12336 3.25 9.14456 3.25 9.16666V15.6893L4.46967 14.4697C4.61032 14.329 4.80109 14.25 5 14.25H10.8333C10.8554 14.25 10.8766 14.2412 10.8923 14.2256C10.9079 14.21 10.9167 14.1888 10.9167 14.1667V12.5C10.9167 12.0858 11.2525 11.75 11.6667 11.75C12.0809 11.75 12.4167 12.0858 12.4167 12.5V14.1667C12.4167 14.5866 12.2499 14.9893 11.9529 15.2862C11.656 15.5832 11.2533 15.75 10.8333 15.75H5.31066L3.03033 18.0303C2.81583 18.2448 2.49324 18.309 2.21299 18.1929C1.93273 18.0768 1.75 17.8033 1.75 17.5V9.16666C1.75 8.74674 1.91682 8.34401 2.21375 8.04708C2.51068 7.75014 2.91341 7.58333 3.33333 7.58333H5C5.41421 7.58333 5.75 7.91911 5.75 8.33333C5.75 8.74754 5.41421 9.08333 5 9.08333H3.33333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span>
+                                                        {course.rating}{' '}
+                                                        <span className="text-sm" style={{ color: '#000', fontWeight: '500' }}>{course.posts}</span>
+                                                    </span>
+                                                    <span className="tooltip">Post Count</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="cursor-pointer py-2 fw-bold" onClick={handleToggleViewMore2} style={{ textAlign: "center", marginTop: "20px", background: '#F5F5F5', zIndex: '100' }}>
+                                    <button
+                                    >
+                                        {!viewMoreActive3 ? <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
                                             height="16"
