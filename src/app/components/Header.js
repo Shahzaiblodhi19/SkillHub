@@ -600,7 +600,6 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
           </button>
           {Login === true ?
             <>
-              {!isSmallMobileView ?
                 <>
                   <button className="btn p-0"
                     id="basic-button3"
@@ -770,9 +769,6 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setsu
                     </MenuItem>
                   </Menu>
                 </>
-                :
-                ''
-              }
             </>
             : ''
           }
