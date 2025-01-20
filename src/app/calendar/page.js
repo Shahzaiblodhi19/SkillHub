@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { MyContext } from '../layout';
 
 export default function CalendarPage() {
     const [view, setView] = useState('calendar');
@@ -25,6 +26,30 @@ export default function CalendarPage() {
         },
         {
             id: 3,
+            date: '2024-12-07', // Same day
+            title: 'Product Launch Discussion',
+            time: '2:00 PM',
+            attendees: 15,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 4,
+            date: '2024-12-07', // Same day
+            title: 'Client Feedback Review',
+            time: '5:00 PM',
+            attendees: 10,
+            type: 'one-on-one',
+        },
+        {
+            id: 5,
+            date: '2024-12-07', // Same day
+            title: 'Launch Feedback Review',
+            time: '1:00 PM',
+            attendees: 18,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 6,
             date: '2024-12-08',
             title: 'Career Planning Session',
             time: '10:00 AM',
@@ -32,7 +57,7 @@ export default function CalendarPage() {
             type: 'one-on-one',
         },
         {
-            id: 4,
+            id: 7,
             date: '2024-12-15',
             title: 'Marketing Masterclass',
             time: '2:00 PM',
@@ -40,12 +65,254 @@ export default function CalendarPage() {
             type: 'zoom-webinar',
         },
         {
-            id: 5,
+            id: 8,
             date: '2024-12-28',
             title: 'Sales Meeting',
             time: '9:00 AM',
             attendees: 12,
             type: 'zoom-meeting',
+        },
+        // Added events for January 2025
+        {
+            id: 9,
+            date: '2025-01-05',
+            title: 'Team Check-in Meeting',
+            time: '10:00 AM',
+            attendees: 5,
+            type: 'teams-meeting',
+        },
+        {
+            id: 10,
+            date: '2025-01-05', // Same day
+            title: 'Product Review Session',
+            time: '1:00 PM',
+            attendees: 8,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 11,
+            date: '2025-01-05', // Same day
+            title: 'Weekly Sprint Review',
+            time: '3:00 PM',
+            attendees: 6,
+            type: 'teams-meeting',
+        },
+        {
+            id: 12,
+            date: '2025-01-05', // Same day
+            title: 'Client Follow-up Meeting',
+            time: '5:00 PM',
+            attendees: 12,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 13,
+            date: '2025-01-05', // Same day
+            title: 'Leadership Strategy Call',
+            time: '7:00 PM',
+            attendees: 10,
+            type: 'teams-meeting',
+        },
+        {
+            id: 14,
+            date: '2025-01-06',
+            title: 'Morning Huddle',
+            time: '8:00 AM',
+            attendees: 4,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 15,
+            date: '2025-01-06', // Same day
+            title: 'Quarterly Sales Strategy',
+            time: '11:00 AM',
+            attendees: 20,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 16,
+            date: '2025-01-06', // Same day
+            title: 'Project Kick-off Meeting',
+            time: '1:00 PM',
+            attendees: 12,
+            type: 'teams-meeting',
+        },
+        {
+            id: 17,
+            date: '2025-01-06', // Same day
+            title: 'Team Collaboration Session',
+            time: '3:00 PM',
+            attendees: 8,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 18,
+            date: '2025-01-06', // Same day
+            title: 'Business Planning Call',
+            time: '5:00 PM',
+            attendees: 10,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 19,
+            date: '2025-01-06', // Same day
+            title: 'Executive Briefing',
+            time: '7:00 PM',
+            attendees: 6,
+            type: 'teams-meeting',
+        },
+        // Additional events with mixed types and dates
+        {
+            id: 20,
+            date: '2025-01-10',
+            title: 'Design Review',
+            time: '9:00 AM',
+            attendees: 8,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 21,
+            date: '2025-01-10', // Same day
+            title: 'Product Strategy Session',
+            time: '1:00 PM',
+            attendees: 10,
+            type: 'teams-meeting',
+        },
+        {
+            id: 22,
+            date: '2025-01-10', // Same day
+            title: 'Marketing Alignment Call',
+            time: '4:00 PM',
+            attendees: 7,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 23,
+            date: '2025-01-12',
+            title: 'Sales Pipeline Review',
+            time: '11:00 AM',
+            attendees: 14,
+            type: 'zoom-webinar',
+        },
+        {
+            id: 24,
+            date: '2025-01-12', // Same day
+            title: 'Client Onboarding Call',
+            time: '2:00 PM',
+            attendees: 5,
+            type: 'teams-meeting',
+        },
+        {
+            id: 25,
+            date: '2025-01-12', // Same day
+            title: 'Weekly All-Hands Meeting',
+            time: '4:00 PM',
+            attendees: 25,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 26,
+            date: '2025-01-15',
+            title: 'Team Stand-up',
+            time: '9:00 AM',
+            attendees: 6,
+            type: 'teams-meeting',
+        },
+        {
+            id: 27,
+            date: '2025-01-15', // Same day
+            title: 'Feature Prioritization Call',
+            time: '1:00 PM',
+            attendees: 10,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 28,
+            date: '2025-01-15', // Same day
+            title: 'Retrospective Session',
+            time: '3:00 PM',
+            attendees: 7,
+            type: 'teams-meeting',
+        },
+        {
+            id: 29,
+            date: '2025-01-18',
+            title: 'Product Development Sync',
+            time: '10:00 AM',
+            attendees: 5,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 30,
+            date: '2025-01-18', // Same day
+            title: 'Sales Training Session',
+            time: '12:00 PM',
+            attendees: 18,
+            type: 'zoom-webinar',
+        },
+        {
+            id: 31,
+            date: '2025-01-18', // Same day
+            title: 'Customer Success Review',
+            time: '2:00 PM',
+            attendees: 8,
+            type: 'teams-meeting',
+        },
+        {
+            id: 32,
+            date: '2025-01-18', // Same day
+            title: 'Executive Meeting',
+            time: '4:00 PM',
+            attendees: 10,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 33,
+            date: '2025-01-20',
+            title: 'Innovation Lab Discussion',
+            time: '10:00 AM',
+            attendees: 6,
+            type: 'teams-meeting',
+        },
+        {
+            id: 34,
+            date: '2025-01-20', // Same day
+            title: 'Customer Support Strategy',
+            time: '2:00 PM',
+            attendees: 5,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 35,
+            date: '2025-01-20', // Same day
+            title: 'Product Marketing Update',
+            time: '5:00 PM',
+            attendees: 7,
+            type: 'zoom-webinar',
+        },
+        {
+            id: 36,
+            date: '2025-01-22',
+            title: 'Team Onboarding',
+            time: '11:00 AM',
+            attendees: 12,
+            type: 'teams-meeting',
+        },
+        {
+            id: 37,
+            date: '2025-01-22', // Same day
+            title: 'Project Planning Call',
+            time: '2:00 PM',
+            attendees: 14,
+            type: 'zoom-meeting',
+        },
+        {
+            id: 38,
+            date: '2025-01-22', // Same day
+            title: 'Quarterly Business Review',
+            time: '5:00 PM',
+            attendees: 10,
+            type: 'zoom-webinar',
         },
     ]);
 
@@ -55,22 +322,22 @@ export default function CalendarPage() {
         const adjustRowHeights = () => {
             const calendarCells = document.querySelectorAll('.calendar-cell');
             const rows = Math.ceil(calendarCells.length / 7);
+
             for (let i = 0; i < rows; i++) {
                 const rowCells = Array.from(calendarCells).slice(i * 7, i * 7 + 7);
-                let maxHeight = 0;
                 rowCells.forEach((cell) => {
-                    maxHeight = Math.max(maxHeight, cell.scrollHeight);
-                });
-                rowCells.forEach((cell) => {
-                    cell.style.height = `${maxHeight}px`;
+                    // Remove any inline height set on the cell to allow auto sizing
+                    cell.style.height = 'auto';
                 });
             }
         };
 
         adjustRowHeights();
         window.addEventListener('resize', adjustRowHeights);
+
         return () => window.removeEventListener('resize', adjustRowHeights);
-    }, [currentMonth, currentYear]);
+    }, [currentMonth, currentYear, events, eventsCollapsed]); // Now listens for event expansions
+
 
     const handleViewToggle = (selectedView) => {
         setView(selectedView);
@@ -94,6 +361,8 @@ export default function CalendarPage() {
         }
     };
 
+    const [eventsShown, setEventsShown] = useState({});
+
     const renderCalendarCells = () => {
         const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
         const days = daysInMonth(currentMonth, currentYear);
@@ -107,42 +376,80 @@ export default function CalendarPage() {
             const formattedDate = date.toISOString().split('T')[0];
             const dayEvents = events.filter((event) => event.date === formattedDate);
 
+            const shownEventsCount = eventsShown[formattedDate] || 3;  // Get how many events to show (default 3)
+
             cells.push(
-                <div className={`calendar-cell ${day <= 0 || day > days ? 'prev-next-month' : ''}`} key={i} >
+                <div className={`calendar-cell ${day <= 0 || day > days ? 'prev-next-month' : ''}`} key={i}>
                     {day > 0 && day <= days && <div className="date-number">{day}</div>}
-                    {dayEvents.map((event, index) => (
+                    {dayEvents.slice(0, shownEventsCount).map((event, index) => (
                         <div key={index} className={`event ${eventsCollapsed[event.id] ? 'expanded' : ''} ${event.type}`} onClick={() =>
                             seteventsCollapsed((prev) => ({
                                 ...prev,
                                 [event.id]: !prev[event.id], // Toggle collapse state for the specific event
                             }))
-                        }
-                        >
+                        }>
                             <div className="event-header">
                                 <div className="event-title">{event.title}</div>
                             </div>
                             <div className="event-time">
-                                <div class="event-icon">
+                                <div className="event-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 38 38">
                                         <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.2" stroke="#15B7C3" d="M22.8865 17.1133L27.3332 14.42V23.5867L22.8865 20.8867M10.6665 14.42H20.8532C21.3925 14.42 21.9096 14.6342 22.291 15.0155C22.6723 15.3969 22.8865 15.9141 22.8865 16.4533V23.5867H12.6998C12.4323 23.5867 12.1673 23.5339 11.9202 23.4313C11.6731 23.3287 11.4486 23.1783 11.2597 22.9888C11.0708 22.7992 10.9212 22.5743 10.8194 22.3268C10.7176 22.0794 10.6656 21.8142 10.6665 21.5467V14.42Z"></path>
                                     </svg>
                                 </div>
                                 {event.time}</div>
                             <div className="event-attendees">
-                                <div class="avatar-group">
+                                <div className="avatar-group">
                                     <img src='https://i.ibb.co/S3QRdcX/AVATAR-Citra-Gunasiwi-for-Paperpillar.jpg' className='avatar' />
                                     <img src='https://i.ibb.co/S3QRdcX/AVATAR-Citra-Gunasiwi-for-Paperpillar.jpg' className='avatar' />
-                                    <span class="attendee-count">{event.attendees}</span>
+                                    <span className="attendee-count">{event.attendees}</span>
                                 </div>
                             </div>
                         </div>
                     ))}
+                    {dayEvents.length > 3 && (
+                        <div className="more-events" style={{ display: dayEvents.length > 3 ? 'block' : 'none' }}>
+                            {shownEventsCount < dayEvents.length ? (
+                                <button onClick={() => handleShowMoreEvents(formattedDate, shownEventsCount)}>
+                                    {dayEvents.length - shownEventsCount} More
+                                </button>
+                            ) : (
+                                <button onClick={() => handleShowLessEvents(formattedDate, shownEventsCount)}>
+                                    {shownEventsCount - 3} Less
+                                </button>
+                            )}
+                        </div>
+                    )}
+
+
                 </div>
             );
         }
 
         return cells;
     };
+
+    const handleShowMoreEvents = (date, shownEventsCount) => {
+        const dayEvents = events.filter((event) => event.date === date);
+        const eventsToShow = shownEventsCount + Math.min(dayEvents.length - shownEventsCount, 3);  // Show 3 more events, or the remaining ones if less than 3
+
+        setEventsShown(prev => ({
+            ...prev,
+            [date]: eventsToShow,
+        }));
+    };
+
+    const handleShowLessEvents = (date, shownEventsCount) => {
+        const eventsToShow = Math.max(shownEventsCount - 3, 3);  // Show 3 less events, but not go below 3
+
+        setEventsShown(prev => ({
+            ...prev,
+            [date]: eventsToShow,
+        }));
+    }
+
+
+
     const [events2, setEvents2] = useState([
         {
             id: '1',
@@ -219,26 +526,56 @@ export default function CalendarPage() {
             </div>
         ));
     };
+    const [activeTab, setActiveTab] = useState("Upcoming");
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
 
 
     return (
         <div className='calendar-page'>
             <div className="container">
-                <header className="header">
-                    <h1 className="school-name">The 4D Copywriting Community</h1>
+                <header className="header flex items-center gap-2 mb-4">
+                    <h1 className="school-name">What's on this month?</h1>
                 </header>
+                <div className="calendar-header z-0">
+                    <div className="flex items-center space-x-4">
+                        {/* All Tab */}
+                        <button
+                            onClick={() => handleTabClick("All")}
+                            className={`px-3 py-2 rounded-full border text-sm font-medium ${activeTab === "All"
+                                ? "bg-gray-900 text-white border-gray-900"
+                                : "bg-white text-gray-700 border-gray-300"
+                                }`}
+                        >
+                            All
+                        </button>
 
-                <nav className="nav-tabs">
-                    <a className="nav-tab">Courses</a>
-                    <a className="nav-tab">Discussions</a>
-                    <a className="nav-tab active">Calendar</a>
-                    <a className="nav-tab">Certificates</a>
-                    <a className="nav-tab">Members</a>
-                    <a className="nav-tab">Products</a>
-                    <a className="nav-tab">About</a>
-                </nav>
+                        {/* Upcoming Tab */}
+                        <button
+                            onClick={() => handleTabClick("Upcoming")}
+                            className={`flex items-center px-3 py-2 rounded-full border text-sm font-medium ${activeTab === "Upcoming"
+                                ? "bg-gray-900 text-white border-gray-900"
+                                : "bg-white text-gray-700 border-gray-300"
+                                }`}
+                        >
+                            📢
+                            Upcoming
+                        </button>
 
-                <div className="calendar-header">
+                        {/* Past Tab */}
+                        <button
+                            onClick={() => handleTabClick("Past")}
+                            className={`flex items-center px-3 py-2 rounded-full border text-sm font-medium ${activeTab === "Past"
+                                ? "bg-gray-900 text-white border-gray-900"
+                                : "bg-white text-gray-700 border-gray-300"
+                                }`}
+                        >
+                            ❗
+                            Past
+                        </button>
+                    </div>
                     <div className="month-nav flex items-center" style={{ alignItems: 'center' }}>
                         <button className="nav-arrow" onClick={handlePrevMonth}><svg style={{ width: '14px', height: '14px' }} viewBox="0 0 25 40">
                             <path d="M24.2349 4.20503C24.5099 4.47811 24.5107 4.92268 24.2367 5.19673L9.92837 19.505C9.65501 19.7784 9.65501 20.2216 9.92837 20.495L24.2367 34.8033C24.5107 35.0773 24.5099 35.5219 24.2349 35.795L20.495 39.5085C20.2214 39.7802 19.7795 39.7795 19.5068 39.5068L0.495041 20.495C0.221674 20.2216 0.221673 19.7784 0.49504 19.505L19.5068 0.49323C19.7795 0.220545 20.2214 0.219764 20.495 0.491483L24.2349 4.20503Z"></path>
