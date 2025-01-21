@@ -163,7 +163,7 @@ export default function RootLayout({ children }) {
                 setsupportModal={setsupportModal}
                 isSidebarSmallActive={isSidebarSmallActive} setisSidebarSmallActive={setisSidebarSmallActive}
               />
-              <div className="content" style={{ height: `${isSmallMobileView ? 'calc(100vh - 120px)' : 'calc(100vh - 62px)'}`, background: 'none' }}>
+              <div className="content" style={{ height: `${isSmallMobileView ? 'calc(100vh - 120px)' : 'calc(100vh - 63px)'}`, background: 'none' }}>
                 <Login
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
