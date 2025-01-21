@@ -19181,3 +19181,293 @@ input:checked+.toggle-slider:before {
   }
 
 }
+
+.bundleviewmore {
+  .popup-content {
+    background: white;
+    border-radius: 16px;
+    position: relative;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+
+  .popup-header {
+    padding: 24px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .bundle-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .bundle-info h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a19;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .close-button {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+
+  .close-button:hover {
+    background-color: #f3f4f6;
+  }
+
+  .products-grid {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .product-card {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .product-thumbnail {
+    width: 72px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .product-details {
+    flex: 1;
+  }
+
+  .product-title {
+    font-weight: 600;
+    color: #13C4CC;
+    font-size: 15px;
+    margin: 0 0 4px 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .product-author {
+    font-size: 13px;
+    color: #6F767E;
+    margin: 0 0 8px 0;
+  }
+
+  .product-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .product-level {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1A1D1F;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .product-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    width: fit-content;
+  }
+
+  .product-label svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .label-course {
+    color: #1c4ed8;
+    background: #dbe9fe;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .label-bundle {
+    color: #343332;
+    background: #e4e4e4;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+
+
+  .label-session {
+    color: #991b1b;
+    background: #fee2e1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .product-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .stat-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #6F767E;
+    cursor: pointer;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .stat-item svg {
+    width: 16px;
+    height: 16px;
+    color: #6F767E;
+  }
+
+  .stat-value {
+    font-weight: 500;
+    color: #1A1D1F;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .stat-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+
+  .popup-footer {
+    padding: 24px;
+    border-top: 1px solid #E5E7EB;
+    background: #F8F9FA;
+  }
+
+  .payment-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .payment-plan {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+  }
+
+  .plan-name {
+    font-weight: 600;
+    color: #1A1D1F;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  .plan-details {
+    font-size: 13px;
+    color: #6F767E;
+  }
+
+  /* Custom scrollbar styles */
+  .products-grid::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .products-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .products-grid::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 4px;
+  }
+
+  .products-grid::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+  }
+
+  .view-all-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    color: #6F767E;
+    font-size: 13px;
+    border-top: 1px solid #E5E7EB;
+    transition: background-color 0.2s;
+  }
+
+  .view-all-button:hover {
+    background-color: #f0f0f0;
+    color: #1A1D1F;
+  }
+
+  .view-all-button svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .view-all-button:hover svg {
+    transform: translateY(2px);
+  }
+}
