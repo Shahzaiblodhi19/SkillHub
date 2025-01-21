@@ -19181,6 +19181,523 @@ input:checked+.toggle-slider:before {
   }
 
 }
+.bookmarks-tab2 {
+  .collection-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .collection-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #F5F5F7;
+    border-radius: 8px;
+  }
+
+  .collection-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #4F4F4F;
+  }
+
+  .collection-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1A1D1F;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .course-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #E5E7EB;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .course-header {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F8F9FA;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .product-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .product-label.course {
+    background: #dbe9fe;
+    color: #1c4ed8;
+  }
+
+  .product-label.event {
+    background: #fee2e1;
+    color: #991b1b;
+  }
+
+  .product-label svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .course-options {
+    cursor: pointer;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4F4F4F;
+  }
+
+  .course-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .course-content {
+    padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .course-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1A1D1F;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 44px;
+  }
+
+  .course-author {
+    font-size: 14px;
+    color: #6F767E;
+    margin-bottom: 12px;
+    font-style: italic;
+    height: 20px;
+  }
+
+  .course-description {
+    font-size: 14px;
+    color: #6F767E;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 42px;
+  }
+
+  .course-stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6F767E;
+    position: relative;
+    font-weight: 500;
+  }
+
+  .stat svg {
+    width: 16px;
+    height: 16px;
+    color: #4F4F4F;
+  }
+
+  .tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+
+  .stat:hover .tooltip,
+  .progress-wrapper:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 16px;
+    margin-top: auto;
+  }
+
+  .current-price {
+    font-size: 20px;
+    font-weight: 600;
+    color: #13C4CC;
+    font-weight: 600;
+  }
+
+  .original-price {
+    font-size: 14px;
+    color: #6F767E;
+    text-decoration: line-through;
+    font-weight: 600;
+  }
+
+  .progress-wrapper {
+    width: 100%;
+    height: 2px;
+    background: #E5E7EB;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #13C4CC 0%, #0A6264 100%);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .course-footer {
+    padding: 16px;
+    background: #F8F9FA;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  .footer-icons {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-icon {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 2px solid #13C4CC;
+    transition: all 0.2s ease;
+  }
+
+  .footer-icon svg {
+    width: 14px;
+    height: 14px;
+    color: #13C4CC;
+  }
+
+  .footer-icon:nth-child(2) {
+    margin-left: -8px;
+    border-color: #13C4CC;
+    z-index: 1;
+  }
+
+  .footer-icon:hover {
+    transform: translateY(-2px);
+  }
+
+  .course-duration {
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+  }
+
+  .course-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .course-rating svg {
+    width: 16px;
+    height: 16px;
+    fill: #4FBAE9;
+  }
+
+  .rating-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1A1D1F;
+  }
+
+
+  .rating-count {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .course-level {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .course-level svg {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6F767E;
+    position: relative;
+    font-weight: 500;
+  }
+
+  .level-value {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1A1D1F;
+  }
+
+
+  .bundle-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
+
+  .bundle-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .bundle-tooltip-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1A1D1F;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .bundle-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+
+  .bundle-item:hover {
+    background-color: #F5F5F7;
+  }
+
+  .bundle-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .bundle-info {
+    flex-grow: 1;
+  }
+
+  .bundle-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1A1D1F;
+    margin-bottom: 4px;
+  }
+
+  .bundle-price {
+    font-size: 13px;
+    color: #13C4CC;
+    font-weight: 500;
+  }
+
+  .options-menu {
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
+
+  .options-menu.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .menu-item {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: #4F4F4F;
+  }
+
+  .menu-item:hover {
+    background-color: #F5F5F7;
+  }
+
+  .menu-item svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .menu-item.danger {
+    color: #f6164b;
+  }
+
+  .menu-item.danger svg {
+    color: #f6164b;
+  }
+
+  /* Add to your existing CSS */
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    color: #4F4F4F;
+    position: relative;
+  }
+
+  .menu-item.has-submenu {
+    justify-content: space-between;
+  }
+
+  .menu-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.2s ease;
+  }
+
+  .menu-item:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .collection-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .collection-item:hover {
+    background: #F5F5F7;
+  }
+
+  .collection-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F7;
+  }
+
+}
 
 .bundleviewmore {
   .popup-content {
@@ -19469,5 +19986,175 @@ input:checked+.toggle-slider:before {
 
   .view-all-button:hover svg {
     transform: translateY(2px);
+  }
+}
+
+.collections-page{
+  .filters-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .filters-left {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .controls-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .filter-button, .sort-button {
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #1a202c;
+    transition: all 0.2s;
+  }
+
+  .filter-button:hover, .sort-button:hover {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+  }
+
+  .filter-button.active, .sort-button.active {
+    background: #f7fafc;
+    border-color: #4a5568;
+  }
+
+  .filter-button svg, .sort-button svg {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+  }
+
+  .filter-dropdown, .sort-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    min-width: 200px;
+    margin-top: 8px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .sort-dropdown {
+    right: 0;
+    left: auto;
+  }
+
+  .filter-button.active + .filter-dropdown,
+  .sort-button.active + .sort-dropdown {
+    display: block;
+  }
+
+  .filter-option, .sort-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .filter-option:hover, .sort-option:hover {
+    background: #f7fafc;
+  }
+
+  .filter-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #cbd5e0;
+    border-radius: 4px;
+  }
+
+  .sort-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #cbd5e0;
+    border-radius: 50%;
+  }
+
+  .nested-options {
+    margin-left: 24px;
+    border-left: 1px solid #e2e8f0;
+    padding-left: 12px;
+  }
+
+  .selected-count {
+    background: #13C4CC;
+    color: white;
+    padding: 0 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toggle-switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+  }
+
+  .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e0;
+    transition: .4s;
+    border-radius: 24px;
+  }
+
+  .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .toggle-slider {
+    background-color: #3182ce;
+  }
+
+  input:checked + .toggle-slider:before {
+    transform: translateX(20px);
   }
 }

@@ -327,13 +327,13 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                                 </Link>
                             </li>
                             <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Bookmarks')}>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/bookmark"
                                     className="flex items-center p-2 "
                                 >
                                     <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" strokeWidth="32" strokeLinejoin="round" fill="none"></path></svg>
                                     <span>Bookmarks</span>
-                                </a>
+                                </Link>
                             </li>
                             <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
                                 <button
@@ -367,7 +367,8 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                             {isSidebarOpen === false ? '' : isCollectionOpen && (
                                 <ul className="ml-7 mt-2">
                                     {["Collection A", "Collection B", "Collection C"].map((item) => (
-                                        <li
+                                        <Link
+                                        href='/collection'
                                             key={item}
                                             className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeCollection === item ? "dropdown-link-active" : "dropdown-link"
                                                 }`}
@@ -375,7 +376,7 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                                         >
                                             {itemIcons[item]} {/* Render the corresponding SVG */}
                                             {item}
-                                        </li>
+                                        </Link>
                                     ))}
                                 </ul>
                             )}
