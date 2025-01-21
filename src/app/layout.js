@@ -30,6 +30,7 @@ import ChangePassword from './components/changepassword';
 import BillingInvoicesModal from './components/billingpastinvoices';
 import AddInstructorModal from './components/addInstructor';
 import AddTeamMemberModal from './components/addteammember';
+import InstructorModal from './components/instructor-page-modal';
 
 // Create context
 export const MyContext = createContext();
@@ -60,6 +61,7 @@ export default function RootLayout({ children }) {
 
   const [isMobileView, setIsMobileView] = useState(false);
   const [isSmallMobileView, setIsSmallMobileView] = useState(false);
+  const [instructorModal, setinstructorModal] = useState(false)
 
   const [activeFilter, setActiveFilter] = useState("");
 
@@ -94,7 +96,9 @@ export default function RootLayout({ children }) {
   const values = {
     isSchoolModal,
     changePassword,
+    setinstructorModal,
     setAddTeamMember,
+    instructorModal,
     AddTeamMember,
     setchangePassword,
     setIsSchoolModal,
@@ -218,7 +222,9 @@ export default function RootLayout({ children }) {
                 <BillingInvoicesModal />
                 <AddInstructorModal />
                 <AddTeamMemberModal />
-                <div className='PagesContent h-full' style={{ padding: isSmallMobileView ?  '10px 10px 35px 10px' : '20px', background: '#F2F2F2', overflowY: 'auto' }}>
+                <InstructorModal />
+
+                <div className='PagesContent h-full' style={{ padding: isSmallMobileView ? '10px 10px 35px 10px' : '20px', background: '#F2F2F2', overflowY: 'auto' }}>
                   {children}
                 </div>
                 {/* Home Page should be here */}
