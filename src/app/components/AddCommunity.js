@@ -141,13 +141,194 @@ const AddCommunity = () => {
     const [selectedEmoji, setSelectedEmoji] = useState(""); // Default emoji
     const [SpaceTitle, setSpaceTitle] = useState(""); // Default emoji
     const [activeTab, setActiveTab] = useState("Details");
+    const communityChecklistData = [
+        {
+            sectionTitle: "Community Requirements",
+            status: "error",
+            issues: 4,
+            progress: 25,
+            checklistItems: [
+                {
+                    title: "Community and Title",
+                    status: "pending",
+                    description: "Community needs to be created and configured with a title.",
+                    action: "Create Community",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                },
+                {
+                    title: "Community Spaces (1+ Required)",
+                    status: "pending",
+                    description: `At least 1 community space is required with title, emoji, and description. Current count: 0`,
+                    action: "Add Spaces",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                },
+                {
+                    title: "Community Cover Image (500x200 minimum)",
+                    status: "pending",
+                    description: "Community cover image is missing or does not meet minimum size requirements (500x200 pixels).",
+                    action: "Upload Cover",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                },
+                {
+                    title: "System Error",
+                    status: "pending",
+                    description: `Unable to create community or space due to an internal error. Please contact support for assistance.`,
+                    action: "Contact Support",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                }
+            ]
+        }
+    ];
+    const profileChecklistData = [
+        {
+            sectionTitle: "Profile Requirements",
+            status: "error",
+            issues: 6,
+            progress: 25,
+            checklistItems: [
+                {
+                    title: "PayPal Connection",
+                    status: "pending",
+                    description: "PayPal account connection is required to receive payments. Please connect your PayPal account.",
+                    action: "Connect PayPal",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                },
+                {
+                    title: "First and Last Name",
+                    status: "pending",
+                    description: "Please provide your full name (first and last name) in your profile.",
+                    action: "Complete Profile",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                },
+                {
+                    title: "Profile Avatar",
+                    status: "pending",
+                    description: "A profile avatar is required. Please upload a profile picture.",
+                    action: "Upload Avatar",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                },
+                {
+                    title: "Profile Bio (200+ characters)",
+                    status: "pending",
+                    description: "Profile bio must be at least 200 characters. Current length: 85 characters (115 more needed).",
+                    action: "Add Bio",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                },
+                {
+                    title: "CPE Credentials",
+                    status: "pending",
+                    description: "CPE credentials are required since CPE is enabled for this course. Please add your professional credentials.",
+                    action: "Add Credentials",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                },
+                {
+                    title: "Plan Purchase Required",
+                    status: "pending",
+                    description: "A paid plan is required to publish this type of course. Please visit our pricing page to select a plan.",
+                    action: "View Plans",
+                    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                }
+            ]
+        }
+    ];
+    const [profilesectionexpand, setprofilesectionexpand] = useState(false);
+    const [expandedState4, setExpandedState4] = useState({});
+    const [expandedState2, setExpandedState2] = useState({});
+    const [communitysectionexpand, setcommunitysectionexpand] = useState(false);
 
     const handleEmojiSelect = (emoji) => {
         setSelectedEmoji(emoji.native); // Capture selected emoji
         setIsEmojiPickerOpen(false); // Close picker after selecting emoji
     };
 
+    const toggleExpand2 = (index) => {
+        setExpandedState2((prevState) => ({
+            ...prevState,
+            [index]: !prevState[index],
+        }));
+    };
 
+    const toggleExpand4 = (index) => {
+        setExpandedState4((prevState) => ({
+            ...prevState,
+            [index]: !prevState[index],
+        }));
+    };
+    const handleExpandAllIssues = () => {
+        setcoursesectionexpand(true);
+        setsessionsectionexpand(true);
+        setprofilesectionexpand(true);
+        setcommunitysectionexpand(true);
+    };
+    const handleExpandIssues = () => {
+        const shouldExpandSection = (checklistData) => {
+            // Expand the section only if there are no completed items and at least one pending item
+            return checklistData.some((section) =>
+                section.checklistItems.every((item) => item.status !== "completed") &&
+                section.checklistItems.some((item) => item.status === "pending")
+            );
+        };
+
+        // Explicitly check each checklistData
+        const courseShouldExpand = shouldExpandSection(courseChecklistData);
+        const profileShouldExpand = shouldExpandSection(profileChecklistData);
+        const sessionShouldExpand = shouldExpandSection(SessionChecklistData);
+        const communityShouldExpand = shouldExpandSection(communityChecklistData);
+
+        // Set expansion states
+        setcoursesectionexpand(courseShouldExpand);
+        setprofilesectionexpand(profileShouldExpand);
+        setsessionsectionexpand(sessionShouldExpand);
+        setcommunitysectionexpand(communityShouldExpand);
+    };
+    const handleExpandCompleted = () => {
+        const shouldExpandSection = (checklistData) => {
+            // Expand the section only if there is at least one "completed" item
+            return checklistData.some((section) =>
+                section.checklistItems.some((item) => item.status === "completed")
+            );
+        };
+
+        // Explicitly check each checklistData
+        const courseShouldExpand = shouldExpandSection(courseChecklistData);
+        const profileShouldExpand = shouldExpandSection(profileChecklistData);
+        const sessionShouldExpand = shouldExpandSection(SessionChecklistData);
+        const communityShouldExpand = shouldExpandSection(communityChecklistData);
+
+        // Set expansion states
+        setcoursesectionexpand(courseShouldExpand);
+        setprofilesectionexpand(profileShouldExpand);
+        setsessionsectionexpand(sessionShouldExpand);
+        setcommunitysectionexpand(communityShouldExpand);
+    };
+
+    const [showCompleted, setShowCompleted] = useState(false);
+
+    const handleToggle = () => {
+        setShowCompleted(!showCompleted);
+    };
+
+    const [expandmenu, setexpandmenu] = useState(false);
     return (
         context.AddCommunityModal &&
         <div className="modal-overlay h-screen" style={{ overflowY: 'auto' }}>
@@ -175,9 +356,6 @@ const AddCommunity = () => {
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <button className="close-button p-0" onClick={() => context.setAddCommunityModal(!context.AddCommunityModal)}>
-                                                ✖
-                                            </button>
                                         </div>
                                         <div className="flex items-center w-100 mt-3" style={{ justifyContent: 'space-between' }}>
                                             <div className="flex gap-4" style={{ fontSize: '13px', fontWeight: '600' }}>
@@ -196,12 +374,17 @@ const AddCommunity = () => {
                                                     Checklist
                                                 </button>
                                             </div>
-
-                                            <button style={{ fontSize: '13px', fontWeight: '600' }} className="absolute right-4 top-16 px-3 py-1 bg-grey-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
-                                                <span>👁</span> Preview
-                                            </button>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <button style={{ fontSize: '13px', fontWeight: '600' }} className="absolute right-14 top-5 px-3 py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
+                                        <span>👁</span> Preview
+                                    </button>
+                                    <button className="close-button p-0" onClick={() => context.setAddCommunityModal(!context.AddCommunityModal)}>
+                                        ✖
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -701,6 +884,298 @@ const AddCommunity = () => {
                                     <button type="submit" className="submit-btn mt-1" style={{ marginLeft: 'auto' }}>
                                         Save Community
                                     </button>
+                                </div>
+                            </>
+                        )}
+                        {activeTab === "Checklist" && (
+                            <>
+                                <div className="row checklist-modal justify-between w-100 pl-10 pr-4 ">
+                                    <div className="course-content col-12 border rounded">
+                                        <div className="content-header">
+                                            <div className="header-left">
+                                                <h1 className="header-title">Community Checklist</h1>
+                                                <div className="header-progress">
+                                                    <div className="progress-bar">
+                                                        <div className="progress-fill" style={{ width: '20px' }}></div>
+                                                    </div>
+                                                    <span className="issues-count">20 issues left</span>
+                                                </div>
+                                            </div>
+                                            <div className="expand-dropdown">
+                                                <div className="view-toggle">
+                                                    <span className="toggle-label">Show Completed</span>
+                                                    <label className="toggle-switch">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="viewToggle"
+                                                            checked={showCompleted}
+                                                            onChange={handleToggle}
+                                                        />
+                                                        <span className="toggle-slider"></span>
+                                                    </label>
+                                                </div>
+                                                <button className="expand-button" onClick={() => setexpandmenu(!expandmenu)}>
+                                                    Expand
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path
+                                                            d="M4 6l4 4 4-4"
+                                                            stroke="currentColor"
+                                                            strokeWidth="1.5"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <div className={`expand-menu ${expandmenu === true ? 'active' : ''}`}>
+                                                    <button onClick={handleExpandAllIssues} className="expand-all">Expand All</button>
+                                                    <button onClick={handleExpandIssues} className="expand-issues">Expand Issues</button>
+                                                    <button onClick={handleExpandCompleted} className="expand-completed">Expand Completed</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {profileChecklistData.map((data, index) => {
+                                            return (
+                                                <div className={`section ${profilesectionexpand === true ? 'expanded' : ''}`}>
+                                                    <div className="section-header mb-0" onClick={() => setprofilesectionexpand(!profilesectionexpand)}>
+                                                        <div className="header-left">
+                                                            <div className="section-title mb-0">{data.sectionTitle}</div>
+                                                            <div className="status-badge status-error">
+                                                                <svg className="status-icon" viewBox="0 0 15 15">
+                                                                    <path
+                                                                        clipRule="evenodd"
+                                                                        fillRule="evenodd"
+                                                                        fill="currentColor"
+                                                                        d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                                                                    />
+                                                                </svg>
+                                                                {data.issues} issues
+                                                            </div>
+                                                        </div>
+                                                        <div className="header-right">
+                                                            <div className="progress-circle relative">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                                                    <circle className="bg" cx="12" cy="12" r="10" />
+                                                                    <circle className="progress" cx="12" cy="12" r="10"
+                                                                        strokeDasharray="62.8"
+                                                                        strokeDashoffset={62.8 - (data.progress / 100) * 62.8} />
+                                                                </svg>
+                                                                <div className="tooltip">{data.progress}% Complete</div>
+                                                            </div>
+                                                            <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div className="section-content">
+                                                        {data.checklistItems.map((item, itemIndex) => (
+                                                            <div className="checklist-item" key={itemIndex}>
+                                                                <div className="item-header" >
+                                                                    <div className="item-icon">
+                                                                        {item.icon}
+                                                                    </div>
+                                                                    <div className="item-title">{item.title}</div>
+                                                                    {item.action ? <button className="fix-button">{item.action}</button> :
+                                                                        <div class="item-status status-completed">
+                                                                            <svg width="20" height="20" viewBox="0 0 20 20">
+                                                                                <path d="M10 0a10 10 0 110 20 10 10 0 010-20zm3.77 7.23l-4.95 4.95-2.59-2.59L4.77 11l3.18 3.18 5.59-5.59-1.77-1.36z" fill="currentColor" />
+                                                                            </svg>
+                                                                            {item.status}
+                                                                        </div>
+                                                                    }
+                                                                    <div className="item-expand" onClick={() => toggleExpand2(`${index}-${itemIndex}`)}>
+                                                                        <svg style={{
+                                                                            transform: expandedState2[`${index}-${itemIndex}`] ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                            transition: 'transform 0.2s ease',
+                                                                        }}
+                                                                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                                <div className={`item-details ${expandedState2[`${index}-${itemIndex}`] ? 'expanded' : ''
+                                                                    }`}>
+                                                                    <div className="issue-description">
+                                                                        {
+                                                                            (() => {
+                                                                                let is200Handled = false;
+                                                                                let is1Handled = false;
+                                                                                let isPricingHandled = false;
+
+                                                                                return item.description.split(/(200|1|visit our pricing page)/g).map((part, index) => {
+                                                                                    if (part === "200" && !is200Handled) {
+                                                                                        is200Handled = true;
+                                                                                        return (
+                                                                                            <span key={index} className="required-count">
+                                                                                                {part}
+                                                                                            </span>
+                                                                                        );
+                                                                                    }
+                                                                                    if (part === "1" && !is1Handled) {
+                                                                                        is1Handled = true;
+                                                                                        return (
+                                                                                            <span key={index} className="required-count">
+                                                                                                {part}
+                                                                                            </span>
+                                                                                        );
+                                                                                    }
+                                                                                    if (part === "visit our pricing page" && !isPricingHandled) {
+                                                                                        isPricingHandled = true;
+                                                                                        return (
+                                                                                            <a key={index} href="#pricing" className="affected-link">
+                                                                                                {part}
+                                                                                            </a>
+                                                                                        );
+                                                                                    }
+                                                                                    return part;
+                                                                                });
+                                                                            })()
+                                                                        }
+
+                                                                        {item.currentPrice ? <span className="highlight-success">{item.currentPrice}</span> : ''}
+                                                                        {item.duration ? <span className="keyword-highlight">{item.duration}</span> : ''}
+
+                                                                        <br />
+                                                                        {item.TitleLineError ? <div class="keyword-highlight">{item.TitleLineError}</div> : ''}
+                                                                        {item.restDescription ? item.restDescription : ''}
+                                                                        <div class="affected-items">
+                                                                            {item.affectedItemsText}
+                                                                            <span href="#" class="affected-link cursor-pointer">
+                                                                                {item.affectedItemsIcon}
+                                                                                {item.affectedItems && item.affectedItems.length > 0 ? (
+                                                                                    item.affectedItems.map((affectedItem, index) => (
+                                                                                        <span key={index}>{affectedItem}</span>
+                                                                                    ))
+                                                                                ) : (
+                                                                                    ''
+                                                                                )}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                        {communityChecklistData.map((data, index) => {
+                                            return (
+                                                <div className={`section ${communitysectionexpand === true ? 'expanded' : ''}`}>
+                                                    <div className="section-header mb-0" onClick={() => setcommunitysectionexpand(!communitysectionexpand)}>
+                                                        <div className="header-left">
+                                                            <div className="section-title mb-0">{data.sectionTitle}</div>
+                                                            <div className="status-badge status-error">
+                                                                <svg className="status-icon" viewBox="0 0 15 15">
+                                                                    <path
+                                                                        clipRule="evenodd"
+                                                                        fillRule="evenodd"
+                                                                        fill="currentColor"
+                                                                        d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                                                                    />
+                                                                </svg>
+                                                                {data.issues} issues
+                                                            </div>
+                                                        </div>
+                                                        <div className="header-right">
+                                                            <div className="progress-circle relative">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                                                    <circle className="bg" cx="12" cy="12" r="10" />
+                                                                    <circle className="progress" cx="12" cy="12" r="10"
+                                                                        strokeDasharray="62.8"
+                                                                        strokeDashoffset={62.8 - (data.progress / 100) * 62.8} />
+                                                                </svg>
+                                                                <div className="tooltip">{data.progress}% Complete</div>
+                                                            </div>
+                                                            <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div className="section-content">
+                                                        {data.checklistItems.map((item, itemIndex) => (
+                                                            <div className="checklist-item" key={itemIndex}>
+                                                                <div className="item-header" >
+                                                                    <div className="item-icon">
+                                                                        {item.icon}
+                                                                    </div>
+                                                                    <div className="item-title">{item.title}</div>
+                                                                    {item.action ? <button className="fix-button">{item.action}</button> :
+                                                                        <div class="item-status status-completed">
+                                                                            <svg width="20" height="20" viewBox="0 0 20 20">
+                                                                                <path d="M10 0a10 10 0 110 20 10 10 0 010-20zm3.77 7.23l-4.95 4.95-2.59-2.59L4.77 11l3.18 3.18 5.59-5.59-1.77-1.36z" fill="currentColor" />
+                                                                            </svg>
+                                                                            {item.status}
+                                                                        </div>
+                                                                    }
+                                                                    <div className="item-expand" onClick={() => toggleExpand4(`${index}-${itemIndex}`)}>
+                                                                        <svg style={{
+                                                                            transform: expandedState4[`${index}-${itemIndex}`] ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                                            transition: 'transform 0.2s ease',
+                                                                        }}
+                                                                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                                <div className={`item-details ${expandedState4[`${index}-${itemIndex}`] ? 'expanded' : ''
+                                                                    }`}>
+                                                                    <div className="issue-description">
+                                                                        {
+                                                                            (() => {
+                                                                                let is1Handled = false;
+                                                                                let isPricingHandled = false;
+
+                                                                                return item.description.split(/(1|contact support)/g).map((part, index) => {
+
+                                                                                    if (part === "1" && !is1Handled) {
+                                                                                        is1Handled = true;
+                                                                                        return (
+                                                                                            <span key={index} className="required-count">
+                                                                                                {part}
+                                                                                            </span>
+                                                                                        );
+                                                                                    }
+                                                                                    if (part === "contact support" && !isPricingHandled) {
+                                                                                        isPricingHandled = true;
+                                                                                        return (
+                                                                                            <a key={index} href="#contactsupport" className="affected-link">
+                                                                                                {part}
+                                                                                            </a>
+                                                                                        );
+                                                                                    }
+                                                                                    return part;
+                                                                                });
+                                                                            })()
+                                                                        }
+
+                                                                        {item.currentPrice ? <span className="highlight-success">{item.currentPrice}</span> : ''}
+                                                                        {item.duration ? <span className="keyword-highlight">{item.duration}</span> : ''}
+
+                                                                        <br />
+                                                                        {item.TitleLineError ? <div class="keyword-highlight">{item.TitleLineError}</div> : ''}
+                                                                        {item.restDescription ? item.restDescription : ''}
+                                                                        <div class="affected-items">
+                                                                            {item.affectedItemsText}
+                                                                            <span href="#" class="affected-link cursor-pointer">
+                                                                                {item.affectedItemsIcon}
+                                                                                {item.affectedItems && item.affectedItems.length > 0 ? (
+                                                                                    item.affectedItems.map((affectedItem, index) => (
+                                                                                        <span key={index}>{affectedItem}</span>
+                                                                                    ))
+                                                                                ) : (
+                                                                                    ''
+                                                                                )}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </>
                         )}

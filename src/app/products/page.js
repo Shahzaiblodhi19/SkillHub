@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { MyContext } from '../layout';
+import Link from 'next/link';
 
 export default function ProductsPage() {
   const productData = [
@@ -267,14 +268,17 @@ export default function ProductsPage() {
   const [schoolHasLinkedItems, setSchoolHasLinkedItems] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const dropdownRef = useRef(null);
-  const modalRef = useRef(null);
-  const buttonRef = useRef(null);
   const toggleMenu = (event) => {
-    // Prevent the event from bubbling up to the document click handler
+    setAllProductsToolTip(false)
     event.stopPropagation();
-    setIsMenuOpen((prevState) => !prevState);
+    setIsMenuOpen(!isMenuOpen);
+    setCourseTooltip(false)
+    setSchooltooltip(false)
+    setBundleSubsTooltip(false)
+    setSessionTooltip(false)
+    setcommunityTooltip(false)
   };
+
   // Close dropdown if clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -311,26 +315,33 @@ export default function ProductsPage() {
 
   const closeModal = () => setActiveModal(null);
 
-  const handleTooltipToggle = (productId, product) => {
+  const handleTooltipToggle = (e, productId, product) => {
     if (product.type === 'course') {
+      e.stopPropagation();
       setCourseTooltip((prevId) => (prevId === productId ? null : productId));
     }
     if (product.type === 'session') {
+      e.stopPropagation();
       setSessionTooltip((prevId) => (prevId === productId ? null : productId));
     }
     if (product.type === 'group-session') {
+      e.stopPropagation();
       setSessionTooltip((prevId) => (prevId === productId ? null : productId));
     }
     if (product.type === 'community') {
+      e.stopPropagation();
       setcommunityTooltip((prevId) => (prevId === productId ? null : productId));
     }
     if (product.type === 'bundle') {
+      e.stopPropagation();
       setBundleSubsTooltip((prevId) => (prevId === productId ? null : productId));
     }
     if (product.type === 'subscription') {
+      e.stopPropagation();
       setBundleSubsTooltip((prevId) => (prevId === productId ? null : productId));
     }
     if (product.type === 'school') {
+      e.stopPropagation();
       setSchooltooltip((prevId) => (prevId === productId ? null : productId));
     }
 
@@ -841,12 +852,12 @@ export default function ProductsPage() {
             <button className="product-btn " >{product.action}</button>
 
 
-            <button className="options-button " onClick={() => handleTooltipToggle(product.id, product)}>
+            <button className="options-button " onClick={(e) => handleTooltipToggle(e, product.id, product)}>
               <svg viewBox="0 0 24 24">
                 <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
               </svg>
             </button>
-            <div className="pager" >
+            <div className="pager" onclick={(e) => e.stopPropagation()} >
               {CourseTooltip === product.id &&
                 <>
                   <div id='dropdown' className={`course-tooltip active`}>
@@ -927,7 +938,7 @@ export default function ProductsPage() {
             <div className="pager"  >
               {SessionTooltip === product.id &&
                 <>
-                  <div id='dropdown' className={`course-tooltip active`}>
+                  <div id='dropdown' className={`course-tooltip active`} onclick={(e) => e.stopPropagation()}>
                     {SessiontooltipData.map((item, index) => (
                       <div
                         key={index}
@@ -935,11 +946,11 @@ export default function ProductsPage() {
 
                         onClick={() => {
                           if (item.text === "Edit Landing Page") {
-                            window.location.href = "/editsettingpricepage?tab=Landing Page";
+                            window.location.href = "/edit-session?tab=Landing Page";
                           } else if (item.text === "Edit Settings") {
-                            window.location.href = "/editsettingpricepage?tab=Settings";
+                            window.location.href = "/edit-session?tab=Settings";
                           } else if (item.text === "Edit Price") {
-                            window.location.href = "/editsettingpricepage?tab=Pricing";
+                            window.location.href = "/edit-session?tab=Pricing";
                           } else {
                             if (item.modal) handleOpenModal(item.modal);
                           }
@@ -948,7 +959,16 @@ export default function ProductsPage() {
                         <div className="tooltip-icon">
                           {item.icon}
                         </div>
-                        <span className="tooltip-text">{item.text}</span>
+                        <span className="tooltip-text">
+                          {item.text === 'Edit Session Activities' ? (
+                            <Link href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+                              {item.text}
+                            </Link>
+                          ) : (
+                            item.text
+                          )}
+                        </span>
+
                         {item.arrow}
                         {item.nested && (
                           <div className="nested-tooltip">
@@ -998,7 +1018,7 @@ export default function ProductsPage() {
                 </>
               }
             </div>
-            <div className="pager" >
+            <div className="pager" onclick={(e) => e.stopPropagation()} >
               {CommunityTooltip === product.id &&
                 <>
                   <div id='dropdown' className={`course-tooltip active`}>
@@ -1034,7 +1054,7 @@ export default function ProductsPage() {
                 </>
               }
             </div>
-            <div className="pager" >
+            <div className="pager" onclick={(e) => e.stopPropagation()} >
               {BundleSubsTooltip === product.id &&
                 <>
                   <div id='dropdown' className={`course-tooltip active`}>
@@ -1075,7 +1095,7 @@ export default function ProductsPage() {
                 </>
               }
             </div>
-            <div className="pager" >
+            <div className="pager" onclick={(e) => e.stopPropagation()} >
               {Schooltooltip === product.id &&
                 <>
                   <div id='dropdown' className={`course-tooltip active`}>
@@ -1259,22 +1279,29 @@ export default function ProductsPage() {
   const handleMenuItemClick = (item) => {
     console.log(`Creating a new ${item}`);
     setIsMenuOpen(false); // Close menu after selecting an option
-    if (item === 'school') {
-      context.setIsSchoolModal(!context.isSchoolModal);
-    }
-    if (item === 'Course') {
-      context.setAddCourseModal(!context.AddCourseModal);
-    }
-    if (item === 'Bundle') {
-      context.setAddBundleModal(!context.AddBundleModal)
-    }
-    if (item === 'Community') {
-      context.setAddCommunityModal(!context.AddCommunityModal)
-    }
-    if (item === 'Session') {
-      context.setAddSessionModal(!context.AddSessionModal)
-    }
+    setCourseTooltip(false)
+    setSchooltooltip(false)
+    setBundleSubsTooltip(false)
+    setSessionTooltip(false)
+    setcommunityTooltip(false)
 
+    setTimeout(() => {
+      if (item === 'school') {
+        context.setIsSchoolModal(!context.isSchoolModal);
+      }
+      if (item === 'Course') {
+        context.setAddCourseModal(!context.AddCourseModal);
+      }
+      if (item === 'Bundle') {
+        context.setAddBundleModal(!context.AddBundleModal)
+      }
+      if (item === 'Community') {
+        context.setAddCommunityModal(!context.AddCommunityModal)
+      }
+      if (item === 'Session') {
+        context.setAddSessionModal(!context.AddSessionModal)
+      }
+    }, 50); // Slight delay for state update
   };
 
 
@@ -1517,13 +1544,23 @@ export default function ProductsPage() {
       count: productTypeCounts['subscription'] || 0,
     },
   ];
+  const handleCloseallmodals = () => {
+    setActiveModal(false);
+    setAllProductsToolTip(false)
+    setIsMenuOpen(false);
+    setCourseTooltip(false)
+    setSchooltooltip(false)
+    setBundleSubsTooltip(false)
+    setSessionTooltip(false)
+    setcommunityTooltip(false)
 
+  }
   return (
-    <div className="container-products">
+    <div className="container-products" onClick={handleCloseallmodals}>
       <div className="header">
         <div className='flex items-center gap-2'>
           <h1 className="header-title">{context.activeFilter === '' ? 'All Products' : context.activeFilter !== 'All Products' ? context.activeFilter : 'All Products'}</h1>
-          <div className="arrow-container mb-1 relative p-1 cursor-pointer" onClick={() => setAllProductsToolTip(!AllProductsToolTip)}>
+          <div className="arrow-container mb-1 relative p-1 cursor-pointer" onClick={(e) => { setAllProductsToolTip(!AllProductsToolTip); e.stopPropagation(); setIsMenuOpen(false) }}>
             <svg style={AllProductsToolTip === true ? { rotate: '180deg' } : { rotate: '0deg' }} className='arrowconatinersvg' viewBox="0 0 24 24" stroke="currentColor">
               <path strokeWidth={3} d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
             </svg>

@@ -1481,7 +1481,7 @@ export default function SchoolPage() {
                                             className={`bg-white text-gray-700 border-1 border-gray-300 px-3.5 py-2 rounded-full ${!showMore ? 'ml-auto' : ''} `}
                                         >
                                             {showMore ? 'Less...' : 'More...'}
-                                        </button>
+                                        </button>s
 
 
                                         <div className='search-page' style={{ position: "relative" }}>
@@ -1627,14 +1627,16 @@ export default function SchoolPage() {
                                                         {Array(3)
                                                             .fill()
                                                             .map((_, i) => (
-                                                                <img
-                                                                    key={i}
-                                                                    src={avatars[Math.floor(Math.random() * avatars.length)]}
-                                                                    alt="reaction avatar"
-                                                                    width={24}
-                                                                    height={24}
-                                                                    className="rounded-full border-2 border-white"
-                                                                />
+                                                                <Link href='/student'>
+                                                                    <img
+                                                                        key={i}
+                                                                        src={avatars[Math.floor(Math.random() * avatars.length)]}
+                                                                        alt="reaction avatar"
+                                                                        width={24}
+                                                                        height={24}
+                                                                        className="rounded-full border-2 border-white"
+                                                                    />
+                                                                </Link>
                                                             ))}
                                                     </div>
                                                 </div>
@@ -1693,12 +1695,14 @@ export default function SchoolPage() {
                                             </div>
                                             <div className="flex space-x-1">
                                                 {avatars.map((avatar, index) => (
-                                                    <img
-                                                        key={index}
-                                                        src={avatar}
-                                                        alt={`Avatar ${index + 1}`}
-                                                        className="w-8 h-8 rounded-full border border-white"
-                                                    />
+                                                    <Link href='/student'>
+                                                        <img
+                                                            key={index}
+                                                            src={avatar}
+                                                            alt={`Avatar ${index + 1}`}
+                                                            className="w-8 h-8 rounded-full border border-white"
+                                                        />
+                                                    </Link>
                                                 ))}
                                             </div>
                                         </div>

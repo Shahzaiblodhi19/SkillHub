@@ -20,6 +20,35 @@ const CourseDetails = () => {
     const [timer, setTimer] = useState({ minutes: 20, seconds: 0 });
     const [featuresExpanded, setFeaturesExpanded] = useState(false);
 
+
+    const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const videoSection = document.querySelector(".video-section");
+            const purchaseWrapper = document.querySelector(".purchase-wrapper");
+
+            if (!videoSection || !purchaseWrapper) return;
+
+            const videoSectionRect = videoSection.getBoundingClientRect();
+            const purchaseWrapperHeight = purchaseWrapper.offsetHeight;
+
+            if (videoSectionRect.top <= 0 && Math.abs(videoSectionRect.top) < videoSectionRect.height - purchaseWrapperHeight) {
+                purchaseWrapper.style.position = "fixed";
+                purchaseWrapper.style.top = "0";
+                purchaseWrapper.style.right = "0";
+            } else {
+                purchaseWrapper.style.position = "absolute";
+                purchaseWrapper.style.top = "auto";
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTimer((prev) => {
@@ -181,11 +210,12 @@ const CourseDetails = () => {
         { id: 4, icon: <FaBook className="text-blue-500 w-5 h-5" fill='#99dceb' />, value: "36", label: "Courses" },
     ];
 
+
     return (
         <div className='course-details'>
             <header className="header px-4">
                 <div className="container">
-                    <div className="header-content">
+                    <div className="header-content ">
                         <div className="course-info pr-5">
                             <div className="breadcrumb">
                                 <span>Development</span>
@@ -232,7 +262,7 @@ const CourseDetails = () => {
                             </div>
                         </div>
 
-                        <div className="video-section">
+                        <div className="video-section" >
                             <div className="video-preview">
                                 <img src="https://i.ibb.co/tK5s859/preview1.jpg" alt="Course Preview" />
                                 <svg
@@ -257,8 +287,9 @@ const CourseDetails = () => {
                                     </g>
                                 </svg>
                             </div>
-
-                            <div className="purchase-wrapper">
+                            <div
+                                className={`purchase-wrapper`}
+                            >
                                 <div className="purchase-tabs">
                                     <button
                                         className={`tab rounded-0 ${activeTab === 'Personal' ? 'active' : ''}`}
@@ -1400,75 +1431,75 @@ const CourseDetails = () => {
                     </div>
                 </div>
                 {authorTooltip &&
-                <div onClick={() => setauthorTooltip(false)}>
-                    <div className='author-tooltip modal-overlay' >
-                        <div className='author-card p-3'  onClick={(e) => e.stopPropagation()} style={{width: '360px'}}>
-                            {/* Image Section */}
-                            <div className="relative w-full h-48">
-                                <Image
-                                    src='https://i.ibb.co/jJ4GHXP/img1.jpg'
-                                    alt="Banner"
-                                    style={{borderRadius: '12px 12px 0px 0'}}
-                                    layout="fill"
-                                    objectFit="cover"
-                                />
-                            </div>
-
-                            {/* Content Section */}
-                            <div className="p-3 border">
-                                <h2 className="text-lg font-bold text-gray-800">The 4D Copywriting Community</h2>
-                                <p className="text-gray-600 text-sm my-2">
-                                    The best place to become a full-time freelance copywriter. Join our
-                                    community of passionate writers and learn from experienced professionals.
-                                </p>
-
-                                <div className="flex flex-col gap-2 mb-4 mt-3 font-bold">
-                                    <div className="flex items-center  text-gray-600" style={{fontSize: '14.5px'}}>
-                                        <span className="mr-2">💎</span> 1-on-1 Mentorship
-                                    </div>
-                                    <div className="flex items-center  text-gray-600" style={{fontSize: '14.5px'}}>
-                                        <span className="mr-2">✏️</span> 4D Copywriting Academy 2.0
-                                    </div>
-                                    <div className="flex items-center text-gray-600" style={{fontSize: '14.5px'}}>
-                                        <span className="mr-2">📍</span> 4D Copywriters Map
-                                    </div>
+                    <div onClick={() => setauthorTooltip(false)}>
+                        <div className='author-tooltip modal-overlay' >
+                            <div className='author-card p-3' onClick={(e) => e.stopPropagation()} style={{ width: '360px' }}>
+                                {/* Image Section */}
+                                <div className="relative w-full h-48">
+                                    <Image
+                                        src='https://i.ibb.co/jJ4GHXP/img1.jpg'
+                                        alt="Banner"
+                                        style={{ borderRadius: '12px 12px 0px 0' }}
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
                                 </div>
 
-                                {/* Stats */}
-                                <div className="flex justify-between items-center flex-col gap-3 border-t pt-2">
-                                    <div className='flex items-center justify-between gap-4 mb-3'>
-                                        <p className="text-gray-800 flex flex-col items-center">
-                                            Learners<span className="font-bold text-sm text-xl">44.8k</span>
-                                        </p>
-                                        |
-                                        <p className="text-gray-800 flex flex-col text-sm items-center">
-                                            Posts<span className="font-bold text-xl ">2.4k</span>
-                                        </p>
-                                        |
-                                        <p className="text-gray-800 flex flex-col text-sm items-center">
-                                            Mods<span className="font-bold text-xl">4</span>
-                                        </p>
-                                    </div>
-                                    <div className="flex space-x-1">
-                                        {avatars.map((avatar, index) => (
-                                            <img
-                                                key={index}
-                                                src={avatar}
-                                                alt={`Avatar ${index + 1}`}
-                                                className="w-8 h-8 rounded-full border border-white"
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
+                                {/* Content Section */}
+                                <div className="p-3 border">
+                                    <h2 className="text-lg font-bold text-gray-800">The 4D Copywriting Community</h2>
+                                    <p className="text-gray-600 text-sm my-2">
+                                        The best place to become a full-time freelance copywriter. Join our
+                                        community of passionate writers and learn from experienced professionals.
+                                    </p>
 
-                                {/* CTA Button */}
-                                <button className="mt-4 w-full py-2.5 px-4 bg-teal-500 text-white text-sm rounded-md shadow hover:bg-teal-600">
-                                    View Discussions
-                                </button>
-                            </div></div></div></div>}
+                                    <div className="flex flex-col gap-2 mb-4 mt-3 font-bold">
+                                        <div className="flex items-center  text-gray-600" style={{ fontSize: '14.5px' }}>
+                                            <span className="mr-2">💎</span> 1-on-1 Mentorship
+                                        </div>
+                                        <div className="flex items-center  text-gray-600" style={{ fontSize: '14.5px' }}>
+                                            <span className="mr-2">✏️</span> 4D Copywriting Academy 2.0
+                                        </div>
+                                        <div className="flex items-center text-gray-600" style={{ fontSize: '14.5px' }}>
+                                            <span className="mr-2">📍</span> 4D Copywriters Map
+                                        </div>
+                                    </div>
+
+                                    {/* Stats */}
+                                    <div className="flex justify-between items-center flex-col gap-3 border-t pt-2">
+                                        <div className='flex items-center justify-between gap-4 mb-3'>
+                                            <p className="text-gray-800 flex flex-col items-center">
+                                                Learners<span className="font-bold text-sm text-xl">44.8k</span>
+                                            </p>
+                                            |
+                                            <p className="text-gray-800 flex flex-col text-sm items-center">
+                                                Posts<span className="font-bold text-xl ">2.4k</span>
+                                            </p>
+                                            |
+                                            <p className="text-gray-800 flex flex-col text-sm items-center">
+                                                Mods<span className="font-bold text-xl">4</span>
+                                            </p>
+                                        </div>
+                                        <div className="flex space-x-1">
+                                            {avatars.map((avatar, index) => (
+                                                <img
+                                                    key={index}
+                                                    src={avatar}
+                                                    alt={`Avatar ${index + 1}`}
+                                                    className="w-8 h-8 rounded-full border border-white"
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* CTA Button */}
+                                    <button className="mt-4 w-full py-2.5 px-4 bg-teal-500 text-white text-sm rounded-md shadow hover:bg-teal-600">
+                                        View Discussions
+                                    </button>
+                                </div></div></div></div>}
                 {includedTooltip &&
                     <div className='author-tooltip modal-overlay' onClick={() => setincludedTooltip(false)}>
-                        <div class="author-card"  onClick={(e) => e.stopPropagation()}>
+                        <div class="author-card" onClick={(e) => e.stopPropagation()}>
                             <div class="author-header">
                                 <div class="author-info">
                                     <h2 class="author-name">Jose Portilla</h2>

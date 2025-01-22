@@ -265,7 +265,7 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                             </li>
 
                             {/* My Products */}
-                            <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
+                            <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} onClick={() => setSidebarLinkActive(false)} >
                                 <button
                                     className="flex items-center justify-between w-full p-2"
                                 >
@@ -335,7 +335,7 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                                     <span>Bookmarks</span>
                                 </Link>
                             </li>
-                            <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
+                            <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} onClick={() => setSidebarLinkActive(false)} >
                                 <button
                                     className="flex items-center justify-between w-full p-2"
                                 >
@@ -368,11 +368,11 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                                 <ul className="ml-7 mt-2">
                                     {["Collection A", "Collection B", "Collection C"].map((item) => (
                                         <Link
-                                        href='/collection'
+                                            href='/collection'
                                             key={item}
                                             className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeCollection === item ? "dropdown-link-active" : "dropdown-link"
                                                 }`}
-                                            onClick={() => handleSetActive(item)}
+                                            onClick={() => { handleSetActive(item); setSidebarLinkActive(false) }}
                                         >
                                             {itemIcons[item]} {/* Render the corresponding SVG */}
                                             {item}

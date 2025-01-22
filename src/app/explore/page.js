@@ -2,9 +2,12 @@
 import profile from '../assets/profile.png';
 import Image from "next/image";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { MyContext } from '../layout';
+import Link from 'next/link';
 
 export default function Explore() {
+    const context = useContext(MyContext)
     const allCourses = [
         {
             id: 1,
@@ -1042,7 +1045,8 @@ export default function Explore() {
                                         >
                                             {course.title}
                                         </h4>
-                                        <p
+                                        <Link
+                                        href='/instructor'
                                             className="mb-4"
                                             style={{
                                                 fontSize: '13px',
@@ -1051,7 +1055,7 @@ export default function Explore() {
                                             }}
                                         >
                                             By {course.author}
-                                        </p>
+                                        </Link>
                                         <p
                                             style={{
                                                 fontSize: '14px',
@@ -1532,14 +1536,14 @@ export default function Explore() {
             {SubscriptionDisplay === true ?
                 <div className='plan-page bg-white rounded-lg p-4 mt-4'>
                     <h1
-                    style={{
-                        fontSize: '22px',
-                        fontWeight: 'bold',
-                        marginBottom: '20px',
-                    }}
-                >
-                    Popular Subscriptions
-                </h1>
+                        style={{
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                            marginBottom: '20px',
+                        }}
+                    >
+                        Popular Subscriptions
+                    </h1>
                     <div className="main-container">
                         <div className="pricing-card learn-card shadow-md">
                             <div className="card-content">
@@ -1640,17 +1644,17 @@ export default function Explore() {
                 </div>
                 : ''
             }
-            {BundleDisplay === true?
+            {BundleDisplay === true ?
                 <div className='bundle mt-4 bg-white p-4 rounded-lg'>
-                        <h1
-                    style={{
-                        fontSize: '22px',
-                        fontWeight: 'bold',
-                        marginBottom: '20px',
-                    }}
-                >
-                    Trending Bundles
-                </h1>
+                    <h1
+                        style={{
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                            marginBottom: '20px',
+                        }}
+                    >
+                        Trending Bundles
+                    </h1>
                     <div class="bundle-grid w-100" style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -1691,7 +1695,7 @@ export default function Explore() {
                                             <div class="course-tooltip">Design Systems Workshop</div>
                                         </div>
                                     </div>
-                                    <button class="view-all-button">
+                                    <button class="view-all-button" onClick={() => context.setbundlemodal(!context.bundlemodal)} >
                                         View All
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                                             <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -1793,7 +1797,7 @@ export default function Explore() {
                                             <div class="course-tooltip">Design Systems Workshop</div>
                                         </div>
                                     </div>
-                                    <button class="view-all-button">
+                                    <button class="view-all-button" onClick={() => context.setbundlemodal(!context.bundlemodal)} >
                                         View All
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                                             <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -1895,7 +1899,7 @@ export default function Explore() {
                                             <div class="course-tooltip">Design Systems Workshop</div>
                                         </div>
                                     </div>
-                                    <button class="view-all-button">
+                                    <button class="view-all-button" onClick={() => context.setbundlemodal(!context.bundlemodal)} >
                                         View All
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                                             <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -1997,7 +2001,7 @@ export default function Explore() {
                                             <div class="course-tooltip">Design Systems Workshop</div>
                                         </div>
                                     </div>
-                                    <button class="view-all-button">
+                                    <button class="view-all-button" onClick={() => context.setbundlemodal(!context.bundlemodal)} >
                                         View All
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                                             <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

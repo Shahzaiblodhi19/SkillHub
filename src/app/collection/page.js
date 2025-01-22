@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import React, { useState } from 'react'
 
 export default function Collection() {
@@ -96,7 +97,7 @@ export default function Collection() {
                 <img src={`${course.image}`} alt={`${course.title}`} class="course-image" />
                 <div class="course-content">
                     <h3 class="course-title">{course.title}</h3>
-                    <div class="course-author">{course.author}</div>
+                    <Link href='/instructor' class="course-author">{course.author}</Link>
                     <p class="course-description">{course.description}</p>
                     <div class="course-stats">
                         <div class="stat">
