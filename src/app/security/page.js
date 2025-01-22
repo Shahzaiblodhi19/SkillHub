@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { MyContext } from "../layout";
 import { FaSyncAlt, FaTrashAlt } from "react-icons/fa"; // Icons for buttons
+import Link from "next/link";
 
 function SignInSecurity() {
     const context = useContext(MyContext);
@@ -67,7 +68,7 @@ function SignInSecurity() {
                                     className="h-7 w-7 text-gray-500"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    style={{ transform: editgooglesettings === true ? 'rotate(180deg)' : 'rotate(0deg)' ,transition: 'transform all 0.1s ease'}}
+                                    style={{ transform: editgooglesettings === true ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform all 0.1s ease' }}
                                 >
                                     <path
                                         fillRule="evenodd"
@@ -133,9 +134,9 @@ function SignInSecurity() {
                         </div>
 
                         {/* Change Password Button */}
-                        <button className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
+                        <Link href='https://developers.facebook.com/docs/facebook-login' className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
                             Connect to Facebook
-                        </button>
+                        </Link>
                     </div><hr className="my-4 text-gray-500" />
                     <div className="flex items-center justify-between">
                         {/* Icon and Password Info */}
@@ -153,9 +154,9 @@ function SignInSecurity() {
                         </div>
 
                         {/* Change Password Button */}
-                        <button className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
+                        <Link href='https://docs.x.com/resources/fundamentals/authentication/guides/log-in-with-x' className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
                             Connect to Twitter
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
