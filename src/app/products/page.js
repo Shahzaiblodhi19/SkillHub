@@ -883,7 +883,13 @@ export default function ProductsPage() {
                           {item.icon}
                         </div>
                         <span className="tooltip-text">
-                          {item.text}
+                          {item.text === 'View Course Details Page' ? (
+                            <Link href="/coursedetails">
+                              {item.text}
+                            </Link>
+                          ) : (
+                            item.text
+                          )}
                         </span>
 
                         {item.arrow}
