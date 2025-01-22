@@ -543,19 +543,32 @@ const CourseDetails = () => {
 
                                                 <div className="features-list">
                                                     <div className="feature-item">
-                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <svg className='w-4 h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+                                                            <circle cx="12" cy="12" r="12" fill="#13c4cc" />
+                                                            <path d="M9.5 16.5l-4-4 1.5-1.5L9.5 13.5l7-7 1.5 1.5-8.5 8.5z" fill="#fff" />
+                                                        </svg>
+
                                                         <span className="feature-text">12,000+ professional courses</span>
                                                     </div>
                                                     <div className="feature-item">
-                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <svg className='w-4 h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+                                                            <circle cx="12" cy="12" r="12" fill="#13c4cc" />
+                                                            <path d="M9.5 16.5l-4-4 1.5-1.5L9.5 13.5l7-7 1.5 1.5-8.5 8.5z" fill="#fff" />
+                                                        </svg>
                                                         <span className="feature-text">120,000 hrs of audio per member</span>
                                                     </div>
                                                     <div className="feature-item">
-                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <svg className='w-4 h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+                                                            <circle cx="12" cy="12" r="12" fill="#13c4cc" />
+                                                            <path d="M9.5 16.5l-4-4 1.5-1.5L9.5 13.5l7-7 1.5 1.5-8.5 8.5z" fill="#fff" />
+                                                        </svg>
                                                         <span className="feature-text">Unlimited standard certificates</span>
                                                     </div>
                                                     <div className="feature-item">
-                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <svg className='w-4 h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+                                                            <circle cx="12" cy="12" r="12" fill="#13c4cc" />
+                                                            <path d="M9.5 16.5l-4-4 1.5-1.5L9.5 13.5l7-7 1.5 1.5-8.5 8.5z" fill="#fff" />
+                                                        </svg>
                                                         <span className="feature-text">5 premium certificates per user</span>
                                                     </div>
                                                 </div>
