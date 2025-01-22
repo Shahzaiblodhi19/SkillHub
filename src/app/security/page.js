@@ -134,7 +134,8 @@ function SignInSecurity() {
                         </div>
 
                         {/* Change Password Button */}
-                        <Link href='https://developers.facebook.com/docs/facebook-login' className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
+                        <Link target="_blank"
+                            rel="noopener noreferrer" href='https://developers.facebook.com/docs/facebook-login' className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
                             Connect to Facebook
                         </Link>
                     </div><hr className="my-4 text-gray-500" />
@@ -154,7 +155,8 @@ function SignInSecurity() {
                         </div>
 
                         {/* Change Password Button */}
-                        <Link href='https://docs.x.com/resources/fundamentals/authentication/guides/log-in-with-x' className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
+                        <Link target="_blank"
+                            rel="noopener noreferrer" href='https://docs.x.com/resources/fundamentals/authentication/guides/log-in-with-x' className="btn btn-light text-gray border px-3 py-2 fw-medium rounded-md shadow-sm" style={{ fontSize: '12px' }}>
                             Connect to Twitter
                         </Link>
                     </div>
