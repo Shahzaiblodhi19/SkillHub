@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaStar, FaUserGraduate, FaComment, FaBook } from 'react-icons/fa';
 import { FaBolt, FaExclamationCircle } from 'react-icons/fa';
 
@@ -20,34 +20,104 @@ const CourseDetails = () => {
     const [timer, setTimer] = useState({ minutes: 20, seconds: 0 });
     const [featuresExpanded, setFeaturesExpanded] = useState(false);
 
+    const positions = [0, 16.67, 33.33, 50, 66.67, 83.33, 100];
+    const teamSizes = [3, 5, 10, 25, 50, 100, 200];
+    const pricesPerUser = [19, 18, 16, 14, 12, 10, 8];
+    const [currentPosition, setCurrentPosition] = useState(0);
+    const [teamSize, setTeamSize] = useState(teamSizes[0]);
+    const [pricePerUser, setPricePerUser] = useState(pricesPerUser[0]);
+    const [totalPrices, setTotalPrice] = useState(teamSizes[0] * pricesPerUser[0] * 12);
 
-    const [isSticky, setIsSticky] = useState(false);
-
+    const sliderContainerRef = useRef(null); // Reference for the slider container
     useEffect(() => {
-        const handleScroll = () => {
-            const videoSection = document.querySelector(".video-section");
-            const purchaseWrapper = document.querySelector(".purchase-wrapper");
+        const handle = document.querySelector(".slider-handle");
+        const container = document.querySelector(".slider-container");
+        const track = document.querySelector(".slider-track");
 
-            if (!videoSection || !purchaseWrapper) return;
+        if (!handle || !container || !track) return;
 
-            const videoSectionRect = videoSection.getBoundingClientRect();
-            const purchaseWrapperHeight = purchaseWrapper.offsetHeight;
+        let isDragging = false;
 
-            if (videoSectionRect.top <= 0 && Math.abs(videoSectionRect.top) < videoSectionRect.height - purchaseWrapperHeight) {
-                purchaseWrapper.style.position = "fixed";
-                purchaseWrapper.style.top = "0";
-                purchaseWrapper.style.right = "0";
-            } else {
-                purchaseWrapper.style.position = "absolute";
-                purchaseWrapper.style.top = "auto";
+        const startDrag = (e) => {
+            isDragging = true;
+            document.addEventListener("mousemove", onDrag);
+            document.addEventListener("mouseup", stopDrag);
+        };
+
+        const onDrag = (e) => {
+            if (!isDragging) return;
+
+            const rect = container.getBoundingClientRect();
+            const percent = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+            const closestPosition = positions.findIndex((pos) => percent * 100 <= pos);
+
+            if (closestPosition !== -1) {
+                setCurrentPosition(closestPosition);
+                handle.style.left = `${positions[closestPosition]}%`;
+                track.style.width = `${positions[closestPosition]}%`;
+
+                setTeamSize(teamSizes[closestPosition]);
+                setPricePerUser(pricesPerUser[closestPosition]);
+                setTotalPrice(teamSizes[closestPosition] * pricesPerUser[closestPosition] * 12);
             }
         };
 
-        window.addEventListener("scroll", handleScroll);
+        const stopDrag = () => {
+            isDragging = false;
+            document.removeEventListener("mousemove", onDrag);
+            document.removeEventListener("mouseup", stopDrag);
+        };
 
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+        handle.addEventListener("mousedown", startDrag);
 
+        return () => {
+            handle.removeEventListener("mousedown", startDrag);
+            document.removeEventListener("mousemove", onDrag);
+            document.removeEventListener("mouseup", stopDrag);
+        };
+    }, [positions, teamSizes, pricesPerUser]);
+    useEffect(() => {
+        const sliderContainer = sliderContainerRef.current;
+        if (!sliderContainer) return; // Exit if the container is not rendered
+
+        const handleSliderClick = (e) => {
+            const rect = sliderContainer.getBoundingClientRect();
+            let percent = (e.clientX - rect.left) / rect.width * 100;
+            let closestPosition = 0;
+            let minDifference = 100;
+
+            positions.forEach((pos, index) => {
+                const difference = Math.abs(percent - pos);
+                if (difference < minDifference) {
+                    minDifference = difference;
+                    closestPosition = index;
+                }
+            });
+
+            setCurrentPosition(closestPosition);
+            updateSlider(closestPosition);
+        };
+
+        const updateSlider = (position) => {
+            const handle = sliderContainer.querySelector(".slider-handle");
+            const track = sliderContainer.querySelector(".slider-track");
+
+            if (handle && track) {
+                handle.style.left = `${positions[position]}%`;
+                track.style.width = `${positions[position]}%`;
+
+                setTeamSize(teamSizes[position]);
+                setPricePerUser(pricesPerUser[position]);
+                setTotalPrice(teamSizes[position] * pricesPerUser[position] * 12);
+            }
+        };
+
+        sliderContainer.addEventListener("click", handleSliderClick);
+
+        return () => {
+            sliderContainer.removeEventListener("click", handleSliderClick);
+        };
+    }, [sliderContainerRef]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -211,6 +281,9 @@ const CourseDetails = () => {
     ];
 
 
+
+
+
     return (
         <div className='course-details'>
             <header className="header px-4">
@@ -305,133 +378,194 @@ const CourseDetails = () => {
                                     </button>
                                 </div>
 
-                                <div className="purchase-content">
-                                    <div className="price-section">
-                                        <span className="current-price">$14.99</span>
-                                        <span className="original-price">$94.99</span>
-                                        <span className="discount">85% off</span>
-                                    </div>
-
-                                    <div className="price-timer">
-                                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                            <path fill="#b32d0f" d="M12 4c-4.878 0-9 4.122-9 9s4.122 9 9 9c4.878 0 9-4.122 9-9s-4.122-9-9-9zm0 16.2c-3.969 0-7.2-3.231-7.2-7.2s3.231-7.2 7.2-7.2 7.2 3.231 7.2 7.2-3.231 7.2-7.2 7.2z" />
-                                            <path fill="#b32d0f" d="M13 7h-2v6l5.25 3.15.75-1.23-4-2.42z" />
-                                        </svg>
-                                        <span className="timer-text">
-                                            <span className="timer-bold">
-                                                {timer.minutes}:{timer.seconds < 10 ? '0' : ''}
-                                                {timer.seconds}
-                                            </span>{' '}
-                                            left at this price!
-                                        </span>
-                                    </div>
-
-                                    <button className="btn btn-primary">Add to cart</button>
-                                    <button className="btn btn-secondary">Buy now</button>
-
-                                    <div class="coupon-section">
-                                        {couponVisible === true ? (
-                                            <div class="coupon-active">
-                                                <div class="coupon-left">
-                                                    <i class="fas fa-bolt coupon-icon"></i>
-                                                    <FaBolt color='#13c4cc' fontSize={22} />
-                                                    <div class="coupon-info">
-                                                        <span class="coupon-discount">40% OFF</span>
-                                                        <span class="coupon-code">BFCPSALE24</span>
-                                                    </div>
-                                                </div>
-                                                <span onClick={() => setCouponVisible(false)} class="remove-coupon">×</span>
-                                            </div>
-                                        ) : (
-                                            <div className="coupon-input active">
-                                                <input type="text" placeholder="Enter Coupon" />
-                                                <button>Apply</button>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div class="course-features">
-                                        <h4 class="features-header">This Course Includes:</h4>
-                                        <div class="features-list">
-                                            <div class="feature-item">
-                                                <div class="feature-icon">
-
-                                                    <svg fill="none" viewBox="0 0 24 24">
-                                                        <path fill="#13C4CC" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clip-rule="evenodd" fill-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <span>18 hours of on-demand video</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <div class="feature-icon">
-                                                    <svg fill="none" viewBox="0 0 24 24">
-                                                        <g clip-path="url(#clip0_6339_72041)">
-                                                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M14 3V7C14 7.26522 14.1054 7.51957 14.2929 7.70711C14.4804 7.89464 14.7348 8 15 8H19"></path>
-                                                            <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M17 21H7C6.46957 21 5.96086 20.7893 5.58579 20.4142C5.21071 20.0391 5 19.5304 5 19V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H14L19 8V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21Z"></path>
-                                                            <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M9 9H10"></path>
-                                                            <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M9 13H15"></path>
-                                                            <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M9 17H15"></path>
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_6339_72041">
-                                                                <rect fill="white" height="24" width="24"></rect>
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
-
-                                                </div>
-                                                <span>10 articles</span>
-                                            </div>
-                                            <div class="feature-item">
-                                                <div class="feature-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32">
-                                                        <path fill="#13C4CC" d="M10.6667 5C10.2246 5 9.80072 5.17559 9.48816 5.48816C9.17559 5.80072 9 6.22464 9 6.66667V25.3333C9 25.7754 9.17559 26.1993 9.48816 26.5118C9.80072 26.8244 10.2246 27 10.6667 27H16.6667C17.219 27 17.6667 27.4477 17.6667 28C17.6667 28.5523 17.219 29 16.6667 29H10.6667C9.69421 29 8.76157 28.6137 8.07394 27.9261C7.38631 27.2384 7 26.3058 7 25.3333V6.66667C7 5.69421 7.38631 4.76158 8.07394 4.07394C8.76158 3.38631 9.69421 3 10.6667 3H21.3333C22.3058 3 23.2384 3.38631 23.9261 4.07394C24.6137 4.76157 25 5.69421 25 6.66667V16C25 16.5523 24.5523 17 24 17C23.4477 17 23 16.5523 23 16V6.66667C23 6.22464 22.8244 5.80072 22.5118 5.48816C22.1993 5.17559 21.7754 5 21.3333 5H18.2764C18.3133 5.10426 18.3333 5.21645 18.3333 5.33333C18.3333 5.88562 17.8856 6.33333 17.3333 6.33333H14.6667C14.1144 6.33333 13.6667 5.88562 13.6667 5.33333C13.6667 5.21645 13.6867 5.10426 13.7236 5H10.6667ZM25.3333 20.3333C25.8856 20.3333 26.3333 20.781 26.3333 21.3333V26.9191L28.6262 24.6262C29.0168 24.2357 29.6499 24.2357 30.0404 24.6262C30.431 25.0168 30.431 25.6499 30.0404 26.0404L26.0404 30.0404C25.6499 30.431 25.0168 30.431 24.6262 30.0404L20.6262 26.0404C20.2357 25.6499 20.2357 25.0168 20.6262 24.6262C21.0168 24.2357 21.6499 24.2357 22.0404 24.6262L24.3333 26.9191V21.3333C24.3333 20.781 24.781 20.3333 25.3333 20.3333ZM16 21.6667C16.5523 21.6667 17 22.1144 17 22.6667V22.68C17 23.2323 16.5523 23.68 16 23.68C15.4477 23.68 15 23.2323 15 22.68V22.6667C15 22.1144 15.4477 21.6667 16 21.6667Z" clip-rule="evenodd" fill-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <span>Available on iOS and Android</span>
-                                            </div>
-
-                                            {featuresExpanded === true ?
-                                                <>
-                                                    <div class="feature-item">
-                                                        <div class="feature-icon">
-                                                            <svg viewBox="0 0 32 32">
-                                                                <path fill="#13C4CC" d="M6.66667 7.66406C5.75228 7.66406 5 8.41635 5 9.33073V22.6641C5 23.1061 5.17559 23.53 5.48816 23.8426" />
-                                                            </svg>
-                                                        </div>
-                                                        <span>Certificate of Completion</span>
-                                                    </div>
-                                                    <div class="feature-item">
-                                                        <div class="feature-icon">
-                                                            <svg viewBox="0 0 20 20">
-                                                                <path fill="#13C4CC" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441" />
-                                                            </svg>
-                                                        </div>
-                                                        <span>Community Access</span>
-                                                    </div>
-                                                </> : ''
-                                            }
+                                {activeTab === 'Personal' &&
+                                    <div className="purchase-content">
+                                        <div className="price-section">
+                                            <span className="current-price">$14.99</span>
+                                            <span className="original-price">$94.99</span>
+                                            <span className="discount">85% off</span>
                                         </div>
-                                        <div class="view-more" onClick={() => setFeaturesExpanded(!featuresExpanded)}>
-                                            <span>{featuresExpanded ? 'View Less' : 'View More'}</span>
-                                            <svg style={{ transform: featuresExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+
+                                        <div className="price-timer">
+                                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                                <path fill="#b32d0f" d="M12 4c-4.878 0-9 4.122-9 9s4.122 9 9 9c4.878 0 9-4.122 9-9s-4.122-9-9-9zm0 16.2c-3.969 0-7.2-3.231-7.2-7.2s3.231-7.2 7.2-7.2 7.2 3.231 7.2 7.2-3.231 7.2-7.2 7.2z" />
+                                                <path fill="#b32d0f" d="M13 7h-2v6l5.25 3.15.75-1.23-4-2.42z" />
                                             </svg>
+                                            <span className="timer-text">
+                                                <span className="timer-bold">
+                                                    {timer.minutes}:{timer.seconds < 10 ? '0' : ''}
+                                                    {timer.seconds}
+                                                </span>{' '}
+                                                left at this price!
+                                            </span>
+                                        </div>
+
+                                        <button className="btn btn-primary">Add to cart</button>
+                                        <button className="btn btn-secondary">Buy now</button>
+
+                                        <div class="coupon-section">
+                                            {couponVisible === true ? (
+                                                <div class="coupon-active">
+                                                    <div class="coupon-left">
+                                                        <i class="fas fa-bolt coupon-icon"></i>
+                                                        <FaBolt color='#13c4cc' fontSize={22} />
+                                                        <div class="coupon-info">
+                                                            <span class="coupon-discount">40% OFF</span>
+                                                            <span class="coupon-code">BFCPSALE24</span>
+                                                        </div>
+                                                    </div>
+                                                    <span onClick={() => setCouponVisible(false)} class="remove-coupon">×</span>
+                                                </div>
+                                            ) : (
+                                                <div className="coupon-input active">
+                                                    <input type="text" placeholder="Enter Coupon" />
+                                                    <button>Apply</button>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div class="course-features">
+                                            <h4 class="features-header">This Course Includes:</h4>
+                                            <div class="features-list">
+                                                <div class="feature-item">
+                                                    <div class="feature-icon">
+
+                                                        <svg fill="none" viewBox="0 0 24 24">
+                                                            <path fill="#13C4CC" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <span>18 hours of on-demand video</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <div class="feature-icon">
+                                                        <svg fill="none" viewBox="0 0 24 24">
+                                                            <g clip-path="url(#clip0_6339_72041)">
+                                                                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M14 3V7C14 7.26522 14.1054 7.51957 14.2929 7.70711C14.4804 7.89464 14.7348 8 15 8H19"></path>
+                                                                <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M17 21H7C6.46957 21 5.96086 20.7893 5.58579 20.4142C5.21071 20.0391 5 19.5304 5 19V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H14L19 8V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21Z"></path>
+                                                                <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M9 9H10"></path>
+                                                                <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M9 13H15"></path>
+                                                                <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#13C4CC" d="M9 17H15"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_6339_72041">
+                                                                    <rect fill="white" height="24" width="24"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+
+                                                    </div>
+                                                    <span>10 articles</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <div class="feature-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32">
+                                                            <path fill="#13C4CC" d="M10.6667 5C10.2246 5 9.80072 5.17559 9.48816 5.48816C9.17559 5.80072 9 6.22464 9 6.66667V25.3333C9 25.7754 9.17559 26.1993 9.48816 26.5118C9.80072 26.8244 10.2246 27 10.6667 27H16.6667C17.219 27 17.6667 27.4477 17.6667 28C17.6667 28.5523 17.219 29 16.6667 29H10.6667C9.69421 29 8.76157 28.6137 8.07394 27.9261C7.38631 27.2384 7 26.3058 7 25.3333V6.66667C7 5.69421 7.38631 4.76158 8.07394 4.07394C8.76158 3.38631 9.69421 3 10.6667 3H21.3333C22.3058 3 23.2384 3.38631 23.9261 4.07394C24.6137 4.76157 25 5.69421 25 6.66667V16C25 16.5523 24.5523 17 24 17C23.4477 17 23 16.5523 23 16V6.66667C23 6.22464 22.8244 5.80072 22.5118 5.48816C22.1993 5.17559 21.7754 5 21.3333 5H18.2764C18.3133 5.10426 18.3333 5.21645 18.3333 5.33333C18.3333 5.88562 17.8856 6.33333 17.3333 6.33333H14.6667C14.1144 6.33333 13.6667 5.88562 13.6667 5.33333C13.6667 5.21645 13.6867 5.10426 13.7236 5H10.6667ZM25.3333 20.3333C25.8856 20.3333 26.3333 20.781 26.3333 21.3333V26.9191L28.6262 24.6262C29.0168 24.2357 29.6499 24.2357 30.0404 24.6262C30.431 25.0168 30.431 25.6499 30.0404 26.0404L26.0404 30.0404C25.6499 30.431 25.0168 30.431 24.6262 30.0404L20.6262 26.0404C20.2357 25.6499 20.2357 25.0168 20.6262 24.6262C21.0168 24.2357 21.6499 24.2357 22.0404 24.6262L24.3333 26.9191V21.3333C24.3333 20.781 24.781 20.3333 25.3333 20.3333ZM16 21.6667C16.5523 21.6667 17 22.1144 17 22.6667V22.68C17 23.2323 16.5523 23.68 16 23.68C15.4477 23.68 15 23.2323 15 22.68V22.6667C15 22.1144 15.4477 21.6667 16 21.6667Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <span>Available on iOS and Android</span>
+                                                </div>
+
+                                                {featuresExpanded === true ?
+                                                    <>
+                                                        <div class="feature-item">
+                                                            <div class="feature-icon">
+                                                                <svg viewBox="0 0 32 32">
+                                                                    <path fill="#13C4CC" d="M6.66667 7.66406C5.75228 7.66406 5 8.41635 5 9.33073V22.6641C5 23.1061 5.17559 23.53 5.48816 23.8426" />
+                                                                </svg>
+                                                            </div>
+                                                            <span>Certificate of Completion</span>
+                                                        </div>
+                                                        <div class="feature-item">
+                                                            <div class="feature-icon">
+                                                                <svg viewBox="0 0 20 20">
+                                                                    <path fill="#13C4CC" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441" />
+                                                                </svg>
+                                                            </div>
+                                                            <span>Community Access</span>
+                                                        </div>
+                                                    </> : ''
+                                                }
+                                            </div>
+                                            <div class="view-more" onClick={() => setFeaturesExpanded(!featuresExpanded)}>
+                                                <span>{featuresExpanded ? 'View Less' : 'View More'}</span>
+                                                <svg style={{ transform: featuresExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="divider ">
+                                            <span className='m-auto text-lg'>Or</span>
+                                        </div>
+
+                                        <div class="subscription-section">
+                                            <h3 class="subscription-title">Subscribe to Skill Hub's top courses</h3>
+                                            <p class="subscription-description">
+                                                Get this course, plus 12,000+ of our top-rated courses, with Personal Plan.
+                                                <a className='ml-2' href="#" style={{ color: "#00BCD4", textDecoration: 'none' }}>Learn more</a>
+                                            </p>
+                                            <button class="subscription-button">Start subscription</button>
+                                            <p class="subscription-info">Starting at $20.00 per month • Cancel anytime</p>
+                                        </div>
+
+                                    </div>
+                                }
+
+                                {activeTab === "Teams" && (
+                                    <div className='teamstabs'>
+                                        <div className="purchase-content">
+                                            <div className="teams-content">
+                                                <button className="try-now-btn">TRY SKILL HUB TEAMS</button>
+
+                                                <div className="slider-section">
+                                                    <div className="slider-label">
+                                                        <span>Team Size</span>
+                                                        <span className="team-size-value">{teamSize} members</span>
+                                                    </div>
+                                                    <div className="slider-container">
+                                                        <div className="slider-track"></div>
+                                                        <div className="slider-handle" style={{ left: `${positions[currentPosition]}%` }}></div>
+                                                    </div>
+                                                    <div className="slider-positions">
+                                                        {teamSizes.map((size, index) => (
+                                                            <span key={index}>{size}</span>
+                                                        ))}
+                                                    </div>
+
+                                                    <div className="price-display">
+                                                        <span className="price">${pricePerUser}</span>
+                                                        <span className="price-period">/user/month</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="total-price-section">
+                                                    <div className="total-price-label">Total Annual Investment</div>
+                                                    <div className="total-price-value">${totalPrices}/year</div>
+                                                </div>
+
+                                                <div className="features-list">
+                                                    <div className="feature-item">
+                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <span className="feature-text">12,000+ professional courses</span>
+                                                    </div>
+                                                    <div className="feature-item">
+                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <span className="feature-text">120,000 hrs of audio per member</span>
+                                                    </div>
+                                                    <div className="feature-item">
+                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <span className="feature-text">Unlimited standard certificates</span>
+                                                    </div>
+                                                    <div className="feature-item">
+                                                        <i className="fas fa-check-circle feature-icon"></i>
+                                                        <span className="feature-text">5 premium certificates per user</span>
+                                                    </div>
+                                                </div>
+
+                                                <button className="btn-teams">Try Skill Hub Teams</button>
+                                                <p className="terms-text">No credit card required</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="divider ">
-                                        <span className='m-auto text-lg'>Or</span>
-                                    </div>
-
-                                    <div class="subscription-section">
-                                        <h3 class="subscription-title">Subscribe to Skill Hub's top courses</h3>
-                                        <p class="subscription-description">
-                                            Get this course, plus 12,000+ of our top-rated courses, with Personal Plan.
-                                            <a className='ml-2' href="#" style={{ color: "#00BCD4", textDecoration: 'none' }}>Learn more</a>
-                                        </p>
-                                        <button class="subscription-button">Start subscription</button>
-                                        <p class="subscription-info">Starting at $20.00 per month • Cancel anytime</p>
-                                    </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                     </div>

@@ -1593,7 +1593,7 @@ export default function SchoolPage() {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div className='flex items-start justify-between gap-4'>
+                                                <div className='flex flex-col md:flex-row items-start justify-between gap-4'>
                                                     <p className="mb-3 text-sm font-medium">{post.content}</p>
                                                     {post.image && (
                                                         <img
@@ -1604,11 +1604,11 @@ export default function SchoolPage() {
                                                         />
                                                     )}
                                                     {post.poll && (
-                                                        <div className="mb-4 px-4 py-3 border-1 rounded-lg" style={{ background: '#f8f9fd' }}>
+                                                        <div className="mb-4 px-4 py-3 border-1 rounded-lg w-100 md:w-auto" style={{ background: '#f8f9fd' }}>
                                                             <p className='font-semibold mb-3'>Favourite Fitness Snacks?</p>
                                                             {post.poll.options.map((option, index) => (
                                                                 <div key={index} className="flex items-center justify-between mb-2 font-medium" style={{ width: '300px' }}>
-                                                                    <span style={{ width: '50%' }}>{option.name}</span>
+                                                                    <span className='wid' style={{ width: '50%' }}>{option.name}</span>
                                                                     <span>{option.percentage}%</span>
                                                                 </div>
                                                             ))}
@@ -1646,7 +1646,7 @@ export default function SchoolPage() {
                                 </div>
                             </div>
                             <div className='col-md-4'>
-                                <div className='author-card p-3' onClick={(e) => e.stopPropagation()} style={{ width: '360px' }}>
+                                <div className='author-card p-3' onClick={(e) => e.stopPropagation()}>
                                     {/* Image Section */}
                                     <div className="relative w-full h-48">
                                         <Image
@@ -1723,7 +1723,7 @@ export default function SchoolPage() {
                             className="flex justify-between items-center cursor-pointer"
                             onClick={toggleSection}
                         >
-                            <div className='flex items-center gap-3'>
+                            <div className='flex items-start md:flex-row md:items-center flex-col gap-3'>
                                 <img className='w-14 h-14 rounded-lg' src='https://i.ibb.co/k67BZds/community-image1.png' />
                                 <h2 className="text-2xl font-semibold text-gray-800">
                                     Your Progress in The 3D UX Journey
@@ -1762,12 +1762,12 @@ export default function SchoolPage() {
                                         {section.items.map((item, idx) => (
                                             <div
                                                 key={idx}
-                                                className="bg-white p-3 w-100 rounded-lg shadow-md mb-4 flex justify-between items-center gap-5"
+                                                className=" bg-white p-3 flex-col w-100 rounded-lg shadow-md mb-4 flex md:flex-row justify-between items-center gap-5"
                                             >
-                                                <div className='flex items-center gap-4'>
+                                                <div className='flex items-center gap-4 flex-col md:flex-row '>
                                                     <div className="w-48 h-32 bg-gray-100 rounded-lg shadow-md flex flex-col">
                                                         {/* Icon */}
-                                                        <div className="flex items-center justify-center mb-4">
+                                                        <div className=" flex items-center justify-center mb-4">
                                                             {item.type !== 'Video' ?
                                                                 <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
@@ -1825,8 +1825,8 @@ export default function SchoolPage() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center space-x-4">
-                                                    <div className="relative">
+                                                <div className="flex items-center space-x-4 w-100 md:w-auto">
+                                                    <div className=" w-100 md:w-auto">
                                                         <div className="learner-report relative rounded">
                                                             <div className="progress-widget">
                                                                 <div className="widget-header">
