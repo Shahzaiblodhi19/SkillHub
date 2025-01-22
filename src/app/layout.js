@@ -54,6 +54,7 @@ export default function RootLayout({ children }) {
   const [AddBundleModal, setAddBundleModal] = useState(false);
   const [AddCommunityModal, setAddCommunityModal] = useState(false);
   const [AddSessionModal, setAddSessionModal] = useState(false);
+  const [searchValue, setSearchValue] = useState(""); // Input value
   const [AddEditProduct, setEditProduct] = useState(false);
   const [changePassword, setchangePassword] = useState(false);
   const [billingInvoices, setbillingInvoices] = useState(false);
@@ -107,7 +108,9 @@ export default function RootLayout({ children }) {
     setchangePassword,
     setIsSchoolModal,
     AddInstructor,
+    setSearchValue,
     setAddInstructor,
+    searchValue,
     activeFilter,
     billingInvoices,
     setbillingInvoices,
@@ -150,6 +153,8 @@ export default function RootLayout({ children }) {
             {/* Main content */}
             <div className="flex-grow-1 w-100">
               <Header
+                setSearchValue={setSearchValue}
+                searchValue={searchValue}
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 isModalOpen2={isModalOpen2}
