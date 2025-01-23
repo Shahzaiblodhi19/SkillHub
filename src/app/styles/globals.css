@@ -4315,18 +4315,59 @@ input:checked+.toggle-slider:before {
   .members-tab .member-header {
     flex-direction: column;
   }
-  .members-tab .member-achievements{flex-wrap: wrap;margin-top: 15px;}
-  .members-tab .member-field{flex-wrap: wrap;display: flex !important;}
-  .about-page .quicklinks{flex-wrap: wrap;display: flex !important;}
-  .about-page .community-stats{flex-wrap: wrap;display: flex !important;}
-  .about-page .leaderboards{flex-wrap: wrap;display: flex !important;}
-  .about-page .about-section2 .courses-grid{flex-wrap: wrap;display: flex !important;}
-  .about-page .about-section3 .session-grid{flex-wrap: wrap;display: flex !important;}
-  .dropwidth{width: 40% !important;}
-  .mm{
+
+  .members-tab .member-achievements {
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+
+  .members-tab .member-field {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .about-page .quicklinks {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .about-page .community-stats {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .about-page .leaderboards {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .about-page .about-section2 .courses-grid {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .about-page .about-section3 .session-grid {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .dropwidth {
+    width: 40% !important;
+  }
+
+  .mm {
     left: 0 !important;
   }
-  .bookmarks-tab2 .courses-grid{flex-wrap: wrap;display: flex !important;}
+
+  .bookmarks-tab2 .courses-grid {
+    flex-wrap: wrap;
+    display: flex !important;
+  }
+
+  .mar {
+    margin-left: 0 !important;
+  }
+
 }
 
 /* Desktop (large screens) */
@@ -4834,6 +4875,40 @@ input:checked+.toggle-slider:before {
     margin-bottom: 20px;
     /* Ensure spacing below the card */
   }
+
+  .table-container {
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    width: 100%;
+    /* Ensure the container takes the full width */
+  }
+
+  .checklist-modal .header-progress {
+    flex-wrap: wrap;
+  }
+
+  .checklist-modal .expand-dropdown {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .checklist-modal .section-header {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .checklist-modal .item-header {
+    display: flex !important;
+    flex-wrap: wrap;
+  }
+
+  .coupon-section table {
+    width: 100%;
+    /* Table takes full width of its container */
+    border-collapse: collapse;
+    /* Optional: Remove gaps between table cells */
+  }
+
 
 }
 
@@ -9019,6 +9094,60 @@ input:checked+.toggle-slider:before {
   .list-view .event-time {
     font-size: 12px !important;
   }
+
+  .instructor .main-content {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .instructor .profile-header {
+    flex-direction: column;
+  }
+
+  .instructor .profile-achievements {
+    flex-wrap: wrap;
+  }
+
+  .instructor .profile-stats {
+    flex-wrap: wrap;
+  }
+
+  .instructor .course-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .bundle .bundle-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .bookmarks-tab .courses-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .course-details .video-section {
+    height: auto !important;
+  }
+
+  .course-details .purchase-wrapper {
+    position: relative !important;
+  }
+
+  .instructor .nav-tabs {
+    flex-wrap: wrap;
+  }
+
+  .reviews .course-grids {
+    display: flex !important;
+    flex-wrap: wrap !important;
+
+  }
+}
+
+.bundle .bundle-grid {
+  width: 100% !important;
+}
+
+.bundle .bundle-card {
+  width: 100% !important;
 }
 
 @media (max-width: 480px) {
@@ -11564,7 +11693,7 @@ input:checked+.toggle-slider:before {
     position: relative;
     /* Parent is absolute */
     top: 0;
-    height: 759.2vh !important;
+    height: 759.2vh;
     right: 0;
     z-index: 2;
   }
@@ -16023,7 +16152,7 @@ input:checked+.toggle-slider:before {
 
     .filter-button {
       width: 100%;
-      justify-content: space-between;
+      justify-content: flex-start !important;
     }
 
     .filter-dropdown {

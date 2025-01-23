@@ -186,17 +186,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                                 <span>Marketing</span>
                                             </Link>
                                         </li>
-                                        <li style={{ display: 'none' }} className={`nav-item`} onClick={() => isMobileView ? setisSidebarActive(true) : setIsSidebarOpen(true)}>
-                                            <a
-                                                href="#"
-                                                className="flex items-center p-2 "
-                                            >
-                                                <svg width={15} height={15} viewBox="0 0 448 512">
-                                                    <path d="M48 88c0-13.3-10.7-24-24-24S0 74.7 0 88L0 424c0 13.3 10.7 24 24 24s24-10.7 24-24L48 88zM440.4 273.5c4.8-4.5 7.6-10.9 7.6-17.5s-2.7-12.9-7.6-17.5l-136-128c-9.7-9.1-24.8-8.6-33.9 1s-8.6 24.8 1 33.9L363.5 232 280 232l-128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l128 0 83.5 0-91.9 86.5c-9.7 9.1-10.1 24.3-1 33.9s24.3 10.1 33.9 1l136-128z" fill="#4F4F4F">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </nav>
                                 <nav className="flex-grow">
@@ -228,13 +218,13 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                             </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={() => handleSidebarLinks('My Learning')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/mylearning"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M16.73 1l.6.998.997.598-.998.6-.599.997-.598-.998-.998-.599.998-.598L16.73 1zm4.706 6.227a.72.72 0 01.284.573v1.45h2.03v14.5H.25V9.25h2.03V7.8a.72.72 0 01.913-.694L12 9.562l8.807-2.456a.72.72 0 01.629.12zm-8.716 3.628v10.397l7.56-2.108V8.748l-7.56 2.107zm-1.44 10.397V10.856L3.72 8.748v10.396l7.56 2.108zm-1.781.998H1.75v-11.5h.53v8.94a.72.72 0 00.527.694l6.692 1.866zm12.221-2.56v-8.94h.53v11.5h-7.749l6.692-1.866a.72.72 0 00.527-.694zM13.898 4.344L13 2.847l-.898 1.496-1.497.898 1.497.898L13 7.636l.898-1.497 1.497-.898-1.497-.898z" fill="#4F4F4F"></path></svg>
                                                 <span>My Learning</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Learner Report')}>
                                             <Link
@@ -249,16 +239,16 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                         </li>
 
                                         {/* My Products */}
-                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} onClick={() => setSidebarLinkActive(false)} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
-                                                <div className="flex items-center">
+                                                <Link href='/school' className="flex items-center">
                                                     <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 20 20">
                                                         <path fill="#4F4F4F" d="M8.33333 3.25C8.31123 3.25 8.29004 3.25878 8.27441 3.27441C8.25878 3.29004 8.25 3.31123 8.25 3.33333V8.02267L11.3637 11.1363C11.5043 11.277 11.5833 11.4678 11.5833 11.6667V16.75H16.75V3.33333C16.75 3.31123 16.7412 3.29003 16.7256 3.27441C16.71 3.25878 16.6888 3.25 16.6667 3.25H8.33333ZM10.0833 16.75V11.9773L6.66667 8.56066L3.25 11.9773V16.75H5.91667V14.1667C5.91667 13.7525 6.25245 13.4167 6.66667 13.4167C7.08088 13.4167 7.41667 13.7525 7.41667 14.1667V16.75H10.0833ZM6.75 6.75462C6.53133 6.73031 6.30401 6.80199 6.13634 6.96967L1.96967 11.1363C1.82902 11.277 1.75 11.4678 1.75 11.6667V17.5C1.75 17.9142 2.08579 18.25 2.5 18.25H17.5C17.9142 18.25 18.25 17.9142 18.25 17.5V3.33333C18.25 2.91341 18.0832 2.51068 17.7863 2.21375C17.4893 1.91681 17.0866 1.75 16.6667 1.75H8.33333C7.91341 1.75 7.51068 1.91681 7.21375 2.21375C6.91682 2.51068 6.75 2.91341 6.75 3.33333V6.75462ZM10.8333 5.08333C11.2475 5.08333 11.5833 5.41912 11.5833 5.83333V5.84167C11.5833 6.25588 11.2475 6.59167 10.8333 6.59167C10.4191 6.59167 10.0833 6.25588 10.0833 5.84167V5.83333C10.0833 5.41912 10.4191 5.08333 10.8333 5.08333ZM14.1667 5.08333C14.5809 5.08333 14.9167 5.41912 14.9167 5.83333V5.84167C14.9167 6.25588 14.5809 6.59167 14.1667 6.59167C13.7525 6.59167 13.4167 6.25588 13.4167 5.84167V5.83333C13.4167 5.41912 13.7525 5.08333 14.1667 5.08333ZM14.1667 8.41667C14.5809 8.41667 14.9167 8.75245 14.9167 9.16667V9.175C14.9167 9.58921 14.5809 9.925 14.1667 9.925C13.7525 9.925 13.4167 9.58921 13.4167 9.175V9.16667C13.4167 8.75245 13.7525 8.41667 14.1667 8.41667ZM14.1667 11.75C14.5809 11.75 14.9167 12.0858 14.9167 12.5V12.5083C14.9167 12.9225 14.5809 13.2583 14.1667 13.2583C13.7525 13.2583 13.4167 12.9225 13.4167 12.5083V12.5C13.4167 12.0858 13.7525 11.75 14.1667 11.75Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                     </svg>
                                                     <span> School</span>
-                                                </div>
+                                                </Link>
 
 
                                                 <span className="d-flex align-items-center gap-2">
@@ -311,22 +301,22 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                             </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Bookmarks')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/bookmark"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" strokeWidth="32" strokeLinejoin="round" fill="none"></path></svg>
                                                 <span>Bookmarks</span>
-                                            </a>
+                                            </Link>
                                         </li>
-                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} onClick={() => setSidebarLinkActive(false)} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
-                                                <div className="flex items-center">
+                                                <Link href='/collection' className="flex items-center">
                                                     <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" fill="#4F4F4F" viewBox="0 0 32 32"><path fill="#4F4F4F" d="M24.7994 11.2C26.9202 11.2 28.6555 12.8505 28.7909 14.937L28.7994 15.2V24.7994C28.7994 26.9202 27.149 28.6555 25.0625 28.7909L24.7994 28.7994H15.2C13.0792 28.7994 11.344 27.149 11.2085 25.0625L11.2 24.7994V15.2C11.2 13.0792 12.8505 11.344 14.937 11.2085L15.2 11.2H24.7994ZM19.9997 14.4C19.607 14.4 19.2804 14.683 19.2126 15.0562L19.1997 15.2L19.1984 19.2H15.2L15.0562 19.2129C14.683 19.2806 14.4 19.6073 14.4 20C14.4 20.3927 14.683 20.7194 15.0562 20.7871L15.2 20.8H19.1984L19.1997 24.8L19.2126 24.9438C19.2804 25.317 19.607 25.6 19.9997 25.6C20.3925 25.6 20.7191 25.317 20.7868 24.9438L20.7997 24.8L20.7984 20.8H24.8L24.9438 20.7871C25.317 20.7194 25.6 20.3927 25.6 20C25.6 19.6073 25.317 19.2806 24.9438 19.2129L24.8 19.2H20.7984L20.7997 15.2L20.7868 15.0562C20.7191 14.683 20.3925 14.4 19.9997 14.4ZM20.259 5.91211L20.3353 6.16395L21.2558 9.59982L14.4 9.60003C11.8437 9.60003 9.75417 11.5983 9.60818 14.118L9.60003 14.4L9.60047 22.9562C7.95734 22.9228 6.45777 21.8712 5.90353 20.2642L5.82005 19.9914L3.33553 10.719C2.78664 8.67051 3.93173 6.56719 5.91211 5.89634L6.16395 5.82005L15.4363 3.33553C17.3994 2.80951 19.4129 3.83924 20.1678 5.66898L20.259 5.91211Z"></path></svg>
                                                     <span> Collections</span>
-                                                </div>
+                                                </Link>
 
 
                                                 <span className="d-flex align-items-center gap-2">
@@ -351,15 +341,16 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                         {isSidebarOpen === false ? '' : isCollectionOpen && (
                                             <ul className="ml-7 mt-2">
                                                 {["Collection A", "Collection B", "Collection C"].map((item) => (
-                                                    <li
+                                                    <Link
+                                                        href='/collection'
                                                         key={item}
                                                         className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeCollection === item ? "dropdown-link-active" : "dropdown-link"
                                                             }`}
-                                                        onClick={() => handleSetActive(item)}
+                                                        onClick={() => { handleSetActive(item); setSidebarLinkActive(false) }}
                                                     >
                                                         {itemIcons[item]} {/* Render the corresponding SVG */}
                                                         {item}
-                                                    </li>
+                                                    </Link>
                                                 ))}
                                             </ul>
                                         )}
@@ -519,6 +510,7 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                                 <span>Marketing</span>
                                             </Link>
                                         </li>
+
                                     </ul>
                                 </nav>
                                 <nav className="flex-grow">
@@ -550,13 +542,13 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                             </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'My Learning' ? 'active' : ''}`} onClick={() => handleSidebarLinks('My Learning')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/mylearning"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M16.73 1l.6.998.997.598-.998.6-.599.997-.598-.998-.998-.599.998-.598L16.73 1zm4.706 6.227a.72.72 0 01.284.573v1.45h2.03v14.5H.25V9.25h2.03V7.8a.72.72 0 01.913-.694L12 9.562l8.807-2.456a.72.72 0 01.629.12zm-8.716 3.628v10.397l7.56-2.108V8.748l-7.56 2.107zm-1.44 10.397V10.856L3.72 8.748v10.396l7.56 2.108zm-1.781.998H1.75v-11.5h.53v8.94a.72.72 0 00.527.694l6.692 1.866zm12.221-2.56v-8.94h.53v11.5h-7.749l6.692-1.866a.72.72 0 00.527-.694zM13.898 4.344L13 2.847l-.898 1.496-1.497.898 1.497.898L13 7.636l.898-1.497 1.497-.898-1.497-.898z" fill="#4F4F4F"></path></svg>
                                                 <span>My Learning</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Learner Report' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Learner Report')}>
                                             <Link
@@ -571,16 +563,16 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                         </li>
 
                                         {/* My Products */}
-                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} onClick={() => setSidebarLinkActive(false)} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
-                                                <div className="flex items-center">
+                                                <Link href='/school' className="flex items-center">
                                                     <svg width={16} height={16} style={{ marginRight: '10px' }} fill="none" viewBox="0 0 20 20">
                                                         <path fill="#4F4F4F" d="M8.33333 3.25C8.31123 3.25 8.29004 3.25878 8.27441 3.27441C8.25878 3.29004 8.25 3.31123 8.25 3.33333V8.02267L11.3637 11.1363C11.5043 11.277 11.5833 11.4678 11.5833 11.6667V16.75H16.75V3.33333C16.75 3.31123 16.7412 3.29003 16.7256 3.27441C16.71 3.25878 16.6888 3.25 16.6667 3.25H8.33333ZM10.0833 16.75V11.9773L6.66667 8.56066L3.25 11.9773V16.75H5.91667V14.1667C5.91667 13.7525 6.25245 13.4167 6.66667 13.4167C7.08088 13.4167 7.41667 13.7525 7.41667 14.1667V16.75H10.0833ZM6.75 6.75462C6.53133 6.73031 6.30401 6.80199 6.13634 6.96967L1.96967 11.1363C1.82902 11.277 1.75 11.4678 1.75 11.6667V17.5C1.75 17.9142 2.08579 18.25 2.5 18.25H17.5C17.9142 18.25 18.25 17.9142 18.25 17.5V3.33333C18.25 2.91341 18.0832 2.51068 17.7863 2.21375C17.4893 1.91681 17.0866 1.75 16.6667 1.75H8.33333C7.91341 1.75 7.51068 1.91681 7.21375 2.21375C6.91682 2.51068 6.75 2.91341 6.75 3.33333V6.75462ZM10.8333 5.08333C11.2475 5.08333 11.5833 5.41912 11.5833 5.83333V5.84167C11.5833 6.25588 11.2475 6.59167 10.8333 6.59167C10.4191 6.59167 10.0833 6.25588 10.0833 5.84167V5.83333C10.0833 5.41912 10.4191 5.08333 10.8333 5.08333ZM14.1667 5.08333C14.5809 5.08333 14.9167 5.41912 14.9167 5.83333V5.84167C14.9167 6.25588 14.5809 6.59167 14.1667 6.59167C13.7525 6.59167 13.4167 6.25588 13.4167 5.84167V5.83333C13.4167 5.41912 13.7525 5.08333 14.1667 5.08333ZM14.1667 8.41667C14.5809 8.41667 14.9167 8.75245 14.9167 9.16667V9.175C14.9167 9.58921 14.5809 9.925 14.1667 9.925C13.7525 9.925 13.4167 9.58921 13.4167 9.175V9.16667C13.4167 8.75245 13.7525 8.41667 14.1667 8.41667ZM14.1667 11.75C14.5809 11.75 14.9167 12.0858 14.9167 12.5V12.5083C14.9167 12.9225 14.5809 13.2583 14.1667 13.2583C13.7525 13.2583 13.4167 12.9225 13.4167 12.5083V12.5C13.4167 12.0858 13.7525 11.75 14.1667 11.75Z" clipRule="evenodd" fillRule="evenodd"></path>
                                                     </svg>
                                                     <span> School</span>
-                                                </div>
+                                                </Link>
 
 
                                                 <span className="d-flex align-items-center gap-2">
@@ -633,22 +625,22 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                             </Link>
                                         </li>
                                         <li className={`nav-item ${SidebarLinkActive === 'Bookmarks' ? 'active' : ''}`} onClick={() => handleSidebarLinks('Bookmarks')}>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/bookmark"
                                                 className="flex items-center p-2 "
                                             >
                                                 <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" strokeWidth="0" fill="none" stroke="#03314b"><path fill="none" strokeLinejoin="round" strokeWidth="32" d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"></path><path d="M320 96H112a48.14 48.14 0 00-48 48v352l152-128 152 128V144a48.14 48.14 0 00-48-48z" strokeWidth="32" strokeLinejoin="round" fill="none"></path></svg>
                                                 <span>Bookmarks</span>
-                                            </a>
+                                            </Link>
                                         </li>
-                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} >
+                                        <li className={`nav-item ${isOpen && isSidebarOpen === true ? 'dropdownActive' : ''}`} onClick={() => setSidebarLinkActive(false)} >
                                             <button
                                                 className="flex items-center justify-between w-full p-2"
                                             >
-                                                <div className="flex items-center">
+                                                <Link href='/collection' className="flex items-center">
                                                     <svg width={16} height={16} style={{ marginRight: '10px' }} xmlns="http://www.w3.org/2000/svg" fill="#4F4F4F" viewBox="0 0 32 32"><path fill="#4F4F4F" d="M24.7994 11.2C26.9202 11.2 28.6555 12.8505 28.7909 14.937L28.7994 15.2V24.7994C28.7994 26.9202 27.149 28.6555 25.0625 28.7909L24.7994 28.7994H15.2C13.0792 28.7994 11.344 27.149 11.2085 25.0625L11.2 24.7994V15.2C11.2 13.0792 12.8505 11.344 14.937 11.2085L15.2 11.2H24.7994ZM19.9997 14.4C19.607 14.4 19.2804 14.683 19.2126 15.0562L19.1997 15.2L19.1984 19.2H15.2L15.0562 19.2129C14.683 19.2806 14.4 19.6073 14.4 20C14.4 20.3927 14.683 20.7194 15.0562 20.7871L15.2 20.8H19.1984L19.1997 24.8L19.2126 24.9438C19.2804 25.317 19.607 25.6 19.9997 25.6C20.3925 25.6 20.7191 25.317 20.7868 24.9438L20.7997 24.8L20.7984 20.8H24.8L24.9438 20.7871C25.317 20.7194 25.6 20.3927 25.6 20C25.6 19.6073 25.317 19.2806 24.9438 19.2129L24.8 19.2H20.7984L20.7997 15.2L20.7868 15.0562C20.7191 14.683 20.3925 14.4 19.9997 14.4ZM20.259 5.91211L20.3353 6.16395L21.2558 9.59982L14.4 9.60003C11.8437 9.60003 9.75417 11.5983 9.60818 14.118L9.60003 14.4L9.60047 22.9562C7.95734 22.9228 6.45777 21.8712 5.90353 20.2642L5.82005 19.9914L3.33553 10.719C2.78664 8.67051 3.93173 6.56719 5.91211 5.89634L6.16395 5.82005L15.4363 3.33553C17.3994 2.80951 19.4129 3.83924 20.1678 5.66898L20.259 5.91211Z"></path></svg>
                                                     <span> Collections</span>
-                                                </div>
+                                                </Link>
 
 
                                                 <span className="d-flex align-items-center gap-2">
@@ -673,15 +665,16 @@ const ResponsiveSidebar = ({ schoolName, selectedEmoji, isSidebarOpen, isSidebar
                                         {isSidebarOpen === false ? '' : isCollectionOpen && (
                                             <ul className="ml-7 mt-2">
                                                 {["Collection A", "Collection B", "Collection C"].map((item) => (
-                                                    <li
+                                                    <Link
+                                                        href='/collection'
                                                         key={item}
                                                         className={`p-2 cursor-pointer d-flex align-items-center gap-2 ${activeCollection === item ? "dropdown-link-active" : "dropdown-link"
                                                             }`}
-                                                        onClick={() => handleSetActive(item)}
+                                                        onClick={() => { handleSetActive(item); setSidebarLinkActive(false) }}
                                                     >
                                                         {itemIcons[item]} {/* Render the corresponding SVG */}
                                                         {item}
-                                                    </li>
+                                                    </Link>
                                                 ))}
                                             </ul>
                                         )}

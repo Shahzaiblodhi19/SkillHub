@@ -105,14 +105,14 @@ const ShoppingCart = () => {
                         {cartItems.map((item, index) => (
                             <>
                                 <div className='border rounded-lg' style={{ marginTop: '54px' }} key={index}>
-                                    <div key={item.id} className="flex mx-4 items-start justify-between border-b py-4">
+                                    <div key={item.id} className="flex mx-4 items-start justify-between border-b py-4 flex-wrap gap-3 md:gap-0">
                                         <img src={item.image} alt={item.title} className="w-36 h-20 rounded-lg" style={{ objectFit: 'cover' }} />
-                                        <div className="flex-1 ml-4">
+                                        <div className="flex-1 ml-4 mar">
                                             <h3 className="text-md font-bold ">{item.title}</h3>
                                             <p className="text-gray-500 text-sm my-2.5">Course by {item.author}</p>
-                                            <div className='flex items-center gap-4'>
+                                            <div className='flex items-center gap-4 flex-wrap'>
                                                 <span className={`label-${item.type.toLowerCase()} text-sm px-2.5 rounded-full`} style={{ fontSize: '12px' }}>{item.type}</span>
-                                                <div className="flex text-sm font-medium text-gray-600 gap-3">
+                                                <div className="flex text-sm font-medium text-gray-600 gap-3 ">
                                                     <span>⏳ {item.duration}</span>
                                                     <span>📚 {item.lessons}</span>
                                                     <span>🎓 {item.students}</span>
@@ -124,9 +124,9 @@ const ShoppingCart = () => {
                                             <path d="M7.15299 3.408C8.41999 1.136 9.05299 0 9.99999 0C10.947 0 11.58 1.136 12.847 3.408L13.175 3.996C13.535 4.642 13.715 4.965 13.995 5.178C14.275 5.391 14.625 5.47 15.325 5.628L15.961 5.772C18.421 6.329 19.65 6.607 19.943 7.548C20.235 8.488 19.397 9.469 17.72 11.43L17.286 11.937C16.81 12.494 16.571 12.773 16.464 13.117C16.357 13.462 16.393 13.834 16.465 14.577L16.531 15.254C16.784 17.871 16.911 19.179 16.145 19.76C15.379 20.341 14.227 19.811 11.925 18.751L11.328 18.477C10.674 18.175 10.347 18.025 9.99999 18.025C9.65299 18.025 9.32599 18.175 8.67199 18.477L8.07599 18.751C5.77299 19.811 4.62099 20.341 3.85599 19.761C3.08899 19.179 3.21599 17.871 3.46899 15.254L3.53499 14.578C3.60699 13.834 3.64299 13.462 3.53499 13.118C3.42899 12.773 3.18999 12.494 2.71399 11.938L2.27999 11.43C0.602991 9.47 -0.235009 8.489 0.0569909 7.548C0.348991 6.607 1.57999 6.328 4.03999 5.772L4.67599 5.628C5.37499 5.47 5.72399 5.391 6.00499 5.178C6.28599 4.965 6.46499 4.642 6.82499 3.996L7.15299 3.408Z" fill="#07c4ad" />
                                         </svg> {item.rating}</button>
                                     </div>
-                                    <div className='flex items-center justify-between gap-5 mx-4'>
-                                        <div className='flex items-center justify-between bg-gray-50 rounded-lg px-3 py-4 w-100'>
-                                            <div className='flex items-center gap-3'>
+                                    <div className='flex items-center justify-between gap-5 mx-4 flex-wrap'>
+                                        <div className='flex items-center justify-between bg-gray-50 rounded-lg px-3 py-4 w-100 flex-wrap gap-3 md:gap-0'>
+                                            <div className='flex items-center gap-3 flex-wrap'>
                                                 <span className="font-medium rounded-md px-2.5 text-sm py-1.5 text-white" style={{ background: '#07c4ad' }}>FREE</span>
                                                 <span className='font-medium text-xl'>${item.price}</span>
                                                 <span className="text-gray-400 font-medium text-sm line-through">Was ${item.originalPrice.toFixed(2)}</span>
@@ -139,10 +139,10 @@ const ShoppingCart = () => {
                                             <path d="M1 1L11 11M1 11L11 1" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg> Remove</button>
                                     </div>
-                                    <div className='footer-card w-100 mt-4 bg-gray-100 px-3 py-2'>
-                                        <div className="footer-item gap-3">
-                                            <div className="footer-item-group">
-                                                <div className="footer-icon-wrapper">
+                                    <div className='footer-card w-100 mt-4 bg-gray-100 px-3 pt-3 pb-36 pb-md-2 md:pb-2 pt-md-2 md:pt-2'>
+                                        <div className="footer-item gap-3 flex-wrap">
+                                            <div className="footer-item-group flex-wrap">
+                                                <div className="footer-icon-wrapper flex-wrap">
                                                     <div className="footer-icon-circle"></div>
                                                     <div className="footer-icon"></div>
                                                 </div>
@@ -174,7 +174,7 @@ const ShoppingCart = () => {
                         <p className='text-gray-400 text-center text-sm mt-5'>Each item in your cart needs to be checked out separately</p>
                     </div>
                     <div className='bg-white  p-4 rounded-lg shadow-md mt-4'>
-                        <div class="flex items-center gap-4 pb-5">
+                        <div class="flex items-center gap-4 pb-5 flex-wrap">
                             <div class="flex items-center gap-2">
                                 <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                     <path fill="currentColor" d="M10.3031 4.71338C10.638 4.71338 10.9096 4.98493 10.9096 5.3199V5.62947C11.7726 5.74654 12.5494 6.11208 13.0363 6.67319C13.2559 6.92617 13.2288 7.30925 12.9758 7.52881C12.7229 7.74837 12.3398 7.72128 12.1202 7.4683C11.8892 7.20209 11.4627 6.96219 10.9096 6.85747V9.13097C11.5063 9.2117 12.0549 9.41056 12.4966 9.70499C13.0803 10.0941 13.5358 10.6984 13.5358 11.4478C13.5358 12.1973 13.0803 12.8015 12.4966 13.1907C12.0549 13.4851 11.5063 13.684 10.9096 13.7647V14.0741C10.9096 14.4091 10.638 14.6806 10.3031 14.6806C9.9681 14.6806 9.69656 14.4091 9.69656 14.0741V13.7645C8.83357 13.6474 8.0568 13.2819 7.5698 12.7208C7.35024 12.4678 7.37733 12.0847 7.63031 11.8652C7.88329 11.6456 8.26636 11.6727 8.48592 11.9257C8.71697 12.1919 9.14345 12.4318 9.69656 12.5365V10.263C9.09982 10.1823 8.55128 9.98342 8.10959 9.68899C7.52581 9.29985 7.07031 8.69563 7.07031 7.94614C7.07031 7.19665 7.52581 6.59244 8.10959 6.2033C8.55128 5.90886 9.09982 5.71 9.69656 5.62928V5.3199C9.69656 4.98493 9.9681 4.71338 10.3031 4.71338ZM9.69656 6.85766C9.33347 6.92644 9.02055 7.0539 8.78241 7.21264C8.4157 7.45709 8.28336 7.7283 8.28336 7.94614C8.28336 8.16399 8.4157 8.4352 8.78241 8.67964C9.02055 8.83839 9.33347 8.96585 9.69656 9.03463V6.85766ZM10.9096 10.3594V12.5363C11.2727 12.4675 11.5856 12.3401 11.8237 12.1813C12.1905 11.9369 12.3228 11.6657 12.3228 11.4478C12.3228 11.23 12.1905 10.9588 11.8237 10.7143C11.5856 10.5556 11.2727 10.4281 10.9096 10.3594Z" clip-rule="evenodd" fill-rule="evenodd"></path>

@@ -12,7 +12,7 @@ const BottomNavigation = () => {
     const navItems = [
         { href: '/', label: 'Dashboard', icon: DashboardIcon },
         { href: '/explore', label: 'Explore', icon: ExploreIcon },
-        { href: '/schools', label: 'Schools', icon: SchoolsIcon },
+        { href: '/school', label: 'Schools', icon: SchoolsIcon },
         { href: '/calendar', label: 'Calendar', icon: CalendarIcon },
         { href: '/me', label: 'Me', icon: MeIcon },
     ];
