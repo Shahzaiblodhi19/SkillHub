@@ -19,7 +19,7 @@ export default function CartItemModal() {
                 <div className="modal-overlay">
                     <div className="modal-container" style={{ width: '45%' }}>
                         <div className="d-flex align-items-center justify-content-between">
-                            <Image style={{ marginLeft: '-5px' }} src={Logo} alt="logo" width={145} height={35} />
+                            <h1 className="fw-bold">Item Added to cart</h1>
                             <button className="close-btn" onClick={toggleModal2}>
                                 ✖
                             </button>
