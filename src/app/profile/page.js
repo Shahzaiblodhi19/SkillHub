@@ -226,7 +226,7 @@ function Profile() {
                                 Avatar
                             </label>
                             {/* Avatar Preview */}
-                            <div className="flex items-center gap-4" style={{ width: "100%" }}>
+                            <div className="flex items-center gap-4 flex-wrap" style={{ width: "100%" }}>
                                 <img
                                     src={preview || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHylL97CjJ3JctnR5MzdMVvsJSeR5-TnVL4w&s"}
                                     alt="Avatar Preview"

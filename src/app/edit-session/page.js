@@ -686,18 +686,18 @@ const EditSession = () => {
             <div className="popup">
                 <div className="popup-header w-100">
                     {/* Header Section */}
-                    <div className="flex items-center w-100 ">
-                        <div className="flex items-center gap-4 w-100">
+                    <div className="flex flex-wrap  items-center w-100 ">
+                        <div className="flex flex-wrap  items-center gap-4 w-100">
                             <img
                                 src="https://i.ibb.co/k67BZds/community-image1.png"
                                 alt="Thumbnail"
                                 className="w-24 h-16 rounded-md object-cover"
                             />
-                            <div className="flex flex-col gap-3 w-100 ">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap  flex flex-wrap -col gap-3 w-100 ">
+                                <div className="flex flex-wrap  items-center justify-between">
+                                    <div className="flex flex-wrap  items-center gap-2">
                                         <h1 className="text-lg font-semibold">UX Design Masterclass</h1>
-                                        <span className="text-gray-500 text-sm flex items-center gap-2">
+                                        <span className="text-gray-500 text-sm flex flex-wrap  items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                                 <circle cx="8" cy="8" r="7"></circle>
                                                 <path d="M6.06 6a2 2 0 1 1 3.93 0c0 1.33-2 2-2 2"></path>
@@ -706,11 +706,11 @@ const EditSession = () => {
                                         </span>
                                     </div>
                                 </div>
-                                <button style={{ fontSize: '13px', fontWeight: '600' }} className="absolute right-14 top-5 px-3 py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
+                                <button style={{ fontSize: '13px', fontWeight: '600' }} className="absolute right-14 top-5 px-3 py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex flex-wrap  items-center gap-2 hover:bg-gray-200">
                                     <span>👁</span> Preview
                                 </button>
-                                <div className="d-flex flex-column flex-md-row align-items-start aling-items-md-center justify-content-between gap-3">
-                                    <div className="d-flex flex-wrap gap-3" style={{ fontSize: '13px', fontWeight: '600' }}>
+                                <div className="d-flex flex-wrap  flex flex-wrap -column flex flex-wrap -md-row align-items-start aling-items-md-center justify-content-between gap-3">
+                                    <div className="d-flex flex-wrap  flex flex-wrap -wrap gap-3" style={{ fontSize: '13px', fontWeight: '600' }}>
                                         <button
                                             onClick={() => setActiveTab("Outline")}
                                             className="pb-1.5"
@@ -905,9 +905,9 @@ const EditSession = () => {
                                                 {selectedCourses.map((course) => (
                                                     <div
                                                         key={course.id}
-                                                        className="flex items-center justify-between border p-3 rounded-md cursor-pointer"
+                                                        className="flex flex-wrap  items-center justify-between border p-3 rounded-md cursor-pointer"
                                                     >
-                                                        <div className="flex items-center gap-3">
+                                                        <div className="flex flex-wrap  items-center gap-3">
                                                             <img
                                                                 src={course.image}
                                                                 alt={course.title}
@@ -943,10 +943,10 @@ const EditSession = () => {
                                                 {filteredCourses.map((course) => (
                                                     <div
                                                         key={course.id}
-                                                        className="flex items-center justify-between border p-3 rounded-md cursor-pointer"
+                                                        className="flex flex-wrap  items-center justify-between border p-3 rounded-md cursor-pointer"
                                                         onClick={() => handleSelectCourse(course)}
                                                     >
-                                                        <div className="flex items-center gap-3">
+                                                        <div className="flex flex-wrap  items-center gap-3">
                                                             <img
                                                                 src={course.image}
                                                                 alt={course.title}
@@ -980,12 +980,12 @@ const EditSession = () => {
                                         <div className="form-group">
                                             <div className="space-y-2">
                                                 {items.map((item, index) => (
-                                                    <div key={index} className="flex items-center gap-2 relative">
+                                                    <div key={index} className="flex flex-wrap  items-center gap-2 relative">
                                                         <input
                                                             type="text"
                                                             value={item}
                                                             onChange={(e) => handleUpdateItem(index, e.target.value)}
-                                                            className="rounded-lg px-3 flex-1 school-inputs"
+                                                            className="rounded-lg px-3 flex flex-wrap -1 school-inputs"
                                                         />
                                                         <button
                                                             type="button"
@@ -1000,7 +1000,7 @@ const EditSession = () => {
                                                     type="button"
                                                     onClick={handleAddItem}
                                                     style={{ fontSize: '14px' }}
-                                                    className="flex items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
+                                                    className="flex flex-wrap  items-center gap-2 bg-black text-white py-2.5 px-4 rounded-lg btn-sm"
                                                 >
                                                     <svg strokeWidth={2.5} xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                         <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -1043,7 +1043,7 @@ const EditSession = () => {
                                                             ))}
                                                         </select>
                                                         {/* Custom Dropdown Icon */}
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                        <div className="absolute inset-y-0 right-0 flex flex-wrap  items-center pr-2 pointer-events-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 className="h-7 w-7 text-gray-400"
@@ -1078,7 +1078,7 @@ const EditSession = () => {
                                                             ))}
                                                         </select>
                                                         {/* Custom Dropdown Icon */}
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                        <div className="absolute inset-y-0 right-0 flex flex-wrap  items-center pr-2 pointer-events-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 className="h-7 w-7 text-gray-400"
@@ -1113,7 +1113,7 @@ const EditSession = () => {
                                                             ))}
                                                         </select>
                                                         {/* Custom Dropdown Icon */}
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                        <div className="absolute inset-y-0 right-0 flex flex-wrap  items-center pr-2 pointer-events-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 className="h-7 w-7 text-gray-400"
@@ -1148,7 +1148,7 @@ const EditSession = () => {
                                                             ))}
                                                         </select>
                                                         {/* Custom Dropdown Icon */}
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                        <div className="absolute inset-y-0 right-0 flex flex-wrap  items-center pr-2 pointer-events-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 className="h-7 w-7 text-gray-400"
@@ -1186,9 +1186,9 @@ const EditSession = () => {
                                                     {selectedInstructors.map((instructor) => (
                                                         <div
                                                             key={instructor.id}
-                                                            className="flex items-center justify-between border py-2 px-3 rounded"
+                                                            className="flex flex-wrap  items-center justify-between border py-2 px-3 rounded"
                                                         >
-                                                            <div className="flex items-center gap-3">
+                                                            <div className="flex flex-wrap  items-center gap-3">
                                                                 <div className="border rounded-lg p-2">
                                                                     <img
                                                                         src={instructor.avatar}
@@ -1198,7 +1198,7 @@ const EditSession = () => {
                                                                 </div>
                                                                 <div className="info">
                                                                     <span className="fw-bold">{instructor.name}</span>
-                                                                    <div className="flex items-center gap-2 mt-1">
+                                                                    <div className="flex flex-wrap  items-center gap-2 mt-1">
                                                                         <input
                                                                             type="checkbox"
                                                                             id={`${instructor.id}`}
@@ -1239,9 +1239,9 @@ const EditSession = () => {
                                                 {filteredInstructors.map((instructor) => (
                                                     <div
                                                         key={instructor.id}
-                                                        className="flex items-center justify-between border py-2 px-3 rounded"
+                                                        className="flex flex-wrap  items-center justify-between border py-2 px-3 rounded"
                                                     >
-                                                        <div className="flex items-center gap-3">
+                                                        <div className="flex flex-wrap  items-center gap-3">
                                                             <div className="border rounded-lg p-2">
                                                                 <img
                                                                     src={instructor.avatar}
@@ -1251,7 +1251,7 @@ const EditSession = () => {
                                                             </div>
                                                             <div className="info">
                                                                 <span className="fw-bold">{instructor.name}</span>
-                                                                <div className="flex items-center gap-2 mt-1">
+                                                                <div className="flex flex-wrap  items-center gap-2 mt-1">
                                                                     <input
                                                                         type="checkbox"
                                                                         id={`${instructor.id}`}
@@ -1275,7 +1275,7 @@ const EditSession = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex items-center justify-end mt-2 mb-4 mr-7">
+                        <div className="flex flex-wrap  items-center justify-end mt-2 mb-4 mr-7">
                             <button type="submit" className="submit-btn mt-1" style={{ marginLeft: 'auto' }}>
                                 Save Session
                             </button>
@@ -1294,7 +1294,7 @@ const EditSession = () => {
                             </div>
                             <div className="bg-white col-xl-7 col-md-12 border rounded">
                                 <div className="popup-content pb-0 pt-4.5 px-2 -lg">
-                                    <div className="view-toggle flex gap-2 items-center">
+                                    <div className="view-toggle flex flex-wrap  gap-2 items-center">
                                         <label className="toggle-switch">
                                             <input
                                                 type="checkbox"
@@ -1314,15 +1314,15 @@ const EditSession = () => {
                                             {/* Display Selected Community */}
                                             {selectedCommunity ? (
                                                 <div className="mt-6">
-                                                    <div className="flex items-center justify-between px-3 py-2 border rounded-lg shadow-sm bg-gray-50">
-                                                        <div className="flex items-center">
+                                                    <div className="flex flex-wrap  items-center justify-between px-3 py-2 border rounded-lg shadow-sm bg-gray-50">
+                                                        <div className="flex flex-wrap  items-center">
                                                             <img
                                                                 src={selectedCommunity.image}
                                                                 alt={selectedCommunity.name}
                                                                 className="w-14 h-14 rounded-lg mr-3"
                                                             />
-                                                            <div className="inline-flex flex-col gap-2">
-                                                                <span className="text-sm bg-yellow-100 flex items-center gap-1 font-medium text-yellow-700 px-2 py-1 rounded w-fit rounded">
+                                                            <div className="inline-flex flex-wrap  flex flex-wrap -col gap-2">
+                                                                <span className="text-sm bg-yellow-100 flex flex-wrap  items-center gap-1 font-medium text-yellow-700 px-2 py-1 rounded w-fit rounded">
                                                                     <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                                         <path fill="currentColor" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441C9.09203 3.29004 9.08325 3.31123 9.08325 3.33333V8.33333C9.08325 8.35543 9.09203 8.37663 9.10766 8.39226C9.12329 8.40789 9.14448 8.41667 9.16659 8.41667H14.9999C15.1988 8.41667 15.3896 8.49569 15.5302 8.63634L16.7499 9.85601V3.33333C16.7499 3.31123 16.7411 3.29003 16.7255 3.27441C16.7099 3.25878 16.6887 3.25 16.6666 3.25H9.16659ZM8.047 2.21375C8.34393 1.91682 8.74666 1.75 9.16659 1.75H16.6666C17.0865 1.75 17.4892 1.91681 17.7862 2.21375C18.0831 2.51068 18.2499 2.91341 18.2499 3.33333V11.6667C18.2499 11.97 18.0672 12.2435 17.7869 12.3596C17.5067 12.4757 17.1841 12.4115 16.9696 12.197L14.6893 9.91667H9.16659C8.74666 9.91667 8.34393 9.74985 8.047 9.45292C7.75007 9.15599 7.58325 8.75326 7.58325 8.33333V3.33333C7.58325 2.91341 7.75007 2.51068 8.047 2.21375Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                                                         <path fill="currentColor" d="M3.33333 9.08333C3.31123 9.08333 3.29004 9.09211 3.27441 9.10774C3.25878 9.12336 3.25 9.14456 3.25 9.16666V15.6893L4.46967 14.4697C4.61032 14.329 4.80109 14.25 5 14.25H10.8333C10.8554 14.25 10.8766 14.2412 10.8923 14.2256C10.9079 14.21 10.9167 14.1888 10.9167 14.1667V12.5C10.9167 12.0858 11.2525 11.75 11.6667 11.75C12.0809 11.75 12.4167 12.0858 12.4167 12.5V14.1667C12.4167 14.5866 12.2499 14.9893 11.9529 15.2862C11.656 15.5832 11.2533 15.75 10.8333 15.75H5.31066L3.03033 18.0303C2.81583 18.2448 2.49324 18.309 2.21299 18.1929C1.93273 18.0768 1.75 17.8033 1.75 17.5V9.16666C1.75 8.74674 1.91682 8.34401 2.21375 8.04708C2.51068 7.75014 2.91341 7.58333 3.33333 7.58333H5C5.41421 7.58333 5.75 7.91911 5.75 8.33333C5.75 8.74754 5.41421 9.08333 5 9.08333H3.33333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
@@ -1340,11 +1340,11 @@ const EditSession = () => {
                                                             ✖
                                                         </button>
                                                     </div>
-                                                    <div className="flex flex-wrap gap-2 mt-5 mb-4 text-sm">
+                                                    <div className="flex flex-wrap  flex flex-wrap -wrap gap-2 mt-5 mb-4 text-sm">
                                                         {/* All */}
                                                         <button
                                                             onClick={() => toggleButton("all")}
-                                                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.all
+                                                            className={`flex flex-wrap  items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.all
                                                                 ? "bg-dark text-white"
                                                                 : "bg-gray-200 text-gray-800"
                                                                 }`}
@@ -1355,7 +1355,7 @@ const EditSession = () => {
                                                         {/* Announcements */}
                                                         <button
                                                             onClick={() => toggleButton("announcements")}
-                                                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.announcements
+                                                            className={`flex flex-wrap  items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.announcements
                                                                 ? "bg-dark text-white"
                                                                 : "bg-gray-200 text-gray-800"
                                                                 }`}
@@ -1367,7 +1367,7 @@ const EditSession = () => {
                                                         {/* News */}
                                                         <button
                                                             onClick={() => toggleButton("news")}
-                                                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.news
+                                                            className={`flex flex-wrap  items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.news
                                                                 ? "bg-dark text-white"
                                                                 : "bg-gray-200 text-gray-800"
                                                                 }`}
@@ -1379,7 +1379,7 @@ const EditSession = () => {
                                                         {/* Weekly Review */}
                                                         <button
                                                             onClick={() => toggleButton("weeklyReview")}
-                                                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.weeklyReview
+                                                            className={`flex flex-wrap  items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.weeklyReview
                                                                 ? "bg-dark text-white"
                                                                 : "bg-gray-200 text-gray-800"
                                                                 }`}
@@ -1391,7 +1391,7 @@ const EditSession = () => {
                                                         {/* Ask Questions */}
                                                         <button
                                                             onClick={() => toggleButton("askQuestions")}
-                                                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.askQuestions
+                                                            className={`flex flex-wrap  items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.askQuestions
                                                                 ? "bg-dark text-white"
                                                                 : "bg-gray-200 text-gray-800"
                                                                 }`}
@@ -1403,7 +1403,7 @@ const EditSession = () => {
                                                         {/* Chat */}
                                                         <button
                                                             onClick={() => toggleButton("chat")}
-                                                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.chat
+                                                            className={`flex flex-wrap  items-center gap-2 px-4 py-2 rounded-full shadow-sm ${toggles.chat
                                                                 ? "bg-dark text-white"
                                                                 : "bg-gray-200 text-gray-800"
                                                                 }`}
@@ -1434,17 +1434,17 @@ const EditSession = () => {
                                                         {filteredCommunities.map((community) => (
                                                             <li
                                                                 key={community.id}
-                                                                className="flex items-center justify-between px-3 py-2 border rounded-lg shadow-sm hover:bg-gray-50 cursor-pointer"
+                                                                className="flex flex-wrap  items-center justify-between px-3 py-2 border rounded-lg shadow-sm hover:bg-gray-50 cursor-pointer"
                                                                 onClick={() => handleSelectCommunity(community)}
                                                             >
-                                                                <div className="flex items-center">
+                                                                <div className="flex flex-wrap  items-center">
                                                                     <img
                                                                         src={community.image}
                                                                         alt={community.name}
                                                                         className="w-14 h-14 rounded-lg mr-3"
                                                                     />
-                                                                    <div className="inline-flex flex-col gap-2">
-                                                                        <span className="text-sm bg-yellow-100 flex items-center gap-1 font-medium text-yellow-700 px-2 py-1 rounded w-fit rounded">
+                                                                    <div className="inline-flex flex-wrap  flex flex-wrap -col gap-2">
+                                                                        <span className="text-sm bg-yellow-100 flex flex-wrap  items-center gap-1 font-medium text-yellow-700 px-2 py-1 rounded w-fit rounded">
                                                                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                                                 <path fill="currentColor" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441C9.09203 3.29004 9.08325 3.31123 9.08325 3.33333V8.33333C9.08325 8.35543 9.09203 8.37663 9.10766 8.39226C9.12329 8.40789 9.14448 8.41667 9.16659 8.41667H14.9999C15.1988 8.41667 15.3896 8.49569 15.5302 8.63634L16.7499 9.85601V3.33333C16.7499 3.31123 16.7411 3.29003 16.7255 3.27441C16.7099 3.25878 16.6887 3.25 16.6666 3.25H9.16659ZM8.047 2.21375C8.34393 1.91682 8.74666 1.75 9.16659 1.75H16.6666C17.0865 1.75 17.4892 1.91681 17.7862 2.21375C18.0831 2.51068 18.2499 2.91341 18.2499 3.33333V11.6667C18.2499 11.97 18.0672 12.2435 17.7869 12.3596C17.5067 12.4757 17.1841 12.4115 16.9696 12.197L14.6893 9.91667H9.16659C8.74666 9.91667 8.34393 9.74985 8.047 9.45292C7.75007 9.15599 7.58325 8.75326 7.58325 8.33333V3.33333C7.58325 2.91341 7.75007 2.51068 8.047 2.21375Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                                                                 <path fill="currentColor" d="M3.33333 9.08333C3.31123 9.08333 3.29004 9.09211 3.27441 9.10774C3.25878 9.12336 3.25 9.14456 3.25 9.16666V15.6893L4.46967 14.4697C4.61032 14.329 4.80109 14.25 5 14.25H10.8333C10.8554 14.25 10.8766 14.2412 10.8923 14.2256C10.9079 14.21 10.9167 14.1888 10.9167 14.1667V12.5C10.9167 12.0858 11.2525 11.75 11.6667 11.75C12.0809 11.75 12.4167 12.0858 12.4167 12.5V14.1667C12.4167 14.5866 12.2499 14.9893 11.9529 15.2862C11.656 15.5832 11.2533 15.75 10.8333 15.75H5.31066L3.03033 18.0303C2.81583 18.2448 2.49324 18.309 2.21299 18.1929C1.93273 18.0768 1.75 17.8033 1.75 17.5V9.16666C1.75 8.74674 1.91682 8.34401 2.21375 8.04708C2.51068 7.75014 2.91341 7.58333 3.33333 7.58333H5C5.41421 7.58333 5.75 7.91911 5.75 8.33333C5.75 8.74754 5.41421 9.08333 5 9.08333H3.33333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
@@ -1481,8 +1481,8 @@ const EditSession = () => {
                                     <div className="form-group space-y-3">
                                         {/* Standard Certificate */}
                                         <div className="p-4 bg-gray-100 rounded-lg">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-9 h-9 flex items-center justify-center bg-gray-200 rounded-full mb-1">
+                                            <div className="flex flex-wrap  items-center gap-3">
+                                                <div className="w-9 h-9 flex flex-wrap  items-center justify-center bg-gray-200 rounded-full mb-1">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         fill="none"
@@ -1498,7 +1498,7 @@ const EditSession = () => {
                                                         />
                                                     </svg>
                                                 </div>
-                                                <div className="view-toggle flex gap-2 items-center">
+                                                <div className="view-toggle flex flex-wrap  gap-2 items-center">
                                                     <label className="toggle-switch">
                                                         <input
                                                             type="checkbox"
@@ -1525,7 +1525,7 @@ const EditSession = () => {
                                                             <option>Sell Separately</option>
                                                         </select>
                                                         {/* Dropdown Icon */}
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                                        <div className="absolute inset-y-0 right-0 flex flex-wrap  items-center pr-3 pointer-events-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 fill="none"
@@ -1548,8 +1548,8 @@ const EditSession = () => {
 
                                         {/* Premium Certificate */}
                                         <div className="p-4 bg-gray-100 rounded-lg">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-9 h-9 flex items-center justify-center bg-gray-200 rounded-full mb-1">
+                                            <div className="flex flex-wrap  items-center gap-3">
+                                                <div className="w-9 h-9 flex flex-wrap  items-center justify-center bg-gray-200 rounded-full mb-1">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         fill="none"
@@ -1565,7 +1565,7 @@ const EditSession = () => {
                                                         />
                                                     </svg>
                                                 </div>
-                                                <div className="view-toggle flex gap-2 items-center">
+                                                <div className="view-toggle flex flex-wrap  gap-2 items-center">
                                                     <label className="toggle-switch">
                                                         <input
                                                             type="checkbox"
@@ -1591,7 +1591,7 @@ const EditSession = () => {
                                                             <option>Include with Course</option>
                                                         </select>
                                                         {/* Dropdown Icon */}
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                                        <div className="absolute inset-y-0 right-0 flex flex-wrap  items-center pr-3 pointer-events-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 fill="none"
@@ -1625,7 +1625,7 @@ const EditSession = () => {
                             </div>
                             <div className="bg-white col-xl-7 col-md-12 border rounded">
                                 <div className="popup-content pb-0 pt-4.5 px-2 -lg">
-                                    <div className="view-toggle flex gap-2 items-center">
+                                    <div className="view-toggle flex flex-wrap  gap-2 items-center">
                                         <label className="toggle-switch">
                                             <input
                                                 type="checkbox"
@@ -1645,8 +1645,8 @@ const EditSession = () => {
                                         {/* Display Selected Community */}
                                         {selectedSchools ? (
                                             <div className="mt-6">
-                                                <div className="flex items-center justify-between px-3 py-2 border rounded-lg shadow-sm bg-gray-50 mb-4">
-                                                    <div className="flex items-center gap-2">
+                                                <div className="flex flex-wrap  items-center justify-between px-3 py-2 border rounded-lg shadow-sm bg-gray-50 mb-4">
+                                                    <div className="flex flex-wrap  items-center gap-2">
                                                         <img
                                                             src={selectedSchools.image}
                                                             alt={selectedSchools.name}
@@ -1687,10 +1687,10 @@ const EditSession = () => {
                                                     {filteredSchools.map((community) => (
                                                         <li
                                                             key={community.id}
-                                                            className="flex items-center justify-between px-3 py-2 border rounded-lg shadow-sm hover:bg-gray-50 cursor-pointer"
+                                                            className="flex flex-wrap  items-center justify-between px-3 py-2 border rounded-lg shadow-sm hover:bg-gray-50 cursor-pointer"
                                                             onClick={() => handleSelectSchools(community)}
                                                         >
-                                                            <div className="flex items-center gap-2">
+                                                            <div className="flex flex-wrap  items-center gap-2">
                                                                 <img
                                                                     src={community.image}
                                                                     alt={community.name}
@@ -1712,7 +1712,7 @@ const EditSession = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex items-center justify-end mt-2 mb-4 mr-7">
+                        <div className="flex flex-wrap  items-center justify-end mt-2 mb-4 mr-7">
                             <button type="submit" className="submit-btn mt-1" style={{ marginLeft: 'auto' }}>
                                 Save Settings
                             </button>
@@ -1983,7 +1983,7 @@ const EditSession = () => {
                                                                         )}
                                                                     </span>
                                                                 </div>
-                                                                <span className="flex items-center gap-2">
+                                                                <span className="flex flex-wrap  items-center gap-2">
                                                                     {item.affectedItemsError && item.affectedItemsError.length > 0 ? (
                                                                         item.affectedItemsError.map((affectedItem, index) => (
                                                                             <span className="keyword-highlight" key={index}>{affectedItem}</span>
@@ -2154,7 +2154,7 @@ const EditSession = () => {
                                                             {!isPlaying && (
                                                                 <button
                                                                     onClick={togglePlayPause}
-                                                                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 rounded-md"
+                                                                    className="absolute inset-0 flex flex-wrap  items-center justify-center bg-black bg-opacity-0 rounded-md"
                                                                 >
                                                                     <svg
                                                                         xmlns="http://www.w3.org/2000/svg"
@@ -2174,10 +2174,10 @@ const EditSession = () => {
 
                                                         {/* Video Actions */}
                                                         <div className="mt-3 relative" >
-                                                            <div className="flex items-center justify-between">
+                                                            <div className="flex flex-wrap  items-center justify-between">
                                                                 <button
                                                                     onClick={handleDropdownToggle}
-                                                                    className="flex items-center gap-1.5 fw-medium text-sm"
+                                                                    className="flex flex-wrap  items-center gap-1.5 fw-medium text-sm"
                                                                 >
                                                                     Video Actions <svg className="w-4 h-4"
                                                                         fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -2398,7 +2398,7 @@ const EditSession = () => {
                                         <p className="text-gray-500 text-sm mb-4">
                                             Set the price for your course and included products.
                                         </p>
-                                        <div className="flex items-center border border-gray-300 rounded-md" style={{ width: '190px' }}>
+                                        <div className="flex flex-wrap  items-center border border-gray-300 rounded-md" style={{ width: '190px' }}>
                                             <span className="px-3 text-gray-700 bg-gray-200 border-r border-gray-300">$</span>
                                             <input
                                                 type="number"
@@ -2422,7 +2422,7 @@ const EditSession = () => {
                                         <p className="text-gray-500 text-sm mb-4">
                                             Products included with course purchase.
                                         </p>
-                                        <div className="flex items-center justify-between border border-gray-300 rounded-md bg-white p-3" >
+                                        <div className="flex flex-wrap  items-center justify-between border border-gray-300 rounded-md bg-white p-3" >
                                             <p className="text-sm rounded-lg fw-medium">
                                                 Standard Certificate
                                             </p>
@@ -2442,7 +2442,7 @@ const EditSession = () => {
                                         <p className="text-gray-500 text-sm mb-4">
                                             Products available for seperate purchase.
                                         </p>
-                                        <div className="flex items-center border border-gray-300 rounded-md" style={{ width: '190px' }}>
+                                        <div className="flex flex-wrap  items-center border border-gray-300 rounded-md" style={{ width: '190px' }}>
                                             <span className="px-3 text-gray-700 bg-gray-200 border-r border-gray-300">$</span>
                                             <input
                                                 type="number"
@@ -2453,7 +2453,7 @@ const EditSession = () => {
                                                 value={'7.00'}
                                             />
                                         </div>
-                                        <div className="flex mt-2.5 items-center justify-between border border-gray-300 rounded-md bg-white p-3" >
+                                        <div className="flex flex-wrap  mt-2.5 items-center justify-between border border-gray-300 rounded-md bg-white p-3" >
                                             <p className="text-sm rounded-lg fw-medium">
                                                 Community Access
                                             </p>
@@ -2461,7 +2461,7 @@ const EditSession = () => {
                                                 $2.00
                                             </p>
                                         </div>
-                                        <div className="flex mt-2.5 items-center justify-between border border-gray-300 rounded-md bg-white p-3" >
+                                        <div className="flex flex-wrap  mt-2.5 items-center justify-between border border-gray-300 rounded-md bg-white p-3" >
                                             <p className="text-sm rounded-lg fw-medium">
                                                 Premium Certificate
                                             </p>
@@ -2488,16 +2488,16 @@ const EditSession = () => {
                                     <div className="form-group px-2 pt-2">
                                         <label className="form-label mb-3">Selected Bundles ({selectedProducts.length})</label>
                                         {selectedProducts.map((product) => (
-                                            <div key={product.id} className="selected-product flex items-center justify-between mb-4 cursor-pointer">
-                                                <div className="flex items-center gap-3">
+                                            <div key={product.id} className="selected-product flex flex-wrap  items-center justify-between mb-4 cursor-pointer">
+                                                <div className="flex flex-wrap  items-center gap-3">
                                                     <img width={55} height={55} className="rounded" src={product.image} />
-                                                    <div className="info flex flex-col">
-                                                        <div className="flex items-center gap-3">
-                                                            <div className="inline-flex items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 9px', borderRadius: '100px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
+                                                    <div className="info flex flex-wrap  flex flex-wrap -col">
+                                                        <div className="flex flex-wrap  items-center gap-3">
+                                                            <div className="inline-flex flex-wrap  items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 9px', borderRadius: '100px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
 
                                                                 <span className="product-type mb-1">{product.type}</span>
                                                             </div>
-                                                            <div className="inline-flex items-center gap-1" style={{ backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '2px 9px', borderRadius: '100px' }}>
+                                                            <div className="inline-flex flex-wrap  items-center gap-1" style={{ backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '2px 9px', borderRadius: '100px' }}>
                                                                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                                     <path fill="#343332" d="M10.3031 4.71338C10.638 4.71338 10.9096 4.98493 10.9096 5.3199V5.62947C11.7726 5.74654 12.5494 6.11208 13.0363 6.67319C13.2559 6.92617 13.2288 7.30925 12.9758 7.52881C12.7229 7.74837 12.3398 7.72128 12.1202 7.4683C11.8892 7.20209 11.4627 6.96219 10.9096 6.85747V9.13097C11.5063 9.2117 12.0549 9.41056 12.4966 9.70499C13.0803 10.0941 13.5358 10.6984 13.5358 11.4478C13.5358 12.1973 13.0803 12.8015 12.4966 13.1907C12.0549 13.4851 11.5063 13.684 10.9096 13.7647V14.0741C10.9096 14.4091 10.638 14.6806 10.3031 14.6806C9.9681 14.6806 9.69656 14.4091 9.69656 14.0741V13.7645C8.83357 13.6474 8.0568 13.2819 7.5698 12.7208C7.35024 12.4678 7.37733 12.0847 7.63031 11.8652C7.88329 11.6456 8.26636 11.6727 8.48592 11.9257C8.71697 12.1919 9.14345 12.4318 9.69656 12.5365V10.263C9.09982 10.1823 8.55128 9.98342 8.10959 9.68899C7.52581 9.29985 7.07031 8.69563 7.07031 7.94614C7.07031 7.19665 7.52581 6.59244 8.10959 6.2033C8.55128 5.90886 9.09982 5.71 9.69656 5.62928V5.3199C9.69656 4.98493 9.9681 4.71338 10.3031 4.71338ZM9.69656 6.85766C9.33347 6.92644 9.02055 7.0539 8.78241 7.21264C8.4157 7.45709 8.28336 7.7283 8.28336 7.94614C8.28336 8.16399 8.4157 8.4352 8.78241 8.67964C9.02055 8.83839 9.33347 8.96585 9.69656 9.03463V6.85766ZM10.9096 10.3594V12.5363C11.2727 12.4675 11.5856 12.3401 11.8237 12.1813C12.1905 11.9369 12.3228 11.6657 12.3228 11.4478C12.3228 11.23 12.1905 10.9588 11.8237 10.7143C11.5856 10.5556 11.2727 10.4281 10.9096 10.3594Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                                                     <path fill="#343332" d="M10.3399 2.51392C6.38177 2.51392 3.1731 5.72259 3.1731 9.6807C3.1731 13.6388 6.38177 16.8475 10.3399 16.8475C14.298 16.8475 17.5067 13.6388 17.5067 9.6807C17.5067 5.72259 14.298 2.51392 10.3399 2.51392ZM1.9231 9.6807C1.9231 5.03224 5.69142 1.26392 10.3399 1.26392C14.9883 1.26392 18.7567 5.03224 18.7567 9.6807C18.7567 14.3292 14.9883 18.0975 10.3399 18.0975C5.69142 18.0975 1.9231 14.3292 1.9231 9.6807Z" clip-rule="evenodd" fill-rule="evenodd"></path>
@@ -2533,11 +2533,11 @@ const EditSession = () => {
                                         {filteredProducts.length > 0 && (
                                             <ul className="product-list mt-4">
                                                 {filteredProducts.map((product) => (
-                                                    <li className="flex items-center justify-between mb-4 cursor-pointer" key={product.id} onClick={() => addProduct(product)}>
-                                                        <div className="flex items-center gap-3">
+                                                    <li className="flex flex-wrap  items-center justify-between mb-4 cursor-pointer" key={product.id} onClick={() => addProduct(product)}>
+                                                        <div className="flex flex-wrap  items-center gap-3">
                                                             <img width={55} height={55} className="rounded" src={product.image} />
                                                             <div className="">
-                                                                <div className="inline-flex items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
+                                                                <div className="inline-flex flex-wrap  items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
                                                                     <span className="product-type mb-1">{product.type}</span>
                                                                 </div> <br />
                                                                 <span className="product-name" style={{ fontSize: '13px', fontWeight: '600' }}>{product.name}</span>
@@ -2563,16 +2563,16 @@ const EditSession = () => {
                                     <div className="form-group px-2 pt-2">
                                         <label className="form-label mb-3">Selected Subscription ({selectedSubscription.length})</label>
                                         {selectedSubscription.map((product) => (
-                                            <div key={product.id} className="selected-product flex items-center justify-between mb-4 cursor-pointer">
-                                                <div className="flex items-center gap-3">
+                                            <div key={product.id} className="selected-product flex flex-wrap  items-center justify-between mb-4 cursor-pointer">
+                                                <div className="flex flex-wrap  items-center gap-3">
                                                     <img width={55} height={55} className="rounded" src={product.image} />
-                                                    <div className="info flex flex-col">
-                                                        <div className="flex items-center gap-3">
-                                                            <div className="inline-flex items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 9px', borderRadius: '100px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
+                                                    <div className="info flex flex-wrap  flex flex-wrap -col">
+                                                        <div className="flex flex-wrap  items-center gap-3">
+                                                            <div className="inline-flex flex-wrap  items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 9px', borderRadius: '100px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
 
                                                                 <span className="product-type mb-1">{product.type}</span>
                                                             </div>
-                                                            <div className="inline-flex items-center gap-1" style={{ backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '2px 9px', borderRadius: '100px' }}>
+                                                            <div className="inline-flex flex-wrap  items-center gap-1" style={{ backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '2px 9px', borderRadius: '100px' }}>
                                                                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                                     <path fill="#343332" d="M10.3031 4.71338C10.638 4.71338 10.9096 4.98493 10.9096 5.3199V5.62947C11.7726 5.74654 12.5494 6.11208 13.0363 6.67319C13.2559 6.92617 13.2288 7.30925 12.9758 7.52881C12.7229 7.74837 12.3398 7.72128 12.1202 7.4683C11.8892 7.20209 11.4627 6.96219 10.9096 6.85747V9.13097C11.5063 9.2117 12.0549 9.41056 12.4966 9.70499C13.0803 10.0941 13.5358 10.6984 13.5358 11.4478C13.5358 12.1973 13.0803 12.8015 12.4966 13.1907C12.0549 13.4851 11.5063 13.684 10.9096 13.7647V14.0741C10.9096 14.4091 10.638 14.6806 10.3031 14.6806C9.9681 14.6806 9.69656 14.4091 9.69656 14.0741V13.7645C8.83357 13.6474 8.0568 13.2819 7.5698 12.7208C7.35024 12.4678 7.37733 12.0847 7.63031 11.8652C7.88329 11.6456 8.26636 11.6727 8.48592 11.9257C8.71697 12.1919 9.14345 12.4318 9.69656 12.5365V10.263C9.09982 10.1823 8.55128 9.98342 8.10959 9.68899C7.52581 9.29985 7.07031 8.69563 7.07031 7.94614C7.07031 7.19665 7.52581 6.59244 8.10959 6.2033C8.55128 5.90886 9.09982 5.71 9.69656 5.62928V5.3199C9.69656 4.98493 9.9681 4.71338 10.3031 4.71338ZM9.69656 6.85766C9.33347 6.92644 9.02055 7.0539 8.78241 7.21264C8.4157 7.45709 8.28336 7.7283 8.28336 7.94614C8.28336 8.16399 8.4157 8.4352 8.78241 8.67964C9.02055 8.83839 9.33347 8.96585 9.69656 9.03463V6.85766ZM10.9096 10.3594V12.5363C11.2727 12.4675 11.5856 12.3401 11.8237 12.1813C12.1905 11.9369 12.3228 11.6657 12.3228 11.4478C12.3228 11.23 12.1905 10.9588 11.8237 10.7143C11.5856 10.5556 11.2727 10.4281 10.9096 10.3594Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                                                     <path fill="#343332" d="M10.3399 2.51392C6.38177 2.51392 3.1731 5.72259 3.1731 9.6807C3.1731 13.6388 6.38177 16.8475 10.3399 16.8475C14.298 16.8475 17.5067 13.6388 17.5067 9.6807C17.5067 5.72259 14.298 2.51392 10.3399 2.51392ZM1.9231 9.6807C1.9231 5.03224 5.69142 1.26392 10.3399 1.26392C14.9883 1.26392 18.7567 5.03224 18.7567 9.6807C18.7567 14.3292 14.9883 18.0975 10.3399 18.0975C5.69142 18.0975 1.9231 14.3292 1.9231 9.6807Z" clip-rule="evenodd" fill-rule="evenodd"></path>
@@ -2608,11 +2608,11 @@ const EditSession = () => {
                                         {filteredSubscriptions.length > 0 && (
                                             <ul className="product-list mt-4">
                                                 {filteredSubscriptions.map((product) => (
-                                                    <li className="flex items-center justify-between mb-4 cursor-pointer" key={product.id} onClick={() => addProduct2(product)}>
-                                                        <div className="flex items-center gap-3">
+                                                    <li className="flex flex-wrap  items-center justify-between mb-4 cursor-pointer" key={product.id} onClick={() => addProduct2(product)}>
+                                                        <div className="flex flex-wrap  items-center gap-3">
                                                             <img width={55} height={55} className="rounded" src={product.image} />
                                                             <div className="">
-                                                                <div className="inline-flex items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
+                                                                <div className="inline-flex flex-wrap  items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
                                                                     <span className="product-type mb-1">{product.type}</span>
                                                                 </div> <br />
                                                                 <span className="product-name" style={{ fontSize: '13px', fontWeight: '600' }}>{product.name}</span>
@@ -2770,7 +2770,7 @@ const EditSession = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex items-center justify-end mt-2 mb-4 mr-7">
+                        <div className="flex flex-wrap  items-center justify-end mt-2 mb-4 mr-7">
                             <button type="submit" className="submit-btn mt-1" style={{ marginLeft: 'auto' }}>
                                 Save Pricing
                             </button>

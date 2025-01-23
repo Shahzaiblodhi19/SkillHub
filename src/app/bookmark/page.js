@@ -184,7 +184,7 @@ export default function Bookmark() {
 
     return (
         <div class="bookmarks-tab2 bg-white p-4 rounded-lg collections-page" onClick={() => setActiveDropdown(false)}>
-            <div className="flex items-center justify-between p-2 mb-4">
+            <div className="flex items-center justify-between p-2 mb-4 flex-wrap gap-3 md:gap-0">
                 {/* Left Section: Collection Name */}
                 <div className="flex items-center space-x-2">
                     {/* Emoji Icon */}
@@ -235,7 +235,7 @@ export default function Bookmark() {
                     </button>
                 </div>
             </div>
-            <div class="filters-container mb-4">
+            <div class="filters-container mb-4 flex-wrap">
                 <div class="filters-left">
                     <div style={{ position: "relative" }}>
                         <button
@@ -538,7 +538,7 @@ export default function Bookmark() {
                             Sort By
                         </button>
                         {isActive("sort") && (
-                            <div className="sort-dropdown" onClick={(e) => e.stopPropagation()}>
+                            <div className="sort-dropdown mm" onClick={(e) => e.stopPropagation()}>
                                 <label className="sort-option">
                                     <input
                                         type="radio"

@@ -200,7 +200,7 @@ function Billing() {
                 </div>
                 <div className="bg-white col-xl-7 col-md-12 border-gray-100 rounded-lg border-2 p-4">
                     {/* Plan Section */}
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center flex-wrap">
                         <div>
                             <h2 className="text-lg font-semibold mb-1">Professional (monthly)</h2>
                             <p className="text-gray-600 text-sm">$89.00 / month</p>
@@ -228,7 +228,7 @@ function Billing() {
                     <hr className="border-gray-300 my-4" />
 
                     {/* Next Billing Section */}
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center flex-wrap">
                         <div>
                             <h2 className="text-lg font-semibold mb-1">Next billing date</h2>
                             <p className="text-gray-500 text-sm">

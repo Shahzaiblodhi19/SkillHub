@@ -876,7 +876,7 @@ export default function Explore() {
                         borderRadius: '20px',
                     }}
                 >
-                    <div className='flex items-center justify-between mb-4'>
+                    <div className='flex items-center flex-col md:flex-row gap-4 justify-between mb-4 md:gap-0'>
                         <h1
                             className=""
                             style={{

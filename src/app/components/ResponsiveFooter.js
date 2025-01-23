@@ -18,7 +18,7 @@ const BottomNavigation = () => {
     ];
 
     return (
-        <nav className="main-footer">
+        <nav className="main-footer gap-0" style={{zIndex: '10009'}}>
             {navItems.map(({ href, label, icon: Icon }) => (
                 <Link key={href} href={href} passHref>
                     <div

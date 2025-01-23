@@ -1004,7 +1004,7 @@ export default function ProductsPage() {
             <h3 className="product-title">{product.title}</h3>
 
             {/* Meta Section */}
-            <div className="product-meta">
+            <div className="product-meta metas">
 
               {/* Labels */}
               <div className="product-labels ">
@@ -1581,7 +1581,7 @@ export default function ProductsPage() {
   );
 
   return (
-    <div className="container-products" onClick={handleCloseallmodals}>
+    <div className="container-products mylearningpage" onClick={handleCloseallmodals}>
       <div className="header">
         <div className='flex items-center gap-2'>
           <h1 className="header-title">My Learning</h1>

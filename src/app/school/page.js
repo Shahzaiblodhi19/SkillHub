@@ -1283,7 +1283,7 @@ export default function SchoolPage() {
 
                         {isOpen && (
                             <div
-                                className="absolute right-0 mt-2 w-64 bg-white shadow-md rounded-lg z-50"
+                                className="absolute right-0 mt-2 w-64 bg-white shadow-md rounded-lg z-50 mm "
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 {/* Search Input */}
@@ -1494,8 +1494,8 @@ export default function SchoolPage() {
                                                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
                                                 </svg>
                                             </button>
-                                            <div className="sort-dropdown" onClick={(e) => e.stopPropagation()} style={{ width: '380px' }}>
-                                                <div className='flex items-start gap-1'>
+                                            <div className="sort-dropdown dropwidth" onClick={(e) => e.stopPropagation()} style={{ width: '380px' }}>
+                                                <div className='flex items-start gap-1 flex-col '>
                                                     <div style={{ width: '95%' }}>
                                                         <h4 className='ml-2 mb-1 text-gray-700'>Filter</h4>
                                                         <label className="sort-option">
@@ -1517,7 +1517,7 @@ export default function SchoolPage() {
                                                             Pinned
                                                         </label>
                                                     </div>
-                                                    <div className='border-l pl-4' style={{ width: '100%' }}>
+                                                    <div className='border-l pl-4 w-100' style={{ width: '100%' }}>
                                                         <h4 className='ml-2 mb-1 text-gray-700'>Sort</h4>
                                                         <label className="sort-option">
                                                             <input
@@ -1679,8 +1679,8 @@ export default function SchoolPage() {
                                         </div>
 
                                         {/* Stats */}
-                                        <div className="flex justify-between items-center flex-col gap-3 border-t pt-2">
-                                            <div className='flex items-center justify-between gap-4 mb-3'>
+                                        <div className="flex justify-between items-center flex-col gap-3 border-t pt-2 md:flex-row">
+                                            <div className='flex items-center justify-between gap-4 mb-3 flex-col md:flex-row'>
                                                 <p className="text-gray-800 flex flex-col items-center">
                                                     Learners<span className="font-bold text-sm text-xl">44.8k</span>
                                                 </p>
@@ -1693,7 +1693,7 @@ export default function SchoolPage() {
                                                     Mods<span className="font-bold text-xl">4</span>
                                                 </p>
                                             </div>
-                                            <div className="flex space-x-1">
+                                            <div className="flex space-x-1 flex-wrap gap-2 md:gap-0">
                                                 {avatars.map((avatar, index) => (
                                                     <Link href='/student'>
                                                         <img
@@ -2519,7 +2519,7 @@ export default function SchoolPage() {
                                 </div>
                             </div>
                             <div className='col-md-4'>
-                                <div className='author-card p-3' onClick={(e) => e.stopPropagation()} style={{ width: '360px' }}>
+                                <div className='author-card p-3' onClick={(e) => e.stopPropagation()}>
                                     {/* Image Section */}
                                     <div className="relative w-full h-48">
                                         <Image
@@ -2552,8 +2552,8 @@ export default function SchoolPage() {
                                         </div>
 
                                         {/* Stats */}
-                                        <div className="flex justify-between items-center flex-col gap-3 border-t pt-2">
-                                            <div className='flex items-center justify-between gap-4 mb-3'>
+                                        <div className="flex justify-between items-center flex-col gap-3 border-t pt-2 md:flex-row">
+                                            <div className='flex items-center justify-between gap-4 mb-3 flex-col md:flex-row'>
                                                 <p className="text-gray-800 flex flex-col items-center">
                                                     Learners<span className="font-bold text-sm text-xl">44.8k</span>
                                                 </p>
@@ -2566,14 +2566,16 @@ export default function SchoolPage() {
                                                     Mods<span className="font-bold text-xl">4</span>
                                                 </p>
                                             </div>
-                                            <div className="flex space-x-1">
+                                            <div className="flex space-x-1 flex-wrap gap-2 md:gap-0">
                                                 {avatars.map((avatar, index) => (
-                                                    <img
-                                                        key={index}
-                                                        src={avatar}
-                                                        alt={`Avatar ${index + 1}`}
-                                                        className="w-8 h-8 rounded-full border border-white"
-                                                    />
+                                                    <Link href='/student'>
+                                                        <img
+                                                            key={index}
+                                                            src={avatar}
+                                                            alt={`Avatar ${index + 1}`}
+                                                            className="w-8 h-8 rounded-full border border-white"
+                                                        />
+                                                    </Link>
                                                 ))}
                                             </div>
                                         </div>

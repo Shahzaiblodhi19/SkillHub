@@ -23,13 +23,13 @@ function SignInSecurity() {
                     <p style={{ fontSize: '15px', color: 'grey' }}>Keep your security secure by changing your password at least every 120 days.</p>
                 </div>
                 <div className="bg-white col-xl-7 col-md-12 border-gray-100 rounded-lg border-2 p-4">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap">
                         {/* Icon and Password Info */}
-                        <div className="flex items-center">
+                        <div className="flex items-center flex-wrap">
                             <div className="bg-gray-100 rounded-lg p-3 flex items-center justify-center">
                                 <svg className="w-5 h-5" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0v2.15c.283.062.554.152.816.286a4 4 0 0 1 1.748 1.748c.247.485.346 1.002.392 1.564.044.541.044 1.206.044 2.01v.483c0 .805 0 1.47-.044 2.01-.046.563-.145 1.08-.392 1.565a4 4 0 0 1-1.748 1.748c-.485.247-1.002.346-1.564.392-.541.044-1.206.044-2.01.044H8.758c-.805 0-1.47 0-2.01-.044-.563-.046-1.08-.145-1.565-.392a4 4 0 0 1-1.748-1.748c-.247-.485-.346-1.002-.392-1.564C3 17.71 3 17.046 3 16.242v-.483c0-.805 0-1.47.044-2.01.046-.563.145-1.08.392-1.565a4 4 0 0 1 1.748-1.748c.262-.134.533-.224.816-.286zm2 2.002q.356-.003.759-.002h6.482q.403 0 .759.002V8a4 4 0 0 0-8 0zm-1.089 2.036c-.438.035-.663.1-.819.18a2 2 0 0 0-.874.874c-.08.156-.145.38-.18.819C5 14.361 5 14.943 5 15.8v.4c0 .857 0 1.439.038 1.889.035.438.1.663.18.819a2 2 0 0 0 .874.874c.156.08.38.145.819.18C7.361 20 7.943 20 8.8 20h6.4c.857 0 1.439 0 1.889-.038.438-.035.663-.1.819-.18a2 2 0 0 0 .874-.874c.08-.156.145-.38.18-.819.037-.45.038-1.032.038-1.889v-.4c0-.857 0-1.439-.038-1.889-.035-.438-.1-.663-.18-.819a2 2 0 0 0-.874-.874c-.156-.08-.38-.145-.819-.18C16.639 12 16.057 12 15.2 12H8.8c-.857 0-1.439 0-1.889.038" fill-rule="evenodd"></path></svg>
                             </div>
-                            <div className="ml-4">
+                            <div className="ml-4 my-3 my-md-0">
                                 <h2 className="text-lg font-semibold">Password</h2>
                                 <p className="text-gray-500 text-sm mt-1">Last changed October 22nd, 2023 03:10</p>
                             </div>
@@ -49,13 +49,13 @@ function SignInSecurity() {
                 </div>
                 <div className="bg-white col-xl-7 col-md-12 border-gray-100 rounded-lg border-2 p-4">
                     <div className={`${editgooglesettings === true ? 'bg-gray-100 p-3 rounded-lg' : ''}`}>
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between flex-wrap">
                             {/* Icon and Password Info */}
-                            <div className="flex items-center">
+                            <div className="flex items-center flex-wrap">
                                 <div className="bg-gray-200 rounded-lg p-2 flex items-center justify-center">
                                     <FcGoogle className="p-0 w-8 h-8" />
                                 </div>
-                                <div className="ml-4">
+                                <div className="ml-4 my-md-0">
                                     <h2 className="text-lg font-semibold">Google</h2>
                                     <p className="text-gray-500 text-sm mt-1">You are connected to your Google Account</p>
                                 </div>
@@ -121,9 +121,9 @@ function SignInSecurity() {
                         }
                     </div>
                     <hr className="my-4 text-gray-500" />
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap">
                         {/* Icon and Password Info */}
-                        <div className="flex items-center">
+                        <div className="flex items-center flex-wrap">
                             <div className="bg-gray-200 rounded-lg p-2 flex items-center justify-center">
                                 <FaFacebook style={{ fill: '#1877F6' }} className="p-0 w-8 h-8" />
                             </div>
@@ -139,9 +139,9 @@ function SignInSecurity() {
                             Connect to Facebook
                         </Link>
                     </div><hr className="my-4 text-gray-500" />
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap">
                         {/* Icon and Password Info */}
-                        <div className="flex items-center">
+                        <div className="flex items-center flex-wrap">
                             <div className="bg-gray-200 rounded-lg p-2 flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48" fill="none">
                                     <path d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24Z" fill="#020202" />

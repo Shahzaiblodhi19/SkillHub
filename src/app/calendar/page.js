@@ -540,7 +540,7 @@ export default function CalendarPage() {
                     <h1 className="school-name">What's on this month?</h1>
                 </header>
                 <div className="calendar-header z-0">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 flex-wrap gap-2 md:gap-0">
                         {/* All Tab */}
                         <button
                             onClick={() => handleTabClick("All")}
