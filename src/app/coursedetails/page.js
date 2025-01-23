@@ -1,8 +1,9 @@
 'use client';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { FaStar, FaUserGraduate, FaComment, FaBook } from 'react-icons/fa';
 import { FaBolt, FaExclamationCircle } from 'react-icons/fa';
+import { MyContext } from '../layout';
 
 const avatars = [
     'https://i.pravatar.cc/150?img=1',
@@ -15,6 +16,7 @@ const avatars = [
 ];
 
 const CourseDetails = () => {
+    const context = useContext(MyContext)
     const [activeTab, setActiveTab] = useState('Personal');
     const [couponVisible, setCouponVisible] = useState(true);
     const [timer, setTimer] = useState({ minutes: 20, seconds: 0 });
@@ -400,7 +402,7 @@ const CourseDetails = () => {
                                             </span>
                                         </div>
 
-                                        <button className="btn btn-primary">Add to cart</button>
+                                        <button onClick={() => context.setcartItem(!context.cartItem)} className="btn btn-primary">Add to cart</button>
                                         <button className="btn btn-secondary">Buy now</button>
 
                                         <div class="coupon-section">

@@ -33,6 +33,7 @@ import AddTeamMemberModal from './components/addteammember';
 import InstructorModal from './components/instructor-page-modal';
 import BundleViewMore from './components/bundle-viewmore';
 import RatingModal from './components/ratingModal';
+import CartItemModal from './components/cartitemsModal';
 
 // Create context
 export const MyContext = createContext();
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
 
   const [activeFilter, setActiveFilter] = useState("");
   const [IsRatingModal, setIsRatingModal] = useState(false)
+  const [cartItem, setcartItem] = useState(false)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -101,7 +103,9 @@ export default function RootLayout({ children }) {
   const values = {
     isSchoolModal,
     setIsRatingModal,
+    cartItem,
     changePassword,
+    setcartItem,
     IsRatingModal,
     bundlemodal,
     setbundlemodal,
@@ -238,6 +242,7 @@ export default function RootLayout({ children }) {
                 <InstructorModal />
                 <BundleViewMore />
                 <RatingModal />
+                <CartItemModal />
 
                 <div className='PagesContent h-full' style={{ padding: isSmallMobileView ? '10px 10px 35px 10px' : '20px', background: '#F2F2F2', overflowY: 'auto' }}>
                   {children}

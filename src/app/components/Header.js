@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import Button from '@mui/material/Button';
+import { IoCartOutline } from "react-icons/io5";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Link from "next/link";
@@ -497,8 +498,8 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                     </MenuItem>
                   ))}
                 </Menu>
-                { (
-                  <button className="search-btn"> 
+                {(
+                  <button className="search-btn">
                     <Link href={`/search?query=${encodeURIComponent(searchValue)}`} >
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 34 28" fill="none">
                         <path
@@ -585,6 +586,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
           ) : ''}
           {Login === true ?
             <>
+
               <button onClick={() => setIsPanelActive(!isPanelActive)} className="btn p-0" type="button"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 60 60" fill="none">
@@ -593,7 +595,21 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                   <path fillRule="evenodd" clipRule="evenodd" d="M36.5859 32.5858C36.961 32.2107 37.4697 32 38.0001 32C38.5305 32 39.0392 32.2107 39.4143 32.5858C39.6314 32.8029 39.7934 33.0647 39.8914 33.3496C40.4303 33.6869 40.8933 34.1357 41.2482 34.6679C41.7012 35.3474 41.9607 36.1374 41.999 36.9531C41.9997 36.9687 42.0001 36.9844 42.0001 37V38.4293C42.0238 38.5668 42.076 38.698 42.1535 38.8144C42.2404 38.9446 42.3566 39.0527 42.4928 39.1298C42.888 39.3536 43.0828 39.8156 42.9671 40.2548C42.8514 40.694 42.4542 41 42.0001 41H40.4496C40.3523 41.4767 40.1171 41.9186 39.7679 42.2678C39.299 42.7366 38.6631 43 38.0001 43C37.3371 43 36.7012 42.7366 36.2323 42.2678C35.8831 41.9186 35.6479 41.4767 35.5506 41H34.0001C33.5459 41 33.1488 40.694 33.0331 40.2548C32.9174 39.8156 33.1121 39.3536 33.5073 39.1298C33.6436 39.0527 33.7598 38.9446 33.8466 38.8144C33.9242 38.698 33.9764 38.5668 34.0001 38.4293V37C34.0001 36.9844 34.0005 36.9687 34.0012 36.9531C34.0395 36.1374 34.299 35.3474 34.752 34.6679C35.1069 34.1357 35.5699 33.6869 36.1088 33.3496C36.2068 33.0647 36.3688 32.8029 36.5859 32.5858ZM35.9218 39C35.9535 38.8754 35.9773 38.7485 35.9928 38.6202C35.9977 38.5803 36.0001 38.5402 36.0001 38.5V37.0254C36.0248 36.5799 36.1684 36.1489 36.4161 35.7773C36.6678 35.3999 37.0174 35.098 37.4276 34.904C37.7771 34.7387 38.0001 34.3867 38.0001 34C38.0001 34.3867 38.223 34.7387 38.5726 34.904C38.9828 35.098 39.3324 35.3999 39.5841 35.7773C39.8318 36.1489 39.9753 36.5799 40.0001 37.0254V38.5C40.0001 38.5402 40.0025 38.5803 40.0073 38.6202C40.0229 38.7485 40.0466 38.8754 40.0784 39H35.9218Z" fill="#616161" />
                 </svg>
               </button>
+              <Link href='/checkout' className="relative w-9 h-9">
+                {/* Cart Icon */}
+                <button
+                  className="flex items-center justify-center w-9 h-9 bg-white rounded-full border border-gray-200"
+                  aria-label="Cart"
+                >
+                  {/* Cart Icon SVG */}
+                  <IoCartOutline fontSize={19} />
+                </button>
 
+                {/* Notification Badge */}
+                <span className="absolute top-0 right-0 w-4 h-4 font-bold text-white rounded-full flex items-center justify-center" style={{ fontSize: '9px', background: '#5fc0ed' }}>
+                  4
+                </span>
+              </Link>
               <a onClick={() => setIsOpenApplytoTeach(!isOpenApplytoTeach)} className={`btn ${isSmallMobileView ? 'btn-sm py-2 px-1' : ''} btn-dark px-4`} style={isSmallMobileView ? { fontSize: '11.2px', borderRadius: '50px' } : { borderRadius: '50px' }}>+  Apply to Teach</a>
 
             </>
@@ -615,6 +631,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
               </g>
             </svg>
           </button>
+
           {Login === true ?
             <>
               <>
