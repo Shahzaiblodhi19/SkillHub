@@ -70,7 +70,7 @@ export default function RootLayout({ children }) {
 
   const [activeFilter, setActiveFilter] = useState("");
   const [IsRatingModal, setIsRatingModal] = useState(false)
-  const [cartItem, setcartItem] = useState(false)
+  const [cartItem, setcartItem] = useState(true)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
