@@ -17,18 +17,18 @@ export default function CartItemModal() {
             {/* Modal */}
             {context.cartItem && (
                 <div className="modal-overlay">
-                    <div className="modal-container" style={{ width: '45%' }}>
-                        <div className="d-flex align-items-center justify-content-between">
+                    <div className="modal-container cartitemmodal" style={{ width: '45%' }}>
+                        <div className="flex flex-wrap align-items-center justify-content-between">
                             <h1 className="fw-bold">Item Added to cart</h1>
                             <button className="close-btn" onClick={toggleModal2}>
                                 ✖
                             </button>
                         </div>
-                        <div className="flex items-center justify-between mt-4 pb-2">
-                            <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-between mt-4 pb-2 flex-wrap gap-4 md:gap-0">
+                            <div className="flex items-start gap-3 flex-col md:flex-row md:items-center">
                                 <FaCircleCheck fontSize={20} style={{ fill: '#5FC0ED' }} />
                                 <img className="w-16 h-16 rounded-lg" src="https://i.ibb.co/tK5s859/preview1.jpg" alt="" />
-                                <div className="info items-start text-start">
+                                <div className="info items-start text-start flex-wrap">
                                     <h1 className="fw-bold">Learning Python for Data Analysis and <br /> Visualization</h1>
                                     <p className="course-description text-sm mt-1">
                                         Learn Python Programming and how to use Python...

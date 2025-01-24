@@ -4902,11 +4902,184 @@ input:checked+.toggle-slider:before {
     flex-wrap: wrap;
   }
 
+  .responsive-tab-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .responsive-tab-container {
+    flex-direction: row;
+    align-items: flex-start !important;
+  }
+
+  .certificate-tab .section-tabs {
+    margin-top: 38px !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px !important;
+  }
+
+  .calendar-page .nav-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .instructor .nav-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
+  .bundleviewmore .payment-options {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .bundleviewmore .products-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .tooltip-display .label {
+    text-transform: uppercase !important;
+  }
+
+  .container-products .sort-button {
+    width: 100%;
+    gap: 0 !important;
+    justify-content: space-between !important;
+  }
+
+  .certificate-tab .user-info {
+    width: 100%;
+  }
+
+  .certificate-tab .section-header {
+    display: block !important;
+  }
+
+  .certificate-tab .section-header-left {
+    display: block !important;
+  }
+
+  .certificate-tab .user-stats {
+    gap: 43px !important;
+  }
+
+  .certificate-tab .section-tab {
+    padding: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .certificate-tab .section-header {
+    padding: 0 !important;
+  }
+
   .coupon-section table {
     width: 100%;
     /* Table takes full width of its container */
     border-collapse: collapse;
     /* Optional: Remove gaps between table cells */
+  }
+
+  .cartitemmodal {
+    width: 80% !important;
+  }
+
+  .bundleviewmore .popup-header {
+    flex-wrap: wrap;
+  }
+
+  .bundleviewmore {
+    padding: 0 !important;
+  }
+
+  .bundleviewmore .close-button {
+    display: none !important;
+  }
+
+  .mn {
+    margin-left: 0 !important;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .justbet {
+    justify-content: space-between !important;
+    width: 100%;
+  }
+
+  .texts {
+    font-size: 16px !important;
+  }
+
+  .mhm {
+    flex-direction: column;
+    align-items: flex-end !important;
+  }
+
+  .hehe {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+
+  }
+  .container-products .product-actions{width: 100%;margin-left: 0 !important;padding-left: 0 !important;}
+  .container-products .product-actions::before{display: none !important;}
+  .mbb{margin-bottom: 0 !important;}
+  .container-products .product-btn{width: 100% !important;}
+  .hehes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 0 !important;
+  }
+
+  .events-tab .content-header-wrapper {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .events-tab .section-title-prefix {
+    font-size: 16px !important;
+  }
+
+  .tabs-claendar {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+    margin-left: 0 !important;
+  }
+
+  .bundleviewmore .bundle-info h2 {
+    font-size: 16px !important;
+    margin-bottom: 12px;
+  }
+
+  .bundleviewmore .popup-header {
+    padding-right: 5px !important;
+  }
+
+  .bundleviewmore .stat-item {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bundleviewmore .product-stats {
+    display: grid !important;
+    overflow: hidden;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .bundleviewmore .payment-plan {
+    width: 100% !important;
+  }
+
+  .bundleviewmore .product-meta {
+    margin-top: 18px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 
 

@@ -540,7 +540,7 @@ export default function CalendarPage() {
                     <h1 className="school-name">What's on this month?</h1>
                 </header>
                 <div className="calendar-header z-0">
-                    <div className="flex items-center space-x-4 flex-wrap gap-2 md:gap-0">
+                    <div className="flex items-center space-x-4 tabs-claendar gap-2 md:gap-0">
                         {/* All Tab */}
                         <button
                             onClick={() => handleTabClick("All")}
@@ -555,19 +555,19 @@ export default function CalendarPage() {
                         {/* Upcoming Tab */}
                         <button
                             onClick={() => handleTabClick("Upcoming")}
-                            className={`flex items-center px-3 py-2 rounded-full border text-sm font-medium ${activeTab === "Upcoming"
+                            className={`flex items-center px-3 py-2 rounded-full mn border text-sm font-medium ${activeTab === "Upcoming"
                                 ? "bg-gray-900 text-white border-gray-900"
                                 : "bg-white text-gray-700 border-gray-300"
                                 }`}
                         >
-                            📢
-                            Upcoming
+                            📢 Upcoming
+                            
                         </button>
 
                         {/* Past Tab */}
                         <button
                             onClick={() => handleTabClick("Past")}
-                            className={`flex items-center px-3 py-2 rounded-full border text-sm font-medium ${activeTab === "Past"
+                            className={`flex items-center px-3 mn py-2 rounded-full border text-sm font-medium ${activeTab === "Past"
                                 ? "bg-gray-900 text-white border-gray-900"
                                 : "bg-white text-gray-700 border-gray-300"
                                 }`}

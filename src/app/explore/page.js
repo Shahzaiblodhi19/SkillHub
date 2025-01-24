@@ -1150,7 +1150,7 @@ export default function Explore() {
                                             objectFit: 'cover',
                                         }}
                                     />
-                                    <div style={{ padding: '28px 38px 10px 12px' }}>
+                                    <div className='hehes' style={{ padding: '28px 38px 10px 12px' }}>
                                         <h4
                                             className="h-13"
                                             style={{
@@ -1162,7 +1162,7 @@ export default function Explore() {
                                         </h4>
                                         <Link
                                             href='/instructor'
-                                            className="mb-4"
+                                            className="mb-4 mbb"
                                             style={{
                                                 fontSize: '13px',
                                                 marginBottom: '5px',
@@ -1194,14 +1194,14 @@ export default function Explore() {
                                 </div>
 
                                 <div
-                                    className="w-100 py-3 px-2 flex items-center justify-between"
+                                    className="w-100 py-3 px-2"
                                     style={{
                                         background: '#F9F9F9',
                                         borderBottomLeftRadius: '10px',
                                         borderBottomRightRadius: '10px',
                                     }}
                                 >
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <div className='hehe' style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         {/* Type */}
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                             {course.details.icons}
@@ -1238,7 +1238,7 @@ export default function Explore() {
                                         </div>
 
                                         {/* Rating */}
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                        <div  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"

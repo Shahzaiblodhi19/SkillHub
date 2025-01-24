@@ -1270,126 +1270,128 @@ export default function SchoolPage() {
             <div className="container">
                 <header className="header flex items-center gap-2">
                     <img className='w-12 h-12 rounded-lg mr-1' src='https://i.ibb.co/jJ4GHXP/img1.jpg' alt='img' />
-                    <h1 className="school-name">The 4D Copywriting Community</h1>
-                    <div className="relative inline-block -mb-1" onClick={(e) => e.stopPropagation()} >
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="bg-gray-200 p-1 rounded-full"
-                        >
-                            <svg viewBox="0 0 24 24" className="w-4 h-4">
-                                <path d="M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15z"></path>
-                            </svg>
-                        </button>
-
-                        {isOpen && (
-                            <div
-                                className="absolute right-0 mt-2 w-64 bg-white shadow-md rounded-lg z-50 mm "
-                                onClick={(e) => e.stopPropagation()}
+                    <div className='flex items-center'>
+                        <h1 className="school-name">The 4D Copywriting Community</h1>
+                        <div className="relative inline-block -mb-1" onClick={(e) => e.stopPropagation()} >
+                            <button
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="bg-gray-200 p-1 rounded-full"
                             >
-                                {/* Search Input */}
-                                <div className="flex items-center mx-3 mt-3 px-2.5 py-1.5 bg-gray-100 rounded-lg text-sm">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-4 h-4 text-gray-500"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        strokeWidth={2}
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M11 19a8 8 0 100-16 8 8 0 000 16zm6-6l4 4"
-                                        />
-                                    </svg>
-                                    <input
-                                        type="text"
-                                        placeholder="Search"
-                                        value={searchTerm}
-                                        onChange={(e) => setSearchTerm(e.target.value)}
-                                        className="ml-2 w-full bg-transparent border-none outline-none text-gray-700"
-                                    />
-                                </div>
+                                <svg viewBox="0 0 24 24" className="w-4 h-4">
+                                    <path d="M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15z"></path>
+                                </svg>
+                            </button>
 
-                                {/* Static "Create School" Option */}
-                                <div className="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm px-4 mt-2" onClick={() => context.setIsSchoolModal(!context.isSchoolModal)}>
-                                    <div className="bg-gray-200 w-7 h-7 flex items-center justify-center rounded-lg mr-2">
+                            {isOpen && (
+                                <div
+                                    className="absolute right-0 mt-2 w-64 bg-white shadow-md rounded-lg z-50  "
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    {/* Search Input */}
+                                    <div className="flex items-center mx-3 mt-3 px-2.5 py-1.5 bg-gray-100 rounded-lg text-sm">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
+                                            className="w-4 h-4 text-gray-500"
                                             fill="none"
                                             viewBox="0 0 24 24"
-                                            strokeWidth="2.5"
                                             stroke="currentColor"
-                                            className="w-4 h-4"
+                                            strokeWidth={2}
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                d="M12 4.75v14.5m7.25-7.25H4.75"
+                                                d="M11 19a8 8 0 100-16 8 8 0 000 16zm6-6l4 4"
                                             />
                                         </svg>
+                                        <input
+                                            type="text"
+                                            placeholder="Search"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            className="ml-2 w-full bg-transparent border-none outline-none text-gray-700"
+                                        />
                                     </div>
-                                    <span className="text-gray-700 font-medium">Create School</span>
-                                </div>
 
-                                {/* Filtered Dropdown Options */}
-                                <div className="mb-2 font-medium">
-                                    {filteredOptions.length > 0 ? (
-                                        filteredOptions.map((option) => (
-                                            <div
-                                                key={option.id}
-                                                className="flex items-center py-2 hover:bg-gray-100 rounded cursor-pointer text-sm px-4"
+                                    {/* Static "Create School" Option */}
+                                    <div className="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm px-4 mt-2" onClick={() => context.setIsSchoolModal(!context.isSchoolModal)}>
+                                        <div className="bg-gray-200 w-7 h-7 flex items-center justify-center rounded-lg mr-2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth="2.5"
+                                                stroke="currentColor"
+                                                className="w-4 h-4"
                                             >
-                                                <div
-                                                    className={`${option.icon === "palette"
-                                                        ? "bg-yellow-100"
-                                                        : option.icon === "book"
-                                                            ? "bg-blue-100"
-                                                            : "bg-green-100"
-                                                        } w-7 h-7 flex items-center justify-center rounded-lg mr-2`}
-                                                >
-                                                    {option.icon === "palette" && (
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                            className="w-4 h-4 text-yellow-500"
-                                                        >
-                                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5h2v5h-2zm0-6.5h2V7h-2v3z"></path>
-                                                        </svg>
-                                                    )}
-                                                    {option.icon === "book" && (
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                            className="w-4 h-4 text-blue-500"
-                                                        >
-                                                            <path d="M4 3H20C21.1 3 22 3.9 22 5V19C22 20.1 21.1 21 20 21H4C2.9 21 2 20.1 2 19V5C2 3.9 2.9 3 4 3ZM6 17H18V19H6V17ZM18 7H6V15H18V7Z" />
-                                                        </svg>
-                                                    )}
-                                                    {option.icon === "camera" && (
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                            className="w-4 h-4 text-green-500"
-                                                        >
-                                                            <path d="M20 5H16.83L14.41 2.59C14.21 2.39 13.92 2.29 13.63 2.29H10.37C10.08 2.29 9.79 2.39 9.59 2.59L7.17 5H4C2.9 5 2 5.9 2 7V17C2 18.1 2.9 19 4 19H20C21.1 19 22 18.1 22 17V7C22 5.9 21.1 5 20 5ZM12 16C10.34 16 9 14.66 9 13C9 11.34 10.34 10 12 10C13.66 10 15 11.34 15 13C15 14.66 13.66 16 12 16Z" />
-                                                        </svg>
-                                                    )}
-                                                </div>
-                                                <span className="text-gray-700">{option.name}</span>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <div className="text-gray-500 text-center py-2">
-                                            No results found
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M12 4.75v14.5m7.25-7.25H4.75"
+                                                />
+                                            </svg>
                                         </div>
-                                    )}
+                                        <span className="text-gray-700 font-medium">Create School</span>
+                                    </div>
+
+                                    {/* Filtered Dropdown Options */}
+                                    <div className="mb-2 font-medium">
+                                        {filteredOptions.length > 0 ? (
+                                            filteredOptions.map((option) => (
+                                                <div
+                                                    key={option.id}
+                                                    className="flex items-center py-2 hover:bg-gray-100 rounded cursor-pointer text-sm px-4"
+                                                >
+                                                    <div
+                                                        className={`${option.icon === "palette"
+                                                            ? "bg-yellow-100"
+                                                            : option.icon === "book"
+                                                                ? "bg-blue-100"
+                                                                : "bg-green-100"
+                                                            } w-7 h-7 flex items-center justify-center rounded-lg mr-2`}
+                                                    >
+                                                        {option.icon === "palette" && (
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 24 24"
+                                                                className="w-4 h-4 text-yellow-500"
+                                                            >
+                                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5h2v5h-2zm0-6.5h2V7h-2v3z"></path>
+                                                            </svg>
+                                                        )}
+                                                        {option.icon === "book" && (
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 24 24"
+                                                                className="w-4 h-4 text-blue-500"
+                                                            >
+                                                                <path d="M4 3H20C21.1 3 22 3.9 22 5V19C22 20.1 21.1 21 20 21H4C2.9 21 2 20.1 2 19V5C2 3.9 2.9 3 4 3ZM6 17H18V19H6V17ZM18 7H6V15H18V7Z" />
+                                                            </svg>
+                                                        )}
+                                                        {option.icon === "camera" && (
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 24 24"
+                                                                className="w-4 h-4 text-green-500"
+                                                            >
+                                                                <path d="M20 5H16.83L14.41 2.59C14.21 2.39 13.92 2.29 13.63 2.29H10.37C10.08 2.29 9.79 2.39 9.59 2.59L7.17 5H4C2.9 5 2 5.9 2 7V17C2 18.1 2.9 19 4 19H20C21.1 19 22 18.1 22 17V7C22 5.9 21.1 5 20 5ZM12 16C10.34 16 9 14.66 9 13C9 11.34 10.34 10 12 10C13.66 10 15 11.34 15 13C15 14.66 13.66 16 12 16Z" />
+                                                            </svg>
+                                                        )}
+                                                    </div>
+                                                    <span className="text-gray-700">{option.name}</span>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="text-gray-500 text-center py-2">
+                                                No results found
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </header>
                 <nav className="nav-tabs z-0">
@@ -1465,27 +1467,28 @@ export default function SchoolPage() {
                             <div className='col-md-8'>
                                 <div className="mt-2">
                                     {/* Header with categories */}
-                                    <div className="flex items-center gap-4 mb-6 flex-wrap font-medium text-sm">
+                                    <div className="flex items-center gap-4 mb-6 flex-wrap font-medium text-sm tabs-claendar">
                                         {categories.slice(0, showMore ? categories.length : 4).map((category) => (
                                             <button
                                                 key={category.name}
                                                 onClick={() => setActiveCategory(category.filter)}
-                                                className={`px-4 py-2 rounded-full ${activeCategory === category.filter ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-700 border-1 border-gray-300'
+                                                className={`px-4 py-2 flex justify-center items-center rounded-full ${activeCategory === category.filter ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-700 border-1 border-gray-300'
                                                     }`}
                                             >
-                                                {category.icon} {category.name}
+                                                {category.icon}
+                                                {category.name}
                                             </button>
                                         ))}
                                         <button
                                             onClick={handleShowMoreToggle}
-                                            className={`bg-white text-gray-700 border-1 border-gray-300 px-3.5 py-2 rounded-full ${!showMore ? 'ml-auto' : ''} `}
+                                            className={`bg-white text-gray-700 border-1 border-gray-300 px-4 py-2 mn rounded-full ${!showMore ? 'ml-auto' : ''} `}
                                         >
                                             {showMore ? 'Less...' : 'More...'}
-                                        </button>s
+                                        </button>
 
 
                                         <div className='search-page' style={{ position: "relative" }}>
-                                            <button className={`bg-white sort-buttons text-gray-700 border-1 border-gray-300 px-3.5 py-2 rounded-full ${FilterDropdown ? 'active' : ''} `} onClick={(e) => {
+                                            <button className={`bg-white sort-buttons text-gray-700 border-1 border-gray-300 px-4 py-2 rounded-full ${FilterDropdown ? 'active' : ''} `} onClick={(e) => {
                                                 e.stopPropagation();
                                                 setFilterDropdown(!FilterDropdown);
                                             }}
@@ -1725,7 +1728,7 @@ export default function SchoolPage() {
                         >
                             <div className='flex items-start md:flex-row md:items-center flex-col gap-3'>
                                 <img className='w-14 h-14 rounded-lg' src='https://i.ibb.co/k67BZds/community-image1.png' />
-                                <h2 className="text-2xl font-semibold text-gray-800">
+                                <h2 className="text-2xl font-semibold text-gray-800 texts">
                                     Your Progress in The 3D UX Journey
                                 </h2>
                             </div>

@@ -756,6 +756,8 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                       ) :
                         item.label === 'Preferences' ? (
                           <Link href="/preferences">{item.label}</Link>
+                        ) : item.label === 'Team' ? (
+                          <Link href="/team">{item.label}</Link>
                         ) : (
                           item.label
                         )}

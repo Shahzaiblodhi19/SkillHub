@@ -117,7 +117,7 @@ export default function BundleViewMore() {
                     className="modal-container bg-white rounded-lg shadow-lg py-2 bundleviewmore "
                     style={{ textAlign: "left", width: '80%', height: 'calc(100vh - 80px)' }}
                 >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-start md:items-center align-items-md-center justify-between">
                         <div class="popup-header">
                             <img src="https://i.ibb.co/sw4yS26/img1.jpg" alt="Bundle cover" class="bundle-image" />
                                 <div class="bundle-info">
@@ -137,7 +137,7 @@ export default function BundleViewMore() {
                                 </button>
                         </div>
 
-                        <button className="close-btn text-gray-500 hover:text-gray-800" onClick={toggleModal}>
+                        <button className="close-btn text-gray-500 hover:text-gray-800 mr-4 md:mr-0 mr-md-0 mt-4 md:mt-0 mt-md-0" onClick={toggleModal}>
                             ✖
                         </button>
                     </div>

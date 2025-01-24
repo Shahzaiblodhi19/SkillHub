@@ -105,18 +105,18 @@ const ShoppingCart = () => {
                         {cartItems.map((item, index) => (
                             <>
                                 <div className='border rounded-lg' style={{ marginTop: '54px' }} key={index}>
-                                    <div key={item.id} className="flex mx-4 items-start justify-between border-b py-4 flex-wrap gap-3 md:gap-0">
+                                    <div key={item.id} className="flex mx-4 items-start justify-between border-b py-4 flex-col md:flex-row gap-3 md:gap-0">
                                         <img src={item.image} alt={item.title} className="w-36 h-20 rounded-lg" style={{ objectFit: 'cover' }} />
                                         <div className="flex-1 ml-4 mar">
                                             <h3 className="text-md font-bold ">{item.title}</h3>
                                             <p className="text-gray-500 text-sm my-2.5">Course by {item.author}</p>
-                                            <div className='flex items-center gap-4 flex-wrap'>
+                                            <div className='flex items-center gap-4 mt-3 md:mt-0 flex-wrap '>
                                                 <span className={`label-${item.type.toLowerCase()} text-sm px-2.5 rounded-full`} style={{ fontSize: '12px' }}>{item.type}</span>
-                                                <div className="flex text-sm font-medium text-gray-600 gap-3 ">
-                                                    <span>⏳ {item.duration}</span>
-                                                    <span>📚 {item.lessons}</span>
-                                                    <span>🎓 {item.students}</span>
-                                                    <span>📊 {item.level}</span>
+                                                <div className="flex text-sm font-medium text-gray-600 gap-3  flex-wrap">
+                                                    <span className='flex items-center gap-1'>⏳ {item.duration}</span>
+                                                    <span className='flex items-center gap-1'>📚 {item.lessons}</span>
+                                                    <span className='flex items-center gap-1'>🎓 {item.students}</span>
+                                                    <span className='flex items-center gap-1'>📊 {item.level}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,12 +126,14 @@ const ShoppingCart = () => {
                                     </div>
                                     <div className='flex items-center justify-between gap-5 mx-4 flex-wrap'>
                                         <div className='flex items-center justify-between bg-gray-50 rounded-lg px-3 py-4 w-100 flex-wrap gap-3 md:gap-0'>
-                                            <div className='flex items-center gap-3 flex-wrap'>
+                                            <div className='flex justbet items-center gap-3 flex-wrap'>
                                                 <span className="font-medium rounded-md px-2.5 text-sm py-1.5 text-white" style={{ background: '#07c4ad' }}>FREE</span>
-                                                <span className='font-medium text-xl'>${item.price}</span>
-                                                <span className="text-gray-400 font-medium text-sm line-through">Was ${item.originalPrice.toFixed(2)}</span>
+                                                <div className='flex items-center gap-2 mhm'>
+                                                    <span className='font-medium text-xl'>${item.price}</span>
+                                                    <span className="text-gray-400 font-medium text-sm line-through">Was ${item.originalPrice.toFixed(2)}</span>
+                                                </div>
                                             </div>
-                                            <button className='btn text-white text-sm flex items-center gap-2.5 py-2 px-3' style={{ background: '#009ecc' }}>Checkout <svg xmlns="http://www.w3.org/2000/svg" className='w-4 h-4' viewBox="0 0 24 24" fill="none">
+                                            <button className='btn checkout-btn text-white text-sm flex items-center gap-2.5 py-2 px-3' style={{ background: '#009ecc' }}>Checkout <svg xmlns="http://www.w3.org/2000/svg" className='w-4 h-4' viewBox="0 0 24 24" fill="none">
                                                 <path d="M20.364 12.707C20.5515 12.5195 20.6568 12.2652 20.6568 12C20.6568 11.7348 20.5515 11.4805 20.364 11.293L14.707 5.636C14.6148 5.54049 14.5044 5.46431 14.3824 5.4119C14.2604 5.35949 14.1292 5.3319 13.9964 5.33075C13.8636 5.3296 13.732 5.3549 13.6091 5.40518C13.4862 5.45546 13.3745 5.52971 13.2806 5.6236C13.1867 5.7175 13.1125 5.82915 13.0622 5.95205C13.0119 6.07494 12.9866 6.20662 12.9878 6.3394C12.9889 6.47218 13.0165 6.6034 13.0689 6.7254C13.1213 6.84741 13.1975 6.95775 13.293 7.05L17.243 11H4.00001C3.7348 11 3.48044 11.1054 3.29291 11.2929C3.10537 11.4804 3.00001 11.7348 3.00001 12C3.00001 12.2652 3.10537 12.5196 3.29291 12.7071C3.48044 12.8946 3.7348 13 4.00001 13H17.243L13.293 16.95C13.1109 17.1386 13.0101 17.3912 13.0123 17.6534C13.0146 17.9156 13.1198 18.1664 13.3052 18.3518C13.4906 18.5372 13.7414 18.6424 14.0036 18.6447C14.2658 18.647 14.5184 18.5462 14.707 18.364L20.364 12.707Z" fill="white" />
                                             </svg></button>
                                         </div>
