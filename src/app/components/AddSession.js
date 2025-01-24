@@ -691,11 +691,19 @@ const AddSession = () => {
                             {/* Header Section */}
                             <div className="flex items-center w-100 ">
                                 <div className="flex items-center gap-4 w-100">
-                                    <img
-                                        src="https://i.ibb.co/k67BZds/community-image1.png"
-                                        alt="Thumbnail"
-                                        className="w-24 h-16 rounded-md object-cover"
-                                    />
+                                    <div className="flex items-start w-100">
+                                        <img
+                                            src="https://i.ibb.co/k67BZds/community-image1.png"
+                                            alt="Thumbnail"
+                                            className="w-24 h-16 rounded-md object-cover"
+                                        />
+                                        <button style={{ fontSize: '13px', fontWeight: '600',display: 'none' }} className="px-3 ml-auto mr-1 mcloses py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
+                                            <span>👁</span> Preview
+                                        </button>
+                                        <button className="p-0 mcloses " style={{display: 'none'}} onClick={() => context.setAddSessionModal(!context.AddSessionModal)}>
+                                            ✖
+                                        </button>
+                                    </div>
                                     <div className="flex flex-col gap-3 w-100 ">
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-2">
@@ -708,26 +716,26 @@ const AddSession = () => {
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex items-center mclose gap-3 mt-3 md:mt-0 mt-md-0">
                                                 <button style={{ fontSize: '13px', fontWeight: '600' }} className="px-3 py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
                                                     <span>👁</span> Preview
                                                 </button>
-                                                <button className="p-0" onClick={() => context.setAddSessionModal(!context.AddSessionModal)}>
+                                                <button className="p-0 " onClick={() => context.setAddSessionModal(!context.AddSessionModal)}>
                                                     ✖
                                                 </button>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-column flex-md-row align-items-start aling-items-md-center justify-content-between gap-3">
-                                            <div className="d-flex flex-wrap gap-3" style={{ fontSize: '13px', fontWeight: '600' }}>
+                                            <div className="d-flex flex-wrap taab gap-3" style={{ fontSize: '13px', fontWeight: '600' }}>
                                                 <button
                                                     onClick={() => setActiveTab("Outline")}
-                                                    className="pb-1.5"
+                                                    className="pb-1.5 tex"
                                                     style={{ color: activeTab === 'Outline' ? '#02C5AF' : '#000', borderBottom: activeTab === 'Outline' ? '2px solid #02C5AF' : 'none' }}
                                                 >
                                                     Outline
                                                 </button>
                                                 <button
-                                                    className="pb-1.5"
+                                                    className="pb-1.5 tex"
                                                     style={{ color: activeTab === 'Landing Page' ? '#02C5AF' : '#000', borderBottom: activeTab === 'Landing Page' ? '2px solid #02C5AF' : 'none' }}
                                                     onClick={() => setActiveTab("Landing Page")}
                                                 >
@@ -735,20 +743,20 @@ const AddSession = () => {
                                                 </button>
                                                 <button
                                                     onClick={() => setActiveTab("Pricing")}
-                                                    className="pb-1.5"
+                                                    className="pb-1.5 tex"
                                                     style={{ color: activeTab === 'Pricing' ? '#02C5AF' : '#000', borderBottom: activeTab === 'Pricing' ? '2px solid #02C5AF' : 'none' }}
                                                 >
                                                     Pricing
                                                 </button>
                                                 <button
-                                                    className="pb-1.5"
+                                                    className="pb-1.5 tex"
                                                     style={{ color: activeTab === 'Checklist' ? '#02C5AF' : '#000', borderBottom: activeTab === 'Checklist' ? '2px solid #02C5AF' : 'none' }}
                                                     onClick={() => setActiveTab("Checklist")}
                                                 >
                                                     Checklist
                                                 </button>
                                                 <button
-                                                    className="pb-1.5"
+                                                    className="pb-1.5 tex"
                                                     style={{ color: activeTab === 'Settings' ? '#02C5AF' : '#000', borderBottom: activeTab === 'Settings' ? '2px solid #02C5AF' : 'none' }}
                                                     onClick={() => setActiveTab("Settings")}
                                                 >

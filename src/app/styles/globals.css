@@ -4363,11 +4363,28 @@ input:checked+.toggle-slider:before {
     flex-wrap: wrap;
     display: flex !important;
   }
-
+.mnmn{width: 100%;}
   .mar {
     margin-left: 0 !important;
   }
-
+  .container-products .results-header .flex{
+    flex-direction: row !important;
+  }
+  .taab{
+    margin-top: 12px;
+    text-align: start !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tex{text-align: left !important;}
+  .mclose{display: none;}
+  .mcloses{display: block !important;}
+  .container-products .footer-count{display: none;}
+  .container-products .footer-count2{display: block !important;}
+  .container-products .product-actions{display: none;}
+  .container-products .product-actions2{display: flex !important;align-items: center;justify-content: flex-end !important;}
+  .mylearningpage .card-footer{padding-top: 0 !important;}
+  .popup-container .popup-header .flex{flex-wrap: wrap;}
 }
 
 /* Desktop (large screens) */
