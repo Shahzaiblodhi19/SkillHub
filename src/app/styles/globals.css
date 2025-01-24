@@ -304,7 +304,7 @@ button:focus {
   border-radius: 50px;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 20px;
+  padding: 8px 20px !important;
   outline: none;
 }
 
@@ -326,7 +326,7 @@ button:focus {
   border-radius: 50px;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 20px;
+  padding: 8px 20px !important;
   outline: none;
 }
 
