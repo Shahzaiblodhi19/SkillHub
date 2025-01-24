@@ -153,7 +153,7 @@ const ShoppingCart = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='flex items-center justify-between gap-5 mx-0 sm:mx-4 flex-wrap'>
+                                    <div className='flex items-center justify-between gap-1 mx-0 sm:mx-4 flex-wrap'>
                                         <div className='flex items-center justify-between bg-gray-50 rounded-lg px-3 py-4 w-100 flex-wrap gap-3 md:gap-0'>
                                             <div className='flex justbet items-center gap-3 flex-wrap'>
                                                 <span className="font-medium rounded-md px-2.5 text-sm py-1.5 text-white" style={{ background: '#07c4ad' }}>FREE</span>
@@ -166,11 +166,11 @@ const ShoppingCart = () => {
                                                 <path d="M20.364 12.707C20.5515 12.5195 20.6568 12.2652 20.6568 12C20.6568 11.7348 20.5515 11.4805 20.364 11.293L14.707 5.636C14.6148 5.54049 14.5044 5.46431 14.3824 5.4119C14.2604 5.35949 14.1292 5.3319 13.9964 5.33075C13.8636 5.3296 13.732 5.3549 13.6091 5.40518C13.4862 5.45546 13.3745 5.52971 13.2806 5.6236C13.1867 5.7175 13.1125 5.82915 13.0622 5.95205C13.0119 6.07494 12.9866 6.20662 12.9878 6.3394C12.9889 6.47218 13.0165 6.6034 13.0689 6.7254C13.1213 6.84741 13.1975 6.95775 13.293 7.05L17.243 11H4.00001C3.7348 11 3.48044 11.1054 3.29291 11.2929C3.10537 11.4804 3.00001 11.7348 3.00001 12C3.00001 12.2652 3.10537 12.5196 3.29291 12.7071C3.48044 12.8946 3.7348 13 4.00001 13H17.243L13.293 16.95C13.1109 17.1386 13.0101 17.3912 13.0123 17.6534C13.0146 17.9156 13.1198 18.1664 13.3052 18.3518C13.4906 18.5372 13.7414 18.6424 14.0036 18.6447C14.2658 18.647 14.5184 18.5462 14.707 18.364L20.364 12.707Z" fill="white" />
                                             </svg></button>
                                         </div>
-                                        <button className="text-gray-500 text-sm flex items-center gap-2.5" onClick={() => handleRemove(item.id)}><svg xmlns="http://www.w3.org/2000/svg" className='w-2.5 h-2.5' viewBox="0 0 12 12" fill="none">
+                                        <button className="text-gray-500 text-sm flex items-center gap-2.5 vfv" onClick={() => handleRemove(item.id)}><svg xmlns="http://www.w3.org/2000/svg" className='w-2.5 h-2.5' viewBox="0 0 12 12" fill="none">
                                             <path d="M1 1L11 11M1 11L11 1" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg> Remove</button>
                                     </div>
-                                    <div className='footer-card w-100 mt-4 bg-gray-100 px-3 pt-3 pb-36 pb-md-2 md:pb-2 pt-md-2 md:pt-2'>
+                                    <div className='footer-card w-100 mt-4 bg-gray-100 px-3 pt-3 pb-20 pb-md-2 md:pb-2 pt-md-2 md:pt-2'>
                                         <div className="footer-item gap-3 flex-wrap">
                                             <div className="footer-item-group flex-wrap">
                                                 <div className="footer-icon-wrapper flex-wrap">
