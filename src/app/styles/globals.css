@@ -4512,11 +4512,16 @@ input:checked+.toggle-slider:before {
   .popup .product-list .flex .flex {
     flex-direction: column;
   }
-
+  .about-page .community-stats{flex-wrap: unset !important;width: 100%;}
+  .members-tab .member-field{align-items: center !important;}
+  .about-page .about-section2 .course-card{width: 100% !important;}
+  .about-page .community-stat-label{font-size: 13px !important;}
+  .about-page .community-stat {padding: 12px !important; width: 100%;}
+  .about-page .community-stat-value{font-size: 14px !important;}
   .popup .product-list .flex {
     flex-direction: column;
   }
-
+  .events-tab .section-header-left{flex-direction: row;}
   .popup .selected-product .flex {
     flex-direction: column;
   }
@@ -4569,6 +4574,7 @@ input:checked+.toggle-slider:before {
     padding-right: 18px;
   }
   .container-products .footer{gap: 0 !important; padding-top: 18px !important;}
+  .calendar-page .calendar-header{justify-content: center !important;}
 }
 
 /* Desktop (large screens) */
@@ -4985,7 +4991,6 @@ input:checked+.toggle-slider:before {
 
   .calendar-page .calendar-header {
     flex-direction: column;
-    align-items: flex-start !important;
     gap: 15px;
   }
 
@@ -17069,7 +17074,7 @@ input:checked+.toggle-slider:before {
   }
 
   .level-value {
-    white-space: normal !important;
+    white-space: nowrap !important;
     font-weight: 500;
   }
 
