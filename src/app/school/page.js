@@ -1610,7 +1610,7 @@ export default function SchoolPage() {
                                                         <div className="mb-4 px-4 py-3 border-1 rounded-lg w-100 md:w-auto" style={{ background: '#f8f9fd' }}>
                                                             <p className='font-semibold mb-3'>Favourite Fitness Snacks?</p>
                                                             {post.poll.options.map((option, index) => (
-                                                                <div key={index} className="flex items-center justify-between mb-2 font-medium" style={{ width: '300px' }}>
+                                                                <div key={index} className="flex items-center justify-between mb-2 font-medium w-100">
                                                                     <span className='wid' style={{ width: '50%' }}>{option.name}</span>
                                                                     <span>{option.percentage}%</span>
                                                                 </div>
