@@ -691,16 +691,16 @@ const AddSession = () => {
                             {/* Header Section */}
                             <div className="flex items-center w-100 ">
                                 <div className="flex items-center gap-4 w-100">
-                                    <div className="flex items-start w-100">
+                                    <div className="flex items-start widths">
                                         <img
                                             src="https://i.ibb.co/k67BZds/community-image1.png"
                                             alt="Thumbnail"
                                             className="w-24 h-16 rounded-md object-cover"
                                         />
-                                        <button style={{ fontSize: '13px', fontWeight: '600',display: 'none' }} className="px-3 ml-auto mr-1 mcloses py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
+                                        <button style={{ fontSize: '13px', fontWeight: '600', display: 'none' }} className="px-3 ml-auto mr-1 mcloses py-1 bg-gray-100 border-1 text-gray-600 rounded-md flex items-center gap-2 hover:bg-gray-200">
                                             <span>👁</span> Preview
                                         </button>
-                                        <button className="p-0 mcloses " style={{display: 'none'}} onClick={() => context.setAddSessionModal(!context.AddSessionModal)}>
+                                        <button className="p-0 mcloses " style={{ display: 'none' }} onClick={() => context.setAddSessionModal(!context.AddSessionModal)}>
                                             ✖
                                         </button>
                                     </div>
@@ -1323,8 +1323,6 @@ const AddSession = () => {
                                                 </label>
                                                 <label htmlFor="viewToggle" className="toggle-label cursor-pointer fw-medium">Enable community for this course</label>
                                             </div>
-
-
                                             {/* Community Selection Section */}
                                             {isCommunityEnabled && (
                                                 <div>
@@ -1497,7 +1495,7 @@ const AddSession = () => {
                                         <div className="popup-content pb-0 pt-4.5 px-2 -lg">
                                             <div className="form-group space-y-3">
                                                 {/* Standard Certificate */}
-                                                <div className="p-4 bg-gray-100 rounded-lg">
+                                                <div className="p-0 md:p-4 p-md-4 bg-gray-100 rounded-lg">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-9 h-9 flex items-center justify-center bg-gray-200 rounded-full mb-1">
                                                             <svg
@@ -1515,7 +1513,7 @@ const AddSession = () => {
                                                                 />
                                                             </svg>
                                                         </div>
-                                                        <div className="view-toggle flex gap-2 items-center">
+                                                        <div className="view-toggle flex gap-2 items-center mt-1 mt-md-0 md:mt-0">
                                                             <label className="toggle-switch">
                                                                 <input
                                                                     type="checkbox"
@@ -1564,7 +1562,7 @@ const AddSession = () => {
                                                 </div>
 
                                                 {/* Premium Certificate */}
-                                                <div className="p-4 bg-gray-100 rounded-lg">
+                                                <div className="p-0 md:p-4 p-md-4 bg-gray-100 rounded-lg">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-9 h-9 flex items-center justify-center bg-gray-200 rounded-full mb-1">
                                                             <svg
@@ -1582,7 +1580,7 @@ const AddSession = () => {
                                                                 />
                                                             </svg>
                                                         </div>
-                                                        <div className="view-toggle flex gap-2 items-center">
+                                                        <div className="view-toggle flex gap-2 items-center mt-1 mt-md-0 md:mt-0">
                                                             <label className="toggle-switch">
                                                                 <input
                                                                     type="checkbox"
@@ -2034,7 +2032,7 @@ const AddSession = () => {
                                         <div className={`section ${isSectionExpanded === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
                                             <div className="section-header mb-0" onClick={() => setIsSectionExpanded(!isSectionExpanded)}>
                                                 <div className="header-left">
-                                                    <div className="section-title mb-0"><span className="text-sm mr-4">Section 1:</span> Course Introduction & Setup</div>
+                                                    <div className="section-title mb-0"><span className="text-sm mr-4 mb-2">Section 1:</span><br /> Course Introduction & Setup</div>
                                                 </div>
                                                 <div className="header-right">
                                                     <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2046,13 +2044,15 @@ const AddSession = () => {
                                                 <div className="section-content" >
                                                     <div className="checklist-item">
                                                         <div className="item-header" >
-                                                            <div className="item-icon">
-                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="item-icon">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div className="item-title">Course Introduction & Overview</div>
                                                             </div>
-                                                            <div className="item-title">Course Introduction & Overview</div>
                                                             <button className="fix-button">Upload Preview</button>
                                                             <div className="item-expand" onClick={() => setOutlineExpandedState11(!OutlineExpandedState11)}>
                                                                 <svg style={{
@@ -2100,13 +2100,15 @@ const AddSession = () => {
                                                     </div>
                                                     <div className="checklist-item mt-4" style={{ overflow: 'visible' }}>
                                                         <div className="item-header" >
-                                                            <div className="item-icon">
-                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="item-icon">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div className="item-title">Course Resources & Materials</div>
                                                             </div>
-                                                            <div className="item-title">Course Resources & Materials</div>
                                                             <button className="fix-button text-danger">Delete Preview</button>
                                                             <div className="item-expand" onClick={() => setOutlineExpandedState12(!OutlineExpandedState12)}>
                                                                 <svg style={{
@@ -2171,13 +2173,13 @@ const AddSession = () => {
                                                                     {!isPlaying && (
                                                                         <button
                                                                             onClick={togglePlayPause}
-                                                                            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 rounded-md"
+                                                                            className="absolute inset-0  flex items-center justify-center bg-black bg-opacity-0 rounded-md"
                                                                         >
                                                                             <svg
                                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                                 fill="#13C4CC"
                                                                                 viewBox="0 0 24 24"
-                                                                                className="w-16 h-16  rounded-full"
+                                                                                className="w-16 h-16  rounded-full mmm"
                                                                             >
                                                                                 <path
                                                                                     strokeLinecap="round"
@@ -2191,7 +2193,7 @@ const AddSession = () => {
 
                                                                 {/* Video Actions */}
                                                                 <div className="mt-3 relative" >
-                                                                    <div className="flex items-center justify-between">
+                                                                    <div className="flex items-center justify-between flex-wrap gap-2 md:gap-0">
                                                                         <button
                                                                             onClick={handleDropdownToggle}
                                                                             className="flex items-center gap-1.5 fw-medium text-sm"
@@ -2221,13 +2223,15 @@ const AddSession = () => {
                                                     </div>
                                                     <div className="checklist-item">
                                                         <div className="item-header" >
-                                                            <div className="item-icon">
-                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="item-icon">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div className="item-title">Setup & Installation Guide</div>
                                                             </div>
-                                                            <div className="item-title">Setup & Installation Guide</div>
                                                             <button className="fix-button">Upload Preview</button>
                                                             <div className="item-expand" onClick={() => setOutlineExpandedState13(!OutlineExpandedState13)}>
                                                                 <svg style={{
@@ -2279,7 +2283,7 @@ const AddSession = () => {
                                         <div className={`section ${isSectionExpanded2 === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
                                             <div className="section-header mb-0" onClick={() => setIsSectionExpanded2(!isSectionExpanded2)}>
                                                 <div className="header-left">
-                                                    <div className="section-title mb-0"><span className="text-sm mr-4">Section 2:</span> Fundamentals Concepts</div>
+                                                    <div className="section-title mb-0"><span className="text-sm mr-4 mb-2">Section 2:</span><br /> Fundamentals Concepts</div>
                                                 </div>
                                                 <div className="header-right">
                                                     <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2292,7 +2296,7 @@ const AddSession = () => {
                                         <div className={`section ${isSectionExpanded3 === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
                                             <div className="section-header mb-0" onClick={() => setIsSectionExpanded3(!isSectionExpanded3)}>
                                                 <div className="header-left">
-                                                    <div className="section-title mb-0"><span className="text-sm mr-4">Section 3:</span> Advanced Topics</div>
+                                                    <div className="section-title mb-0"><span className="text-sm mr-4 mb-2">Section 3:</span><br /> Advanced Topics</div>
                                                 </div>
                                                 <div className="header-right">
                                                     <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2304,7 +2308,7 @@ const AddSession = () => {
                                         <div className={`section ${isSectionExpanded4 === true ? 'expanded' : ''}`} style={{ overflow: 'visible' }}>
                                             <div className="section-header mb-0" onClick={() => setIsSectionExpanded4(!isSectionExpanded4)}>
                                                 <div className="header-left">
-                                                    <div className="section-title mb-0"><span className="text-sm mr-4">Section 4:</span> Advanced Course Topics & Guide</div>
+                                                    <div className="section-title mb-0"><span className="text-sm mr-4 mb-2">Section 4:</span><br /> Advanced Course Topics & Guide</div>
                                                 </div>
                                                 <div className="header-right">
                                                     <svg className="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2316,13 +2320,15 @@ const AddSession = () => {
                                                 <div className="section-content" >
                                                     <div className="checklist-item">
                                                         <div className="item-header" >
-                                                            <div className="item-icon">
-                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="item-icon">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div className="item-title">Course Advanced Topics</div>
                                                             </div>
-                                                            <div className="item-title">Course Advanced Topics</div>
                                                             <button className="fix-button">Upload Preview</button>
                                                             <div className="item-expand" onClick={() => setOutlineExpandedState4(!OutlineExpandedState4)}>
                                                                 <svg style={{
@@ -2370,13 +2376,15 @@ const AddSession = () => {
                                                     </div>
                                                     <div className="checklist-item mt-4" style={{ overflow: 'visible' }}>
                                                         <div className="item-header" >
-                                                            <div className="item-icon">
-                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="item-icon">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div className="item-title">Course PDF & Materials</div>
                                                             </div>
-                                                            <div className="item-title">Course PDF & Materials</div>
                                                             <button className="fix-button text-danger">Delete Preview</button>
                                                             <div className="item-expand" onClick={() => setOutlineExpandedState42(!OutlineExpandedState42)}>
                                                                 <svg style={{
@@ -2509,7 +2517,7 @@ const AddSession = () => {
                                                         <div className="flex items-center gap-3">
                                                             <img width={55} height={55} className="rounded" src={product.image} />
                                                             <div className="info flex flex-col">
-                                                                <div className="flex items-center gap-3">
+                                                                <div className="d-flex items-center gap-3">
                                                                     <div className="inline-flex items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 9px', borderRadius: '100px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
 
                                                                         <span className="product-type mb-1">{product.type}</span>
@@ -2521,12 +2529,21 @@ const AddSession = () => {
                                                                         </svg>
                                                                         <span className="product-price mb-1">${product.price}</span>
                                                                     </div>
+                                                                    <button
+                                                                        type="button"
+                                                                        className="nahs"
+                                                                        style={{display: 'none'}}
+                                                                        onClick={() => removeProduct(product.id)}
+                                                                    >
+                                                                        ✖
+                                                                    </button>
                                                                 </div>
                                                                 <span className="product-name mt-1" style={{ fontSize: '13px', fontWeight: '600' }}>{product.name}</span>
                                                             </div>
                                                         </div>
                                                         <button
                                                             type="button"
+                                                            className="nah"
                                                             onClick={() => removeProduct(product.id)}
                                                         >
                                                             ✖
@@ -2554,13 +2571,16 @@ const AddSession = () => {
                                                                 <div className="flex items-center gap-3">
                                                                     <img width={55} height={55} className="rounded" src={product.image} />
                                                                     <div className="">
-                                                                        <div className="inline-flex items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
-                                                                            <span className="product-type mb-1">{product.type}</span>
-                                                                        </div> <br />
+                                                                        <div className="d-flex items-center justify-between w-100 my-2 md:my-0 my-md-0">
+                                                                            <div className="inline-flex items-center gap-1" style={product.type === 'Bundle' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
+                                                                                <span className="product-type mb-1">{product.type}</span>
+                                                                            </div>
+                                                                            <span className="product-price nahs ml-auto" style={{ fontSize: '13.5px', fontWeight: '500' }}>${product.price}</span> <br />
+                                                                        </div>
                                                                         <span className="product-name" style={{ fontSize: '13px', fontWeight: '600' }}>{product.name}</span>
                                                                     </div>
                                                                 </div>
-                                                                <span className="product-price" style={{ fontSize: '13.5px', fontWeight: '500' }}>${product.price}</span>
+                                                                <span className="product-price nah" style={{ fontSize: '13.5px', fontWeight: '500' }}>${product.price}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -2584,7 +2604,7 @@ const AddSession = () => {
                                                         <div className="flex items-center gap-3">
                                                             <img width={55} height={55} className="rounded" src={product.image} />
                                                             <div className="info flex flex-col">
-                                                                <div className="flex items-center gap-3">
+                                                                <div className="d-flex items-center gap-3 my-2 my-md- md:my-0">
                                                                     <div className="inline-flex items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 9px', borderRadius: '100px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
 
                                                                         <span className="product-type mb-1">{product.type}</span>
@@ -2596,12 +2616,21 @@ const AddSession = () => {
                                                                         </svg>
                                                                         <span className="product-price mb-1">${product.price}</span>
                                                                     </div>
+                                                                    <button
+                                                                        type="button"
+                                                                        className="nahs"
+                                                                        style={{ display: 'none' }}
+                                                                        onClick={() => removeProduct2(product.id)}
+                                                                    >
+                                                                        ✖
+                                                                    </button>
                                                                 </div>
                                                                 <span className="product-name mt-1" style={{ fontSize: '13px', fontWeight: '600' }}>{product.name}</span>
                                                             </div>
                                                         </div>
                                                         <button
                                                             type="button"
+                                                            className="nah"
                                                             onClick={() => removeProduct2(product.id)}
                                                         >
                                                             ✖
@@ -2629,13 +2658,16 @@ const AddSession = () => {
                                                                 <div className="flex items-center gap-3">
                                                                     <img width={55} height={55} className="rounded" src={product.image} />
                                                                     <div className="">
-                                                                        <div className="inline-flex items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
-                                                                            <span className="product-type mb-1">{product.type}</span>
-                                                                        </div> <br />
+                                                                        <div className="d-flex items-center justify-between w-100 my-2 my-md-0 md:my-0">
+                                                                            <div className="inline-flex items-center gap-1" style={product.type === 'Subscription' ? { borderRadius: '100px', backgroundColor: '#e2e2e0', color: '#000', fontWeight: '500', fontSize: '13px', padding: '3px 14px' } : { padding: '2px 7px', backgroundColor: '#fee2e1', color: '#991b1b', fontWeight: '500', fontSize: '13px' }}>
+                                                                                <span className="product-type mb-1">{product.type}</span>
+                                                                            </div>
+                                                                            <span className="product-price nahs ml-auto" style={{ fontSize: '13.5px', fontWeight: '500' }}>${product.price}</span><br />
+                                                                        </div>
                                                                         <span className="product-name" style={{ fontSize: '13px', fontWeight: '600' }}>{product.name}</span>
                                                                     </div>
                                                                 </div>
-                                                                <span className="product-price" style={{ fontSize: '13.5px', fontWeight: '500' }}>${product.price}</span>
+                                                                <span className="product-price nah" style={{ fontSize: '13.5px', fontWeight: '500' }}>${product.price}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
