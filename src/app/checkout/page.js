@@ -106,25 +106,54 @@ const ShoppingCart = () => {
                             <>
                                 <div className='border rounded-lg' style={{ marginTop: '54px' }} key={index}>
                                     <div key={item.id} className="flex mx-4 items-start justify-between border-b py-4 flex-col md:flex-row gap-3 md:gap-0">
-                                        <img src={item.image} alt={item.title} className="w-36 h-20 rounded-lg" style={{ objectFit: 'cover' }} />
-                                        <div className="flex-1 ml-4 mar">
-                                            <h3 className="text-md font-bold ">{item.title}</h3>
-                                            <p className="text-gray-500 text-sm my-2.5">Course by {item.author}</p>
-                                            <div className='flex items-center gap-4 mt-3 md:mt-0 flex-wrap '>
-                                                <span className={`label-${item.type.toLowerCase()} text-sm px-2.5 rounded-full`} style={{ fontSize: '12px' }}>{item.type}</span>
-                                                <div className="flex text-sm font-medium text-gray-600 gap-3  flex-wrap">
-                                                    <span className='flex items-center gap-1'>⏳ {item.duration}</span>
-                                                    <span className='flex items-center gap-1'>📚 {item.lessons}</span>
-                                                    <span className='flex items-center gap-1'>🎓 {item.students}</span>
-                                                    <span className='flex items-center gap-1'>📊 {item.level}</span>
+                                        <div className='hidden sm:block'>
+                                            <img src={item.image} alt={item.title} className="sm:w-36 h-20 rounded-lg" style={{ objectFit: 'cover' }} />
+                                            <div className="flex-1 ml-4 mar">
+                                                <h3 className="text-md font-bold ">{item.title}</h3>
+                                                <p className="text-gray-500 text-sm my-2.5">Course by {item.author}</p>
+                                                <div className='flex items-center gap-4 mt-3 md:mt-0 flex-wrap '>
+                                                    <span className={`label-${item.type.toLowerCase()} text-sm px-2.5 rounded-full`} style={{ fontSize: '12px' }}>{item.type}</span>
+                                                    <div className="flex text-sm font-medium text-gray-600 gap-3  flex-wrap">
+                                                        <span className='flex items-center gap-1'>⏳ {item.duration}</span>
+                                                        <span className='flex items-center gap-1'>📚 {item.lessons}</span>
+                                                        <span className='flex items-center gap-1'>🎓 {item.students}</span>
+                                                        <span className='flex items-center gap-1'>📊 {item.level}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="bg-gray-100 rounded-full px-3 text-sm py-1 font-medium flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" className='w-3 h-3' viewBox="0 0 20 20" fill="none">
-                                            <path d="M7.15299 3.408C8.41999 1.136 9.05299 0 9.99999 0C10.947 0 11.58 1.136 12.847 3.408L13.175 3.996C13.535 4.642 13.715 4.965 13.995 5.178C14.275 5.391 14.625 5.47 15.325 5.628L15.961 5.772C18.421 6.329 19.65 6.607 19.943 7.548C20.235 8.488 19.397 9.469 17.72 11.43L17.286 11.937C16.81 12.494 16.571 12.773 16.464 13.117C16.357 13.462 16.393 13.834 16.465 14.577L16.531 15.254C16.784 17.871 16.911 19.179 16.145 19.76C15.379 20.341 14.227 19.811 11.925 18.751L11.328 18.477C10.674 18.175 10.347 18.025 9.99999 18.025C9.65299 18.025 9.32599 18.175 8.67199 18.477L8.07599 18.751C5.77299 19.811 4.62099 20.341 3.85599 19.761C3.08899 19.179 3.21599 17.871 3.46899 15.254L3.53499 14.578C3.60699 13.834 3.64299 13.462 3.53499 13.118C3.42899 12.773 3.18999 12.494 2.71399 11.938L2.27999 11.43C0.602991 9.47 -0.235009 8.489 0.0569909 7.548C0.348991 6.607 1.57999 6.328 4.03999 5.772L4.67599 5.628C5.37499 5.47 5.72399 5.391 6.00499 5.178C6.28599 4.965 6.46499 4.642 6.82499 3.996L7.15299 3.408Z" fill="#07c4ad" />
-                                        </svg> {item.rating}</button>
+                                        <div className='block sm:hidden'>
+                                            <div className='flex gap-2'>
+                                                <img src={item.image} alt={item.title} className="w-32 h-16 rounded-lg" style={{ objectFit: 'cover' }} />
+                                                <div>
+                                                    <div className='flex justify-between items-start'>
+                                                        <h5 className="flex-1 text-md font-bold">{item.title}</h5>
+                                                        <button className="bg-gray-100 rounded-full text-sm font-medium flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" className='w-3 h-3' viewBox="0 0 20 20" fill="none">
+                                                            <path d="M7.15299 3.408C8.41999 1.136 9.05299 0 9.99999 0C10.947 0 11.58 1.136 12.847 3.408L13.175 3.996C13.535 4.642 13.715 4.965 13.995 5.178C14.275 5.391 14.625 5.47 15.325 5.628L15.961 5.772C18.421 6.329 19.65 6.607 19.943 7.548C20.235 8.488 19.397 9.469 17.72 11.43L17.286 11.937C16.81 12.494 16.571 12.773 16.464 13.117C16.357 13.462 16.393 13.834 16.465 14.577L16.531 15.254C16.784 17.871 16.911 19.179 16.145 19.76C15.379 20.341 14.227 19.811 11.925 18.751L11.328 18.477C10.674 18.175 10.347 18.025 9.99999 18.025C9.65299 18.025 9.32599 18.175 8.67199 18.477L8.07599 18.751C5.77299 19.811 4.62099 20.341 3.85599 19.761C3.08899 19.179 3.21599 17.871 3.46899 15.254L3.53499 14.578C3.60699 13.834 3.64299 13.462 3.53499 13.118C3.42899 12.773 3.18999 12.494 2.71399 11.938L2.27999 11.43C0.602991 9.47 -0.235009 8.489 0.0569909 7.548C0.348991 6.607 1.57999 6.328 4.03999 5.772L4.67599 5.628C5.37499 5.47 5.72399 5.391 6.00499 5.178C6.28599 4.965 6.46499 4.642 6.82499 3.996L7.15299 3.408Z" fill="#07c4ad" />
+                                                        </svg> {item.rating}
+                                                        </button>
+                                                    </div>
+                                                    <p className="text-gray-500 text-[10px] my-2.5">Course by {item.author}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex-1 ml-4 mar">
+                                                <div className='flex flex-col gap-4 mt-3 md:mt-0'>
+                                                    <span className={`label-${item.type.toLowerCase()} text-sm px-2.5 rounded-full w-fit`} style={{ fontSize: '12px' }}>{item.type}</span>
+                                                    <div className="flex text-sm font-medium text-gray-600 gap-3  flex-wrap">
+                                                        <div className='flex justify-start gap-3 w-full'>
+                                                            <span className='flex items-center gap-1 w-1/2'>⏳ {item.duration}</span>
+                                                            <span className='flex items-center gap-1 w-1/2'>📚 {item.lessons}</span>
+                                                        </div>
+                                                        <div className='flex justify-start gap-3 w-full'>
+                                                            <span className='flex items-center gap-1 w-1/2'>🎓 {item.students}</span>
+                                                            <span className='flex items-center gap-1 w-1/2'>📊 {item.level}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className='flex items-center justify-between gap-5 mx-4 flex-wrap'>
+                                    <div className='flex items-center justify-between gap-5 mx-0 sm:mx-4 flex-wrap'>
                                         <div className='flex items-center justify-between bg-gray-50 rounded-lg px-3 py-4 w-100 flex-wrap gap-3 md:gap-0'>
                                             <div className='flex justbet items-center gap-3 flex-wrap'>
                                                 <span className="font-medium rounded-md px-2.5 text-sm py-1.5 text-white" style={{ background: '#07c4ad' }}>FREE</span>
