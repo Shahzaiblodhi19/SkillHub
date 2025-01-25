@@ -4134,7 +4134,8 @@ input:checked+.toggle-slider:before {
   height: 100%;
   fill: currentColor;
 }
-
+.notifications-panel .avatar{width: 40px !important;height: 40px !important;}
+.notifications-panel .notifications-list{height: 71vh !important;}
 
 .container-products .footer-count {
   position: relative;
@@ -4376,6 +4377,7 @@ input:checked+.toggle-slider:before {
     flex-direction: row !important;
   }
 
+  .notifications-panel .notifications-list{height: 40vh !important;}
   .widths {
     width: 100%;
   }
@@ -4512,16 +4514,41 @@ input:checked+.toggle-slider:before {
   .popup .product-list .flex .flex {
     flex-direction: column;
   }
-  .about-page .community-stats{flex-wrap: unset !important;width: 100%;}
-  .members-tab .member-field{align-items: center !important;}
-  .about-page .about-section2 .course-card{width: 100% !important;}
-  .about-page .community-stat-label{font-size: 13px !important;}
-  .about-page .community-stat {padding: 12px !important; width: 100%;}
-  .about-page .community-stat-value{font-size: 14px !important;}
+
+  .about-page .community-stats {
+    flex-wrap: unset !important;
+    width: 100%;
+  }
+
+  .members-tab .member-field {
+    align-items: center !important;
+  }
+
+  .about-page .about-section2 .course-card {
+    width: 100% !important;
+  }
+
+  .about-page .community-stat-label {
+    font-size: 13px !important;
+  }
+
+  .about-page .community-stat {
+    padding: 12px !important;
+    width: 100%;
+  }
+
+  .about-page .community-stat-value {
+    font-size: 14px !important;
+  }
+
   .popup .product-list .flex {
     flex-direction: column;
   }
-  .events-tab .section-header-left{flex-direction: row;}
+
+  .events-tab .section-header-left {
+    flex-direction: row;
+  }
+
   .popup .selected-product .flex {
     flex-direction: column;
   }
@@ -4573,8 +4600,54 @@ input:checked+.toggle-slider:before {
     padding-left: 18px;
     padding-right: 18px;
   }
-  .container-products .footer{gap: 0 !important; padding-top: 18px !important;}
-  .calendar-page .calendar-header{justify-content: center !important;}
+
+  .container-products .footer {
+    gap: 0 !important;
+    padding-top: 18px !important;
+  }
+
+  .calendar-page .calendar-header {
+    justify-content: center !important;
+  }
+
+  .notifications-panel {
+    width: 100% !important;
+  }
+
+  .header-top {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .notifications-panel .header-icons {
+    display: none;
+  }
+
+  .notifications-panel .header-controls {
+    justify-content: space-between !important;
+    width: 100%;
+  }
+
+  .notifications-panel .tab:first-child {
+    margin-left: 0 !important;
+  }
+
+  .notifications-panel .tab {
+    justify-content: space-between !important;
+  }
+
+  .notifications-panel .tabs {
+    margin-left: 0 !important;
+    row-gap: 14px !important;
+    width: 100% !important;
+    column-gap: 30px !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .notifications-panel .notihidden {
+    display: flex !important;
+  }
 }
 
 /* Desktop (large screens) */
@@ -5302,10 +5375,14 @@ input:checked+.toggle-slider:before {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
   }
+  .secpar{display: none !important;}
+  .secpars{display: block !important;}
+  .mll{margin-left: 0 !important;margin-bottom: 18px !important;}
 
 
 }
-
+.container-products .footer{padding-top: 24px !important;}
+.container-products .product-card-main{align-items: center;}
 .pager .course-tooltip {
   position: absolute !important;
   background: white;
