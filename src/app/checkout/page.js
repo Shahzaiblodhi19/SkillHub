@@ -157,7 +157,7 @@ const ShoppingCart = () => {
                                         </svg> {item.rating}
                                         </button>
                                     </div>
-                                    <div className='flex items-center justify-between gap-1 mx-0 md:mx-4 mmmm pr-4'>
+                                    <div className='flex items-center justify-between gap-1 mx-0 md:mx-4 mmmm pr-8 pl-5'>
                                         <div className='flex items-center justify-between bg-gray-50 rounded-lg px-3 py-4 w-100 flex-wrap gap-3 md:gap-0'>
                                             <div className='flex justbet items-center gap-3 flex-wrap'>
                                                 <span className="font-medium rounded-md px-2.5 text-sm py-1.5 text-white" style={{ background: '#07c4ad' }}>FREE</span>
