@@ -5383,7 +5383,9 @@ input:checked+.toggle-slider:before {
   .mmmm {
     flex-wrap: wrap !important;
   }
-
+  .learner-report .progress-widget {
+    margin-left: auto !important;
+  }
   .bundleviewmore .product-meta {
     margin-top: 18px;
     display: grid !important;

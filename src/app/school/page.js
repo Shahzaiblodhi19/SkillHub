@@ -1720,10 +1720,10 @@ export default function SchoolPage() {
                     </div>
                 }
                 {activetab === 'Courses' &&
-                    <div className="p-4 rounded-lg shadow-md" style={{ background: '#f0f7ff' }}>
+                    <div className="p-4 rounded-lg shadow-md w-100" style={{ background: '#f0f7ff' }}>
                         {/* Header Section */}
                         <div
-                            className="flex justify-between items-center cursor-pointer"
+                            className="flex justify-between items-center cursor-pointer w-100"
                             onClick={toggleSection}
                         >
                             <div className='flex items-start md:flex-row md:items-center flex-col gap-3'>
@@ -1765,9 +1765,9 @@ export default function SchoolPage() {
                                         {section.items.map((item, idx) => (
                                             <div
                                                 key={idx}
-                                                className=" bg-white p-3 flex-col w-100 rounded-lg shadow-md mb-4 flex md:flex-row justify-between items-center gap-5"
+                                                className=" bg-white p-3 flex-col w-100 rounded-lg shadow-md mb-4 flex md:flex-row justify-between items-center gap-5 w-100"
                                             >
-                                                <div className='flex items-center gap-4 flex-col md:flex-row '>
+                                                <div className='flex items-center gap-4 flex-col md:flex-row w-100'>
                                                     <div className="w-48 h-32 bg-gray-100 rounded-lg shadow-md flex flex-col">
                                                         {/* Icon */}
                                                         <div className=" flex items-center justify-center mb-4">
@@ -1828,8 +1828,8 @@ export default function SchoolPage() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center space-x-4 w-100 md:w-auto">
-                                                    <div className=" w-100 md:w-auto">
+                                                <div className="flex items-center space-x-4 w-100 md:w-auto justify-end">
+                                                    <div className="ml-auto w-100 md:w-auto">
                                                         <div className="learner-report relative rounded">
                                                             <div className="progress-widget">
                                                                 <div className="widget-header">
