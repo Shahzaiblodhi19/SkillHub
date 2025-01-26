@@ -5383,9 +5383,7 @@ input:checked+.toggle-slider:before {
   .mmmm {
     flex-wrap: wrap !important;
   }
-  .learner-report .progress-widget {
-    margin-left: auto !important;
-  }
+
   .bundleviewmore .product-meta {
     margin-top: 18px;
     display: grid !important;
@@ -5415,7 +5413,9 @@ input:checked+.toggle-slider:before {
 .container-products .product-card-main {
   align-items: center;
 }
-
+.learner-report .progress-widget {
+  margin-left: auto !important;
+}
 .pager .course-tooltip {
   position: absolute !important;
   background: white;
