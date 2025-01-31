@@ -216,9 +216,19 @@ export default function Marketing() {
         const maxValue = Math.max(...data);
         const minValue = Math.min(...data);
 
+        // Function to calculate opacity
         const getOpacity = (value) =>
             0.2 + ((value - minValue) / (maxValue - minValue)) * 0.8;
 
+        // Function to get the appropriate background color
+        const getBackgroundColor = (value) => {
+            const percentage = (value - minValue) / (maxValue - minValue);
+            const colorIntensity = Math.max(0.2, Math.min(1, percentage)); // Keep it within the range of 0.2 to 1
+            const color = `rgba(82, 212, 218, ${colorIntensity})`; // Dynamic color based on intensity
+            return color;
+        };
+
+        // Function to determine the cell index based on percentage or count
         const getCellIndex = (value) => {
             if (currentView === "percentage") {
                 if (value >= 80) return 0;
@@ -246,9 +256,7 @@ export default function Marketing() {
 
                 if (i === getCellIndex(value)) {
                     cellDiv.classList.add("active");
-                    cellDiv.style.backgroundColor = `rgba(19, 196, 204, ${getOpacity(
-                        value
-                    )})`;
+                    cellDiv.style.backgroundColor = getBackgroundColor(value);
                     cellDiv.textContent =
                         currentView === "percentage" ? `${value}%` : value.toLocaleString();
                 }
@@ -259,6 +267,7 @@ export default function Marketing() {
             grid.appendChild(column);
         });
     };
+
 
     useEffect(() => {
         updateDeliveryGrid();
@@ -500,10 +509,15 @@ export default function Marketing() {
         document.execCommand("redo", false, null);
     };
 
+    const [showOptions, setShowOptions] = useState(null);
+
+    const handleOptionsClick = (emailId) => {
+        setShowOptions(prevState => (prevState === emailId ? null : emailId)); // Toggle visibility based on email.id
+    };
 
     return (
-        <div className="container-fluid marketing-page" >
-            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="container-fluid marketing-page" onClick={() => setShowOptions(false)}>
+            <div className="grid gap-3 md:grid-cols-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {statsData.map((stat, index) => (
                     <div
                         key={index}
@@ -543,11 +557,8 @@ export default function Marketing() {
                                 </div>
                             </div>
                             <div className="icon-container">
-                                <svg fill="none" viewBox="0 0 32 32" width="24" height="24">
-                                    <path
-                                        fill="#13c4cc"
-                                        d="M9.33341 6.33333C8.89139 6.33333 8.46746 6.50892 8.1549 6.82148C7.84234 7.13404 7.66675 7.55797 7.66675 7.99999V20.734C8.17815 20.473 8.74858 20.3333 9.33341 20.3333H18C18.5523 20.3333 19 20.781 19 21.3333C19 21.8856 18.5523 22.3333 18 22.3333H9.33341C8.89139 22.3333 8.46746 22.5089 8.1549 22.8215C7.84234 23.134 7.66675 23.558 7.66675 24C7.66675 24.442 7.84234 24.8659 8.1549 25.1785C8.46746 25.4911 8.89139 25.6667 9.33341 25.6667H18C18.5523 25.6667 19 26.1144 19 26.6667C19 27.2189 18.5523 27.6667 18 27.6667H9.33341C8.36095 27.6667 7.42832 27.2804 6.74069 25.5927C6.05306 25.9051 5.66675 24.9725 5.66675 24V7.99999C5.66675 7.02753 6.05306 6.0949 6.74069 5.40727C7.42832 4.71964 8.36095 4.33333 9.33341 4.33333H25.3334C25.8857 4.33333 26.3334 4.78104 26.3334 5.33333V12.9998C26.3334 13.5521 25.8857 13.9998 25.3334 13.9998C24.7811 13.9998 24.3334 13.5521 24.3334 12.9998V6.33333H9.33341Z"
-                                    />
+                                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path fill="#13c4cc" d="M3.71863 3.71841C4.25138 3.18562 4.97399 2.88635 5.72738 2.88635H18.2728C19.0262 2.88635 19.7488 3.18561 20.2816 3.71841C20.8145 4.25117 21.1137 4.97382 21.1137 5.72726V18.2727C21.1137 19.0261 20.8145 19.7487 20.2817 20.2815C20.2817 20.2815 20.2817 20.2815 20.2816 20.2815C20.2816 20.2815 20.2816 20.2816 20.2816 20.2816C19.7488 20.8144 19.0262 21.1136 18.2728 21.1136H5.72738C4.97394 21.1136 4.25129 20.8143 3.71853 20.2815C3.18574 19.7487 2.88647 19.0261 2.88647 18.2727V5.72726C2.88647 4.97387 3.18574 4.25126 3.71853 3.71851C3.71856 3.71848 3.7186 3.71844 3.71863 3.71841ZM5.72738 4.38635C5.37173 4.38635 5.03068 4.52763 4.77929 4.77907L4.77919 4.77917C4.52776 5.03056 4.38647 5.37161 4.38647 5.72726V18.2727C4.38647 18.6284 4.52776 18.9694 4.77919 19.2208L4.77929 19.2209C5.03068 19.4723 5.37173 19.6136 5.72738 19.6136H18.2728C18.6285 19.6136 18.9695 19.4723 19.2209 19.2209L19.221 19.2208C19.4725 18.9694 19.6137 18.6284 19.6137 18.2727V5.72726C19.6137 5.37161 19.4725 5.03056 19.221 4.77917L19.2209 4.77907C18.9695 4.52764 18.6285 4.38635 18.2728 4.38635H5.72738ZM16.1819 7.06817C16.5961 7.06817 16.9319 7.40396 16.9319 7.81817V16.1818C16.9319 16.596 16.5961 16.9318 16.1819 16.9318C15.7677 16.9318 15.4319 16.596 15.4319 16.1818V7.81817C15.4319 7.40396 15.7677 7.06817 16.1819 7.06817ZM12.0001 10.2045C12.4143 10.2045 12.7501 10.5403 12.7501 10.9545V16.1818C12.7501 16.596 12.4143 16.9318 12.0001 16.9318C11.5859 16.9318 11.2501 16.596 11.2501 16.1818V10.9545C11.2501 10.5403 11.5859 10.2045 12.0001 10.2045ZM7.81829 13.3409C8.23251 13.3409 8.56829 13.6767 8.56829 14.0909V16.1818C8.56829 16.596 8.23251 16.9318 7.81829 16.9318C7.40408 16.9318 7.06829 16.596 7.06829 16.1818V14.0909C7.06829 13.6767 7.40408 13.3409 7.81829 13.3409Z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                 </svg>
                             </div>
                         </div>
@@ -612,7 +623,7 @@ export default function Marketing() {
                             </div>
                         </div>
 
-                        <div className="delivery-controls">
+                        <div className="delivery-controls justify-end" style={{ justifyContent: 'flex-end' }}>
                             <button
                                 className={`control-button ${currentView === "percentage" ? "active" : ""
                                     }`}
@@ -776,15 +787,14 @@ export default function Marketing() {
 
 
                     {/* Email Table */}
-                    <div className="overflow-x-auto">
-                        <table className="email-table w-full min-w-max">
+                    <div className="w-full">
+                        <table className="email-table w-full hidden md:table">
                             <thead>
                                 <tr>
                                     <th>
                                         <div className="checkbox-wrapper">
                                             <div
-                                                className={`custom-checkbox2 ${selectedEmails.length === paginatedEmails.length ? "checked" : ""
-                                                    }`}
+                                                className={`custom-checkbox2 ${selectedEmails.length === paginatedEmails.length ? "checked" : ""}`}
                                                 role="checkbox"
                                                 aria-checked={selectedEmails.length === paginatedEmails.length}
                                                 onClick={handleSelectAll}
@@ -801,17 +811,15 @@ export default function Marketing() {
                             </thead>
                             <tbody>
                                 {paginatedEmails.map((email) => (
-                                    <tr key={email.id} className="main-row">
+                                    <tr key={email.id} className="main-row dir">
                                         <td>
                                             <div className="checkbox-wrapper">
                                                 <div
-                                                    className={`custom-checkbox2 ${selectedEmails.includes(email.id) ? "checked" : ""
-                                                        }`}
+                                                    className={`custom-checkbox2 ${selectedEmails.includes(email.id) ? "checked" : ""}`}
                                                     role="checkbox"
                                                     aria-checked={selectedEmails.includes(email.id)}
                                                     onClick={() => handleCheckboxChange(email.id)}
                                                 />
-
                                             </div>
                                         </td>
                                         <td>
@@ -826,19 +834,22 @@ export default function Marketing() {
                                             </div></td>
                                         <td className="email-title">{email.title}</td>
                                         <td>
-                                            <span className={`status-pill status-${email.status.toLowerCase()} tooltips`} data-tooltip="Sent on Fri, Dec 25, 2024 4:22 PM">{email.status}</span>
+                                            <span className={`status-pill status-${email.status.toLowerCase()} tooltips`} data-tooltip={`${email.status}`}>
+                                                {email.status}
+                                            </span>
                                         </td>
                                         <td>
                                             <div className="products-avatars">
                                                 {email.products.map((product, index) => (
-                                                    <div className="tooltips gap-0 p-0" data-tooltip={`${product.name}`}>
-                                                        <div className="avatar">
-                                                            <div key={index}  >
-                                                                <img src={product.image} alt={product.name} />
-                                                            </div>
+                                                    <div className="tooltips gap-0 p-0 z-50" data-tooltip={`${product.name}`} key={index}>
+                                                        <div className="avatar flex items-center gap-2">
+                                                            <img src={product.image} alt={product.name} />
                                                         </div>
                                                     </div>
                                                 ))}
+                                                <div className='p-1 px-2 rounded-full avatar' style={{ background: '#f0f3fa', fontSize: '12px', color: '#6f8692', fontWeight: 'bold' }}>
+                                                    +3
+                                                </div>
                                             </div>
                                         </td>
                                         <td>
@@ -861,16 +872,111 @@ export default function Marketing() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <button className="options-button"><svg viewBox="0 0 24 24">
-                                                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                                            </svg></button>
+                                        <td className="relative">
+                                            <button className="options-button p-2" onClick={(e) => { handleOptionsClick(email.id); e.stopPropagation() }}>
+                                                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                                                    <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                                </svg>
+                                            </button>
+                                            {showOptions === email.id && (
+                                                <div onClick={(e) => e.stopPropagation()} className="absolute right-0 mt-2 w-48 bg-white shadow-sm rounded-lg max-h-60 overflow-visible z-50">
+                                                    <div className="p-2">
+                                                        {email.status !== "SENT" && (
+                                                            <>
+                                                                <button className="dropdown-option py-2 px-4 w-full text-left text-gray-700 hover:bg-gray-100">Delete</button>
+                                                                <button className="dropdown-option py-2 px-4 w-full text-left text-gray-700 hover:bg-gray-100">Reschedule</button>
+                                                                <button className="dropdown-option py-2 px-4 w-full text-left text-gray-700 hover:bg-gray-100">Preview</button>
+                                                                <button className="dropdown-option py-2 px-4 w-full text-left text-gray-700 hover:bg-gray-100">Archive</button>
+                                                            </>
+                                                        )}
+                                                        {email.status === "SENT" && (
+                                                            <button className="dropdown-option py-2 px-4 w-full text-left text-gray-700 hover:bg-gray-100">Delete</button>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
-                        </table></div>
+                        </table>
 
+                        {/* Mobile View */}
+                        <div className="block md:hidden">
+                            {paginatedEmails.map((email) => (
+                                <div key={email.id} className="email-card border rounded-lg p-4 mb-4 shadow-md">
+                                    <div className='flex items-center gap-3'>
+                                        <div className='tooltips' data-tooltip={`${email.type}`}>
+                                            <div class={`email-type-icon type-${email.type.toLowerCase()}`} >
+                                                {email.type === 'Marketing' ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M5.333 0a.667.667 0 0 0 0 1.333h5.334a.667.667 0 1 0 0-1.333H5.333ZM2.667 3.333c0-.368.298-.666.666-.666h9.334a.667.667 0 1 1 0 1.333H3.333a.667.667 0 0 1-.666-.667ZM1.333 6c0-.368.299-.667.667-.667h12c.368 0 .667.299.667.667v9.333A.667.667 0 0 1 14 16H2a.667.667 0 0 1-.667-.667V6Zm1.334.667v8h10.666v-8H2.667Z" />
+                                                </svg> : email.type === 'Announcement' ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" d="M6.759 3H17.24c.805 0 1.47 0 2.01.044.563.046 1.08.145 1.565.392a4 4 0 0 1 1.748 1.748c.239.468.339.966.387 1.505a1 1 0 0 1 .03.5C23 7.64 23 8.16 23 8.76v6.482c0 .805 0 1.47-.044 2.01-.046.563-.145 1.08-.392 1.565a4 4 0 0 1-1.748 1.748c-.485.247-1.002.346-1.564.392-.541.044-1.206.044-2.01.044H6.758c-.805 0-1.47 0-2.01-.044-.563-.046-1.08-.145-1.565-.392a4 4 0 0 1-1.748-1.748c-.247-.485-.346-1.002-.392-1.564C1 16.71 1 16.046 1 15.242V8.758c0-.599 0-1.12.018-1.57a1 1 0 0 1 .031-.5c.048-.54.148-1.037.387-1.505a44 0 0 1 1.748-1.748c.485-.247 1.002-.346 1.564-.392C5.29 3 5.954 3 6.758 3M3 8.92v6.28c0 .857 0 1.439.038 1.889.035.438.1.663.18.819a2 2 0 0 0 .874.874c.156.08.38.145.82.18C5.361 19 5.942 19 6.8 19h10.4c.857 0 1.439 0 1.889-.038.438-.035.663-.1.819-.18a2 2 0 0 0 .874-.874c.08-.156.145-.38.18-.819.037-.45.038-1.032.038-1.889V8.92l-6.591 4.615-.116.08c-.544.383-1.023.719-1.567.855a3 3 0 0 1-1.452 0c-.544-.136-1.022-.472-1.567-.854l-.116-.081zm17.917-2.383-7.655 5.36c-.73.51-.884.598-1.02.632a1 1 0 0 1-.484 0c-.136-.034-.29-.123-1.02-.633L3.083 6.537c.036-.207.082-.34.135-.445a2 2 0 0 1 .874-.874c.156-.08.38-.145.82-.18C5.361 5 5.942 5 6.8 5h10.4c.857 0 1.439 0 1.889.038.438.035.663.1.819.18a2 2 0 0 1 .874.874c.053.104.1.238.135.445"></path>
+                                                </svg> : ''}
+                                            </div>
+                                        </div>
+                                        <div className='info'>
+                                            <span className="email-title">{email.title}</span>
+                                            <div className='flex items-center gap-3'>
+                                                <span className={`status-pill status-${email.status.toLowerCase()} tooltips`} data-tooltip={`${email.status}`}>
+                                                    {email.status}
+                                                </span>
+                                                <div className="flex gap-2 mt-2">
+                                                    {email.products.map((product, index) => (
+                                                        <div key={index} className="avatar">
+                                                            <img src={product.image} alt={product.name} className="w-8 h-8 rounded-full" />
+                                                        </div>
+                                                    ))}
+                                                    <div className="p-1 px-2 rounded-full avatar bg-gray-200 text-xs font-semibold">+3</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="email-stats mt-3" style={{ gridTemplateColumns: '2fr 2fr',gap: '20px' }}>
+                                        <div className="stat-item">
+                                            <span className="stat-label">Sent</span>
+                                            <span className="stat-number">{email.stats.sent}</span>
+                                        </div>
+                                        <div className="stat-item">
+                                            <span className="stat-label">Opened</span>
+                                            <span className="stat-number">{email.stats.opened}</span>
+                                        </div>
+                                        <div className="stat-item">
+                                            <span className="stat-label">Clicked</span>
+                                            <span className="stat-number">{email.stats.clicked}</span>
+                                        </div>
+                                        <div className="stat-item">
+                                            <span className="stat-label">Unsubscribed</span>
+                                            <span className="stat-number">{email.stats.unsubscribed}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-2 text-end">
+                                        <button className="options-button ml-auto" style={{marginLeft: 'auto'}} onClick={(e) => { handleOptionsClick(email.id); e.stopPropagation() }}>
+                                            <svg viewBox="0 0 24 24" className="w-6 h-6">
+                                                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                            </svg>
+                                        </button>
+                                        {showOptions === email.id && (
+                                            <div className="mt-2 bg-white shadow-md rounded-lg p-2">
+                                                {email.status !== "SENT" && (
+                                                    <>
+                                                        <button className="dropdown-option py-2 w-full text-left">Delete</button>
+                                                        <button className="dropdown-option py-2 w-full text-left">Reschedule</button>
+                                                        <button className="dropdown-option py-2 w-full text-left">Preview</button>
+                                                        <button className="dropdown-option py-2 w-full text-left">Archive</button>
+                                                    </>
+                                                )}
+                                                {email.status === "SENT" && (
+                                                    <button className="dropdown-option py-2 w-full text-left">Delete</button>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     <div className="container-products pt-2 pb-0">
                         <div className='footer mt-1 p-0 flex flex-col md:flex-row gap-4 md:gap-0 pt-4 pb-0 mb-0'>
                             <div className='footer-left'>
@@ -929,7 +1035,7 @@ export default function Marketing() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             {isModalOpen && (
                 <div className={`modal ${isModalOpen === true ? 'active' : ''}`}>
@@ -1199,7 +1305,8 @@ export default function Marketing() {
                         </div>
                     </div>
                 </div>
-            )}
+            )
+            }
         </div >
     );
 }

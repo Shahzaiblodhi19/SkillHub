@@ -143,21 +143,7 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
             {/* Panel Header */}
             <div className="panel-header">
                 <div className="header-top">
-                    <div className='flex items-center justify-between w-100'>
                         <h1 className="panel-title">Notifications</h1>
-                        <div className='flex items-center gap-2 notihidden' style={{display: 'none'}}>
-                            <div className="header-icon ">
-                                <svg className="tabler-icon tabler-icon-settings" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path></svg>
-                            </div>
-                            <div onClick={() => setIsPanelActive(false)} className="header-icon close-icon">
-                                <svg fill="none" viewBox="0 0 15 15">
-                                    <path clipRule="evenodd" fillRule="evenodd" fill="currentColor" d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
                     <div className="header-controls">
                         <label className="hide-read">
                             Hide Read
@@ -257,7 +243,7 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             height={40}
                                         />
                                     </div>
-                                    <div className="notification-content">
+                                    <div className="notification-content relative">
                                         <div className="notification-text" style={{ fontSize: '12.4px' }}>
                                             <strong>{notification.name}</strong> {notification.text}
                                             <a href={notification.link} className="notification-link ml-2">
@@ -280,24 +266,26 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             <span>{notification.time.date}</span>
                                             <span>{notification.time.timeAgo}</span>
                                         </div>
-                                    </div>
-                                    <div className="notification-indicators">
-                                        {notification.isRead === false ?
-                                            <div className="unread-indicator"></div> : ''}
-                                        <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
-                                            <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
-                                                <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
-                                            </svg>
+                                        <div className="notification-indicators">
+
+                                            <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
+                                                <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
+                                                    <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
+                                                </svg>
+                                            </div>
+                                            <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
+                                                <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            {notification.isRead === false ?
+                                                <div className="unread-indicator"></div> : ''}
                                         </div>
-                                        <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
-                                            <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
-                                                ></path>
-                                            </svg>
-                                        </div>
                                     </div>
+
                                 </div>
                             ))}
                     </div>
@@ -344,7 +332,7 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             height={40}
                                         />
                                     </div>
-                                    <div className="notification-content">
+                                    <div className="notification-content relative">
                                         <div className="notification-text" style={{ fontSize: '12.4px' }}>
                                             <strong>{notification.name}</strong> {notification.text}
                                             <a href={notification.link} className="notification-link ml-2">
@@ -367,22 +355,23 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             <span>{notification.time.date}</span>
                                             <span>{notification.time.timeAgo}</span>
                                         </div>
-                                    </div>
-                                    <div className="notification-indicators">
-                                        {notification.isRead === false ?
-                                            <div className="unread-indicator"></div> : ''}
-                                        <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
-                                            <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
-                                                <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
-                                            </svg>
-                                        </div>
-                                        <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
-                                            <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
-                                                ></path>
-                                            </svg>
+
+                                        <div className="notification-indicators">
+                                            <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
+                                                <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
+                                                    <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
+                                                </svg>
+                                            </div>
+                                            <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
+                                                <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            {notification.isRead === false ?
+                                                <div className="unread-indicator"></div> : ''}
                                         </div>
                                     </div>
                                 </div>
@@ -431,7 +420,7 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             height={40}
                                         />
                                     </div>
-                                    <div className="notification-content">
+                                    <div className="notification-content relative">
                                         <div className="notification-text" style={{ fontSize: '12.4px' }}>
                                             <strong>{notification.name}</strong> {notification.text}
                                             <a href={notification.link} className="notification-link ml-2">
@@ -454,22 +443,23 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             <span>{notification.time.date}</span>
                                             <span>{notification.time.timeAgo}</span>
                                         </div>
-                                    </div>
-                                    <div className="notification-indicators">
-                                        {notification.isRead === false ?
-                                            <div className="unread-indicator"></div> : ''}
-                                        <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
-                                            <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
-                                                <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
-                                            </svg>
-                                        </div>
-                                        <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
-                                            <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
-                                                ></path>
-                                            </svg>
+
+                                        <div className="notification-indicators">
+                                            <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
+                                                <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
+                                                    <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
+                                                </svg>
+                                            </div>
+                                            <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
+                                                <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            {notification.isRead === false ?
+                                                <div className="unread-indicator"></div> : ''}
                                         </div>
                                     </div>
                                 </div>
@@ -518,7 +508,7 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             height={40}
                                         />
                                     </div>
-                                    <div className="notification-content">
+                                    <div className="notification-content relative">
                                         <div className="notification-text" style={{ fontSize: '12.4px' }}>
                                             <strong>{notification.name}</strong> {notification.text}
                                             <a href={notification.link} className="notification-link ml-2">
@@ -541,22 +531,23 @@ const NotificationsPanel = ({ setIsPanelActive, isPanelActive }) => {
                                             <span>{notification.time.date}</span>
                                             <span>{notification.time.timeAgo}</span>
                                         </div>
-                                    </div>
-                                    <div className="notification-indicators">
-                                        {notification.isRead === false ?
-                                            <div className="unread-indicator"></div> : ''}
-                                        <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
-                                            <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
-                                                <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
-                                            </svg>
-                                        </div>
-                                        <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
-                                            <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
-                                                ></path>
-                                            </svg>
+
+                                        <div className="notification-indicators">
+                                            <div onClick={() => handleMarkAsRead(notification.id)} className="mark-read">
+                                                <svg viewBox="0 0 256 256" fill="currentColor" height="100%" width="100%">
+                                                    <path fill={notification.isRead === true ? '#009ECB' : 'currentColor'} d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
+                                                </svg>
+                                            </div>
+                                            <div onClick={() => handleDismissNotification(notification.id)} className="dismiss-notification">
+                                                <svg fill="none" viewBox="0 0 12 12" width="12" height="12">
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="M7.46875 6L10.8438 2.65625C11.0312 2.46875 11.0312 2.125 10.8438 1.9375L10.0625 1.15625C9.875 0.96875 9.53125 0.96875 9.34375 1.15625L6 4.53125L2.625 1.15625C2.4375 0.96875 2.09375 0.96875 1.90625 1.15625L1.125 1.9375C0.9375 2.125 0.9375 2.46875 1.125 2.65625L4.5 6L1.125 9.375C0.9375 9.5625 0.9375 9.90625 1.125 10.0938L1.90625 10.875C2.09375 11.0625 2.4375 11.0625 2.625 10.875L6 7.5L9.34375 10.875C9.53125 11.0625 9.875 11.0625 10.0625 10.875L10.8438 10.0938C11.0312 9.90625 11.0312 9.5625 10.8438 9.375L7.46875 6Z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            {notification.isRead === false ?
+                                                <div className="unread-indicator"></div> : ''}
                                         </div>
                                     </div>
                                 </div>

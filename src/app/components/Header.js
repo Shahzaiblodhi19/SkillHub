@@ -22,6 +22,36 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  // State to hold the selected values of the filters
+  const [language, setLanguage] = useState("");
+  const [filterType, setFilterType] = useState("");
+  const [sortBy, setSortBy] = useState("");
+
+  // Reset the filters to their default values
+  const handleReset = () => {
+    setLanguage("");
+    setFilterType("");
+    setSortBy("");
+  };
+
+  // Handle changes in each select filter
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    // Trigger your filter logic here
+    console.log(`Language selected: ${e.target.value}`);
+  };
+
+  const handleFilterTypeChange = (e) => {
+    setFilterType(e.target.value);
+    // Trigger your filter logic here
+    console.log(`Filter type selected: ${e.target.value}`);
+  };
+
+  const handleSortByChange = (e) => {
+    setSortBy(e.target.value);
+    // Trigger your filter logic here
+    console.log(`Sort by selected: ${e.target.value}`);
+  };
 
   // Menu items with labels, keys, and their SVG icons
   const menuItems = [
@@ -74,7 +104,6 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
   ];
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    setShowSuggestions(true);
   };
 
   const handleClose = () => {
@@ -297,11 +326,19 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
       filteredCommunities.length > 0;
 
     return (
-      <div className="results-section">
+      <div className="results-section pr-4 pb-0" style={{ overflowY: 'auto', height: selectedItem === 'all' || showCourses && showSessions && showCommunities ? '450px' : '100%' }}>
         {/* Render Courses */}
         {showCourses && (
           <div className="results-category">
-            <h3 className="category-title">Courses</h3>
+            <div class="category-header">
+              <div class="category-icon-wrapper">
+                <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                  <path fill="currentColor" d="M7 4.75C6.66848 4.75 6.35054 4.8817 6.11612 5.11612C5.8817 5.35054 5.75 5.66848 5.75 6V15.5505C6.13355 15.3548 6.56137 15.25 7 15.25H18.25V4.75H7ZM19.75 4C19.75 3.58579 19.4142 3.25 19 3.25H7C6.27065 3.25 5.57118 3.53973 5.05546 4.05546C4.53973 4.57118 4.25 5.27065 4.25 6V18C4.25 18.7293 4.53973 19.4288 5.05546 19.9445C5.57118 20.4603 6.27065 20.75 7 20.75H19C19.4142 20.75 19.75 20.4142 19.75 20V4ZM18.25 16.75H7C6.66848 16.75 6.35054 16.8817 6.11612 17.1161C5.8817 17.3505 5.75 17.6685 5.75 18C5.75 18.3315 5.8817 18.6495 6.11612 18.8839C6.35054 19.1183 6.66848 19.25 7 19.25H18.25V16.75ZM8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H15C15.4142 7.25 15.75 7.58579 15.75 8C15.75 8.41421 15.4142 8.75 15 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg>
+
+              </div>
+              <h3 class="category-title">Courses</h3>
+            </div>
             <div className="results-list">
               {filteredCourses.map((course, index) => (
                 <div key={index} className="result-item">
@@ -310,6 +347,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                     <h4 className="result-title">{course.title}</h4>
                     <p>{course.author}</p>
                   </div>
+                  <Link href={'/coursedetails'} class="watch-button">VIEW</Link>
                 </div>
               ))}
             </div>
@@ -319,7 +357,14 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
         {/* Render Sessions */}
         {showSessions && (
           <div className="results-category">
-            <h3 className="category-title">Sessions</h3>
+            <div class="category-header">
+              <div class="category-icon-wrapper">
+                <svg class="category-icon" fill="none" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="category-title">Sessions</h3>
+            </div>
             <div className="results-list">
               {filteredSessions.map((session, index) => (
                 <div key={index} className="result-item">
@@ -328,6 +373,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                     <h4 className="result-title">{session.title}</h4>
                     <p>{session.author}</p>
                   </div>
+                  <Link href={'/coursedetails'} class="watch-button">VIEW</Link>
                 </div>
               ))}
             </div>
@@ -337,7 +383,15 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
         {/* Render Communities */}
         {showCommunities && (
           <div className="results-category">
-            <h3 className="category-title">Communities</h3>
+            <div class="category-header">
+              <div class="category-icon-wrapper">
+                <svg class="category-icon" viewBox="0 0 20 20">
+                  <path fill="currentColor" d="M9.16659 3.25C9.14448 3.25 9.12329 3.25878 9.10766 3.27441C9.09203 3.29004 9.08325 3.31123 9.08325 3.33333V8.33333C9.08325 8.35543 9.09203 8.37663 9.10766 8.39226C9.12329 8.40789 9.14448 8.41667 9.16659 8.41667H14.9999C15.1988 8.41667 15.3896 8.49569 15.5302 8.63634L16.7499 9.85601V3.33333C16.7499 3.31123 16.7411 3.29003 16.7255 3.27441C16.7099 3.25878 16.6887 3.25 16.6666 3.25H9.16659ZM8.047 2.21375C8.34393 1.91682 8.74666 1.75 9.16659 1.75H16.6666C17.0865 1.75 17.4892 1.91681 17.7862 2.21375C18.0831 2.51068 18.2499 2.91341 18.2499 3.33333V11.6667C18.2499 11.97 18.0672 12.2435 17.7869 12.3596C17.5067 12.4757 17.1841 12.4115 16.9696 12.197L14.6893 9.91667H9.16659C8.74666 9.91667 8.34393 9.74985 8.047 9.45292C7.75007 9.15599 7.58325 8.75326 7.58325 8.33333V3.33333C7.58325 2.91341 7.75007 2.51068 8.047 2.21375Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                  <path fill="currentColor" d="M3.33333 9.08333C3.31123 9.08333 3.29004 9.09211 3.27441 9.10774C3.25878 9.12336 3.25 9.14456 3.25 9.16666V15.6893L4.46967 14.4697C4.61032 14.329 4.80109 14.25 5 14.25H10.8333C10.8554 14.25 10.8766 14.2412 10.8923 14.2256C10.9079 14.21 10.9167 14.1888 10.9167 14.1667V12.5C10.9167 12.0858 11.2525 11.75 11.6667 11.75C12.0809 11.75 12.4167 12.0858 12.4167 12.5V14.1667C12.4167 14.5866 12.2499 14.9893 11.9529 15.2862C11.656 15.5832 11.2533 15.75 10.8333 15.75H5.31066L3.03033 18.0303C2.81583 18.2448 2.49324 18.309 2.21299 18.1929C1.93273 18.0768 1.75 17.8033 1.75 17.5V9.16666C1.75 8.74674 1.91682 8.34401 2.21375 8.04708C2.51068 7.75014 2.91341 7.58333 3.33333 7.58333H5C5.41421 7.58333 5.75 7.91911 5.75 8.33333C5.75 8.74754 5.41421 9.08333 5 9.08333H3.33333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="category-title">Communities</h3>
+            </div>
             <div className="results-list">
               {filteredCommunities.map((community, index) => (
                 <div key={index} className="result-item">
@@ -346,6 +400,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                     <h4 className="result-title">{community.title}</h4>
                     <p>{community.author}</p>
                   </div>
+                  <Link href={'/coursedetails'} class="watch-button">VIEW</Link>
                 </div>
               ))}
             </div>
@@ -354,7 +409,7 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
 
         {/* Fallback for no matches */}
         {!showCourses && !showSessions && !showCommunities && (
-          <p>No results found</p>
+          <p className="text-center w-100 mb-2">No results found</p>
         )}
       </div>
     );
@@ -364,22 +419,32 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
 
   const renderTopics = () => (
     <div className="topics-section">
-      <h3 className="section-title">Topics</h3>
+      <div class="topics-header">
+        <div class="topics-icon-wrapper">
+          <svg class="topics-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 4h6v6h-6z" />
+            <path d="M14 4h6v6h-6z" />
+            <path d="M4 14h6v6h-6z" />
+            <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+          </svg>
+        </div>
+        <h3 class="section-title">Topics</h3>
+      </div>
       <div className="topics-grid">
         {topics.map((topic, index) => (
-          <div
-            key={index}
-            className="topic-item"
-            onClick={() => {
-              setSearchValue(topic.toLowerCase());
-              setShowTrending(false);
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 1310 1310" fill="none">
-              <path d="M1310 748.571H748.571V1310H561.429V748.571H0V561.429H561.429V0H748.571V561.429H1310V748.571Z" fill="black" />
-            </svg>
-            <span>{topic}</span>
-          </div>
+
+          <Link href={`/search?query=${encodeURIComponent(topic.toLowerCase())}`} class="topic-item" onClick={() => {
+            setSearchValue(topic.toLowerCase());
+          }}>
+            <span
+            >{topic}</span>
+            <div class="topic-icon-wrapper">
+              <svg class="topic-plus-icon" viewBox="0 0 448 512">
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" fill="white"></path>
+              </svg>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
@@ -426,24 +491,48 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
             </svg>
           </button>
           {!isSmallMobileView ?
-            <div className="input-group position-relative search-bar" style={{ background: '#F1F6F7', border: '1.5px solid #293330', borderRadius: '8px', maxWidth: '485px', width: '100%' }}>
+            <div className="input-group position-relative search-bar" style={{ background: '#F3F4F6', border: '1.5px solid #293330', borderRadius: '8px', maxWidth: '485px', width: '100%' }}>
               <div className="search-wrapper w-100">
-                <button className="btn " type="button">
-                  <svg width='24' height='24' viewBox="1 1 60 60">
-                    <path d="M27.765 42.244c-8.614 0-15.622-7.008-15.622-15.622S19.151 11 27.765 11s15.622 7.008 15.622 15.622-7.007 15.622-15.622 15.622zm0-28.398c-7.045 0-12.775 5.73-12.775 12.775s5.73 12.775 12.775 12.775 12.775-5.73 12.775-12.775-5.73-12.775-12.775-12.775z"></path><path d="M34.869 39.146l4.014-3.738 9.286 9.114a3.164 3.164 0 01-.07 4.562l-.071.066a3.163 3.163 0 01-4.561-.257l-8.598-9.747zM27.77 34.173c-2.882 0-5.412-.876-7.656-2.526a1.002 1.002 0 01-.35-.81c.008-.461.445-.969 1.02-.959.284.005.493.153.713.308 1.837 1.302 3.832 1.971 6.275 1.971 1.875 0 4.492-.476 6.314-2.118a.98.98 0 01.638-.261.92.92 0 01.686.241c.222.209.33.527.336.735a1.02 1.02 0 01-.318.775c-1.333 1.237-4.262 2.644-7.658 2.644z"></path>
+                <div className="btn pr-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 mt-1.5">
+                    <defs>
+                      <radialGradient id="circleGradient" cx="30%" cy="30%" r="70%" fx="20%" fy="20%">
+                        <stop offset="0%" style={{ stopColor: '#FFE4D6' }} />
+                        <stop offset="45%" style={{ stopColor: '#9EC5E3' }} />
+                        <stop offset="100%" style={{ stopColor: '#386087' }} />
+                      </radialGradient>
+                      <linearGradient id="handleGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style={{ stopColor: '#386087' }} />
+                        <stop offset="100%" style={{ stopColor: '#9EC5E3' }} />
+                      </linearGradient>
+                    </defs>
+
+                    <path
+                      opacity="0.9"
+                      fillRule="evenodd"
+                      fill="url(#handleGradient)"
+                      d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
+                    ></path>
+
+                    <path
+                      fillRule="evenodd"
+                      fill="url(#circleGradient)"
+                      d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
+                    ></path>
                   </svg>
-                </button>
+
+                </div>
                 <input
                   style={{
-                    background: '#F1F6F7 ',
+                    background: '#F3F4F6',
                     border: '0',
                     paddingLeft: '0',
                     paddingRight: '3px',
-                    fontSize: '12px',
+                    fontSize: '13px',
                   }}
                   type="text"
-                  className="form-control w-100"
-                  placeholder="Search for anything..."
+                  className="form-control w-100 school-inputs fonts"
+                  placeholder="Search for books, podcasts, skills.."
                   aria-label="Search"
                   value={searchValue}
                   onClick={handleFocus}
@@ -551,41 +640,77 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
           }
 
           {!isSmallMobileView ? isFilterVisible && (
-            <div className="filter-section">
-              <span className="mr-4" style={{ color: '#000', fontWeight: '600' }}>Filter & Sort</span>
-              <button className="d-flex align-items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 1L13 13M11.9588 2.62429H3.59188C3.47354 2.62419 3.35768 2.65941 3.25817 2.72574C3.15867 2.79208 3.07973 2.88671 3.03082 2.99831C2.98191 3.10991 2.9651 3.23374 2.98239 3.35498C2.99969 3.47622 3.05037 3.58973 3.12836 3.6819L6.39213 7.54388C6.49029 7.66021 6.54432 7.8095 6.54417 7.96399V11.0712C6.54417 11.1207 6.5553 11.1695 6.57667 11.2137C6.59804 11.258 6.62906 11.2965 6.66729 11.3262L8.51401 12.7605C8.55974 12.7961 8.61411 12.8177 8.67104 12.823C8.72797 12.8283 8.7852 12.8171 8.83633 12.7906C8.88745 12.7642 8.93045 12.7235 8.9605 12.6731C8.99055 12.6228 9.00647 12.5647 9.00647 12.5055V7.96399C9.00632 7.8095 9.06035 7.66021 9.15852 7.54388L12.4223 3.68127C12.7707 3.26944 12.4875 2.62429 11.9588 2.62429Z" stroke="#575B5A" strokeWidth="1.2" strokeLinecap="round" />
-              </svg> Reset All</button>
-              <div className="filter-group">
-                <select>
-                  <option>My Language</option>
-                  <option>English</option>
-                  <option>Chinese</option>
-                  <option>Spanish</option>
-                  <option>French</option>
-                  <option>Russian</option>
-                  <option>German</option>
-                  <option>Japanese</option>
-                  <option>Korean</option>
-                  <option>Hebrew</option>
-                </select>
-              </div>
+            <div className={`filter-sections ${isFilterVisible ? 'active' : ''}`}>
+              <div className="filter-containers">
+                <span className="filter-titles">Filter & Sort</span>
+                <div className="filters-rows">
+                  {/* Language Filter */}
+                  <div className="filter-groups">
+                    <select
+                      className="filter-selects"
+                      value={language}
+                      onChange={handleLanguageChange}
+                    >
+                      <option value="">All Languages</option>
+                      <option value="en">English</option>
+                      <option value="zh">Chinese</option>
+                      <option value="hi">Hindi</option>
+                      <option value="es">Spanish</option>
+                      <option value="fr">French</option>
+                      <option value="ru">Russian</option>
+                      <option value="de">German</option>
+                      <option value="ja">Japanese</option>
+                      <option value="ko">Korean</option>
+                      <option value="he">Hebrew</option>
+                    </select>
+                  </div>
 
-              <div className="filter-group">
-                <select>
-                  <option>Title & Content</option>
-                  <option>Title</option>
-                  <option>Content</option>
-                </select>
-              </div>
+                  {/* Filter Type */}
+                  <div className="filter-groups">
+                    <select
+                      className="filter-selects"
+                      value={filterType}
+                      onChange={handleFilterTypeChange}
+                    >
+                      <option value="">Title & Content</option>
+                      <option value="title">Title</option>
+                      <option value="content">Content</option>
+                    </select>
+                  </div>
 
-              <div className="filter-group">
-                <select>
-                  <option>Best Match</option>
-                  <option>Popularity</option>
-                  <option>Newest</option>
-                  <option>Oldest</option>
-                </select>
+                  {/* Sort By */}
+                  <div className="filter-groups">
+                    <select
+                      className="filter-selects"
+                      value={sortBy}
+                      onChange={handleSortByChange}
+                    >
+                      <option value="">Best Match</option>
+                      <option value="popularity">Popularity</option>
+                      <option value="newest">Newest</option>
+                      <option value="oldest">Oldest</option>
+                    </select>
+                  </div>
+
+                  {/* Reset Button */}
+                  <button className="reset-buttons" onClick={handleReset}>
+                    <svg
+                      width="14"
+                      height="14"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <path
+                        d="M1 1L13 13M11.9588 2.62429H3.59188C3.47354 2.62419 3.35768 2.65941 3.25817 2.72574C3.15867 2.79208 3.07973 2.88671 3.03082 2.99831C2.98191 3.10991 2.9651 3.23374 2.98239 3.35498C2.99969 3.47622 3.05037 3.58973 3.12836 3.6819L6.39213 7.54388C6.49029 7.66021 6.54432 7.8095 6.54417 7.96399V11.0712C6.54417 11.1207 6.5553 11.1695 6.57667 11.2137C6.59804 11.258 6.62906 11.2965 6.66729 11.3262L8.51401 12.7605C8.55974 12.7961 8.61411 12.8177 8.67104 12.823C8.72797 12.8283 8.7852 12.8171 8.83633 12.7906C8.88745 12.7642 8.93045 12.7235 8.9605 12.6731C8.99055 12.6228 9.00647 12.5647 9.00647 12.5055V7.96399C9.00632 7.8095 9.06035 7.66021 9.15852 7.54388L12.4223 3.68127C12.7707 3.26944 12.4875 2.62429 11.9588 2.62429Z"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      ></path>
+                    </svg>
+                    Reset All
+                  </button>
+                </div>
               </div>
             </div>
           ) : ''}
@@ -683,14 +808,13 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                           width: '225px',
                           right: "0",
                           background: "white",
-                          border: "1px solid #ccc",
                           borderRadius: "4px",
                           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                          zIndex: 1000,
+                          zIndex: 100000,
                         }}
                       >
-                        <a onClick={() => setIsOpenApplytoTeach(!isOpenApplytoTeach)} className={`btn ${isSmallMobileView ? 'btn-sm py-2 px-1' : ''} btn-dark px-4`} style={isSmallMobileView ? { fontSize: '11.2px', borderRadius: '50px' } : { borderRadius: '50px' }}>+  Apply to Teach</a>
-                        <button onClick={() => setIsPanelActive(!isPanelActive)} className="btn p-0" type="button"
+                        <a onClick={() =>{ setIsDropdownOpen(false); setIsOpenApplytoTeach(!isOpenApplytoTeach)}} className={`btn ${isSmallMobileView ? 'btn-sm py-2 px-1' : ''} btn-dark px-4`} style={isSmallMobileView ? { fontSize: '11.2px', borderRadius: '50px' } : { borderRadius: '50px' }}>+  Apply to Teach</a>
+                        <button onClick={() => { setIsDropdownOpen(false); setIsPanelActive(!isPanelActive) }} className="btn p-0" type="button"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 60 60" fill="none">
                             <circle cx="30" cy="30" r="29.25" stroke="#E5E5E5" strokeWidth="1.5" />
@@ -718,144 +842,137 @@ const Header = ({ isModalOpen, setIsModalOpen, isModalOpen2, supportModal, setSe
                     },
                   }}
                 >
-                  <div
-                    className="mb-2"
-                    style={{
-                      padding: "14px",
-                      fontWeight: "bold",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Daniel Lopez
-                    <p className="mt-1 mb-3" style={{ fontSize: '12px', color: '#010101', fontWeight: '500' }}>daniellopez@gmail.com</p>
-                    <span className="px-3 py-2" style={{ fontSize: '13px', color: '#010101', fontWeight: '500', background: '#F4F4F4', borderRadius: '5px' }}>Proffestional until Apr 30, 2024</span>
+                  <div className="avatar-tooltip">
+                    <div className="top-section">
+                      <h3 className="user-name">Daniel Lopez</h3>
+                      <p className="user-email">daniellopez@gmail.com</p>
+                      <div className="plan-info">Professional until Apr 30, 2024</div>
+                    </div>
+
+                    <div className="menu-section">
+                      <Link href="/preferences" className="menu-item">
+                        <svg fill="none" viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="currentColor" d="M12 4C10.3431 4 9 5.34315 9 7C9 8.65685 10.3431 10 12 10C13.6569 10 15 8.65685 15 7C15 5.34315 13.6569 4 12 4ZM7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7ZM19.0277 15.6255C18.6859 15.5646 18.1941 15.6534 17.682 16.1829C17.4936 16.3777 17.2342 16.4877 16.9632 16.4877C16.6922 16.4877 16.4328 16.3777 16.2444 16.1829C15.7322 15.6534 15.2405 15.5646 14.8987 15.6255C14.5381 15.6897 14.2179 15.9384 14.0623 16.3275C13.8048 16.9713 13.9014 18.662 16.9632 20.4617C20.0249 18.662 20.1216 16.9713 19.864 16.3275C19.7084 15.9384 19.3882 15.6897 19.0277 15.6255ZM21.721 15.5847C22.5748 17.7191 21.2654 20.429 17.437 22.4892C17.1412 22.6484 16.7852 22.6484 16.4893 22.4892C12.6609 20.4291 11.3516 17.7191 12.2053 15.5847C12.6117 14.5689 13.4917 13.8446 14.5481 13.6565C15.3567 13.5125 16.2032 13.6915 16.9632 14.1924C17.7232 13.6915 18.5697 13.5125 19.3783 13.6565C20.4347 13.8446 21.3147 14.5689 21.721 15.5847ZM9.92597 14.2049C10.1345 14.7163 9.889 15.2999 9.3776 15.5084C7.06131 16.453 5.5 18.5813 5.5 20.9999C5.5 21.5522 5.05228 21.9999 4.5 21.9999C3.94772 21.9999 3.5 21.5522 3.5 20.9999C3.5 17.6777 5.641 14.8723 8.6224 13.6565C9.1338 13.448 9.71743 13.6935 9.92597 14.2049Z" clip-rule="evenodd" fill-rule="evenodd" />
+                        </svg>
+                        <span>Preferences</span>
+                      </Link>
+
+                      <Link href="/profile" className="menu-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="currentColor" d="M14 12.5C14 13.6046 13.1046 14.5 12 14.5C10.8954 14.5 10 13.6046 10 12.5C10 11.3954 10.8954 10.5 12 10.5C13.1046 10.5 14 11.3954 14 12.5Z" />
+                          <path fill="currentColor" d="M12 17.25C11.7265 17.25 11.3186 17.3871 10.6823 17.9811C10.2786 18.3579 9.64578 18.3361 9.26894 17.9323C8.89211 17.5286 8.91393 16.8958 9.31768 16.5189C10.1099 15.7795 10.9878 15.25 12 15.25C13.0122 15.25 13.8901 15.7795 14.6823 16.5189C15.0861 16.8958 15.1079 17.5286 14.7311 17.9323C14.3542 18.3361 13.7214 18.3579 13.3177 17.9811C12.6814 17.3871 12.2735 17.25 12 17.25Z" clip-rule="evenodd" fill-rule="evenodd" />
+                          <path fill="currentColor" d="M4 5C4 3.34315 5.34315 2 7 2H17C18.6569 2 20 3.34315 20 5V19C20 20.6569 18.6569 22 17 22H7C5.34315 22 4 20.6569 4 19V5ZM7 4C6.44772 4 6 4.44772 6 5V19C6 19.5523 6.44772 20 7 20H17C17.5523 20 18 19.5523 18 19V5C18 4.44772 17.5523 4 17 4H7Z" clip-rule="evenodd" fill-rule="evenodd" />
+                          <path fill="currentColor" d="M9 7C9 6.44772 9.44772 6 10 6H14C14.5523 6 15 6.44772 15 7C15 7.55228 14.5523 8 14 8H10C9.44772 8 9 7.55228 9 7Z" clip-rule="evenodd" fill-rule="evenodd" />
+                        </svg>
+                        <span>Account Details</span>
+                      </Link>
+
+                      <Link href="/billing" className="menu-item">
+                        <svg fill="none" viewBox="0 0 24 24">
+                          <path fill="currentColor" d="M12 1.5C6.20156 1.5 1.5 6.20156 1.5 12C1.5 17.7984 6.20156 22.5 12 22.5C17.7984 22.5 22.5 17.7984 22.5 12C22.5 6.20156 17.7984 1.5 12 1.5ZM12 20.5C7.30781 20.5 3.5 16.6922 3.5 12C3.5 7.30781 7.30781 3.5 12 3.5C16.6922 3.5 20.5 7.30781 20.5 12C20.5 16.6922 16.6922 20.5 12 20.5Z" />
+                          <path fill="currentColor" d="M12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7Z" />
+                          <path fill="currentColor" d="M8 15.5C7.44772 15.5 7 15.9477 7 16.5C7 17.0523 7.44772 17.5 8 17.5H16C16.5523 17.5 17 17.0523 17 16.5C17 15.9477 16.5523 15.5 16 15.5H8Z" />
+                        </svg>
+                        <span>Billing</span>
+                      </Link>
+
+                      <Link href="/security" className="menu-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="currentColor" d="M12 2C9.23858 2 7 4.23858 7 7V9C5.89543 9 5 9.89543 5 11V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V11C19 9.89543 18.1046 9 17 9V7C17 4.23858 14.7614 2 12 2ZM9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7V9H9V7Z" />
+                          <circle cx="12" cy="15" r="2" fill="white" />
+                        </svg>
+                        <span>Sign In & Security</span>
+                      </Link>
+
+                      <a onClick={() => handleLink('Support')} href="#" className="menu-item">
+                        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none">
+                          <path d="M9.984 9A2.248 2.248 0 0 1 12 7.75a2.25 2.25 0 0 1 1.579 3.853c-.5.493-1.108 1.025-1.402 1.65M12 16.25v.01m0 2.99a7.25 7.25 0 1 1 0-14.5 7.25 7.25 0 0 1 0 14.5Z" stroke-linejoin="round" stroke-linecap="round" />
+                        </svg>
+                        <span>Support</span>
+                      </a>
+                      <a href="#" className="menu-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 4h6v6h-6z"></path>
+                          <path d="M14 4h6v6h-6z"></path>
+                          <path d="M4 14h6v6h-6z"></path>
+                          <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                        </svg>
+                        <span>Request New Content</span>
+                      </a>
+
+                      <Link href="/team" className="menu-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                          <path fill="currentColor" d="M256 464c-114.69 0-208-93.31-208-208S141.31 48 256 48s208 93.31 208 208-93.31 208-208 208zm0-384c-97 0-176 79-176 176s79 176 176 176 176-78.95 176-176S353.05 80 256 80z" />
+                          <path fill="currentColor" d="M323.67 292c-17.4 0-34.21-7.72-47.34-21.73a83.76 83.76 0 01-22-51.32c-1.47-20.7 4.88-39.75 17.88-53.62S303.38 144 323.67 144c20.14 0 38.37 7.62 51.33 21.46s19.47 33 18 53.51a84 84 0 01-22 51.3C357.86 284.28 341.06 292 323.67 292zm55.81-74zm-215.66 77.36c-29.76 0-55.93-27.51-58.33-61.33-1.23-17.32 4.15-33.33 15.17-45.08s26.22-18 43.15-18 32.12 6.44 43.07 18.14 16.5 27.82 15.25 45c-2.44 33.77-28.6 61.27-58.31 61.27zm256.55 59.92c-1.59-4.7-5.46-9.71-13.22-14.46-23.46-14.33-52.32-21.91-83.48-21.91-30.57 0-60.23 7.9-83.53 22.25-26.25 16.17-43.89 39.75-51 68.18-1.68 6.69-4.13 19.14-1.51 26.11a192.18 192.18 0 00232.75-80.17zm-256.74 46.09c7.07-28.21 22.12-51.73 45.47-70.75a8 8 0 00-2.59-13.77c-12-3.83-25.7-5.88-42.69-5.88-23.82 0-49.11 6.45-68.14 18.17-5.4 3.33-10.7 4.61-14.78 5.75a192.84 192.84 0 0077.78 86.64l1.79-.14a102.82 102.82 0 013.16-20.02z" />
+                        </svg>
+                        <span>Team</span>
+                      </Link>
+
+                      <a href="#" className="menu-item">
+                        <svg stroke-width="1.5" stroke="currentColor" fill="none" viewBox="0 0 24 24" width="24" height="24">
+                          <path d="M20 17v-12c0 -1.121 -.879 -2 -2 -2s-2 .879 -2 2v12l2 2l2 -2z" stroke-linejoin="round" stroke-linecap="round" />
+                          <path d="M16 7h4" stroke-linejoin="round" stroke-linecap="round" />
+                          <path d="M18 19h-13a2 2 0 1 1 0 -4h4a2 2 0 1 0 0 -4h-3" stroke-linejoin="round" stroke-linecap="round" />
+                        </svg>
+                        <span>Highlighters</span>
+                      </a>
+                    </div>
+
+                    <div className="menu-section">
+                      <a href="#" className="menu-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                        </svg>
+                        <span>Logout</span>
+                      </a>
+                    </div>
+
+                    <div className="footer-section">
+                      <div className="footer-row">
+                        <span className="footer-label">Download</span>
+                        <div className="footer-icons">
+                          <a href="#" className="platform-link">
+                            <svg viewBox="0 0 384 512" width="14" height="14">
+                              <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+                            </svg>
+                            iOS
+                          </a>
+                          <a href="#" className="platform-link">
+                            <svg viewBox="0 0 576 512" width="14" height="14">
+                              <path fill="currentColor" d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55" />
+                            </svg>
+                            Android
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="footer-row">
+                        <span className="footer-label">Connect</span>
+                        <div className="footer-icons social-icons">
+                          <a href="#" className="social-link">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                              <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                          </a>
+                          <a href="#" className="social-link">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                              <path fill="currentColor" d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.92 1.92 0 0 1-1.8 2z" />
+                            </svg>
+                          </a>
+                          <a href="#" className="social-link">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                              <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                          </a>
+                          <a href="#" className="social-link">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                              <path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  {profileItems.map((item, index) => (
-                    <MenuItem
-                      key={index}
-                      style={{
-                        borderRadius: "5px",
-                        border: "0.2px solid #F5F5F5",
-                        padding: "11px 15px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        fontSize: "14px",
-                        fontWeight: "500",
-                        color: "#333",
-                        transition: "background-color 0.3s ease",
-                      }}
-                      onMouseEnter={(e) => (e.target.style.backgroundColor = "#f0f0f0")}
-                      onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
-                      onClick={() => {
-                        handleClose3(); // Close the menu
-                        handleLink(item.label); // Trigger the link action
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontSize: "18px",
-                        }}
-                      >
-                        {item.icon}
-                      </span>
-                      {item.label === 'Account Details' ? (
-                        <Link href="/profile">{item.label}</Link>
-                      ) : item.label === 'Sign In & Security' ? (
-                        <Link href="/security">{item.label}</Link>
-                      ) : item.label === 'Billing' ? (
-                        <Link href="/billing">{item.label}</Link>
-                      ) :
-                        item.label === 'Preferences' ? (
-                          <Link href="/preferences">{item.label}</Link>
-                        ) : item.label === 'Team' ? (
-                          <Link href="/team">{item.label}</Link>
-                        ) : (
-                          item.label
-                        )}
-                    </MenuItem>
-                  ))}
-
-                  <MenuItem
-                    style={{
-                      borderRadius: "5px",
-                      background: '#F8F9FB',
-                      border: '0.2px solid #F5F5F5',
-                      padding: "11px 15px",
-                      display: "flex",
-                      flexDirection: 'column',
-                      alignItems: "center",
-                      gap: "10px",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      color: "#333",
-                      transition: "background-color 0.3s ease",
-                    }}
-
-                    onClick={handleClose3}
-                  >
-                    <div className="d-flex align-items-center justify-content-between w-100 py-2">
-                      <span
-
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: '600'
-                        }}
-                      >
-                        Download
-                      </span>
-                      <div className="d-flex align-items-center gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 53 20" fill="none">
-                          <path d="M14.1643 19.1976C13.0658 20.253 11.8665 20.0864 10.712 19.5864C9.49031 19.0754 8.36946 19.0531 7.08049 19.5864C5.46647 20.2752 4.61462 20.0752 3.65069 19.1976C-1.81905 13.6094 -1.01204 5.09936 5.19746 4.78828C6.71061 4.86605 7.76421 5.6104 8.64968 5.67706C9.97228 5.41043 11.2388 4.64386 12.6511 4.74385C14.3436 4.87716 15.6214 5.54374 16.462 6.74359C12.9649 8.82111 13.7944 13.3872 17 14.6648C16.3611 16.3313 15.5317 17.9866 14.153 19.2087L14.1643 19.1976ZM8.53759 4.72163C8.36946 2.24416 10.3982 0.199975 12.7296 0C13.0546 2.8663 10.1068 4.99937 8.53759 4.72163Z" fill="#686A69" />
-                          <path d="M27 5.05V3H29.0517V5.05H27ZM27.1933 18V8.38333H28.86V18H27.1933ZM37.8333 18H34.885C34.1394 18 33.5044 17.7378 32.98 17.2133C32.4556 16.6889 32.1933 16.0533 32.1933 15.3067V5.69333C32.1933 4.94667 32.4556 4.31111 32.98 3.78667C33.5044 3.26222 34.1394 3 34.885 3H37.835C38.5794 3 39.2139 3.26222 39.7383 3.78667C40.2639 4.31111 40.5267 4.94611 40.5267 5.69167V15.3083C40.5267 16.0528 40.2644 16.6878 39.74 17.2133C39.2156 17.7378 38.58 18 37.8333 18ZM34.885 16.3333H37.835C38.1339 16.3333 38.3794 16.2372 38.5717 16.045C38.7639 15.8528 38.86 15.6072 38.86 15.3083V5.69167C38.86 5.39278 38.7639 5.14722 38.5717 4.955C38.3794 4.76278 38.1333 4.66667 37.8333 4.66667H34.885C34.585 4.66667 34.3394 4.76278 34.1483 4.955C33.9561 5.14722 33.86 5.39333 33.86 5.69333V15.3083C33.86 15.6072 33.9561 15.8528 34.1483 16.045C34.3406 16.2372 34.5861 16.3333 34.885 16.3333ZM43.86 18V16.3333H49.5C49.8 16.3333 50.0461 16.2372 50.2383 16.045C50.4306 15.8528 50.5267 15.6072 50.5267 15.3083V12.3583C50.5267 12.0594 50.4306 11.8139 50.2383 11.6217C50.0461 11.4294 49.8 11.3333 49.5 11.3333H46.5517C45.8061 11.3333 45.1711 11.0711 44.6467 10.5467C44.1222 10.0222 43.86 9.38667 43.86 8.64V5.69167C43.86 4.94722 44.1222 4.31222 44.6467 3.78667C45.1711 3.26222 45.8061 3 46.5517 3H52.1933V4.66667H46.5517C46.2517 4.66667 46.0061 4.76278 45.815 4.955C45.6228 5.14722 45.5267 5.39333 45.5267 5.69333V8.64167C45.5267 8.94056 45.6228 9.18611 45.815 9.37833C46.0072 9.57056 46.2528 9.66667 46.5517 9.66667H49.5017C50.2461 9.66667 50.8806 9.92889 51.405 10.4533C51.9306 10.9778 52.1933 11.6133 52.1933 12.36V15.3083C52.1933 16.0528 51.9306 16.6878 51.405 17.2133C50.8806 17.7378 50.2456 18 49.5 18H43.86Z" fill="#686A69" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="14" viewBox="0 0 106 14" fill="none">
-                          <path d="M33.3864 13.7992H31L36.3622 0.531235H38.9596L44.3219 13.7992H41.9354L37.7228 2.94123H37.6064L33.3864 13.7992ZM33.7866 8.60342H41.528V10.2878H33.7866V8.60342Z" fill="#686A69" />
-                          <path d="M48.4745 7.89079V13.7992H46.299V3.84822H48.3872V5.46784H48.5254C48.7825 4.94092 49.1851 4.51766 49.7332 4.19806C50.2861 3.87845 50.9822 3.71865 51.8213 3.71865C52.5828 3.71865 53.2498 3.86118 53.8221 4.14623C54.3945 4.42696 54.8383 4.8459 55.1536 5.40305C55.4689 5.9602 55.6265 6.64908 55.6265 7.46969V13.7992H53.4511V7.70292C53.4511 6.98164 53.2401 6.41802 52.8181 6.01203C52.3961 5.60173 51.8165 5.39658 51.0792 5.39658C50.5747 5.39658 50.1261 5.49375 49.7332 5.68811C49.3451 5.88246 49.0371 6.16752 48.8092 6.54327C48.586 6.9147 48.4745 7.36388 48.4745 7.89079Z" fill="#686A69" />
-                          <path d="M62.7276 13.9935C61.8254 13.9935 61.0203 13.7884 60.3121 13.3781C59.6088 12.9634 59.0558 12.3739 58.6532 11.6094C58.2555 10.8407 58.0566 9.91856 58.0566 8.84313C58.0566 7.7677 58.2579 6.84776 58.6605 6.08329C59.0679 5.31883 59.6257 4.73361 60.3339 4.32763C61.0421 3.92164 61.8448 3.71865 62.7422 3.71865C63.4358 3.71865 63.9936 3.8223 64.4156 4.02962C64.8424 4.23261 65.1723 4.47015 65.4051 4.74225C65.6428 5.01435 65.8271 5.25405 65.958 5.46136H66.089V0.531235H68.2645V13.7992H66.1399V12.2508H65.958C65.8271 12.4624 65.6379 12.7043 65.3905 12.9764C65.148 13.2485 64.8133 13.486 64.3865 13.689C63.9596 13.892 63.4067 13.9935 62.7276 13.9935ZM63.2078 12.3415C63.8335 12.3415 64.3622 12.1947 64.7939 11.901C65.2305 11.603 65.5603 11.1905 65.7834 10.6636C66.0114 10.1367 66.1254 9.52337 66.1254 8.82369C66.1254 8.13266 66.0138 7.528 65.7907 7.00972C65.5676 6.49144 65.2402 6.08761 64.8085 5.79824C64.3768 5.50887 63.8432 5.36418 63.2078 5.36418C62.553 5.36418 62.0073 5.51535 61.5708 5.81768C61.1342 6.12001 60.8044 6.53247 60.5813 7.05507C60.363 7.57766 60.2539 8.16721 60.2539 8.82369C60.2539 9.48882 60.3654 10.087 60.5886 10.6182C60.8117 11.1495 61.1415 11.5706 61.5781 11.8815C62.0195 12.1882 62.5627 12.3415 63.2078 12.3415Z" fill="#686A69" />
-                          <path d="M71.3694 13.7992V3.84822H73.4721V5.42897H73.5885C73.7922 4.89341 74.1511 4.47231 74.6653 4.16566C75.1843 3.8547 75.7712 3.69921 76.426 3.69921C76.5618 3.69921 76.7219 3.70353 76.9062 3.71217C77.0954 3.72081 77.2433 3.73161 77.35 3.74456V5.59741C77.2627 5.57581 77.1075 5.55206 76.8844 5.52615C76.6612 5.49591 76.4381 5.4808 76.215 5.4808C75.7009 5.4808 75.2425 5.57797 74.8399 5.77233C74.4421 5.96236 74.1269 6.22798 73.894 6.56918C73.6612 6.90606 73.5448 7.29045 73.5448 7.72235V13.7992H71.3694Z" fill="#686A69" />
-                          <path d="M83.5398 14C82.4921 14 81.5778 13.7862 80.7969 13.3586C80.016 12.9311 79.4097 12.3329 78.978 11.5641C78.5463 10.7953 78.3304 9.89696 78.3304 8.86904C78.3304 7.8368 78.5463 6.93414 78.978 6.16104C79.4097 5.38794 80.016 4.7876 80.7969 4.36002C81.5778 3.93244 82.4921 3.71865 83.5398 3.71865C84.5875 3.71865 85.5019 3.93244 86.2828 4.36002C87.0637 4.7876 87.67 5.38794 88.1017 6.16104C88.5334 6.93414 88.7493 7.8368 88.7493 8.86904C88.7493 9.89696 88.5334 10.7953 88.1017 11.5641C87.67 12.3329 87.0637 12.9311 86.2828 13.3586C85.5019 13.7862 84.5875 14 83.5398 14ZM83.5471 12.3739C84.2262 12.3739 84.7888 12.2141 85.2351 11.8945C85.6813 11.5749 86.0112 11.1495 86.2246 10.6182C86.4429 10.087 86.552 9.50177 86.552 8.86256C86.552 8.22767 86.4429 7.64461 86.2246 7.11337C86.0112 6.57782 85.6813 6.14808 85.2351 5.82416C84.7888 5.50023 84.2262 5.33827 83.5471 5.33827C82.8632 5.33827 82.2957 5.50023 81.8446 5.82416C81.3983 6.14808 81.0661 6.57782 80.8478 7.11337C80.6344 7.64461 80.5277 8.22767 80.5277 8.86256C80.5277 9.50177 80.6344 10.087 80.8478 10.6182C81.0661 11.1495 81.3983 11.5749 81.8446 11.8945C82.2957 12.2141 82.8632 12.3739 83.5471 12.3739Z" fill="#686A69" />
-                          <path d="M91.1775 13.7992V3.84822H93.353V13.7992H91.1775ZM92.2762 2.31282C91.8978 2.31282 91.5728 2.20052 91.3012 1.97594C91.0344 1.74703 90.901 1.47493 90.901 1.15965C90.901 0.840043 91.0344 0.567947 91.3012 0.343359C91.5728 0.114453 91.8978 0 92.2762 0C92.6545 0 92.9771 0.114453 93.2438 0.343359C93.5155 0.567947 93.6513 0.840043 93.6513 1.15965C93.6513 1.47493 93.5155 1.74703 93.2438 1.97594C92.9771 2.20052 92.6545 2.31282 92.2762 2.31282Z" fill="#686A69" />
-                          <path d="M100.463 13.9935C99.561 13.9935 98.7558 13.7884 98.0476 13.3781C97.3443 12.9634 96.7914 12.3739 96.3888 11.6094C95.991 10.8407 95.7922 9.91856 95.7922 8.84313C95.7922 7.7677 95.9935 6.84776 96.396 6.08329C96.8035 5.31883 97.3613 4.73361 98.0695 4.32763C98.7776 3.92164 99.5804 3.71865 100.478 3.71865C101.171 3.71865 101.729 3.8223 102.151 4.02962C102.578 4.23261 102.908 4.47015 103.141 4.74225C103.378 5.01435 103.563 5.25405 103.694 5.46136H103.825V0.531235H106V13.7992H103.875V12.2508H103.694C103.563 12.4624 103.373 12.7043 103.126 12.9764C102.884 13.2485 102.549 13.486 102.122 13.689C101.695 13.892 101.142 13.9935 100.463 13.9935ZM100.943 12.3415C101.569 12.3415 102.098 12.1947 102.529 11.901C102.966 11.603 103.296 11.1905 103.519 10.6636C103.747 10.1367 103.861 9.52337 103.861 8.82369C103.861 8.13266 103.749 7.528 103.526 7.00972C103.303 6.49144 102.976 6.08761 102.544 5.79824C102.112 5.50887 101.579 5.36418 100.943 5.36418C100.289 5.36418 99.7429 5.51535 99.3063 5.81768C98.8698 6.12001 98.54 6.53247 98.3168 7.05507C98.0986 7.57766 97.9894 8.16721 97.9894 8.82369C97.9894 9.48882 98.101 10.087 98.3241 10.6182C98.5472 11.1495 98.8771 11.5706 99.3136 11.8815C99.755 12.1882 100.298 12.3415 100.943 12.3415Z" fill="#686A69" />
-                          <path d="M0 13C0.156818 11.1642 0.727636 9.47414 1.71245 7.92997C2.69727 6.3858 4.00827 5.15904 5.64545 4.24969L3.71136 0.955457C3.60682 0.80104 3.58068 0.638043 3.63295 0.466468C3.68523 0.294894 3.79848 0.166213 3.97273 0.0804254C4.11212 -0.00536191 4.26894 -0.0225191 4.44318 0.0289533C4.61742 0.0804257 4.75682 0.18337 4.86136 0.337787L6.79545 3.63202C8.29394 3.01435 9.86212 2.70552 11.5 2.70552C13.1379 2.70552 14.7061 3.01435 16.2045 3.63202L18.1386 0.337787C18.2432 0.18337 18.3826 0.0804257 18.5568 0.0289533C18.7311 -0.0225191 18.8879 -0.00536191 19.0273 0.0804254C19.2015 0.166213 19.3148 0.294894 19.367 0.466468C19.4193 0.638043 19.3932 0.80104 19.2886 0.955457L17.3545 4.24969C18.9924 5.15904 20.3034 6.3858 21.2875 7.92997C22.2717 9.47414 22.8425 11.1642 23 13H0ZM6.27273 10.169C6.63864 10.169 6.94809 10.0445 7.20109 9.79533C7.45409 9.5462 7.58024 9.24183 7.57955 8.88221C7.57885 8.52259 7.45235 8.21787 7.20005 7.96806C6.94774 7.71825 6.63864 7.59402 6.27273 7.5954C5.90682 7.59677 5.59736 7.72133 5.34436 7.96909C5.09136 8.21684 4.96521 8.52121 4.96591 8.88221C4.96661 9.2432 5.09311 9.54792 5.34541 9.79636C5.59771 10.0448 5.90682 10.169 6.27273 10.169ZM16.7273 10.169C17.0932 10.169 17.4026 10.0445 17.6556 9.79533C17.9086 9.5462 18.0348 9.24183 18.0341 8.88221C18.0334 8.52259 17.9069 8.21787 17.6546 7.96806C17.4023 7.71825 17.0932 7.59402 16.7273 7.5954C16.3614 7.59677 16.0519 7.72133 15.7989 7.96909C15.5459 8.21684 15.4198 8.52121 15.4205 8.88221C15.4212 9.2432 15.5477 9.54792 15.8 9.79636C16.0523 10.0448 16.3614 10.169 16.7273 10.169Z" fill="#686A69" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="d-flex align-items-center justify-content-between w-100 py-2">
-                      <span
-
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: '600'
-                        }}
-                      >
-                        Connect
-                      </span>
-                      <div className="d-flex align-items-center gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 43 43" fill="none">
-                          <rect width="43" height="43" rx="8" fill="#F0F0F0" />
-                          <mask id="mask0_35_103" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="8" y="8" width="27" height="27">
-                            <path d="M8 8H35V35H8V8Z" fill="white" />
-                          </mask>
-                          <g mask="url(#mask0_35_103)">
-                            <path d="M29.2625 9.26514H33.4031L24.3581 19.6293L35 33.7349H26.6686L20.1384 25.1816L12.6749 33.7349H8.53036L18.2041 22.6456L8 9.26707H16.5436L22.4373 17.0836L29.2625 9.26514ZM27.8064 31.2509H30.1014L15.29 11.6199H12.8291L27.8064 31.2509Z" fill="#666666" />
-                          </g>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 43 43" fill="none">
-                          <path d="M0 8C0 3.58172 3.58172 0 8 0H35C39.4183 0 43 3.58172 43 8V35C43 39.4183 39.4183 43 35 43H8C3.58172 43 0 39.4183 0 35V8Z" fill="#F0F0F0" />
-                          <path d="M30.307 13.579C28.787 12.8429 27.1412 12.3087 25.4269 12C25.3968 12.0004 25.368 12.0132 25.3469 12.0356C25.1412 12.4274 24.9012 12.9379 24.7412 13.3297C22.9228 13.0449 21.0736 13.0449 19.2553 13.3297C19.0953 12.926 18.8553 12.4274 18.6381 12.0356C18.6267 12.0119 18.5924 12 18.5581 12C16.8438 12.3087 15.2095 12.8429 13.678 13.579C13.6666 13.579 13.6551 13.5908 13.6437 13.6027C10.5351 18.4346 9.67789 23.1359 10.1008 27.7897C10.1008 27.8134 10.1122 27.8371 10.135 27.849C12.1922 29.4161 14.1694 30.3659 16.1238 30.9951C16.1581 31.007 16.1924 30.9951 16.2038 30.9713C16.6609 30.3184 17.0724 29.6298 17.4267 28.9056C17.4495 28.8581 17.4267 28.8106 17.381 28.7988C16.7295 28.5376 16.1124 28.2289 15.5066 27.8728C15.4609 27.849 15.4609 27.7778 15.4952 27.7422C15.6209 27.6472 15.7466 27.5404 15.8723 27.4454C15.8952 27.4216 15.9295 27.4216 15.9524 27.4335C19.8839 29.2974 24.124 29.2974 28.0098 27.4335C28.0327 27.4216 28.067 27.4216 28.0898 27.4454C28.2155 27.5522 28.3413 27.6472 28.467 27.754C28.5127 27.7897 28.5127 27.8609 28.4556 27.8846C27.8612 28.2527 27.2327 28.5495 26.5812 28.8106C26.5355 28.8225 26.5241 28.8819 26.5355 28.9175C26.9012 29.6417 27.3127 30.3303 27.7584 30.9832C27.7927 30.9951 27.827 31.007 27.8612 30.9951C29.827 30.3659 31.8042 29.4161 33.8614 27.849C33.8843 27.8371 33.8957 27.8134 33.8957 27.7897C34.3986 22.4117 33.0614 17.746 30.3527 13.6027C30.3413 13.5908 30.3299 13.579 30.307 13.579ZM18.021 24.9523C16.8438 24.9523 15.8609 23.8244 15.8609 22.4354C15.8609 21.0464 16.8209 19.9186 18.021 19.9186C19.2324 19.9186 20.1925 21.0583 20.181 22.4354C20.181 23.8244 19.221 24.9523 18.021 24.9523ZM25.9869 24.9523C24.8097 24.9523 23.8269 23.8244 23.8269 22.4354C23.8269 21.0464 24.7869 19.9186 25.9869 19.9186C27.1984 19.9186 28.1584 21.0583 28.147 22.4354C28.147 23.8244 27.1984 24.9523 25.9869 24.9523Z" fill="#666666" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 43 43" fill="none">
-                          <path d="M0 8C0 3.58172 3.58172 0 8 0H35C39.4183 0 43 3.58172 43 8V35C43 39.4183 39.4183 43 35 43H8C3.58172 43 0 39.4183 0 35V8Z" fill="#F0F0F0" />
-                          <path d="M35.0677 21.5338C35.0677 14.0632 29.0045 8 21.5338 8C14.0632 8 8 14.0632 8 21.5338C8 28.0842 12.6556 33.5383 18.8271 34.797V25.594H16.1203V21.5338H18.8271V18.1504C18.8271 15.5383 20.9519 13.4135 23.5639 13.4135H26.9474V17.4737H24.2406C23.4962 17.4737 22.8872 18.0827 22.8872 18.8271V21.5338H26.9474V25.594H22.8872V35C29.7218 34.3233 35.0677 28.5579 35.0677 21.5338Z" fill="#666666" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 43 43" fill="none">
-                          <path d="M0 8C0 3.58172 3.58172 0 8 0H35C39.4183 0 43 3.58172 43 8V35C43 39.4183 39.4183 43 35 43H8C3.58172 43 0 39.4183 0 35V8Z" fill="#F0F0F0" />
-                          <path d="M21.5 8C14.048 8 8 14.048 8 21.5C8 28.952 14.048 35 21.5 35C28.952 35 35 28.952 35 21.5C35 14.048 28.952 8 21.5 8ZM27.764 17.18C27.5615 19.313 26.684 24.497 26.2385 26.8865C26.0495 27.899 25.6715 28.2365 25.3205 28.277C24.5375 28.3445 23.9435 27.764 23.1875 27.2645C21.9995 26.4815 21.3245 25.9955 20.177 25.2395C18.8405 24.362 19.7045 23.876 20.474 23.093C20.6765 22.8905 24.1325 19.745 24.2 19.4615C24.2094 19.4186 24.2081 19.374 24.1964 19.3316C24.1846 19.2893 24.1627 19.2505 24.1325 19.2185C24.0515 19.151 23.9435 19.178 23.849 19.1915C23.7275 19.2185 21.8375 20.474 18.152 22.958C17.612 23.3225 17.126 23.5115 16.694 23.498C16.208 23.4845 15.29 23.228 14.6015 22.9985C13.751 22.7285 13.0895 22.58 13.1435 22.1075C13.1705 21.8645 13.508 21.6215 14.1425 21.365C18.0845 19.6505 20.7035 18.5165 22.013 17.9765C25.766 16.4105 26.5355 16.1405 27.0485 16.1405C27.1565 16.1405 27.413 16.1675 27.575 16.3025C27.71 16.4105 27.7505 16.559 27.764 16.667C27.7505 16.748 27.7775 16.991 27.764 17.18Z" fill="#666666" />
-                        </svg>
-                      </div>
-                    </div>
-                  </MenuItem>
                 </Menu>
 
 

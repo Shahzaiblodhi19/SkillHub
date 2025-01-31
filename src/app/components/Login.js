@@ -17,11 +17,11 @@ export default function Login({ isModalOpen, setIsModalOpen, isModalOpen2, setIs
         <>
             {/* Modal */}
             {isModalOpen && (
-                <div className="modal-overlay">
-                    <div className="modal-container">
+                <div className="modal-overlay" style={{ background: '#f2f2f2', opacity: '100' }}>
+                    <div className="modal-container" style={{boxShadow: 'none'}}>
                         <div className="d-flex align-items-center justify-content-between">
                             <Image style={{ marginLeft: '-5px' }} src={Logo} alt="logo" width={145} height={35} />
-                            <button className="close-btn" onClick={toggleModal}>
+                            <button className="close-btns" onClick={toggleModal}>
                                 ✖
                             </button>
                         </div>
@@ -68,7 +68,7 @@ export default function Login({ isModalOpen, setIsModalOpen, isModalOpen2, setIs
                             </div>
 
                             <div>
-                                <label className="flex items-center gap-2 mt-2" style={{fontSize: '13px'}}>
+                                <label className="flex items-center gap-2 mt-2" style={{ fontSize: '13px' }}>
                                     <input
                                         type="checkbox"
                                     />

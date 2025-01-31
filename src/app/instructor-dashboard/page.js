@@ -1,8 +1,11 @@
 "use client";
 import { Chart } from 'chart.js/auto';
-import React from 'react';
+import Link from 'next/link';
+import React, { useContext } from 'react';
+import { MyContext } from '../layout';
 
 export default function Home() {
+  const context = useContext(MyContext)
   // Example stats for dynamic rendering
   const stats = [
     {
@@ -137,10 +140,7 @@ export default function Home() {
       },
       progress: 50,
       status: 'Draft',
-    }
-  ];
-
-  const events = [
+    },
     {
       title: "Web Development Summit 2024",
       image: "https://i.ibb.co/hBpWGQ7/c3.jpg",
@@ -152,42 +152,78 @@ export default function Home() {
       progress: 50,
       status: 'Draft',
     },
+  ];
+
+  const events = [
     {
-      title: "Digital Marketing Conference",
-      image: "https://i.ibb.co/NKffPZQ/c4.jpg",
+      title: "Advanced Web Development",
+      image: "https://i.ibb.co/640kJN2/c1.jpg",
       stats: {
-        attendees: '2,567',
-        revenue: "$12,450",
-        rating: 4.6
+        students: '5,678',
+        revenue: "$5,879",
+        rating: 4.8
       },
       progress: 50,
       status: 'Draft',
-    }
-  ];
-
-  const communities = [
+    },
     {
-      title: "Web Developers Hub",
-      image: "https://i.ibb.co/ss92kB8/c5.jpg",
+      title: "UI/UX Design Masterclass",
+      image: "https://i.ibb.co/GFhHTqZ/c2.jpg",
       stats: {
-        members: '8,934',
-        revenue: "$15,750",
+        students: '3,245',
+        revenue: "$3,459",
         rating: 4.9
       },
       progress: 50,
       status: 'Draft',
     },
     {
-      title: "Design Community Plus",
-      image: "https://i.ibb.co/rkkdzYx/c6.jpg",
+      title: "Web Development Summit 2024",
+      image: "https://i.ibb.co/hBpWGQ7/c3.jpg",
       stats: {
-        members: '6,234',
-        revenue: "$9,850",
+        attendees: '1,234',
+        revenue: "$8,950",
+        rating: 4.7
+      },
+      progress: 50,
+      status: 'Draft',
+    },
+  ];
+
+  const communities = [
+    {
+      title: "Advanced Web Development",
+      image: "https://i.ibb.co/640kJN2/c1.jpg",
+      stats: {
+        students: '5,678',
+        revenue: "$5,879",
         rating: 4.8
       },
       progress: 50,
       status: 'Draft',
-    }
+    },
+    {
+      title: "UI/UX Design Masterclass",
+      image: "https://i.ibb.co/GFhHTqZ/c2.jpg",
+      stats: {
+        students: '3,245',
+        revenue: "$3,459",
+        rating: 4.9
+      },
+      progress: 50,
+      status: 'Draft',
+    },
+    {
+      title: "Web Development Summit 2024",
+      image: "https://i.ibb.co/hBpWGQ7/c3.jpg",
+      stats: {
+        attendees: '1,234',
+        revenue: "$8,950",
+        rating: 4.7
+      },
+      progress: 50,
+      status: 'Draft',
+    },
   ];
   const salesData = [
     {
@@ -483,7 +519,7 @@ export default function Home() {
             <div className="stat-value">
               {stat.value}
               <span
-                className={`stat-percentage ${stat.percentage.includes("+") ? "positive" : "negative"
+                className={`stat-percentage ${stat.percentage.includes("+") ? "positive" : stat.percentage.includes("0") ? "zero" : "negative"
                   }`}
               >
                 {stat.percentage}
@@ -491,13 +527,112 @@ export default function Home() {
             </div>
             <div className="stat-comparison">{stat.comparison}</div>
             <div className="stat-footer">
-              <div className="stat-footer-content">{stat.footer}</div>
+              <div className="stat-footer-content">
+                {stat.name === 'Ratings' ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4">
+                  <path style={{ fill: 'none', strokeWidth: '2', stroke: '#0ac898' }} d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg> : ''}
+                {stat.footer}</div>
             </div>
           </div>
         ))}
       </div>
+      <div className="dashboard2">
+        <div className="column column-wide p-2">
+          <div className="column-header">
+            <div className="header-left">
+              <div className="header-title">OVERALL SALES</div>
+              <div className="header-value">
+                $83,125
+                <span className="trend-badge trend-up">+7.5%</span>
+              </div>
+            </div>
+            <div className="icon-container">
+              <svg fill="none" viewBox="0 0 32 32" width="24" height="24"> <path fill="#13c4cc" d="M9.33341 6.33333C8.89139 6.33333 8.46746 6.50892 8.1549 6.82148C7.84234 7.13404 7.66675 7.55797 7.66675 7.99999V20.734C8.17815 20.473 8.74858 20.3333 9.33341 20.3333H18C18.5523 20.3333 19 20.781 19 21.3333C19 21.8856 18.5523 22.3333 18 22.3333H9.33341C8.89139 22.3333 8.46746 22.5089 8.1549 22.8215C7.84234 23.134 7.66675 23.558 7.66675 24C7.66675 24.442 7.84234 24.8659 8.1549 25.1785C8.46746 25.4911 8.89139 25.6667 9.33341 25.6667H18C18.5523 25.6667 19 26.1144 19 26.6667C19 27.2189 18.5523 27.6667 18 27.6667H9.33341C8.36095 27.6667 7.42832 27.2804 6.74069 26.5927C6.05306 25.9051 5.66675 24.9725 5.66675 24V7.99999C5.66675 7.02753 6.05306 6.0949 6.74069 5.40727C7.42832 4.71964 8.36095 4.33333 9.33341 4.33333H25.3334C25.8857 4.33333 26.3334 4.78104 26.3334 5.33333V12.9998C26.3334 13.5521 25.8857 13.9998 25.3334 13.9998C24.7811 13.9998 24.3334 13.5521 24.3334 12.9998V6.33333H9.33341ZM11.0001 10.6667C11.0001 10.1144 11.4478 9.66666 12.0001 9.66666H20.0001C20.5524 9.66666 21.0001 10.1144 21.0001 10.6667C21.0001 11.2189 20.5524 11.6667 20.0001 11.6667H12.0001C11.4478 11.6667 11.0001 11.2189 11.0001 10.6667Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                <path fill="#13c4cc" d="M25.3334 16C25.8857 16 26.3334 16.4477 26.3334 17V17.3333H28.0001C28.5524 17.3333 29.0001 17.781 29.0001 18.3333C29.0001 18.8856 28.5524 19.3333 28.0001 19.3333H24.6667C24.4015 19.3333 24.1472 19.4387 23.9596 19.6262C23.7721 19.8138 23.6667 20.0681 23.6667 20.3333C23.6667 20.5985 23.7721 20.8529 23.9596 21.0404C24.1472 21.228 24.4015 21.3333 24.6667 21.3333H26.0001C26.7957 21.3333 27.5588 21.6494 28.1214 22.212C28.684 22.7746 29.0001 23.5377 29.0001 24.3333C29.0001 25.129 28.684 25.892 28.1214 26.4547C27.6379 26.9381 27.0064 27.2395 26.3334 27.3148V27.6667C26.3334 28.219 25.8857 28.6667 25.3334 28.6667C24.7811 28.6667 24.3334 28.219 24.3334 27.6667V27.3333H22.6667C22.1145 27.3333 21.6667 26.8856 21.6667 26.3333C21.6667 25.781 22.1145 25.3333 22.6667 25.3333H26.0001C26.2653 25.3333 26.5196 25.228 26.7072 25.0404C26.8947 24.8529 27.0001 24.5985 27.0001 24.3333C27.0001 24.0681 26.8947 23.8138 26.7072 23.6262C26.5196 23.4387 26.2653 23.3333 26.0001 23.3333H24.6667C23.8711 23.3333 23.108 23.0173 22.5454 22.4547C21.9828 21.892 21.6667 21.129 21.6667 20.3333C21.6667 19.5377 21.9828 18.7746 22.5454 18.212C23.0289 17.7285 23.6604 17.4271 24.3334 17.3519V17C24.3334 16.4477 24.7811 16 25.3334 16Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
 
-      <div className="dashboard-section" style={{ marginBottom: '24px' }}>
+          <div className="legend">
+            <div className="legend-item">
+              <div className="legend-dot" style={{ backgroundColor: '#13C4CC' }}></div>
+              Courses
+            </div>
+            <div className="legend-item">
+              <div className="legend-dot" style={{ backgroundColor: '#02C5AF' }}></div>
+              Events
+            </div>
+            <div className="legend-item">
+              <div className="legend-dot" style={{ backgroundColor: '#009ECB' }}></div>
+              Communities
+            </div>
+            <div className="legend-item">
+              <div className="legend-dot" style={{ backgroundColor: '#3B6E91' }}></div>
+              Certificates
+            </div>
+          </div>
+
+          <div className="chart-container">
+            <canvas ref={canvasRef} id="salesChart"></canvas>
+          </div>
+        </div>
+
+        <div className="column column-narrow p-2">
+          <div className="column-header">
+            <div className="header-left">
+              <div className="header-title">UPCOMING EVENTS</div>
+              <div className="header-value">
+                5
+                <span className="trend-badge trend-down">-5%</span>
+              </div>
+            </div>
+            <div className="icon-container">
+              <svg fill="none" viewBox="0 0 24 24" width="24" height="24"> <path fill="#13c4cc" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clipRule="evenodd" fillRule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+          <div className="events-list">
+            {eventsData.map((event) => (
+              <div className="event-card" key={event.id}>
+                <img src={event.image} alt="Event" className="event-image" />
+                <div className="event-content">
+                  <div className="event-title">{event.title}</div>
+                  <div className="event-meta">
+                    <div className="event-type" style={{ color: event.type.color }}>
+                      {event.type.label === 'Zoom' ? <svg class="svg-icon colored" fill="none" viewBox="0 0 38 38">
+                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.2" stroke="#15B7C3" d="M22.8865 17.1133L27.3332 14.42V23.5867L22.8865 20.8867M10.6665 14.42H20.8532C21.3925 14.42 21.9096 14.6342 22.291 15.0155C22.6723 15.3969 22.8865 15.9141 22.8865 16.4533V23.5867H12.6998C12.4323 23.5867 12.1673 23.5339 11.9202 23.4313C11.6731 23.3287 11.4486 23.1783 11.2597 22.9888C11.0708 22.7992 10.9212 22.5743 10.8194 22.3268C10.7176 22.0794 10.6656 21.8142 10.6665 21.5467V14.42Z" />
+                      </svg> : event.type.label === 'Teams' ? <svg class="svg-icon colored" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 55 55">
+                        <path fill="currentColor" d="M28.0017 15.7696C28.9609 15.1655 30.0969 14.9053 31.2235 15.0316C32.35 15.158 33.4001 15.6634 34.2017 16.465C34.2065 16.4697 34.2112 16.4745 34.216 16.4793C34.7116 16.347 35.2288 16.3033 35.7436 16.3522C36.5245 16.4265 37.2706 16.7113 37.9023 17.1764C38.534 17.6414 39.0277 18.2692 39.3306 18.9927C39.6335 19.7163 39.7343 20.5085 39.6223 21.2849C39.5339 21.8974 39.3157 22.4818 38.9845 23H41.3333C41.8856 23 42.3333 23.4477 42.3333 24V30.6667C42.3333 32.3464 41.6661 33.9573 40.4783 35.145C39.3063 36.317 37.7222 36.9823 36.0665 36.9997C35.7186 37.6388 35.2783 38.2306 34.7545 38.7545C33.3167 40.1923 31.3667 41 29.3333 41C25.9158 41 23.0295 38.7476 22.0364 35.6667H16C15.4477 35.6667 15 35.219 15 34.6667V21.3333C15 20.7811 15.4477 20.3333 16 20.3333H25.6773C25.6329 19.6676 25.7218 18.9951 25.9442 18.3563C26.317 17.2858 27.0425 16.3737 28.0017 15.7696ZM27.6847 20.3333H29.3333C29.8856 20.3333 30.3333 20.7811 30.3333 21.3333V22.982C30.4259 22.9923 30.5187 22.9983 30.6117 23H30.7207C31.036 22.9943 31.3506 22.9388 31.6527 22.8337C31.9095 22.7442 32.1511 22.621 32.3718 22.4685C32.4493 22.3844 32.538 22.3167 32.6335 22.2654C32.854 22.0738 33.0469 21.8498 33.2047 21.5992C33.5672 21.0237 33.7233 20.342 33.6475 19.6661C33.5935 19.1845 33.424 18.7262 33.157 18.3285C33.1097 18.2761 33.0673 18.218 33.031 18.1546C32.9559 18.0583 32.8746 17.9663 32.7875 17.8792C32.3066 17.3982 31.6765 17.095 31.0005 17.0192C30.3246 16.9434 29.643 17.0995 29.0675 17.462C28.492 17.8244 28.0567 18.3717 27.833 19.014C27.6847 19.4399 27.6353 19.8908 27.6847 20.3333ZM35.38 18.3332C35.5062 18.6901 35.5923 19.0623 35.635 19.4432C35.7614 20.5697 35.5012 21.7058 34.8971 22.665C34.8425 22.7516 34.7855 22.8363 34.726 22.919C34.7797 22.9335
+                         34.8339 22.946 34.8886 22.9567C35.3033 23.0372 35.732 23.0036 36.1291 22.8596C36.5261 22.7155 36.8766 22.4664 37.1432 22.1388C37.4098 21.8112 37.5825 21.4173 37.6428 20.9993C37.7031 20.5813 37.6488 20.1547 37.4857 19.7651C37.3226 19.3754 37.0568 19.0374 36.7166 18.787C36.3765 18.5366 35.9748 18.3832 35.5543 18.3432C35.4962 18.3377 35.4381 18.3344 35.38 18.3332ZM35 25H30.7365C30.6896 25.0007 30.6427 25.0007 30.5958 25H30.3333V34.6667C30.3333 35.219 29.8856 35.6667 29.3333 35.6667H24.1776C25.0725 37.6292 27.0479 39 29.3333 39C30.8362 39 32.2776 38.403 33.3403 37.3403C34.403 36.2776 35 34.8362 35 33.3333V25ZM22.8263 33.6667H28.3333V22.3333H17V33.6667H22.7865C22.7998 33.6664 22.813 33.6664 22.8263 33.6667ZM37 25V33.3333C37 33.8703 36.9437 34.4015 36.8343 34.9189C37.673 34.7544 38.451 34.344 39.0641 33.7308C39.8768 32.9181 40.3333 31.8159 40.3333 30.6667V25H37ZM19 25.3333C19 24.7811 19.4477 24.3333 20 24.3333H25.3333C25.8856 24.3333 26.3333 24.7811 26.3333 25.3333C26.3333 25.8856 25.8856 26.3333 25.3333 26.3333H23.6667V30.6667C23.6667 31.219 23.219 31.6667 22.6667 31.6667C22.1144 31.6667 21.6667 31.219 21.6667 30.6667V26.3333H20C19.4477 26.3333 19 25.8856 19 25.3333Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                      </svg> : event.type.label === '1:1 Session' ? <svg class="svg-icon colored" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 38 38">
+                        <path stroke-width="0.25" stroke="currentColor" fill="currentColor" d="M12.3205 25.7152H21.1938C21.8457 26.6366 22.9139 27.2235 24.1101 27.2235C26.0733 27.2235 27.674 25.6231 27.6746 23.6601C27.693 22.4994 27.1241 21.4509 26.2582 20.8003V12.2557V12.1307H26.1332H23.5913V11.943C23.5913 11.6717 23.3698 11.4502 23.0985 11.4502C22.8271 11.4502 22.6056 11.6717 22.6056 11.943V12.1307H19.1219V11.943C19.1219 11.6717 18.9005 11.4502 18.6291 11.4502C18.3578 11.4502 18.1363 11.6717 18.1363 11.943V12.1307H14.6342V11.943C14.6342 11.6717 14.4127 11.4502 14.1414 11.4502C13.87 11.4502 13.6486 11.6717 13.6486 11.943V12.1307H11.125H11V12.2557V24.3948C11 25.1259 11.5893 25.7152 12.3205 25.7152ZM21.6855 24.9867L21.6858 24.9866L21.6815 24.9786C21.4706 24.592 21.3472 24.1343 21.3472 23.659C21.3474 22.1285 22.5967 20.8965 24.1099 20.8965C24.6199 20.8965 25.0941 21.0371 25.4979 21.2829L25.4978 21.283L25.5031 21.2858C25.6925 21.3892 25.8671 21.5283 26.0263 21.6875L26.1147 21.5991L26.0263 21.6875C26.5388 22.2 26.8725 22.9049 26.8725 23.6775C26.8725 25.2076 25.6238 26.4394 24.1112 26.4402C23.3008 26.4221 22.5615 26.0697 22.0511 25.5068C21.9058 25.3434 21.7693 25.171 21.6855 24.9867ZM11.8016 12.9324H13.6667V13.1201C13.6667 13.3915 13.8881 13.6129 14.1595 13.6129C14.4308 13.6129 14.6523 13.3915 14.6523 13.1201V12.9324H18.1544V13.1201C18.1544 13.3915 18.3759 13.6129 18.6472 13.6129C18.9186 13.6129 19.14 13.3915 19.14 13.1201V12.9324H22.6421V13.1201C22.6421 13.3915 22.8636 13.6129 23.1349 13.6129C23.4063 13.6129 23.6278 13.3915 23.6278 13.1201V12.9324H25.4928V14.0987H11.8016V12.9324ZM12.3203 24.9135C12.0398 24.9135 11.8014 24.6752 11.8014 24.3947L11.8016 14.9004H25.438V20.3609C25.0283 20.1965 24.5773 20.0946 24.11 20.0946C22.1466 20.0946 20.5456 21.6956 20.5456 23.6591C20.5456 24.1068 20.6321 24.5251 20.7792 24.9135H12.3203Z"></path>
+                        <path fill="currentColor" d="M25.3976 24.1553L25.0483 23.9346L24.3861 23.5116V21.7827C24.3861 21.6355 24.2573 21.5068 24.1103 21.5068C23.9631 21.5068 23.8345 21.6356 23.8345 21.7827V23.8059L25.1036 24.6152C25.1587 24.652 25.1956 24.652 25.2507 24.652C25.3427 24.652 25.4347 24.6152 25.4899 24.5232C25.5633 24.4128 25.5264 24.2473 25.3976 24.1553L25.3976 24.1553Z"></path>
+                        <path fill="currentColor" d="M20.2375 16.75H19.1125V17.875H20.2375V16.75ZM22.15 16.75H21.025V17.875H22.15V16.75ZM22.9375 16.75H24.0625V17.875H22.9375V16.75ZM18.325 19H17.2V20.125H18.325V19ZM19.1125 19H20.2375V20.125H19.1125V19ZM22.15 19H21.025V20.125H22.15V19ZM17.2 21.25H18.325V22.375H17.2V21.25ZM16.4125 21.25H15.2875V22.375H16.4125V21.25ZM13.375 21.25H14.5V22.375H13.375V21.25ZM16.4125 19H15.2875V20.125H16.4125V19ZM13.375 19H14.5V20.125H13.375V19ZM24.0625 19H22.9375V20.125H24.0625V19ZM17.2 16.75H18.325V17.875H17.2V16.75ZM16.4125 16.75H15.2875V17.875H16.4125V16.75Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                      </svg> : ''}
+                      {event.type.label}
+                    </div>
+                    <div className="event-datetime">{event.datetime}</div>
+                  </div>
+                  <div className="event-attendees">
+                    <div className="avatar-group">
+                      {event.attendees.map((attendee, index) => (
+                        <img
+                          key={index}
+                          src={attendee}
+                          className="avatar"
+                          alt={`Attendee ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                    <span className="attendee-count">{event.attendeeCount}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="dashboard-section mt-4">
         <h2 className="section-header">Recent Activity</h2>
         <div className="columns-container">
           {/* Courses Column */}
@@ -546,7 +681,7 @@ export default function Home() {
                         </svg> {course.stats.rating}
                       </div>
                     </div>
-                    <button className='mt-3 edit-course-btn'>Edit Course</button>
+                    <Link href={'/editsettingpricepage?tab=Landing%20Page'} className='mt-3 edit-course-btn'>Edit Course</Link>
                   </div>
                 </div>
               ))}
@@ -599,7 +734,7 @@ export default function Home() {
                         </svg> {event.stats.rating}
                       </div>
                     </div>
-                    <button className='mt-3 edit-course-btn'>Edit Event</button>
+                    <Link href={'/edit-session?tab=Landing%20Page'} className='mt-3 edit-course-btn'>Edit Event</Link>
                   </div>
                 </div>
               ))}
@@ -653,7 +788,7 @@ export default function Home() {
                         </svg> {community.stats.rating}
                       </div>
                     </div>
-                    <button className='mt-3 edit-course-btn'>Edit Community</button>
+                    <button onClick={() => context.setAddCommunityModal(!context.AddCommunityModal)} className='mt-3 edit-course-btn'>Edit Community</button>
                   </div>
                 </div>
               ))}
@@ -661,104 +796,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="dashboard2">
-        <div className="column column-wide p-2">
-          <div className="column-header">
-            <div className="header-left">
-              <div className="header-title">OVERALL SALES</div>
-              <div className="header-value">
-                $83,125
-                <span className="trend-badge trend-up">+7.5%</span>
-              </div>
-            </div>
-            <div className="icon-container">
-              <svg fill="none" viewBox="0 0 24 24" width="24" height="24"> <path fill="#13c4cc" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clipRule="evenodd" fillRule="evenodd"></path>
-              </svg>
-            </div>
-          </div>
 
-          <div className="legend">
-            <div className="legend-item">
-              <div className="legend-dot" style={{ backgroundColor: '#13C4CC' }}></div>
-              Courses
-            </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{ backgroundColor: '#02C5AF' }}></div>
-              Events
-            </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{ backgroundColor: '#009ECB' }}></div>
-              Communities
-            </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{ backgroundColor: '#3B6E91' }}></div>
-              Certificates
-            </div>
-          </div>
-
-          <div className="chart-container">
-            <canvas ref={canvasRef} id="salesChart"></canvas>
-          </div>
-        </div>
-
-        <div className="column column-narrow p-2">
-          <div className="column-header">
-            <div className="header-left">
-              <div className="header-title">UPCOMING EVENTS</div>
-              <div className="header-value">
-                5
-                <span className="trend-badge trend-down">-5%</span>
-              </div>
-            </div>
-            <div className="icon-container">
-              <svg fill="none" viewBox="0 0 24 24" width="24" height="24"> <path fill="#13c4cc" d="M5 6.75C4.66848 6.75 4.35054 6.8817 4.11612 7.11612C3.8817 7.35054 3.75 7.66848 3.75 8V16C3.75 16.3315 3.8817 16.6495 4.11612 16.8839C4.35054 17.1183 4.66848 17.25 5 17.25H13C13.3315 17.25 13.6495 17.1183 13.8839 16.8839C14.1183 16.6495 14.25 16.3315 14.25 16V8C14.25 7.66848 14.1183 7.35054 13.8839 7.11612C13.6495 6.8817 13.3315 6.75 13 6.75H5ZM15.75 8.78622V8C15.75 7.27065 15.4603 6.57118 14.9445 6.05546C14.4288 5.53973 13.7293 5.25 13 5.25H5C4.27065 5.25 3.57118 5.53973 3.05546 6.05546C2.53973 6.57118 2.25 7.27065 2.25 8V16C2.25 16.7293 2.53973 17.4288 3.05546 17.9445C3.57118 18.4603 4.27065 18.75 5 18.75H13C13.7293 18.75 14.4288 18.4603 14.9445 17.9445C15.4603 17.4288 15.75 16.7293 15.75 16V15.213L19.2176 16.9465C19.4844 17.0798 19.7809 17.1427 20.0787 17.1293C20.3766 17.1159 20.6661 17.0266 20.9198 16.8699C21.1735 16.7131 21.3829 16.4942 21.5282 16.2338C21.6735 15.9734 21.7498 15.6802 21.75 15.382V8.61763C21.7498 8.31945 21.6735 8.02585 21.5282 7.76546C21.3829 7.50506 21.1735 7.28612 20.9198 7.12939C20.6661 6.97266 20.3766 6.88335 20.0787 6.86994C19.7809 6.85652 19.4845 6.91944 19.2177 7.05273L15.75 8.78622ZM15.75 10.4632V13.5361L19.8883 15.6047C19.8882 15.6047 19.8883 15.6047 19.8883 15.6047C19.9263 15.6237 19.9687 15.6328 20.0112 15.6308C20.0538 15.6289 20.0952 15.6162 20.1314 15.5938C20.1676 15.5714 20.1976 15.5401 20.2183 15.5029C20.2391 15.4657 20.25 15.4238 20.25 15.3812V8.61803C20.25 8.57543 20.2391 8.53354 20.2183 8.49635C20.1976 8.45915 20.1676 8.42787 20.1314 8.40548C20.0952 8.38309 20.0538 8.37033 20.0112 8.36842C19.9687 8.3665 19.9264 8.37547 19.8884 8.39448C19.8883 8.3945 19.8884 8.39446 19.8884 8.39448L15.75 10.4632Z" clipRule="evenodd" fillRule="evenodd"></path>
-              </svg>
-            </div>
-          </div>
-          <div className="events-list">
-            {eventsData.map((event) => (
-              <div className="event-card" key={event.id}>
-                <img src={event.image} alt="Event" className="event-image" />
-                <div className="event-content">
-                  <div className="event-title">{event.title}</div>
-                  <div className="event-meta">
-                    <div className="event-type" style={{ color: event.type.color }}>
-                      <svg
-                        className="svg-icon colored"
-                        fill="none"
-                        viewBox="0 0 38 38"
-                      >
-                        <path
-                          d={event.type.iconPath}
-                          strokeLinejoin="round"
-                          strokeLinecap="round"
-                          strokeWidth="1.2"
-                          stroke={event.type.color}
-                        />
-                      </svg>
-                      {event.type.label}
-                    </div>
-                    <div className="event-datetime">{event.datetime}</div>
-                  </div>
-                  <div className="event-attendees">
-                    <div className="avatar-group">
-                      {event.attendees.map((attendee, index) => (
-                        <img
-                          key={index}
-                          src={attendee}
-                          className="avatar"
-                          alt={`Attendee ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                    <span className="attendee-count">{event.attendeeCount}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
       <div className="dashboard-section mt-4">
         <h2 className="section-header">Recent Sales</h2>
         <div className="sales-section">
