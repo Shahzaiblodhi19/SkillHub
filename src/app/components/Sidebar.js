@@ -173,7 +173,7 @@ export default function Sidebar({ schoolName, isSidebarActive, setisSidebarActiv
                                                     }`}
                                                 onClick={() => handleActiveLink(item)}
                                             >
-                                                {<Link href="/products">
+                                                {<Link href="/my-products">
                                                     {item}
                                                 </Link>}
                                             </li>
